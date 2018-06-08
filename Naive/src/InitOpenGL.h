@@ -2,14 +2,13 @@
 #define INITOPENGL_H
 
 #include <cstdio>
-#include "gl.h"
 #include <stdexcept>
-#include "render.h"
 #include <unistd.h>
+
+#include "gl.h"
 
 class initOpenGL {
     GLFWwindow* window;
-    int licznik;
 public:
     initOpenGL();
     ~initOpenGL();

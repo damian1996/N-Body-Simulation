@@ -1,7 +1,6 @@
-#include "initOpenGL.h"
+#include "InitOpenGL.h"
 
 initOpenGL::initOpenGL() {
-    licznik = 0;
 }
 
 initOpenGL::~initOpenGL() {
@@ -42,7 +41,6 @@ bool initOpenGL::ClearWindow() {
     }
     else {
         destroyWindow();
-        //printf("%d \n ", licznik++);
         return true;
     }
 }
@@ -51,12 +49,10 @@ bool initOpenGL::Swap() {
     if(!glfwWindowShouldClose(this->window)) {
         glfwSwapBuffers(this->window);
         glfwPollEvents();
-        licznik++;
         return false;
     }
     else {
         destroyWindow();
-        //printf("%d \n ", licznik++);
         return true;
     }
 }

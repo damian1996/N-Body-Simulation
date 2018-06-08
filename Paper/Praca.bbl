@@ -1,0 +1,187 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 2.6 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \sortlist[entry]{anyt/global}
+    \entry{Aarseth}{book}{}
+      \name{author}{1}{}{%
+        {{hash=ec347883cb6bf5817c11457be032dac6}{%
+           family={Aarseth},
+           family_i={A\bibinitperiod},
+           given={Sverre\bibnamedelima J.},
+           given_i={S\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Cambridge University Press}%
+      }
+      \strng{namehash}{ec347883cb6bf5817c11457be032dac6}
+      \strng{fullhash}{ec347883cb6bf5817c11457be032dac6}
+      \field{labelalpha}{Aar03}
+      \field{sortinit}{A}
+      \field{sortinithash}{b685c7856330eaee22789815b49de9bb}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Gravitional N-Body Simulations. Tools and Algorithms 1 edition}
+      \field{year}{2003}
+    \endentry
+    \entry{Cuda}{manual}{}
+      \name{author}{1}{}{%
+        {{hash=61a23953300b78e83f381e02ca45c5e4}{%
+           family={Corporation},
+           family_i={C\bibinitperiod},
+           given={NVIDIA},
+           given_i={N\bibinitperiod}}}%
+      }
+      \strng{namehash}{61a23953300b78e83f381e02ca45c5e4}
+      \strng{fullhash}{61a23953300b78e83f381e02ca45c5e4}
+      \field{labelalpha}{Cor}
+      \field{sortinit}{C}
+      \field{sortinithash}{59f25d509f3381b07695554a9f35ecb2}
+      \field{extraalpha}{1}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{edition}{v9.1.85, 2018}
+      \field{title}{CUDA C Programming Guide}
+      \field{urlday}{05}
+      \field{urlmonth}{03}
+      \field{urlyear}{2018}
+      \verb{url}
+      \verb http://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html
+      \endverb
+    \endentry
+    \entry{runtimeApi}{manual}{}
+      \name{author}{1}{}{%
+        {{hash=61a23953300b78e83f381e02ca45c5e4}{%
+           family={Corporation},
+           family_i={C\bibinitperiod},
+           given={NVIDIA},
+           given_i={N\bibinitperiod}}}%
+      }
+      \strng{namehash}{61a23953300b78e83f381e02ca45c5e4}
+      \strng{fullhash}{61a23953300b78e83f381e02ca45c5e4}
+      \field{labelalpha}{Cor}
+      \field{sortinit}{C}
+      \field{sortinithash}{59f25d509f3381b07695554a9f35ecb2}
+      \field{extraalpha}{2}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{edition}{v9.1.85, 2018}
+      \field{title}{NVIDIA CUDA Runtime API}
+      \field{urlday}{05}
+      \field{urlmonth}{03}
+      \field{urlyear}{2018}
+      \verb{url}
+      \verb http://docs.nvidia.com/cuda/cuda-runtime-api/index.html
+      \endverb
+    \endentry
+    \entry{opengl}{manual}{}
+      \name{author}{1}{}{%
+        {{hash=638160ae56a17712d83fafc12a740c80}{%
+           family={Group},
+           family_i={G\bibinitperiod},
+           given={Khronos},
+           given_i={K\bibinitperiod}}}%
+      }
+      \strng{namehash}{638160ae56a17712d83fafc12a740c80}
+      \strng{fullhash}{638160ae56a17712d83fafc12a740c80}
+      \field{labelalpha}{Gro17}
+      \field{sortinit}{G}
+      \field{sortinithash}{1c854ef9177a91bf894e66485bdbd3ed}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{edition}{OpenGL 4.6}
+      \field{title}{OpenGL API, OpenGL Shading Lanugage and GLX Specifications}
+      \field{urlday}{30}
+      \field{urlmonth}{07}
+      \field{urlyear}{2017}
+      \field{year}{2017}
+      \verb{url}
+      \verb https://www.khronos.org/registry/OpenGL/index_gl.php
+      \endverb
+    \endentry
+    \entry{fastNbody}{inbook}{}
+      \name{author}{1}{}{%
+        {{hash=c80df4a88bc38a808f57006ebf998123}{%
+           family={Lars\bibnamedelima Nyland},
+           family_i={L\bibinitperiod\bibinitdelim N\bibinitperiod},
+           suffix={Mark\bibnamedelima Harris},
+           suffix_i={M\bibinitperiod\bibinitdelim H\bibinitperiod},
+           given={Jan\bibnamedelima Prins},
+           given_i={J\bibinitperiod\bibinitdelim P\bibinitperiod}}}%
+      }
+      \strng{namehash}{c80df4a88bc38a808f57006ebf998123}
+      \strng{fullhash}{c80df4a88bc38a808f57006ebf998123}
+      \field{labelalpha}{Lar07}
+      \field{sortinit}{L}
+      \field{sortinithash}{872351f18d0f736066eda0bf18bfa4f7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{chapter}{Fast N-Body Simulation with CUDA. Chapter 31}
+      \field{title}{GPU Gems 3}
+      \field{year}{2007}
+      \field{pages}{677\bibrangedash 694}
+      \range{pages}{18}
+    \endentry
+    \entry{helsinkiSeminar}{article}{}
+      \name{author}{1}{}{%
+        {{hash=c7edfb29fd98cf09d373b307c9f2fd57}{%
+           family={Lindholm},
+           family_i={L\bibinitperiod},
+           given={Tancred},
+           given_i={T\bibinitperiod}}}%
+      }
+      \strng{namehash}{c7edfb29fd98cf09d373b307c9f2fd57}
+      \strng{fullhash}{c7edfb29fd98cf09d373b307c9f2fd57}
+      \field{labelalpha}{Lin99}
+      \field{sortinit}{L}
+      \field{sortinithash}{872351f18d0f736066eda0bf18bfa4f7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{University of Helsinki}
+      \field{title}{Seminar presentation. N-body algorithms}
+      \field{year}{1999}
+    \endentry
+    \entry{barneshut}{inbook}{}
+      \name{author}{1}{}{%
+        {{hash=57679aa3518cad7be072b48f9028f053}{%
+           family={Martin\bibnamedelima Burtscher},
+           family_i={M\bibinitperiod\bibinitdelim B\bibinitperiod},
+           given={Keshav\bibnamedelima Pingali},
+           given_i={K\bibinitperiod\bibinitdelim P\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {NVIDIA Corporation, Wen-mei W. Hwu}%
+      }
+      \strng{namehash}{57679aa3518cad7be072b48f9028f053}
+      \strng{fullhash}{57679aa3518cad7be072b48f9028f053}
+      \field{labelalpha}{Mar11}
+      \field{sortinit}{M}
+      \field{sortinithash}{2684bec41e9697b92699b46491061da2}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{chapter}{An Efficient CUDA Implementation of the Tree-Based Barnes HUT N-Body Algorithm. Chapter 6}
+      \field{title}{GPU Computing Gems Emerald Edition}
+      \field{year}{2011}
+      \field{pages}{75\bibrangedash 92}
+      \range{pages}{18}
+    \endentry
+  \endsortlist
+\endrefsection
+\endinput
+

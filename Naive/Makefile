@@ -15,7 +15,7 @@ TARGET := $(OUTDIR)/main
 
 # Options
 NVCCOPTIONS = -m64 -std=c++14 -g
-CXXOPTIONS = -m64 -std=c++14 -g -Wall
+CXXOPTIONS = -m64 -std=c++14 -g -Wall -I /usr/local/cuda/include/
 
 # Common flags
 NVCCFLAGS += $(NVCCOPTIONS)
@@ -31,7 +31,7 @@ $(TARGET): $(OBJS) $(CUOBJS)
 	@mkdir -p $(OUTDIR)
 	$(NVCC) $^ $(LDFLAGS) -o $@
 
-build/%.o: src/%.cu src/%.cuh
+build/%.o: src/%.cu src/%.h
 	@mkdir -p $(BUILDDIR)
 	$(NVCC) $(NVCCFLAGS) -c $< -o $@
 

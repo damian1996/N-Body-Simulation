@@ -1,0 +1,5 @@
+[0] Config.pm:340> INFO - This is Biber 2.4
+[0] Config.pm:343> INFO - Logfile is 'Praca.bbl.blg'
+[46] biber:287> INFO - === czw cze  7, 2018, 20:36:10
+[76] Utils.pm:163> ERROR - Cannot find control file 'Praca.bbl.bcf'! - did you pass the "backend=biber" option to BibLaTeX?
+[76] Biber.pm:113> INFO - ERRORS: 1
