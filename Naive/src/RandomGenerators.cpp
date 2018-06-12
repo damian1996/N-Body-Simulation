@@ -4,11 +4,11 @@ RandomGenerators::RandomGenerators() {
 
 }
 
-float RandomGenerators::getRandomFloat(float a, float b) {
+float RandomGenerators::getRandomfloat(float a, float b) {
     std::random_device rd1;
     std::mt19937 gen1(rd1());
-    std::uniform_real_distribution<> disFloat(a, b);
-    return disFloat(gen1);
+    std::uniform_real_distribution<> disfloat(a, b);
+    return disfloat(gen1);
 }
 
 int RandomGenerators::getRandomByte() {

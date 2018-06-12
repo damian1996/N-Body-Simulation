@@ -40,6 +40,28 @@
       \field{title}{Gravitional N-Body Simulations. Tools and Algorithms 1 edition}
       \field{year}{2003}
     \endentry
+    \entry{threebody1}{article}{}
+      \name{author}{1}{}{%
+        {{hash=d37810d1c7f8e6d56d03544d8d583711}{%
+           family={Alain\bibnamedelima Chenciner},
+           family_i={A\bibinitperiod\bibinitdelim C\bibinitperiod},
+           given={Richard\bibnamedelima Montgomery},
+           given_i={R\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
+      }
+      \strng{namehash}{d37810d1c7f8e6d56d03544d8d583711}
+      \strng{fullhash}{d37810d1c7f8e6d56d03544d8d583711}
+      \field{labelalpha}{Ala00}
+      \field{sortinit}{A}
+      \field{sortinithash}{b685c7856330eaee22789815b49de9bb}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Annals of Mathematics}
+      \field{title}{A remarkable periodic solution of the three-body problem in the case of equal masses}
+      \field{volume}{152}
+      \field{year}{2000}
+      \field{pages}{881\bibrangedash 901}
+      \range{pages}{21}
+    \endentry
     \entry{Cuda}{manual}{}
       \name{author}{1}{}{%
         {{hash=61a23953300b78e83f381e02ca45c5e4}{%
@@ -88,6 +110,52 @@
       \field{urlyear}{2018}
       \verb{url}
       \verb http://docs.nvidia.com/cuda/cuda-runtime-api/index.html
+      \endverb
+    \endentry
+    \entry{threebody2}{article}{}
+      \name{author}{1}{}{%
+        {{hash=8187f24c92ead200b9daa9953b47a9c1}{%
+           family={G.Lodge},
+           family_i={G\bibinitperiod},
+           suffix={J.\bibnamedelimi A.\bibnamedelimi Walsh},
+           suffix_i={J\bibinitperiod\bibinitdelim A\bibinitperiod\bibinitdelim W\bibinitperiod},
+           given={M.Kramer},
+           given_i={M\bibinitperiod}}}%
+      }
+      \strng{namehash}{8187f24c92ead200b9daa9953b47a9c1}
+      \strng{fullhash}{8187f24c92ead200b9daa9953b47a9c1}
+      \field{labelalpha}{GLo03}
+      \field{sortinit}{G}
+      \field{sortinithash}{1c854ef9177a91bf894e66485bdbd3ed}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{International Journal of Bifurcation and Chaos}
+      \field{title}{A Trilinear Three-Body Problem}
+      \field{volume}{13}
+      \field{year}{2003}
+      \field{pages}{2141\bibrangedash 2155}
+      \range{pages}{15}
+    \endentry
+    \entry{thrust}{manual}{}
+      \name{author}{1}{}{%
+        {{hash=820cdded81a7d1272273f2bec9b3c7d6}{%
+           family={GOOGLE?},
+           family_i={G\bibinitperiod}}}%
+      }
+      \strng{namehash}{820cdded81a7d1272273f2bec9b3c7d6}
+      \strng{fullhash}{820cdded81a7d1272273f2bec9b3c7d6}
+      \field{labelalpha}{GOO}
+      \field{sortinit}{G}
+      \field{sortinithash}{1c854ef9177a91bf894e66485bdbd3ed}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{edition}{v9.2.88, 2018}
+      \field{title}{THRUST}
+      \field{urlday}{15}
+      \field{urlmonth}{05}
+      \field{urlyear}{2018}
+      \verb{url}
+      \verb https://docs.nvidia.com/cuda/thrust/index.html
       \endverb
     \endentry
     \entry{opengl}{manual}{}
@@ -180,6 +248,32 @@
       \field{year}{2011}
       \field{pages}{75\bibrangedash 92}
       \range{pages}{18}
+    \endentry
+    \entry{fund}{inbook}{}
+      \name{author}{1}{}{%
+        {{hash=a2626036b795a6385df4ae0ad444c829}{%
+           family={Roger\bibnamedelimb R.\bibnamedelimi Bate},
+           family_i={R\bibinitperiod\bibinitdelim R\bibinitperiod\bibinitdelim B\bibinitperiod},
+           suffix={Donald\bibnamedelimb D.\bibnamedelimi Mueller},
+           suffix_i={D\bibinitperiod\bibinitdelim D\bibinitperiod\bibinitdelim M\bibinitperiod},
+           given={Jerry\bibnamedelimb E.\bibnamedelimi White},
+           given_i={J\bibinitperiod\bibinitdelim E\bibinitperiod\bibinitdelim W\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {DOVER PUBLICATIONS}%
+      }
+      \strng{namehash}{a2626036b795a6385df4ae0ad444c829}
+      \strng{fullhash}{a2626036b795a6385df4ae0ad444c829}
+      \field{labelalpha}{Rog71}
+      \field{sortinit}{R}
+      \field{sortinithash}{c7387613477035a752d935acfc3e3ea2}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{chapter}{1 TWO-BODY ORBITAL MECHANICS}
+      \field{title}{Fundamentals of astrodynamics}
+      \field{year}{1971}
+      \field{pages}{1\bibrangedash 49}
+      \range{pages}{49}
     \endentry
   \endsortlist
 \endrefsection

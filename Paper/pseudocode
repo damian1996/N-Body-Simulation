@@ -1,0 +1,19 @@
+\\
+ustaw mase oraz początkową pozycję i prędkość dla każdego ciała \\
+while(true)\\
+\tab for i in {1...N}:\\
+\tab\tab	uaktualnijPozycje()\\
+\tab narysujNowePozycje()\\
+
+set mass, position and velocity for each body;
+while(true) {
+   for i in {1...N}
+      updatePosition(i);
+   drawUpdatedBodies();
+}
+
+ustaw mase oraz początkową pozycję i prędkość dla każdego ciała
+while(true)
+   for i in {1...N}:
+       uaktualnijPozycje()
+   narysujNowePozycje()

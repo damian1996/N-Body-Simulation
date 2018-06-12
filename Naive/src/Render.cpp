@@ -41,13 +41,13 @@ void Render::createAndBindBuffer() {
     glBufferData(GL_ARRAY_BUFFER, sizeof(char)*3*N, V_color, GL_DYNAMIC_DRAW);
     glEnableVertexAttribArray(1);
     glVertexAttribPointer(1, 3, GL_UNSIGNED_BYTE, GL_TRUE, 0, 0);
-    glPointSize(2.0);
+    glPointSize(4.0);
 }
 // "    gl_PointSize = gl_Normal.z*((weight+100.0)/70.0);"
 
 void Render::createAndCompileShaders() {
     const char* vertex_shader[] = {
-        "#version 130\n"
+        "#version 400\n"
         "in vec3 position;\n"
         "in vec3 color;\n"
         "in float weight;\n"
@@ -59,7 +59,7 @@ void Render::createAndCompileShaders() {
     };
 
     const char* fragment_shader[] = {
-        "#version 130\n"
+        "#version 400\n"
         "in vec3 vertex_color;\n"
         "void main() {\n"
         "    gl_FragColor = vec4(vertex_color, 1);\n"

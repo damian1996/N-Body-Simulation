@@ -21,7 +21,7 @@ class initOpenGL;
 
 class Render {
   byte3d* V_color;
-  double last_time;
+  float last_time;
   float3d* V_position;
   GLuint buffer[2];
   GLuint program, sh_fragment, sh_vertex;

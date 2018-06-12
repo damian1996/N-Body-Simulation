@@ -1,15 +1,15 @@
 [0] Config.pm:340> INFO - This is Biber 2.4
 [0] Config.pm:343> INFO - Logfile is 'Praca.blg'
-[45] biber:287> INFO - === czw cze  7, 2018, 21:43:20
-[147] Biber.pm:348> INFO - Reading 'Praca.bcf'
-[311] Biber.pm:739> INFO - Using all citekeys in bib section 0
-[317] Biber.pm:3151> INFO - Processing section 0
-[370] Biber.pm:3308> INFO - Looking for bibtex format file 'biblio.bib' for section 0
-[386] bibtex.pm:1113> INFO - Decoding LaTeX character macros into UTF-8
-[396] bibtex.pm:974> INFO - Found BibTeX data source 'biblio.bib'
-[581] UCollate.pm:65> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
-[582] UCollate.pm:65> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
-[582] Biber.pm:3028> INFO - Sorting list 'anyt/global' of type 'entry' with scheme 'anyt' and locale 'en-US'
-[582] Biber.pm:3032> INFO - No sort tailoring available for locale 'en-US'
-[591] bbl.pm:519> INFO - Writing 'Praca.bbl' with encoding 'UTF-8'
-[615] bbl.pm:615> INFO - Output to Praca.bbl
+[47] biber:287> INFO - === pią cze  8, 2018, 18:09:58
+[151] Biber.pm:348> INFO - Reading 'Praca.bcf'
+[316] Biber.pm:739> INFO - Using all citekeys in bib section 0
+[322] Biber.pm:3151> INFO - Processing section 0
+[356] Biber.pm:3308> INFO - Looking for bibtex format file 'biblio.bib' for section 0
+[368] bibtex.pm:1113> INFO - Decoding LaTeX character macros into UTF-8
+[376] bibtex.pm:974> INFO - Found BibTeX data source 'biblio.bib'
+[585] UCollate.pm:65> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
+[586] UCollate.pm:65> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[586] Biber.pm:3028> INFO - Sorting list 'anyt/global' of type 'entry' with scheme 'anyt' and locale 'en-US'
+[586] Biber.pm:3032> INFO - No sort tailoring available for locale 'en-US'
+[603] bbl.pm:519> INFO - Writing 'Praca.bbl' with encoding 'UTF-8'
+[638] bbl.pm:615> INFO - Output to Praca.bbl

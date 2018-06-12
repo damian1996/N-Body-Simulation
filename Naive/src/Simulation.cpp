@@ -5,7 +5,7 @@ Simulation::Simulation(Render* r, Step* comp, unsigned N) : r(r), comp(comp), N(
     positions.reserve(3*N);
     for(unsigned i=0; i<N; i++) {
         for(int j=0; j<2; j++)
-            positions.push_back(rg->getRandomFloat(-1.0, 1.0));
+            positions.push_back(rg->getRandomfloat(-1.0, 1.0));
         positions.push_back(0.0f);
     }
 }

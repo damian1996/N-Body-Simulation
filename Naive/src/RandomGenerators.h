@@ -6,7 +6,8 @@
 class RandomGenerators {
 public:
   RandomGenerators();
-  float getRandomFloat(float a, float b);
+  float getRandomfloat(float a, float b);
+  //float randPosition(float a, float b);
   int getRandomByte();
 };
 

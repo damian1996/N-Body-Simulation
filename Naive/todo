@@ -1,0 +1,28 @@
+KOD
+1) sensowne poczatkowe pozycje, predkosci i masy (vi <=> P(ri)/P(t)) STUPID
+7) potestowanie G oraz dt DONE
+4) przetestowanie wzoru grawitacji newtona z dodatkowym epsem w mianowniku
+5) zrobienie cos z sytuacją, w ktorej obiekty się zbliżają do siebie
+6) kolizje (zeby wygladaly sensownie)
+2) 3d kulki z torem ruchow
+3) przerobienie obliczen na 3d
+12) prywatne funkcji w Render i pewnie nie tylko
+13) wywalic typedefy dla host_vector z Render
+
+PAPER
+8) sensowne zastosowania N-BODY
+9) uzupelnienie szczegolow naiwnego algo
+10) udoskonalenia algo
+11) opis rownoleglej wersji
+
+
+The N-body simulations can be used in theoretical studies of the large-scale structure of the universe, galaxies, star clusters, solar systems,
+stellar dynamics, climate modeling, gases, liquids and plasmas. On smaller scales, quantum effects become important. N-body simulations are applied
+in a wide range of areas outside physics such as N-body simulations of large biomolecules, for example realistic protein unfolding or even simulations
+of deoxyribonucleic acid (DNA). The N-body simulation has proven to be one of the most versatile methods.
+
+https://docs.nvidia.com/cuda/cuda-c-best-practices-guide/index.html
+https://developer.nvidia.com/gpugems/GPUGems3/gpugems3_ch31.html
+https://arxiv.org/pdf/0806.3950.pdf
+file:///home/damian/Desktop/praca%20licencjacka/materialy/Gravitational%20N-Body%20Simulatio%20-%20Aarseth,%20Sverre%20J._5510.pdf
+https://www.quora.com/What-is-the-average-mass-of-a-star
