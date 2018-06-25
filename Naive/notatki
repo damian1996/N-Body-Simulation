@@ -1,55 +1,15 @@
-imho ładnie by było jakbyś zrobił interfejs! czyli: masz interfejs SimulationLogic z dwiema metodami:
-calculate(host_vector<float>& positions)
-init()
-czy coś w ten deseń
-i ty implementujesz ten interfejs
-wersja na cpu trzyma sobie swoje vectory, liczy sobie po swojemu na cpu
-wersja na gpu swoje device_vectory, liczy sobie na cudzie
-klasa Simulation ma gdzieś to, jak to się liczy przecież - podaje tylko referencję do vectora pozycji i chce wynik
-a jak już chcesz wgl ładnie to możesz otemplatkować sobie to (jakby cię np. bolało to że wersja na cpu ma host_vector a
-chcesz zamiast tego zwykły vector, to otemplatkuj sobie ten kontener i pyknie, bo host_vector i vector
-mają bardzo podobne metody, dodatkowo możesz otemplatkować sposób symulacji - podając w templatce klase
-od liczenia na cpu albo gpu, chociaż do tego starczy nawet argument w konstruktorze…)
+https://arxiv.org/pdf/0806.3950.pdf
+https://arxiv.org/pdf/1411.6671.pdf
+file:///home/damian/Desktop/praca%20licencjacka/materialy/Gravitational%20N-Body%20Simulatio%20-%20Aarseth,%20Sverre%20J._5510.pdf
+https://arxiv.org/pdf/1105.1082.pdf
+https://pl.wikipedia.org/wiki/Zasada_zachowania_p%C4%99du
+https://pl.wikipedia.org/wiki/Zderzenie_centralne
 
 
-to rozwiązuje następujące problemy:
-- nie musisz trzymać na hoście velocity i weights, nei musisz ich kopiować, hosta to WGL nie obchodzi
-- wysyłanie do rendera teraz polega na tym co ty robisz (pos=posD) tylko nie masz tego dziwactwa że cuda wywołuje render
-- jakbyś chciał zrobić kolejną implementację symulacji (np. cuda na kd drzewach) to implementujesz sobie kolejną klasę
- i wszystko bez modyfikowania klasy simulation :3
-- rozdzielasz sobie simulation od obliczeń i jest to przez to bardziej czytelne
 
-to znowu powtarzasz kod
-główna pętla jest taka sama dla cpu i gpu
-ja bym zrobiła tak
-- main wybiera rodzaj symulacji
-- main tworzy obiekty:
-* symulacji
-* do obliczeń, w zależności od tego co wybierze user
-* renderu
-render i obliczenia dale w konstruktorze do symulacji
-- symulacja ma główną pętle:
-while(nie koniec)
- zrobObliczenia(pozycje&)
- nie koniec = zrenderuj sie(pozycje&)
-tyle!
 
-co to jest klasa do obliczen? ... to nie symulacja? ...
-z tego co widziałąm ty masz osobną klase do zarządzania tym całym majdanem co się nazywa Simulation i osobną na obliczenia,
-więc próbowałam się tego trzymać po prostu chce całkowicie wydzielić te obliczenia fizyczne od renderu, od wszystkiego
 
-i ona sobie grzebie w openglu itd, może trzymać shaderki itp
 
-mamy osobną klase która tylko liczy (tak naprawde to 2 które implementują wspólny interfejs)
-
-i mamy osobną klase, która ma tylko sterowac całym programem i która trzyma te dwie klasy i nimi steruje - niech będzie scena
-i ona ma główną pętlę i na smiane wywołuje rysuj i licz
-
-i teraz nie ma wątpliwości - że symulacja nagle zacznie ci rysować na ekran, symulacja nic nie wie o żadnym ekranie
-rysowanie nic nie wie o żadnych obliczeniach dopiero ta co kontroluje wie że są takie klasy ale nic ją nie obchodzi
-co się dzieje pod spodem - tylko rozkazuje żeby się rysowało / liczyło
-
-rozumiesz dlaczego takie rozdzielenie jest fajne? i jest fajna kompozycja - scena posiada klase od rendera i klase od obliczeń
 
 cudaMalloc(&image_dev, image_width*image_height*4*sizeof(uint8_t));
     cudaMalloc(&result_dev, image_width*image_height*4*sizeof(uint8_t));

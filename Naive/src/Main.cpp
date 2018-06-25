@@ -9,10 +9,12 @@ int main() {
     scanf("%d", &type);
     printf("Podaj liczbę jednostek do poddania symulacji\n");
     scanf("%d", &N);
-
+    printf("WTF... %d\n", N);
     Render* r = new Render(N);
     Step* step;
     Simulation* sim;
+
+    
 
     while(1) {
         bool correctChoice = true;

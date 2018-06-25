@@ -1,19 +1,24 @@
 KOD
-1) sensowne poczatkowe pozycje, predkosci i masy (vi <=> P(ri)/P(t)) STUPID
-7) potestowanie G oraz dt DONE
-4) przetestowanie wzoru grawitacji newtona z dodatkowym epsem w mianowniku
-5) zrobienie cos z sytuacją, w ktorej obiekty się zbliżają do siebie
-6) kolizje (zeby wygladaly sensownie)
-2) 3d kulki z torem ruchow
-3) przerobienie obliczen na 3d
-12) prywatne funkcji w Render i pewnie nie tylko
-13) wywalic typedefy dla host_vector z Render
+1) Przeskalować sensowne, wejściowe, rzeczywiste dane do wykorzystania ich w programie
+2) Jeśli sie nie powiedze, to chociaz sprawdzic sensownosc jednostek przy masie czy predkosci
+3) Sprawdzenie zasady zachowania pędu dla tychże sensownych jednostek
+4) Zaimplementowac sklejanie się kulek gdy ich odległość jest odpowiednio mała
+5) Znalezc inna metode na przetestowanie poprawności układu
+6) Sensowny dobór liczny bloków i wątków na CUDA
+7) Optymalizacje kernela na CUDA
+8) Przerobienie kodu na 3D
+9) Integracja kodu z złączalnymi kulkami 3D
+10) kosmetyczne poprawki kodu (prywatne funkcji w Render i pewnie nie tylko, wywalic typedefy dla host_vector z Render)
+11) dodac wieksze obramowanie 
+http://ikee.lib.auth.gr/record/294535/files/Thesis.pdf
 
 PAPER
-8) sensowne zastosowania N-BODY
-9) uzupelnienie szczegolow naiwnego algo
-10) udoskonalenia algo
-11) opis rownoleglej wersji
+1) Zastosowania N-body wraz z przykładami paperów
+2) Rozpisać test poprawnosci z ZZP (z jej definicją)
+3) Wstawka o optymalizacji wzoru Newtona z e^2 w mianowniku
+4) Wstawka o złączaniu kulek i jak to jest zrobione w OpenGL
+5) Wstawka o optach kernela na CUDA
+6) opis kodu do naiwnego algorytmu (co sie dzieje w poszczegolnych linijkach)
 
 
 The N-body simulations can be used in theoretical studies of the large-scale structure of the universe, galaxies, star clusters, solar systems,

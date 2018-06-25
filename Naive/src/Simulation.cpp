@@ -5,7 +5,7 @@ Simulation::Simulation(Render* r, Step* comp, unsigned N) : r(r), comp(comp), N(
     positions.reserve(3*N);
     for(unsigned i=0; i<N; i++) {
         for(int j=0; j<2; j++)
-            positions.push_back(rg->getRandomfloat(-1.0, 1.0));
+            positions.push_back(rg->getRandomfloat(-1.0f, 1.0f));
         positions.push_back(0.0f);
     }
 }
@@ -25,7 +25,7 @@ void Simulation::makeSimulation() {
     while(true) {
         curr_time = r->getTime();
         //printf("%f %f\n", curr_time, 10*(curr_time-last_time));
-        comp->compute(positions, 10*(curr_time-last_time));
+        comp->compute(positions, (curr_time-last_time)*10);//100*(curr_time-last_time));
         last_time = curr_time;
         bool v = r->draw(positions);
         if(v) break;

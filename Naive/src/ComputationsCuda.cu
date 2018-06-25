@@ -1,6 +1,7 @@
 #include "ComputationsCuda.h"
 
 const float G = 6.674*(1e-11);
+const float EPS = 0.01f;
 
 template <typename T>
 __global__
@@ -13,10 +14,19 @@ void NaiveSim(T* pos, T* velo, T* weigh, int N, float dt) {
         if(j!=thid) {
             float distX = pos[j*3] - posx;
             float distY = pos[j*3+1] - posy;
+            float dist = (distX*distX+distY*distY) + EPS*EPS;
             if(fabs(distX)>1e-10 && fabs(distY)>1e-10) {
                 float F = G*(weighI*weigh[j]);
-                forcex += F*distX/(distX*distX+distY*distY);
-                forcey += F*distX/(distX*distX+distY*distY);
+                forcex += F*distX/dist;
+                forcey += F*distY/dist;
+
+                /*if(dist>=EPS) {
+                    forcex += F*distX/dist;
+                    forcey += F*distY/dist;
+                } else {
+                  forcex += F*distX;
+                  forcey += F*distY;
+                }*/
             }
         }
     }
@@ -37,6 +47,13 @@ void Computations::NaiveSimBridgeThrust(type& pos, int N, float dt) {
     float* d_positions = thrust::raw_pointer_cast(posD.data());
     float* d_velocities = thrust::raw_pointer_cast(veloD.data());
     float* d_weights = thrust::raw_pointer_cast(weightsD.data());
+
+    float zzpx = 0.0f, zzpy = 0.0f;
+    for(int i=0; i<N; i++) {
+        zzpx += (weightsD[i]*veloD[i*3]);
+        zzpy += (weightsD[i]*veloD[i*3+1]);
+    }
+    std::cout << "Pedy : " << zzpx << "  " << zzpy << std::endl;
 
     NaiveSim<<<64, (N+63)/64>>>(d_positions, d_velocities, d_weights, N, dt);
 
