@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.6.9)  25 JUN 2018 00:15
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.6.9)  26 JUN 2018 19:36
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -613,6 +613,45 @@ Package color Info: Driver file: pdftex.def on input line 143.
 (/usr/share/texlive/texmf-dist/tex/latex/base/fontenc.sty
 Package: fontenc 2005/09/27 v1.99g Standard LaTeX package
 )
+(/usr/share/texlive/texmf-dist/tex/latex/ms/ragged2e.sty
+Package: ragged2e 2009/05/21 v2.1 ragged2e Package (MS)
+
+
+LaTeX Warning: Command \@arrayparboxrestore  has changed.
+               Check if current package is valid.
+
+(/usr/share/texlive/texmf-dist/tex/latex/ms/everysel.sty
+Package: everysel 2011/10/28 v1.2 EverySelectfont Package (MS)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/footmisc/footmisc.sty
+Package: footmisc 2011/06/06 v5.5b a miscellany of footnote facilities
+\FN@temptoken=\toks30
+\footnotemargin=\dimen134
+\c@pp@next@reset=\count131
+Package footmisc Info: Declaring symbol style bringhurst on input line 855.
+Package footmisc Info: Declaring symbol style chicago on input line 863.
+Package footmisc Info: Declaring symbol style wiley on input line 872.
+Package footmisc Info: Declaring symbol style lamport-robust on input line 883.
+
+Package footmisc Info: Declaring symbol style lamport* on input line 903.
+Package footmisc Info: Declaring symbol style lamport*-robust on input line 924
+.
+)
+\CenteringLeftskip=\skip49
+\RaggedLeftLeftskip=\skip50
+\RaggedRightLeftskip=\skip51
+\CenteringRightskip=\skip52
+\RaggedLeftRightskip=\skip53
+\RaggedRightRightskip=\skip54
+\CenteringParfillskip=\skip55
+\RaggedLeftParfillskip=\skip56
+\RaggedRightParfillskip=\skip57
+\JustifyingParfillskip=\skip58
+\CenteringParindent=\skip59
+\RaggedLeftParindent=\skip60
+\RaggedRightParindent=\skip61
+\JustifyingParindent=\skip62
+)
 (/usr/share/texlive/texmf-dist/tex/latex/tools/bm.sty
 Package: bm 2014/10/28 v1.1c Bold Symbol Support (DPC/FMi)
 \symboldoperators=\mathgroup6
@@ -652,63 +691,63 @@ Package: xkeyval 2014/12/03 v2.7a package option processing (HA)
 
 (/usr/share/texlive/texmf-dist/tex/generic/xkeyval/xkeyval.tex
 (/usr/share/texlive/texmf-dist/tex/generic/xkeyval/xkvutils.tex
-\XKV@toks=\toks30
-\XKV@tempa@toks=\toks31
+\XKV@toks=\toks31
+\XKV@tempa@toks=\toks32
 )
-\XKV@depth=\count131
+\XKV@depth=\count132
 File: xkeyval.tex 2014/12/03 v2.7a key=value parser (HA)
 )))
 (/usr/share/texlive/texmf-dist/tex/generic/pstricks/pst-fp.tex
 `pst-fp' v0.05, 2010/01/17 (hv)
-\pstFP@xs=\count132
-\pstFP@xia=\count133
-\pstFP@xib=\count134
-\pstFP@xfa=\count135
-\pstFP@xfb=\count136
-\pstFP@rega=\count137
-\pstFP@regb=\count138
-\pstFP@regs=\count139
-\pstFP@times=\count140
+\pstFP@xs=\count133
+\pstFP@xia=\count134
+\pstFP@xib=\count135
+\pstFP@xfa=\count136
+\pstFP@xfb=\count137
+\pstFP@rega=\count138
+\pstFP@regb=\count139
+\pstFP@regs=\count140
+\pstFP@times=\count141
 )
 (/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfutil-common.tex
-\pgfutil@everybye=\toks32
-\pgfutil@tempdima=\dimen134
-\pgfutil@tempdimb=\dimen135
+\pgfutil@everybye=\toks33
+\pgfutil@tempdima=\dimen135
+\pgfutil@tempdimb=\dimen136
 
 (/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfutil-common-lists.t
 ex)) (/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfkeys.code.tex
-\pgfkeys@pathtoks=\toks33
-\pgfkeys@temptoks=\toks34
+\pgfkeys@pathtoks=\toks34
+\pgfkeys@temptoks=\toks35
 
 (/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfkeysfiltered.code.t
 ex
-\pgfkeys@tmptoks=\toks35
+\pgfkeys@tmptoks=\toks36
 )) (/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgffor.code.tex
 (/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmath.code.tex
 (/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathcalc.code.tex
 (/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathutil.code.tex
-\pgf@x=\dimen136
-\pgf@xa=\dimen137
-\pgf@xb=\dimen138
-\pgf@xc=\dimen139
-\pgf@y=\dimen140
-\pgf@ya=\dimen141
-\pgf@yb=\dimen142
-\pgf@yc=\dimen143
-\c@pgf@counta=\count141
-\c@pgf@countb=\count142
-\c@pgf@countc=\count143
-\c@pgf@countd=\count144
-\pgfutil@tempcnta=\count145
-\pgfutil@tempcntb=\count146
+\pgf@x=\dimen137
+\pgf@xa=\dimen138
+\pgf@xb=\dimen139
+\pgf@xc=\dimen140
+\pgf@y=\dimen141
+\pgf@ya=\dimen142
+\pgf@yb=\dimen143
+\pgf@yc=\dimen144
+\c@pgf@counta=\count142
+\c@pgf@countb=\count143
+\c@pgf@countc=\count144
+\c@pgf@countd=\count145
+\pgfutil@tempcnta=\count146
+\pgfutil@tempcntb=\count147
 )
 (/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathparser.code.tex
-\pgfmath@dimen=\dimen144
-\pgfmath@count=\count147
+\pgfmath@dimen=\dimen145
+\pgfmath@count=\count148
 \pgfmath@box=\box30
-\pgfmath@toks=\toks36
-\pgfmath@stack@operand=\toks37
-\pgfmath@stack@operation=\toks38
+\pgfmath@toks=\toks37
+\pgfmath@stack@operand=\toks38
+\pgfmath@stack@operation=\toks39
 )
 (/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.code.tex
 (/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.basic.code
@@ -728,60 +767,60 @@ tex)
 (/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.integerari
 thmetics.code.tex)))
 (/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfloat.code.tex
-\c@pgfmathroundto@lastzeros=\count148
+\c@pgfmathroundto@lastzeros=\count149
 ))
-\pgffor@iter=\dimen145
-\pgffor@skip=\dimen146
-\pgffor@stack=\toks39
-\pgffor@toks=\toks40
+\pgffor@iter=\dimen146
+\pgffor@skip=\dimen147
+\pgffor@stack=\toks40
+\pgffor@toks=\toks41
 )
-\psLoopIndex=\count149
+\psLoopIndex=\count150
 
 `PSTricks' v2.64b  <2015/14/11> (tvz)
-\pst@dima=\dimen147
-\pst@dimb=\dimen148
-\pst@dimc=\dimen149
-\pst@dimd=\dimen150
-\pst@dimg=\dimen151
-\pst@dimh=\dimen152
-\pst@dimm=\dimen153
-\pst@dimn=\dimen154
-\pst@dimo=\dimen155
-\pst@dimp=\dimen156
+\pst@dima=\dimen148
+\pst@dimb=\dimen149
+\pst@dimc=\dimen150
+\pst@dimd=\dimen151
+\pst@dimg=\dimen152
+\pst@dimh=\dimen153
+\pst@dimm=\dimen154
+\pst@dimn=\dimen155
+\pst@dimo=\dimen156
+\pst@dimp=\dimen157
 \pst@hbox=\box31
 \pst@ibox=\box32
 \pst@boxg=\box33
-\pst@cnta=\count150
-\pst@cntb=\count151
-\pst@cntc=\count152
-\pst@cntd=\count153
-\pst@cntg=\count154
-\pst@cnth=\count155
-\pst@cntm=\count156
-\pst@cntn=\count157
-\pst@cnto=\count158
-\pst@cntp=\count159
-\@zero=\count160
-\pst@toks=\toks41
+\pst@cnta=\count151
+\pst@cntb=\count152
+\pst@cntc=\count153
+\pst@cntd=\count154
+\pst@cntg=\count155
+\pst@cnth=\count156
+\pst@cntm=\count157
+\pst@cntn=\count158
+\pst@cnto=\count159
+\pst@cntp=\count160
+\@zero=\count161
+\pst@toks=\toks42
 (/usr/share/texlive/texmf-dist/tex/generic/pstricks/pstricks.con)
-\psunit=\dimen157
-\psxunit=\dimen158
-\psyunit=\dimen159
-\pst@C@@rType=\count161
-\pslinewidth=\dimen160
-\psk@startLW=\dimen161
-\psk@endLW=\dimen162
-\pst@customdefs=\toks42
-\pslinearc=\dimen163
-\pst@symbolStep=\dimen164
-\pst@symbolWidth=\dimen165
-\pst@symbolLinewidth=\dimen166
-\everypsbox=\toks43
-\psframesep=\dimen167
-\pslabelsep=\dimen168
-\sh@wgridXunit=\dimen169
-\sh@wgridYunit=\dimen170
-\pst@shift=\dimen171
+\psunit=\dimen158
+\psxunit=\dimen159
+\psyunit=\dimen160
+\pst@C@@rType=\count162
+\pslinewidth=\dimen161
+\psk@startLW=\dimen162
+\psk@endLW=\dimen163
+\pst@customdefs=\toks43
+\pslinearc=\dimen164
+\pst@symbolStep=\dimen165
+\pst@symbolWidth=\dimen166
+\pst@symbolLinewidth=\dimen167
+\everypsbox=\toks44
+\psframesep=\dimen168
+\pslabelsep=\dimen169
+\sh@wgridXunit=\dimen170
+\sh@wgridYunit=\dimen171
+\pst@shift=\dimen172
 )
 File: pstricks.tex 2015/14/11 v2.64b `PSTricks' (tvz,hv)
 
@@ -823,7 +862,7 @@ runsystem(uname -s > "Praca.w18")...executed.
 runsystem(rm -- "Praca.w18")...executed.
 
 )
-\c@app@runs=\count162
+\c@app@runs=\count163
 runsystem(echo " ")...executed.
 
 runsystem(echo "-------------------------------------------------")...executed.
@@ -856,15 +895,15 @@ runsystem(echo "-------------------------------------------------")...executed.
 
 (/usr/share/texlive/texmf-dist/tex/latex/pst-pdf/pst-pdf.sty
 Package: pst-pdf 2008/10/09 v1.1v PS graphics for pdfLaTeX (RN,HjG)
-\c@pspicture=\count163
+\c@pspicture=\count164
 Package pst-pdf Info: MODE: 1 (pdfTeX mode) on input line 214.
-\ppf@output=\toks44
+\ppf@output=\toks45
 
 (/usr/share/texmf/tex/latex/preview/preview.sty
 Package: preview 2010/02/14 11.88 (AUCTeX/preview-latex)
-\pr@snippet=\count164
+\pr@snippet=\count165
 \pr@box=\box34
-\pr@output=\toks45
+\pr@output=\toks46
 )
 (/usr/share/texlive/texmf-dist/tex/latex/graphics/dvips.def
 File: dvips.def 2015/12/30 v3.0k Driver-dependent file (DPC,SPQR)
@@ -917,16 +956,16 @@ Package: auxhook 2011/03/04 v1.3 Hooks for auxiliary files (HO)
 (/usr/share/texlive/texmf-dist/tex/latex/oberdiek/kvoptions.sty
 Package: kvoptions 2011/06/30 v3.11 Key value format for package options (HO)
 )
-\@linkdim=\dimen172
-\Hy@linkcounter=\count165
-\Hy@pagecounter=\count166
+\@linkdim=\dimen173
+\Hy@linkcounter=\count166
+\Hy@pagecounter=\count167
 
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/pd1enc.def
 File: pd1enc.def 2012/11/06 v6.83m Hyperref: PDFDocEncoding definition (HO)
 Now handling font encoding PD1 ...
 ... no UTF-8 mapping file for font encoding PD1
 )
-\Hy@SavedSpaceFactor=\count167
+\Hy@SavedSpaceFactor=\count168
 
 (/usr/share/texlive/texmf-dist/tex/latex/latexconfig/hyperref.cfg
 File: hyperref.cfg 2002/06/06 v1.2 hyperref configuration of TeXLive
@@ -938,17 +977,17 @@ Package hyperref Info: Plain pages OFF on input line 4458.
 Package hyperref Info: Backreferencing OFF on input line 4463.
 Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
 Package hyperref Info: Bookmarks ON on input line 4688.
-\c@Hy@tempcnt=\count168
+\c@Hy@tempcnt=\count169
 
 (/usr/share/texlive/texmf-dist/tex/latex/url/url.sty
 \Urlmuskip=\muskip11
 Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
 )
 LaTeX Info: Redefining \url on input line 5041.
-\XeTeXLinkMargin=\dimen173
-\Fld@menulength=\count169
-\Field@Width=\dimen174
-\Fld@charsize=\dimen175
+\XeTeXLinkMargin=\dimen174
+\Fld@menulength=\count170
+\Field@Width=\dimen175
+\Fld@charsize=\dimen176
 Package hyperref Info: Hyper figures OFF on input line 6295.
 Package hyperref Info: Link nesting OFF on input line 6300.
 Package hyperref Info: Hyper index ON on input line 6303.
@@ -958,24 +997,24 @@ Package hyperref Info: Link coloring with OCG OFF on input line 6320.
 Package hyperref Info: PDF/A mode OFF on input line 6325.
 LaTeX Info: Redefining \ref on input line 6365.
 LaTeX Info: Redefining \pageref on input line 6369.
-\Hy@abspage=\count170
-\c@Item=\count171
-\c@Hfootnote=\count172
+\Hy@abspage=\count171
+\c@Item=\count172
+\c@Hfootnote=\count173
 )
 
 Package hyperref Message: Driver (autodetected): hpdftex.
 
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/hpdftex.def
 File: hpdftex.def 2012/11/06 v6.83m Hyperref driver for pdfTeX
-\Fld@listcount=\count173
-\c@bookmark@seq@number=\count174
+\Fld@listcount=\count174
+\c@bookmark@seq@number=\count175
 
 (/usr/share/texlive/texmf-dist/tex/latex/oberdiek/rerunfilecheck.sty
 Package: rerunfilecheck 2011/04/15 v1.7 Rerun checks for auxiliary files (HO)
 Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
 82.
 )
-\Hy@SectionHShift=\skip49
+\Hy@SectionHShift=\skip63
 )
 (/usr/share/texlive/texmf-dist/tex/latex/biblatex/biblatex.sty
 Package: biblatex 2016/03/03 v3.3 programmable bibliographies (PK/JW/AB)
@@ -986,11 +1025,11 @@ B)
 
 (/usr/share/texlive/texmf-dist/tex/latex/etoolbox/etoolbox.sty
 Package: etoolbox 2015/08/02 v2.2a e-TeX tools for LaTeX (JAW)
-\etb@tempcnta=\count175
+\etb@tempcnta=\count176
 )
 (/usr/share/texlive/texmf-dist/tex/latex/logreq/logreq.sty
 Package: logreq 2010/08/04 v1.0 xml request logger
-\lrq@indent=\count176
+\lrq@indent=\count177
 
 (/usr/share/texlive/texmf-dist/tex/latex/logreq/logreq.def
 File: logreq.def 2010/08/04 v1.0 logreq spec v1.0
@@ -998,57 +1037,57 @@ File: logreq.def 2010/08/04 v1.0 logreq spec v1.0
 (/usr/share/texlive/texmf-dist/tex/latex/base/ifthen.sty
 Package: ifthen 2014/09/29 v1.1c Standard LaTeX ifthen package (DPC)
 )
-\c@tabx@nest=\count177
-\c@listtotal=\count178
-\c@listcount=\count179
-\c@liststart=\count180
-\c@liststop=\count181
-\c@citecount=\count182
-\c@citetotal=\count183
-\c@multicitecount=\count184
-\c@multicitetotal=\count185
-\c@instcount=\count186
-\c@maxnames=\count187
-\c@minnames=\count188
-\c@maxitems=\count189
-\c@minitems=\count190
-\c@citecounter=\count191
-\c@savedcitecounter=\count192
-\c@uniquelist=\count193
-\c@uniquename=\count194
-\c@refsection=\count195
-\c@refsegment=\count196
-\c@maxextratitle=\count197
-\c@maxextratitleyear=\count198
-\c@maxextrayear=\count199
-\c@maxextraalpha=\count266
-\c@abbrvpenalty=\count267
-\c@highnamepenalty=\count268
-\c@lownamepenalty=\count269
-\c@maxparens=\count270
-\c@parenlevel=\count271
-\blx@tempcnta=\count272
-\blx@tempcntb=\count273
-\blx@tempcntc=\count274
-\blx@maxsection=\count275
-\blx@maxsegment@0=\count276
-\blx@notetype=\count277
-\blx@parenlevel@text=\count278
-\blx@parenlevel@foot=\count279
-\blx@sectionciteorder@0=\count280
-\labelnumberwidth=\skip50
-\labelalphawidth=\skip51
-\biblabelsep=\skip52
-\bibitemsep=\skip53
-\bibnamesep=\skip54
-\bibinitsep=\skip55
-\bibparsep=\skip56
-\bibhang=\skip57
+\c@tabx@nest=\count178
+\c@listtotal=\count179
+\c@listcount=\count180
+\c@liststart=\count181
+\c@liststop=\count182
+\c@citecount=\count183
+\c@citetotal=\count184
+\c@multicitecount=\count185
+\c@multicitetotal=\count186
+\c@instcount=\count187
+\c@maxnames=\count188
+\c@minnames=\count189
+\c@maxitems=\count190
+\c@minitems=\count191
+\c@citecounter=\count192
+\c@savedcitecounter=\count193
+\c@uniquelist=\count194
+\c@uniquename=\count195
+\c@refsection=\count196
+\c@refsegment=\count197
+\c@maxextratitle=\count198
+\c@maxextratitleyear=\count199
+\c@maxextrayear=\count266
+\c@maxextraalpha=\count267
+\c@abbrvpenalty=\count268
+\c@highnamepenalty=\count269
+\c@lownamepenalty=\count270
+\c@maxparens=\count271
+\c@parenlevel=\count272
+\blx@tempcnta=\count273
+\blx@tempcntb=\count274
+\blx@tempcntc=\count275
+\blx@maxsection=\count276
+\blx@maxsegment@0=\count277
+\blx@notetype=\count278
+\blx@parenlevel@text=\count279
+\blx@parenlevel@foot=\count280
+\blx@sectionciteorder@0=\count281
+\labelnumberwidth=\skip64
+\labelalphawidth=\skip65
+\biblabelsep=\skip66
+\bibitemsep=\skip67
+\bibnamesep=\skip68
+\bibinitsep=\skip69
+\bibparsep=\skip70
+\bibhang=\skip71
 \blx@bcfin=\read1
 \blx@bcfout=\write3
-\c@mincomprange=\count281
-\c@maxcomprange=\count282
-\c@mincompwidth=\count283
+\c@mincomprange=\count282
+\c@maxcomprange=\count283
+\c@mincompwidth=\count284
 Package biblatex Info: Trying to load biblatex default data model...
 Package biblatex Info: ... file 'blx-dm.def' found.
 
@@ -1057,78 +1096,78 @@ Package biblatex Info: Trying to load biblatex style data model...
 Package biblatex Info: ... file 'alphabetic.dbx' not found.
 Package biblatex Info: Trying to load biblatex custom data model...
 Package biblatex Info: ... file 'biblatex-dm.cfg' not found.
-\c@afterword=\count284
-\c@savedafterword=\count285
-\c@annotator=\count286
-\c@savedannotator=\count287
-\c@author=\count288
-\c@savedauthor=\count289
-\c@bookauthor=\count290
-\c@savedbookauthor=\count291
-\c@commentator=\count292
-\c@savedcommentator=\count293
-\c@editor=\count294
-\c@savededitor=\count295
-\c@editora=\count296
-\c@savededitora=\count297
-\c@editorb=\count298
-\c@savededitorb=\count299
-\c@editorc=\count300
-\c@savededitorc=\count301
-\c@foreword=\count302
-\c@savedforeword=\count303
-\c@holder=\count304
-\c@savedholder=\count305
-\c@introduction=\count306
-\c@savedintroduction=\count307
-\c@namea=\count308
-\c@savednamea=\count309
-\c@nameb=\count310
-\c@savednameb=\count311
-\c@namec=\count312
-\c@savednamec=\count313
-\c@translator=\count314
-\c@savedtranslator=\count315
-\c@shortauthor=\count316
-\c@savedshortauthor=\count317
-\c@shorteditor=\count318
-\c@savedshorteditor=\count319
-\c@labelname=\count320
-\c@savedlabelname=\count321
-\c@institution=\count322
-\c@savedinstitution=\count323
-\c@lista=\count324
-\c@savedlista=\count325
-\c@listb=\count326
-\c@savedlistb=\count327
-\c@listc=\count328
-\c@savedlistc=\count329
-\c@listd=\count330
-\c@savedlistd=\count331
-\c@liste=\count332
-\c@savedliste=\count333
-\c@listf=\count334
-\c@savedlistf=\count335
-\c@location=\count336
-\c@savedlocation=\count337
-\c@organization=\count338
-\c@savedorganization=\count339
-\c@origlocation=\count340
-\c@savedoriglocation=\count341
-\c@origpublisher=\count342
-\c@savedorigpublisher=\count343
-\c@publisher=\count344
-\c@savedpublisher=\count345
-\c@language=\count346
-\c@savedlanguage=\count347
-\c@pageref=\count348
-\c@savedpageref=\count349
-\shorthandwidth=\skip58
-\shortjournalwidth=\skip59
-\shortserieswidth=\skip60
-\shorttitlewidth=\skip61
-\shortauthorwidth=\skip62
-\shorteditorwidth=\skip63
+\c@afterword=\count285
+\c@savedafterword=\count286
+\c@annotator=\count287
+\c@savedannotator=\count288
+\c@author=\count289
+\c@savedauthor=\count290
+\c@bookauthor=\count291
+\c@savedbookauthor=\count292
+\c@commentator=\count293
+\c@savedcommentator=\count294
+\c@editor=\count295
+\c@savededitor=\count296
+\c@editora=\count297
+\c@savededitora=\count298
+\c@editorb=\count299
+\c@savededitorb=\count300
+\c@editorc=\count301
+\c@savededitorc=\count302
+\c@foreword=\count303
+\c@savedforeword=\count304
+\c@holder=\count305
+\c@savedholder=\count306
+\c@introduction=\count307
+\c@savedintroduction=\count308
+\c@namea=\count309
+\c@savednamea=\count310
+\c@nameb=\count311
+\c@savednameb=\count312
+\c@namec=\count313
+\c@savednamec=\count314
+\c@translator=\count315
+\c@savedtranslator=\count316
+\c@shortauthor=\count317
+\c@savedshortauthor=\count318
+\c@shorteditor=\count319
+\c@savedshorteditor=\count320
+\c@labelname=\count321
+\c@savedlabelname=\count322
+\c@institution=\count323
+\c@savedinstitution=\count324
+\c@lista=\count325
+\c@savedlista=\count326
+\c@listb=\count327
+\c@savedlistb=\count328
+\c@listc=\count329
+\c@savedlistc=\count330
+\c@listd=\count331
+\c@savedlistd=\count332
+\c@liste=\count333
+\c@savedliste=\count334
+\c@listf=\count335
+\c@savedlistf=\count336
+\c@location=\count337
+\c@savedlocation=\count338
+\c@organization=\count339
+\c@savedorganization=\count340
+\c@origlocation=\count341
+\c@savedoriglocation=\count342
+\c@origpublisher=\count343
+\c@savedorigpublisher=\count344
+\c@publisher=\count345
+\c@savedpublisher=\count346
+\c@language=\count347
+\c@savedlanguage=\count348
+\c@pageref=\count349
+\c@savedpageref=\count350
+\shorthandwidth=\skip72
+\shortjournalwidth=\skip73
+\shortserieswidth=\skip74
+\shorttitlewidth=\skip75
+\shortauthorwidth=\skip76
+\shorteditorwidth=\skip77
 Package biblatex Info: Trying to load compatibility code...
 Package biblatex Info: ... file 'blx-compat.def' found.
 
@@ -1140,13 +1179,13 @@ Package biblatex Info: ... file 'biblatex_.def' found.
 
 (/usr/share/texlive/texmf-dist/tex/latex/biblatex/biblatex_.def
 File: biblatex_.def 
-\c@textcitecount=\count350
-\c@textcitetotal=\count351
-\c@textcitemaxnames=\count352
-\c@biburlnumpenalty=\count353
-\c@biburlucpenalty=\count354
-\c@biburllcpenalty=\count355
-\c@smartand=\count356
+\c@textcitecount=\count351
+\c@textcitetotal=\count352
+\c@textcitemaxnames=\count353
+\c@biburlnumpenalty=\count354
+\c@biburlucpenalty=\count355
+\c@biburllcpenalty=\count356
+\c@smartand=\count357
 )
 Package biblatex Info: Trying to load bibliography style 'alphabetic'...
 Package biblatex Info: ... file 'alphabetic.bbx' found.
@@ -1158,8 +1197,8 @@ Package biblatex Info: ... file 'standard.bbx' found.
 
 (/usr/share/texlive/texmf-dist/tex/latex/biblatex/bbx/standard.bbx
 File: standard.bbx 2016/03/03 v3.3 biblatex bibliography style (PK/JW/AB)
-\c@bbx:relatedcount=\count357
-\c@bbx:relatedtotal=\count358
+\c@bbx:relatedcount=\count358
+\c@bbx:relatedtotal=\count359
 ))
 Package biblatex Info: Trying to load citation style 'alphabetic'...
 Package biblatex Info: ... file 'alphabetic.cbx' found.
@@ -1183,8 +1222,8 @@ Package biblatex Info: ... file 'biblatex.cfg' found.
 (/usr/share/texlive/texmf-dist/tex/latex/biblatex/biblatex.cfg
 File: biblatex.cfg 
 )))
-Package hyperref Info: Option `colorlinks' set `true' on input line 29.
-\c@theorem=\count359
+Package hyperref Info: Option `colorlinks' set `true' on input line 30.
+\c@theorem=\count360
 Package biblatex Info: Trying to load language 'english'...
 Package biblatex Info: ... file 'english.lbx' found.
 
@@ -1195,8 +1234,8 @@ File: english.lbx 2016/03/03 v3.3 biblatex localization (PK/JW/AB)
 Package biblatex Warning: 'babel/polyglossia' detected but 'csquotes' missing.
 (biblatex)                Loading 'csquotes' recommended.
 
-\@quotelevel=\count360
-\@quotereset=\count361
+\@quotelevel=\count361
+\@quotereset=\count362
 
 LaTeX Warning: Unused global option(s):
     [14pt].
@@ -1204,22 +1243,22 @@ LaTeX Warning: Unused global option(s):
 (./Praca.aux)
 \openout1 = `Praca.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 38.
-LaTeX Font Info:    ... okay on input line 38.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 38.
-LaTeX Font Info:    ... okay on input line 38.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 38.
-LaTeX Font Info:    ... okay on input line 38.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 38.
-LaTeX Font Info:    ... okay on input line 38.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 38.
-LaTeX Font Info:    ... okay on input line 38.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 38.
-LaTeX Font Info:    ... okay on input line 38.
-LaTeX Font Info:    Checking defaults for OT4/cmr/m/n on input line 38.
-LaTeX Font Info:    ... okay on input line 38.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 38.
-LaTeX Font Info:    ... okay on input line 38.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 39.
+LaTeX Font Info:    ... okay on input line 39.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 39.
+LaTeX Font Info:    ... okay on input line 39.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 39.
+LaTeX Font Info:    ... okay on input line 39.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 39.
+LaTeX Font Info:    ... okay on input line 39.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 39.
+LaTeX Font Info:    ... okay on input line 39.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 39.
+LaTeX Font Info:    ... okay on input line 39.
+LaTeX Font Info:    Checking defaults for OT4/cmr/m/n on input line 39.
+LaTeX Font Info:    ... okay on input line 39.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 39.
+LaTeX Font Info:    ... okay on input line 39.
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: hyperref package is loaded.
 Package caption Info: listings package is loaded.
@@ -1261,35 +1300,38 @@ Package caption Info: End \AtBeginDocument code.
 
 (/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count362
-\scratchdimen=\dimen176
+\scratchcounter=\count363
+\scratchdimen=\dimen177
 \scratchbox=\box35
-\nofMPsegments=\count363
-\nofMParguments=\count364
-\everyMPshowfont=\toks46
-\MPscratchCnt=\count365
-\MPscratchDim=\dimen177
-\MPnumerator=\count366
-\makeMPintoPDFobject=\count367
-\everyMPtoPDFconversion=\toks47
+\nofMPsegments=\count364
+\nofMParguments=\count365
+\everyMPshowfont=\toks47
+\MPscratchCnt=\count366
+\MPscratchDim=\dimen178
+\MPnumerator=\count367
+\makeMPintoPDFobject=\count368
+\everyMPtoPDFconversion=\toks48
 )
-\c@lstlisting=\count368
+\c@lstlisting=\count369
+Package ragged2e Info: ABD: executing \RaggedRight on input line 39.
+ ABD: EverySelectfont initializing macros
+LaTeX Info: Redefining \selectfont on input line 39.
 
 Preview: Fontsize 10pt
 Preview: PDFoutput 1
 \AtBeginShipoutBox=\box36
-Package hyperref Info: Link coloring ON on input line 38.
+Package hyperref Info: Link coloring ON on input line 39.
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
 
 (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
 Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 )
-\c@section@level=\count369
+\c@section@level=\count370
 )
-LaTeX Info: Redefining \ref on input line 38.
-LaTeX Info: Redefining \pageref on input line 38.
-LaTeX Info: Redefining \nameref on input line 38.
+LaTeX Info: Redefining \ref on input line 39.
+LaTeX Info: Redefining \pageref on input line 39.
+LaTeX Info: Redefining \nameref on input line 39.
 
 (./Praca.out) (./Praca.out)
 \@outlinefile=\write4
@@ -1303,37 +1345,37 @@ Package biblatex Info: Automatic encoding selection.
 Package biblatex Info: Trying to load bibliographic data...
 Package biblatex Info: ... file 'Praca.bbl' found.
  (./Praca.bbl)
-Package biblatex Info: Reference section=0 on input line 38.
-Package biblatex Info: Reference segment=0 on input line 38.
-LaTeX Font Info:    Try loading font information for OML+plm on input line 65.
+Package biblatex Info: Reference section=0 on input line 39.
+Package biblatex Info: Reference segment=0 on input line 39.
+LaTeX Font Info:    Try loading font information for OML+plm on input line 66.
 
 (/usr/share/texlive/texmf-dist/tex/latex/polski/omlplm.fd
 File: omlplm.fd 2008/02/24 v1.2.1 Font defs for fonts PL (MW)
 )
-LaTeX Font Info:    Try loading font information for OMS+plsy on input line 65.
+LaTeX Font Info:    Try loading font information for OMS+plsy on input line 66.
 
 
 (/usr/share/texlive/texmf-dist/tex/latex/polski/omsplsy.fd
 File: omsplsy.fd 2008/02/24 v1.2.1 Font defs for fonts PL (MW)
 )
-LaTeX Font Info:    Try loading font information for OMX+plex on input line 65.
+LaTeX Font Info:    Try loading font information for OMX+plex on input line 66.
 
 
 (/usr/share/texlive/texmf-dist/tex/latex/polski/omxplex.fd
 File: omxplex.fd 2008/02/24 v1.2.1 Font defs for fonts PL (MW)
 )
 LaTeX Font Info:    External font `plex10' loaded for size
-(Font)              <10> on input line 65.
+(Font)              <10> on input line 66.
 LaTeX Font Info:    External font `plex10' loaded for size
-(Font)              <7> on input line 65.
+(Font)              <7> on input line 66.
 LaTeX Font Info:    External font `plex10' loaded for size
-(Font)              <5> on input line 65.
-LaTeX Font Info:    Try loading font information for U+msa on input line 65.
+(Font)              <5> on input line 66.
+LaTeX Font Info:    Try loading font information for U+msa on input line 66.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 65.
+LaTeX Font Info:    Try loading font information for U+msb on input line 66.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
@@ -1348,66 +1390,51 @@ Non-PDF special ignored!{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
 \openout5 = `Praca.toc'.
 
  [2]
-Overfull \hbox (0.99713pt too wide) in paragraph at lines 88--89
+Overfull \hbox (13.21939pt too wide) in paragraph at lines 89--89
 \OT4/cmr/m/n/10 ruchów wszys-t-kich ciaª danego ukªadu o danych masach, pr¦d-ko
-±-ci-ach i poªo»e-ni-ach pocz¡tkowych
+±-ci-ach i poªo»e-ni-ach pocz¡tkowych 
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 88--89
-
- []
-
-
-Overfull \hbox (19.16376pt too wide) in paragraph at lines 92--93
-\OT4/cmr/m/n/10 Problem wyz-naczenia ruchu dowol-nej liczby ciaª jest trudny, w
-ielu naukowców próbowaªo rozstrzygn¡¢
- []
-
-[3] (./draw.pdf_tex <draw.pdf, id=125, page=1, 1201.90314pt x 531.12717pt>
+[3] (./draw.pdf_tex <draw.pdf, id=133, page=1, 1201.90314pt x 531.12717pt>
 File: draw.pdf Graphic file (type pdf)
 
 <use draw.pdf, page 1>
 Package pdftex.def Info: draw.pdf, page1 used on input line 52.
 (pdftex.def)             Requested size: 418.25368pt x 184.82751pt.
 )
-Overfull \hbox (8.63484pt too wide) in paragraph at lines 127--128
-\OT4/cmr/m/n/10 CUDA to uni-w-er-salna ar-chitek-tura pro-ce-sorów wielordzenio
-wych (gªównie kart graficznych) umo»li-
+Overfull \hbox (6.46928pt too wide) in paragraph at lines 128--129
+\OT4/cmr/m/n/10 Thrust jest sz-ablonow¡ bib-liotek¡ dla CUDA bazu-j¡ca na bib-l
+iotece STL z C++. Thrust umo»li- 
  []
 
 
 Underfull \vbox (badness 1910) has occurred while \output is active []
 
- [4 <./draw.pdf>]
-Underfull \hbox (badness 10000) in paragraph at lines 152--153
-
+ [4 <./draw.pdf>] [5]
+Overfull \hbox (6.0pt too wide) in paragraph at lines 187--187
+[][][][][][][]  
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 161--162
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 169--170
-
- []
-
-[5]
-Overfull \hbox (6.0pt too wide) in paragraph at lines 188--188
-[][][][][][][] 
- []
-
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 191.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 190.
 
 (/usr/share/texlive/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 191.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 190.
 
-(/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
+Overfull \hbox (5.27492pt too wide) in paragraph at lines 196--196
+[]\OT4/cmr/m/n/10 Ka»de ciaªo na pocz¡tku symu-lacji ma losowan¡ pozy-cj¦, pr¦d
+-ko±¢ oraz wag¦. Jed-nos-tki przyj¦te 
+ []
+
+
+Overfull \hbox (19.35822pt too wide) in paragraph at lines 206--207
+\OT4/cmr/m/n/10 niesko«c-zonej dla ka»dego ciaªa w symu-lacji. W tym celu wyko-
+rzys-tane zostaªo, wcze±niej wprowad- 
+ []
+
+[6] (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2015/06/04 1.6 listings language file
 )
 (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
@@ -1416,51 +1443,47 @@ File: lstlang1.sty 2015/06/04 1.6 listings language file
 (/usr/share/texlive/texmf-dist/tex/latex/listings/lstmisc.sty
 File: lstmisc.sty 2015/06/04 1.6 (Carsten Heinz)
 )
-Overfull \hbox (6.0pt too wide) in paragraph at lines 209--209
-[][][][][][][] 
+Overfull \hbox (6.0pt too wide) in paragraph at lines 234--234
+[][][][][][][]  
  []
 
-LaTeX Font Info:    Try loading font information for OML+cmr on input line 210.
+LaTeX Font Info:    Try loading font information for OML+cmr on input line 235.
 
 (/usr/share/texlive/texmf-dist/tex/latex/base/omlcmr.fd
 File: omlcmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <10> not available
-(Font)              Font shape `OML/cmm/m/it' tried instead on input line 210.
+(Font)              Font shape `OML/cmm/m/it' tried instead on input line 235.
 
-Overfull \hbox (1.7506pt too wide) in paragraph at lines 227--228
+Overfull \hbox (1.7506pt too wide) in paragraph at lines 252--253
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
-[6]
-LaTeX Font Info:    Try loading font information for OT4+cmtt on input line 263
+[7]
+LaTeX Font Info:    Try loading font information for OT4+cmtt on input line 289
 .
  (/usr/share/texlive/texmf-dist/tex/latex/polski/ot4cmtt.fd
 File: ot4cmtt.fd 2008/02/24 v1.2.1 Font defs for fonts PL (MW)
-) [7]
-Overfull \hbox (10.81352pt too wide) in paragraph at lines 273--273
-[]\OT4/cmr/m/n/10 Tancred Lind-holm. ``Sem-i-nar pre-sen-ta-tion. N-body al-go-
-rithms''. In: \OT4/cmr/m/it/10 Uni-ver-sity of Helsinki
- []
+) [8]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 300.
+ [9]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 300.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 274.
-[8]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 274.
- (./Praca.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 274.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 274.
+(./Praca.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 300.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 300.
 Package rerunfilecheck Info: File `Praca.out' has not changed.
 (rerunfilecheck)             Checksum: 782E80DE6FDCD40AAF12113D0AAE7417;1374.
 Package logreq Info: Writing requests to 'Praca.run.xml'.
 \openout1 = `Praca.run.xml'.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 274.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 300.
  ) 
 Here is how much of TeX's memory you used:
- 23548 strings out of 493029
- 386655 string characters out of 6136235
- 837188 words of memory out of 5000000
- 26636 multiletter control sequences out of 15000+600000
+ 23732 strings out of 493029
+ 390035 string characters out of 6136235
+ 835253 words of memory out of 5000000
+ 26804 multiletter control sequences out of 15000+600000
  18915 words of font info for 54 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  48i,8n,99p,938b,1550s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1484,10 +1507,10 @@ plsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/pl/plsy7.pfb></usr
 /share/texlive/texmf-dist/fonts/type1/public/pl/plti10.pfb></usr/share/texlive/
 texmf-dist/fonts/type1/public/pl/plti12.pfb></usr/share/texlive/texmf-dist/font
 s/type1/public/pl/pltt10.pfb>
-Output written on Praca.pdf (8 pages, 156326 bytes).
+Output written on Praca.pdf (9 pages, 161052 bytes).
 PDF statistics:
- 299 PDF objects out of 1000 (max. 8388607)
- 268 compressed objects within 3 object streams
- 78 named destinations out of 1000 (max. 500000)
+ 312 PDF objects out of 1000 (max. 8388607)
+ 280 compressed objects within 3 object streams
+ 83 named destinations out of 1000 (max. 500000)
  158 words of extra memory for PDF output out of 10000 (max. 10000000)
 

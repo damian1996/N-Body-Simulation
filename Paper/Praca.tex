@@ -15,6 +15,7 @@
 \usepackage{listings}
 \usepackage{color}
 \usepackage{fontenc}
+\usepackage[document]{ragged2e}
 \usepackage{bm}
 \usepackage{pstricks}
 \usepackage{auto-pst-pdf}
@@ -89,11 +90,11 @@ Symulacja N ciał jest zagadnieniem z mechaniki klasycznej, które polega na wyz
 
 \subsection{\Large Szczególne przypadki}
 \bigskip
-Problem wyznaczenia ruchu dowolnej liczby ciał jest trudny, wielu naukowców próbowało rozstrzygnąć go dla małej, ustalonej liczby ciał.
+Problem wyznaczenia ruchu dowolnej liczby ciał jest trudny, więc wielu naukowców próbowało rozstrzygnąć go dla małej, ustalonej liczby ciał.
 
 \subsubsection{Problem dwóch ciał}
 Problem dla dwóch ciał podlegających prawom klasycznej dynamiki Newtona i przyciągających się zgodnie z newtonowskim prawem powszechnego ciążenia został rozstrzygnięty przez J. Bernoulliego przy założeniu, że masa obiektu koncentruje się w jego środku. \cite{fund}
-Ruch dwóch ciał wygląda wtedy tak, że obiekty poruszają się po krzywych stożkowych oraz rodzaj krzywej zależy od całkowitej energii układu. Przykładowo, w przypadku małej energii, gdy ciała nie mogą się od siebie uwolnić, to krążą wokół siebie po elipsach. W innych przypadkach obiekty mogą poruszać się chociażby po hiperboli. 
+Ruch dwóch ciał wygląda wtedy tak, że obiekty poruszają się po krzywych stożkowych, a rodzaj krzywej zależy od całkowitej energii układu. Przykładowo, w przypadku małej energii, gdy ciała nie mogą się od siebie uwolnić, to krążą wokół siebie po elipsach. W innych przypadkach obiekty mogą poruszać się chociażby po hiperboli. 
 
 \subsubsection{Problem trzech ciał}
 Problem dla N = 3 wciąż nie jest rozwiązany w ogólności. Istnieją rozwiązania dla szczególnych przypadków\cite{threebody1, threebody2}. Innym ważnym przypadkiem jest problem, w którym masa jednego z ciał jest zaniedbywalnie mała, jest to tak zwany ograniczony problem trzech ciał - przedstawiony przez J. L. Lagrange'a w XVIII wieku. Badał on układ Słońce-Ziemia-Księżyc. 
@@ -101,11 +102,9 @@ Problem dla N = 3 wciąż nie jest rozwiązany w ogólności. Istnieją rozwiąz
 
 \subsection{\Large Zastosowania}
 \bigskip
-Symulacje N ciał są szeroko wykorzystywanymi narzędziami w fizyce oraz astronomii. 
-Problemami, w których symulacje są użyteczne są na przykład dynamika systemu z kilkoma ciałami jak 
-układ Słońce-Ziemia-Księżyc. W fizycznej kosmologii 
-from investigating the dynamics of few-body systems like the Earth-Moon-Sun system t understanding the evolution of the large-scale structure of the universe.[1] In physical cosmology, N-body simulations are used to study processes of non-linear structure formation such as galaxy filaments and galaxy halos from the influence of dark matter. Direct N-body simulations are used to study the dynamical evolution of star clusters. Common examples include a satellite orbiting a planet, a planet orbiting a star, two stars orbiting each other (a binary star), and a classical electron orbiting an atomic nucleus (although to solve the electron/nucleus 2-body system correctly a quantum mechanical approach must be used).
-
+Symulacje N ciał są szeroko wykorzystywanymi narzędziami w fizyce oraz astronomii. Problemem, w którym symulacje są użyteczne jest na przykład dynamika systemu z kilkoma ciałami jak układ Słońce-Ziemia-Księżyc\cite{SEMmisc}, której zrozumienie może pomóc zrozumienie działania olbrzymich systemów we wszechświecie.\cite{chaosMisc}
+W kosmologii symulacje N ciał są wykorzystywane do studiowania procesów tworzenie nieliniowych struktur jak galaktyczne halo z wpływem ciemnej materii\cite{haloDensity}. 
+Bezpośrednie symulacje N ciał są wykorzystywane na przykład do studiowania dynamicznej ewolucji klastrów gwiazd.\cite{dirNBody} 
 \newpage
 
 \begin{figure}
@@ -193,6 +192,31 @@ while(true)
    narysujNowePozycje()
 \end{lstlisting}
 
+
+Każde ciało na początku symulacji ma losowaną pozycję, prędkość oraz wagę. Jednostki przyjęte w symulacji są następujące : \\
+- jednostką wagi jest masa słońca. Masa słońca jest definiowana następująco\\
+\begin{center}
+M\textsubscript{\(\odot\)} = 1.9884\(\cdot 10^{30}\)\\
+\end{center}
+Symulowane gwiazdy mają wagi z zakresu \([0.5, 10]\) M\textsubscript{\(\odot\)}.\\
+- jednostką odległości jest parsek, czyli odległość, dla której paralaksa roczna położenia Ziemi widzianej prostopadle do płaszczyzny orbity wynosi 1 sekundę łuku. W przeliczeniu na metry i po zaokrągleniu jest to 
+\begin{center}
+\(1\) pc \(\approx\) \(3,2616\) roku świetlnego \(\approx\) \(3,086\cdot 10^{16}\) m\\
+\end{center}
+Najbardziej złożoną operacją w algorytmie jest uaktualnienie pozycji w każdym obiegu pętli nieskończonej dla każdego ciała w symulacji. W tym celu wykorzystane zostało, wcześniej wprowadzone, Prawo 4. W ten sposób może zostać policzona siła, którą na dane ciało działają wszystkie pozostałe obiekty w symulacji. 
+
+Przypominając, wzór na siłe działającą na ciało wygląda następująco :\\
+$$F_i = -G\cdot m_i \sum_{j=1, j\neq i}^N \frac{m_j(r_i - r_j)}{|r_i - r_j|^3},$$ 
+gdzie stała grawitacji wynosi
+\begin{center}
+$$G = 6,67408(31)\cdot 10^{-11} \frac{m^{3}}{kg s^2},$$
+\end{center}
+W astronomii stała grawitacji jest wyrażana jako 
+\begin{center}
+$$G = 4,3\cdot 10^{-3} \frac{pc}{M_{\odot}} \frac{km^2}{s^2}$$
+\end{center}
+Złożoność obliczeniowa naiwnej operacji uaktualnienia pozycji wszyskich obiektów, przedstawia poniższy fakt.
+
 \begin{theorem}
 Uaktualnienie pozycji wszystkich ciał ma złożoność obliczeniową $\mathcal{O}(N^{2})$.
 \end{theorem}
@@ -204,9 +228,10 @@ Następnie dla każdego obiektu musimy wyznaczyć jego przyśpieszenie oraz now�
 Poprzez zsumowanie złożoności obu podoperacji, widzimy że złożoność obliczeniowa jednego kroku symulacji naiwnego algorytmu wynosi $\mathcal{O}(N^{2})$.
 \end{myproof}
 
+
 \lstset{backgroundcolor=\color{white}, numbers=left, numbersep=8pt}              
 
-\begin{lstlisting}[language=C++, frame=single, framerule=2pt, caption=compute next step]
+\begin{lstlisting}[language=C++, frame=single, framerule=2pt, caption=uaktualnienie pozycji ciał]
 typedef thrust::host_vector<float> tf3;
 void StepNaive::compute(tf3& positions, float dt) {
   std::fill(forces.begin(), forces.end(), 0);
@@ -230,6 +255,7 @@ void StepNaive::compute(tf3& positions, float dt) {
   }
 }
 \end{lstlisting}
+
 
 \subsection{\Large Paralelizacja naiwnego algorytmu}
 

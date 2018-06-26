@@ -112,6 +112,48 @@
       \verb http://docs.nvidia.com/cuda/cuda-runtime-api/index.html
       \endverb
     \endentry
+    \entry{haloDensity}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=f7a0c2d04eb6c2c11c8cae261bbf3c7c}{%
+           family={E.D'Onghia},
+           family_i={E\bibinitperiod},
+           suffix={C.Firmani},
+           suffix_i={C\bibinitperiod},
+           given={G.Chincarini},
+           given_i={G\bibinitperiod}}}%
+      }
+      \strng{namehash}{f7a0c2d04eb6c2c11c8cae261bbf3c7c}
+      \strng{fullhash}{f7a0c2d04eb6c2c11c8cae261bbf3c7c}
+      \field{labelalpha}{EDO02}
+      \field{sortinit}{E}
+      \field{sortinithash}{fefc5210ef4721525b2a478df41efcd4}
+      \field{extraalpha}{1}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{The Halo Density Profiles with Non-Standard N-body Simulations}
+      \field{year}{2002}
+    \endentry
+    \entry{dirNBody}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=f7a0c2d04eb6c2c11c8cae261bbf3c7c}{%
+           family={E.D'Onghia},
+           family_i={E\bibinitperiod},
+           suffix={C.Firmani},
+           suffix_i={C\bibinitperiod},
+           given={G.Chincarini},
+           given_i={G\bibinitperiod}}}%
+      }
+      \strng{namehash}{f7a0c2d04eb6c2c11c8cae261bbf3c7c}
+      \strng{fullhash}{f7a0c2d04eb6c2c11c8cae261bbf3c7c}
+      \field{labelalpha}{EDO02}
+      \field{sortinit}{E}
+      \field{sortinithash}{fefc5210ef4721525b2a478df41efcd4}
+      \field{extraalpha}{2}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{The Halo Density Profiles with Non-Standard N-body Simulations}
+      \field{year}{2002}
+    \endentry
     \entry{threebody2}{article}{}
       \name{author}{1}{}{%
         {{hash=8187f24c92ead200b9daa9953b47a9c1}{%
@@ -182,6 +224,39 @@
       \verb{url}
       \verb https://www.khronos.org/registry/OpenGL/index_gl.php
       \endverb
+    \endentry
+    \entry{chaosMisc}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=72b90f0c3473f7bf08465574cbe2cedc}{%
+           family={Heggie},
+           family_i={H\bibinitperiod},
+           given={Douglas\bibnamedelima C.},
+           given_i={D\bibinitperiod\bibinitdelim C\bibinitperiod}}}%
+      }
+      \strng{namehash}{72b90f0c3473f7bf08465574cbe2cedc}
+      \strng{fullhash}{72b90f0c3473f7bf08465574cbe2cedc}
+      \field{labelalpha}{Heg91}
+      \field{sortinit}{H}
+      \field{sortinithash}{82012198d5dfa657b8c4a168793268a6}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{CHAOS IN THE N-BODY PROBLEM OF STELLAR DYNAMICS}
+      \field{year}{1991}
+    \endentry
+    \entry{SEMmisc}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=6235e0ac4972a6a88d26ad227d40feac}{%
+           family={J.Eiland},
+           family_i={J\bibinitperiod}}}%
+      }
+      \strng{namehash}{6235e0ac4972a6a88d26ad227d40feac}
+      \strng{fullhash}{6235e0ac4972a6a88d26ad227d40feac}
+      \field{labelalpha}{JEi}
+      \field{sortinit}{J}
+      \field{sortinithash}{ec3950a647c092421b9fcca6d819504a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{N-Body Simulation of the Formation of the Earth-Moon System from a Single Giant Impact}
     \endentry
     \entry{fastNbody}{inbook}{}
       \name{author}{1}{}{%

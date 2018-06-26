@@ -28,7 +28,7 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {2.2}\relax \fontsize {14.4}{18}\selectfont Jednow\IeC {\k a}tkowy naiwny algorytm z pseudokodem}{6}{subsection.2.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {paragraph}{Dow\IeC {\'o}d:}{6}{section*.4}
+\contentsline {paragraph}{Dow\IeC {\'o}d:}{7}{section*.4}
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {2.3}\relax \fontsize {14.4}{18}\selectfont Paralelizacja naiwnego algorytmu}{7}{subsection.2.3}
 \defcounter {refsection}{0}\relax 
@@ -40,6 +40,6 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {3.2}\relax \fontsize {14.4}{18}\selectfont Zr\IeC {\'o}wnoleglenie algorytmu Barnesa-Huta}{7}{subsection.3.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.3}\relax \fontsize {14.4}{18}\selectfont Implementacja}{7}{subsection.3.3}
+\contentsline {subsection}{\numberline {3.3}\relax \fontsize {14.4}{18}\selectfont Implementacja}{8}{subsection.3.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4}\relax \fontsize {17.28}{22}\selectfont Podsumowanie}{7}{section.4}
+\contentsline {section}{\numberline {4}\relax \fontsize {17.28}{22}\selectfont Podsumowanie}{8}{section.4}
