@@ -4,11 +4,11 @@
 #include <thrust/host_vector.h>
 #include <thrust/device_vector.h>
 
-typedef thrust::host_vector<float> type;
+typedef thrust::host_vector<double> type;
 
 class Computations {
-  thrust::device_vector<float> veloD;
-  thrust::device_vector<float> weightsD;
+  thrust::device_vector<double> veloD;
+  thrust::device_vector<double> weightsD;
 public:
   Computations(type velocities, type weights) {
       veloD = velocities;
@@ -18,7 +18,7 @@ public:
 
   }
   //void NaiveSimBridge(Render* painter, type& pos, type& velocities, type& weights, int N);
-  void NaiveSimBridgeThrust(type& pos, int N, float dt);
+  void NaiveSimBridgeThrust(type& pos, int N, double dt);
 };
 
 #endif

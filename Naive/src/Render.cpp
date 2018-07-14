@@ -50,13 +50,13 @@ void Render::mouse_scroll(double offset) {
   camera_radius += offset;
 }
 
-static void MessageCallback(GLenum source, 
-                     GLenum type, 
-                     GLuint id, 
+static void MessageCallback(GLenum source,
+                     GLenum type,
+                     GLuint id,
                      GLenum severity,
-                     GLsizei length, 
-                     const GLchar* message, 
-                     const void* userParam) 
+                     GLsizei length,
+                     const GLchar* message,
+                     const void* userParam)
 {
     fprintf(stderr, "GL CALLBACK: %s type = 0x%x, severity = 0x%x, message = %s\n",
           (type == GL_DEBUG_TYPE_ERROR ? "** GL ERROR **" : ""),
@@ -97,15 +97,15 @@ void Render::setupWindow() {
     glfwWindowHint(GLFW_SAMPLES, 4);
 
     this->window = glfwCreateWindow(height, width, "N-BODY SIMULATION", NULL, NULL);
-    if (!this->window)        
+    if (!this->window)
         throw std::runtime_error("Failed to create window");
-  
+
     glfwMakeContextCurrent(this->window);
-    glfwSetKeyCallback(this->window, this->key_callback);    
+    glfwSetKeyCallback(this->window, this->key_callback);
     glfwSetCursorPosCallback(this->window, this->cursor_position_callback);
     glfwSetMouseButtonCallback(this->window, this->mouse_button_callback);
     glfwSetScrollCallback(this->window, this->scroll_callback);
-  
+
     glfwSwapInterval(1); //enables v-sync
 }
 
@@ -158,7 +158,7 @@ void Render::createAndBindBuffer() {
     glBufferData(GL_ARRAY_BUFFER, sizeof(float)*3*N, V_position, GL_DYNAMIC_DRAW);
     glEnableVertexAttribArray(0);
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
-    
+
     glBindBuffer(GL_ARRAY_BUFFER, buffer[1]);
     glBufferData(GL_ARRAY_BUFFER, sizeof(char)*3*N, V_color, GL_DYNAMIC_DRAW);
     glEnableVertexAttribArray(1);
@@ -168,7 +168,7 @@ void Render::createAndBindBuffer() {
     glBindBuffer(GL_ARRAY_BUFFER, buffer[2]);
     glBufferData(GL_ARRAY_BUFFER, sizeof(float)*N, V_mass, GL_DYNAMIC_DRAW);
     glEnableVertexAttribArray(2);
-    glVertexAttribPointer(2, 1, GL_FLOAT, GL_FALSE, 0, 0);    
+    glVertexAttribPointer(2, 1, GL_FLOAT, GL_FALSE, 0, 0);
 }
 // "    gl_PointSize = gl_Normal.z*((weight+100.0)/70.0);"
 
@@ -252,13 +252,13 @@ void Render::render() {
     glm::mat4 mvp = projection * view;
     GLuint MatrixID = glGetUniformLocation(program, "MVP");
     glUniformMatrix4fv(MatrixID, 1, GL_FALSE, &mvp[0][0]);
-    
+
     glBindBuffer(GL_ARRAY_BUFFER, buffer[0]);
     glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(float)*3*N, V_position);
-    
+
     glBindBuffer(GL_ARRAY_BUFFER, buffer[1]);
     glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(char)*3*N, V_color);
-    
+
     glBindBuffer(GL_ARRAY_BUFFER, buffer[2]);
     glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(float)*N, V_mass);
 
@@ -275,7 +275,7 @@ bool Render::draw(thrust::host_vector<float>& positions) {
     bool res;
     res = ClearWindow();
     if(res) return true;
-    
+
     render();
 
     res = Swap();
@@ -283,7 +283,7 @@ bool Render::draw(thrust::host_vector<float>& positions) {
     return false;
 }
 
-float Render::getTime() {
+double Render::getTime() {
     return glfwGetTime();
 }
 

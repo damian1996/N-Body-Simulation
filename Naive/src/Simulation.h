@@ -15,11 +15,13 @@ class Simulation {
     Render* r;
     Step* comp;
     unsigned N;
-    thrust::host_vector<float> positions;
+    thrust::host_vector<double> positions;
+    thrust::host_vector<float> posToDraw;
     RandomGenerators* rg;
 public:
     Simulation(Render* r, Step* comp, unsigned N);
     ~Simulation();
+    void normalizePositions();
     void makeSimulation();
 };
 

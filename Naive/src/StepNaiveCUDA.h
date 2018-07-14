@@ -11,15 +11,15 @@
 class StepNaiveCuda : public Step {
   Computations* c;
   RandomGenerators* rg;
-  thrust::host_vector<float> weights;
-  thrust::host_vector<float> velocities;
+  thrust::host_vector<double> weights;
+  thrust::host_vector<double> velocities;
 public:
     StepNaiveCuda(std::vector<float> masses, unsigned N);
     ~StepNaiveCuda();
     void initialize() {
 
     }
-    void compute(tf3& positions, float dt);
+    void compute(tf3& positions, double dt);
 };
 
 #endif

@@ -8,8 +8,8 @@
 class RandomGenerators {
 public:
   RandomGenerators();
-  float getRandomfloat(float a, float b);
-  //float randPosition(float a, float b);
+  double getRandomdouble(double a, double b);
+  //double randPosition(double a, double b);
   int getRandomByte();
   int getRandomType();
   template<typename T>

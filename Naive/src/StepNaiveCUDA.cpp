@@ -20,6 +20,6 @@ StepNaiveCuda::~StepNaiveCuda() {
     delete rg;
 }
 
-void StepNaiveCuda::compute(tf3& positions, float dt) {
+void StepNaiveCuda::compute(tf3& positions, double dt) {
     c->NaiveSimBridgeThrust(positions, N, dt);
 }

@@ -9,7 +9,8 @@ KOD
 8) Przerobienie kodu na 3D
 9) Integracja kodu z złączalnymi kulkami 3D
 10) kosmetyczne poprawki kodu (prywatne funkcji w Render i pewnie nie tylko, wywalic typedefy dla host_vector z Render)
-11) dodac wieksze obramowanie 
+11) dodac wieksze obramowanie
+12) kly (kilo lata swietlne) -> 100-180 srednicy galaktyki
 http://ikee.lib.auth.gr/record/294535/files/Thesis.pdf
 
 const char* vertex_shader[] = {
@@ -49,7 +50,12 @@ PAPER
 4) Wstawka o złączaniu kulek i jak to jest zrobione w OpenGL
 5) Wstawka o optach kernela na CUDA
 6) opis kodu do naiwnego algorytmu (co sie dzieje w poszczegolnych linijkach)
+7) Prawo 4 czy Prawo 5 przemianowac na twierdzenie/fakt
+8) wywalic oczojebny zielony
+9) plusik na rysunku jest krzywo(nie na srodku)
 
+README
+1) instalka libglm-dev
 
 The N-body simulations can be used in theoretical studies of the large-scale structure of the universe, galaxies, star clusters, solar systems,
 stellar dynamics, climate modeling, gases, liquids and plasmas. On smaller scales, quantum effects become important. N-body simulations are applied
@@ -62,4 +68,9 @@ https://arxiv.org/pdf/0806.3950.pdf
 file:///home/damian/Desktop/praca%20licencjacka/materialy/Gravitational%20N-Body%20Simulatio%20-%20Aarseth,%20Sverre%20J._5510.pdf
 https://www.quora.com/What-is-the-average-mass-of-a-star
 
+<<<<<<< HEAD
 kamera jest we współrzędnych sferycznych i radius to odległość od centrum, theta i phi to kąty
+=======
+
+https://gist.github.com/tonylukasavage/5672490
+>>>>>>> 8bd69e9... Partial changes with parsecs and sun masses

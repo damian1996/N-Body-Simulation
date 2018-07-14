@@ -1,11 +1,13 @@
 #include "ComputationsCuda.h"
 
-const float G = 6.674*(1e-11);
-const float EPS = 0.01f;
+//const double G = 6.674*(1e-11);
+const double x = 1.0/(3.086*1e13); //[km -> pc]
+const double G = 4.3*(1e-3)/(x*x); //[pc^3/Mo*s^2]
+const double EPS = 0.01f;
 
 template <typename T>
 __global__
-void NaiveSim(T* pos, T* velo, T* weigh, int N, float dt) {
+void NaiveSim(T* pos, T* velo, T* weigh, int N, double dt) {
     //printf("%f\n", pos->arr[thid]);
     int thid = blockIdx.x*blockDim.x + threadIdx.x;
     float posx = pos[thid*3], posy = pos[thid*3+1], posz = pos[thid*3+2], weighI = weigh[thid];
@@ -32,7 +34,7 @@ void NaiveSim(T* pos, T* velo, T* weigh, int N, float dt) {
             }
         }
     }
-    float acc = forcex/weighI;
+    double acc = forcex/weighI; //pc / s2
     pos[thid*3] += velo[thid*3]*dt + acc*dt*dt/2;
     velo[thid*3] += acc*dt;
 
@@ -43,17 +45,17 @@ void NaiveSim(T* pos, T* velo, T* weigh, int N, float dt) {
     acc = forcez/weighI;
     pos[thid*3+2] += velo[thid*3+2]*dt + acc*dt*dt/2;
     velo[thid*3+2] += acc*dt;
-    
+
     __syncthreads();
 }
 
-void Computations::NaiveSimBridgeThrust(type& pos, int N, float dt) {
-    // type = thrust::device_vector<float>
-    thrust::device_vector<float> posD = pos;
+void Computations::NaiveSimBridgeThrust(type& pos, int N, double dt) {
+    // type = thrust::device_vector<double>
+    thrust::device_vector<double> posD = pos;
 
-    float* d_positions = thrust::raw_pointer_cast(posD.data());
-    float* d_velocities = thrust::raw_pointer_cast(veloD.data());
-    float* d_weights = thrust::raw_pointer_cast(weightsD.data());
+    double* d_positions = thrust::raw_pointer_cast(posD.data());
+    double* d_velocities = thrust::raw_pointer_cast(veloD.data());
+    double* d_weights = thrust::raw_pointer_cast(weightsD.data());
 
     float zzpx = 0.0f, zzpy = 0.0f, zzpz = 0.0f;
     for(int i=0; i<N; i++) {
@@ -66,7 +68,7 @@ void Computations::NaiveSimBridgeThrust(type& pos, int N, float dt) {
     NaiveSim<<<64, (N+63)/64>>>(d_positions, d_velocities, d_weights, N, dt);
 
     pos = posD;
-    //thrust::copy(weightsD.begin(), weightsD.end(), std::ostream_iterator<float>(std::cout, " "));
+    //thrust::copy(weightsD.begin(), weightsD.end(), std::ostream_iterator<double>(std::cout, " "));
 }
 
 

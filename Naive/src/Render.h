@@ -17,7 +17,7 @@
 #include "gl.h"
 #include "RandomGenerators.h"
 
-typedef thrust::host_vector<float > tf3;
+typedef thrust::host_vector<double > tf3;
 typedef thrust::host_vector<char > tb3;
 typedef std::vector<std::array<float, 3> > f3;
 typedef std::vector<std::array<char, 3> > b3;
@@ -47,7 +47,7 @@ public:
     static void mouse_released();
     static void mouse_scroll(double offset);
     static void mouse_move(double xpos, double ypos);
-    
+
     static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
     static void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
     static void mouse_button_callback(GLFWwindow* window, int button, int action, int mods);
@@ -73,7 +73,7 @@ private:
     byte3d* V_color;
     float3d* V_position;
     float* V_mass;
-    
+
     GLuint buffer[3];
     GLuint program, sh_fragment, sh_vertex;
     GLFWwindow* window;

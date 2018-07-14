@@ -4,11 +4,11 @@ RandomGenerators::RandomGenerators() {
 
 }
 
-float RandomGenerators::getRandomfloat(float a, float b) {
+double RandomGenerators::getRandomdouble(double a, double b) {
     std::random_device rd1;
     std::mt19937 gen1(rd1());
-    std::uniform_real_distribution<> disfloat(a, b);
-    return disfloat(gen1);
+    std::uniform_real_distribution<> disdouble(a, b);
+    return disdouble(gen1);
 }
 
 int RandomGenerators::getRandomByte() {
@@ -58,25 +58,26 @@ void RandomGenerators::initializeWeights<std::vector<float>>(std::vector<float>&
     switch(typeMass) {
         case 0: // full random
             for(unsigned i=0; i < N; i++)
-                weights[i] = getRandomfloat(1000.0f, 100000.0f); // 10^10
+                weights[i] = getRandomdouble(0.5, 9.0); // 10^10
+                //weights[i] = getRandomdouble(1000.0, 100000.0); // 10^10
             break;
         case 1: // 1/10 duze masy, reszta stosunkowo male
             for(unsigned i=0; i < (N/10); i++)
-                weights[i] = getRandomfloat(1000000.0f, 1010000.0f);
+                weights[i] = getRandomdouble(1000000.0, 1010000.0);
             for(unsigned i=(N/10); i < N; i++)
-                weights[i] = getRandomfloat(1000.0f, 2000.0f);
+                weights[i] = getRandomdouble(1000.0, 2000.0);
             break;
         case 2: // 1/20 male, 2/10 duze, 5/15 male
             for(unsigned i=0; i < (N/20); i++)
-                weights[i] = getRandomfloat(1000000.0f, 1010000.0f);
+                weights[i] = getRandomdouble(1000000.0, 1010000.0);
             for(unsigned i=(N/20); i < 5*(N/20); i++)
-                weights[i] = getRandomfloat(40000.0f, 45000.0f);
+                weights[i] = getRandomdouble(40000.0, 45000.0);
             for(unsigned i = 5*(N/20); i < N; i++)
-                weights[i] = getRandomfloat(1000.0f, 2000.0f);
+                weights[i] = getRandomdouble(1000.0, 2000.0);
             break;
         default: // same male
             for(unsigned i=0; i < N; i++)
-                weights[i] = getRandomfloat(1000.0f, 1100.0f); // 10^10
+                weights[i] = getRandomdouble(1000.0, 1100.0); // 10^10
             break;
     }
 }
@@ -85,29 +86,30 @@ template <>
 void RandomGenerators::initializeWeights<thrust::host_vector<float>>(thrust::host_vector<float>& weights, unsigned N) {
     weights.resize(N);
     int typeMass = 0; //getRandomType();
-    printf("TYP %d\n", typeMass);
+    printf("TYPE OF DATA : %d\n", typeMass);
     switch(typeMass) {
         case 0: // full random
             for(unsigned i=0; i < N; i++)
-                weights[i] = getRandomfloat(1000.0f, 100000.0f); // 10^10
+                weights[i] = getRandomdouble(0.5, 9.0); // 10^10
+                //weights[i] = getRandomdouble(1000.0, 100000.0); // 10^10
             break;
         case 1: // 1/10 duze masy, reszta stosunkowo male
             for(unsigned i=0; i < 1; i++)
-                weights[i] = getRandomfloat(1000000.0f, 1010000.0f);
+                weights[i] = getRandomdouble(1000000.0, 1010000.0);
             for(unsigned i=1; i < N; i++)
-                weights[i] = getRandomfloat(1000.0f, 2000.0f);
+                weights[i] = getRandomdouble(1000.0, 2000.0);
             break;
         case 2: // 1/20 male, 2/10 duze, 5/15 male
             for(unsigned i=0; i < (N/20); i++)
-                weights[i] = getRandomfloat(1000000.0f, 1010000.0f);
+                weights[i] = getRandomdouble(1000000.0, 1010000.0);
             for(unsigned i=(N/20); i < 5*(N/20); i++)
-                weights[i] = getRandomfloat(40000.0f, 45000.0f);
+                weights[i] = getRandomdouble(40000.0, 45000.0);
             for(unsigned i = 5*(N/20); i < N; i++)
-                weights[i] = getRandomfloat(1000.0f, 2000.0f);
+                weights[i] = getRandomdouble(1000.0, 2000.0);
             break;
         default: // same male
             for(unsigned i=0; i < N; i++)
-                weights[i] = getRandomfloat(1000.0f, 1100.0f); // 10^10
+                weights[i] = getRandomdouble(1000.0, 1100.0); // 10^10
             break;
     }
 }
