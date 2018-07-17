@@ -13,7 +13,10 @@ public:
   int getRandomByte();
   int getRandomType();
   template<typename T>
-  void initializeValues(T& velocities, T& weights, unsigned N);
+  void initializeVelocities(T& velocities, unsigned N);
+  
+  template<typename T>
+  void initializeWeights(T& weights, unsigned N);
 };
 
 #endif

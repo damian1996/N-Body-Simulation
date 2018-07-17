@@ -14,7 +14,7 @@ float RandomGenerators::getRandomfloat(float a, float b) {
 int RandomGenerators::getRandomByte() {
     std::random_device rd2;
     std::mt19937 gen2(rd2());
-    std::uniform_int_distribution<> disByte(0, 255);
+    std::uniform_int_distribution<> disByte(100, 255);
     return disByte(gen2);
 }
 
@@ -26,20 +26,34 @@ int RandomGenerators::getRandomType() {
 }
 
 template<typename T>
-void RandomGenerators::initializeValues(T& velocities, T& weights, unsigned N) {
-
+void RandomGenerators::initializeVelocities(T& velocities, unsigned N) {
 }
 
 template <>
-void RandomGenerators::initializeValues<std::vector<float>>(std::vector<float>& velocities, std::vector<float>& weights, unsigned N) {
+void RandomGenerators::initializeVelocities<std::vector<float>>(std::vector<float>& velocities, unsigned N) {
     velocities.resize(3*N);
-    weights.resize(N);
 
     for(unsigned i=0; i<N; i++)
         for(int j=0; j<3; j++)
             velocities[i*3+j] = getRandomfloat(-0.01f, 0.01f);
+}
+// zderzenie plastyczne / sprezyste
+template <>
+void RandomGenerators::initializeVelocities<thrust::host_vector<float>>(thrust::host_vector<float>& velocities, unsigned N) {
+    velocities.resize(3*N);
+    for(unsigned i=0; i<N; i++)
+        for(int j=0; j<3; j++)
+            velocities[i*3+j] = getRandomfloat(-0.01f, 0.01f);
+}
 
-    int typeMass = getRandomType();
+template<typename T>
+void RandomGenerators::initializeWeights(T& weights, unsigned N) {
+}
+
+template <>
+void RandomGenerators::initializeWeights<std::vector<float>>(std::vector<float>& weights, unsigned N) {
+    weights.resize(N);
+    int typeMass = 1; //getRandomType();
     printf("TYP %d\n", typeMass);
     switch(typeMass) {
         case 0: // full random
@@ -68,14 +82,8 @@ void RandomGenerators::initializeValues<std::vector<float>>(std::vector<float>& 
 }
 // zderzenie plastyczne / sprezyste
 template <>
-void RandomGenerators::initializeValues<thrust::host_vector<float>>(thrust::host_vector<float>& velocities, thrust::host_vector<float>& weights, unsigned N) {
-    velocities.resize(3*N);
+void RandomGenerators::initializeWeights<thrust::host_vector<float>>(thrust::host_vector<float>& weights, unsigned N) {
     weights.resize(N);
-
-    for(unsigned i=0; i<N; i++)
-        for(int j=0; j<3; j++)
-            velocities[i*3+j] = getRandomfloat(-0.01f, 0.01f);
-
     int typeMass = 0; //getRandomType();
     printf("TYP %d\n", typeMass);
     switch(typeMass) {

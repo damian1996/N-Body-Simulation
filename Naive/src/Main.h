@@ -3,6 +3,7 @@
 
 #include <cstdio>
 
+#include "RandomGenerators.h"
 #include "Simulation.h"
 #include "StepNaive.h"
 #include "StepNaiveCUDA.h"

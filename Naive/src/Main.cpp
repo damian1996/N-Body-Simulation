@@ -10,25 +10,26 @@ int main() {
     printf("Podaj liczbę jednostek do poddania symulacji\n");
     scanf("%d", &N);
     printf("WTF... %d\n", N);
-    Render* r = new Render(N);
+    RandomGenerators* ran_gen = new RandomGenerators();
+    std::vector<float> masses(N);
+    ran_gen->initializeWeights<std::vector<float>>(masses, N);
+    Render* r = new Render(masses, N);
     Step* step;
     Simulation* sim;
-
-    
 
     while(1) {
         bool correctChoice = true;
         switch(type) {
             case 1:
             {
-              step = new StepNaive(N);
+              step = new StepNaive(masses, N);
               sim = new Simulation(r, step, N);
               sim->makeSimulation();
               break;
             }
             case 2:
             {
-              step = new StepNaiveCuda(N);
+              step = new StepNaiveCuda(masses, N);
               sim = new Simulation(r, step, N);
               sim->makeSimulation();
               break;
@@ -50,8 +51,17 @@ int main() {
         if(correctChoice) break;
     }
 
+    delete ran_gen;
     return 0;
 }
 
 // https://pl.wikipedia.org/wiki/Wstrzykiwanie_zale%C5%BCno%C5%9Bci
 // https://arxiv.org/pdf/0806.3950.pdf
+
+//file:///home/damian/Desktop/praca%20licencjacka/materialy/Gravitational%20N-Body%20Simulatio%20-%20Aarseth,%20Sverre%20J._5510.pdf
+//file:///home/damian/Desktop/praca%20licencjacka/materialy/nBody_nVidia.pdf
+//file:///home/damian/Desktop/praca%20licencjacka/materialy/Gravitational%20N-Body%20Simulatio%20-%20Aarseth,%20Sverre%20J._5510.pdf
+//https://www.sciencedirect.com/science/article/pii/0021999173901605
+//https://github.com/adityavkk/N-Body-Simulations/blob/master/Barnes-Hut/src/Bodies.hs
+//https://link.springer.com/chapter/10.1007%2F978-1-4613-9600-0_7
+//https://www.maths.tcd.ie/~btyrrel/nbody.pdf

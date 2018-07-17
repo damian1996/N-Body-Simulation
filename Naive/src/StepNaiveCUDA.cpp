@@ -2,11 +2,14 @@
 
 // lista inicjalizacyjna vs dziedziczenie?
 
-StepNaiveCuda::StepNaiveCuda(unsigned N) {
+StepNaiveCuda::StepNaiveCuda(std::vector<float> masses, unsigned N) {
     this->N = N;
+    weights.resize(N);
+    for(unsigned i=0; i<N; i++) {
+        weights[i] = masses[i];
+    }
     rg = new RandomGenerators();
-    rg->initializeValues<thrust::host_vector<float> >(velocities, weights, N);
-
+    rg->initializeVelocities<thrust::host_vector<float> >(velocities, N);
     c = new Computations(velocities, weights);
 }
 
