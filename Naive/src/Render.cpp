@@ -286,3 +286,5 @@ bool Render::draw(thrust::host_vector<float>& positions) {
 float Render::getTime() {
     return glfwGetTime();
 }
+
+// https://gist.github.com/shyamkkhadka/536961
