@@ -4,9 +4,9 @@ Simulation::Simulation(Render* r, Step* comp, unsigned N) : r(r), comp(comp), N(
     rg = new RandomGenerators();
     positions.reserve(3*N);
     for(unsigned i=0; i<N; i++) {
-        for(int j=0; j<2; j++)
+        for(int j=0; j<3; j++)
             positions.push_back(rg->getRandomfloat(-1.0f, 1.0f));
-        positions.push_back(0.0f);
+        //positions.push_back(0.0f);
     }
 }
 

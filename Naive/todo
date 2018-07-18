@@ -12,6 +12,36 @@ KOD
 11) dodac wieksze obramowanie 
 http://ikee.lib.auth.gr/record/294535/files/Thesis.pdf
 
+const char* vertex_shader[] = {
+    "#version 400\n"
+    "in vec3 position;\n"
+    "in vec3 color;\n"
+    "in float weight;\n"
+    "out vec3 vertex_color;\n"
+    "void main() {\n"
+    "    gl_Position = vec4(position,1.0);\n"
+    "    vertex_color=color;\n"
+    "}"
+};
+
+const char* fragment_shader[] = {
+    "#version 400\n"
+    "in vec3 vertex_color;\n"
+    "void main() {\n"
+    "    gl_FragColor = vec4(vertex_color, 1);\n"
+    "}"
+};
+
+//gl_PointSize = mass*5;
+
+
+
+// MUST READ!!!
+https://www.khronos.org/opengl/wiki/Vertex_Specification#Theory
+https://computergraphics.stackexchange.com/questions/5712/gl-static-draw-vs-gl-dynamic-draw-vs-gl-stream-draw-does-it-matter
+https://thebookofshaders.com/02/
+wspolrzedne sferyczne
+
 PAPER
 1) Zastosowania N-body wraz z przykładami paperów
 2) Rozpisać test poprawnosci z ZZP (z jej definicją)
@@ -31,3 +61,5 @@ https://developer.nvidia.com/gpugems/GPUGems3/gpugems3_ch31.html
 https://arxiv.org/pdf/0806.3950.pdf
 file:///home/damian/Desktop/praca%20licencjacka/materialy/Gravitational%20N-Body%20Simulatio%20-%20Aarseth,%20Sverre%20J._5510.pdf
 https://www.quora.com/What-is-the-average-mass-of-a-star
+
+kamera jest we współrzędnych sferycznych i radius to odległość od centrum, theta i phi to kąty

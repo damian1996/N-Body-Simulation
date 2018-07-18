@@ -2,6 +2,7 @@
 #define STEPNAIVE_H
 
 #include <cmath>
+#include <iterator>
 #include "Step.h"
 
 class StepNaive  : public Step {
@@ -9,7 +10,7 @@ class StepNaive  : public Step {
     std::vector<float> velocities;
     std::vector<float> weights;
 public:
-    StepNaive(unsigned N);
+    StepNaive(std::vector<float>& masses, unsigned N);
     ~StepNaive();
     void initialize();
     void compute(tf3& positions, float dt);
