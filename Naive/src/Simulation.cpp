@@ -19,8 +19,8 @@ Simulation::~Simulation() {
 }
 
 void Simulation::normalizePositions() {
-    for(int i=0; i < 3*N; i++) {
-      posToDraw[i] = positions[i]; // /200.0;
+    for(unsigned i=0; i < 3*N; i++) {
+      posToDraw[i] = positions[i]/400.0; // /200.0;
     }
 }
 

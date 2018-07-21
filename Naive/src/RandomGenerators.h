@@ -7,6 +7,7 @@
 
 class RandomGenerators {
 public:
+  const double veloRand = 1e-15;
   RandomGenerators();
   double getRandomdouble(double a, double b);
   //double randPosition(double a, double b);

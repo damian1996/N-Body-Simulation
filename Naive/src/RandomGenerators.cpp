@@ -57,8 +57,10 @@ void RandomGenerators::initializeWeights<std::vector<float>>(std::vector<float>&
     printf("TYP %d\n", typeMass);
     switch(typeMass) {
         case 0: // full random
-            for(unsigned i=0; i < N; i++)
-                weights[i] = getRandomdouble(0.5, 9.0); // 10^10
+            for(unsigned i=0; i<div; i++)
+                weights[i] = getRandomdouble(1000.0, 9000.0);
+            for(unsigned i=div; i < N; i++)
+                weights[i] = getRandomdouble(100.0, 300.0); // 10^10
                 //weights[i] = getRandomdouble(1000.0, 100000.0); // 10^10
             break;
         case 1: // 1/10 duze masy, reszta stosunkowo male

@@ -11,6 +11,9 @@ protected:
     //const double G = 6.674*(1e-11);
     const double x = (3.086*1e13); //[km -> pc]
     const double G = (4.3*(1e-3))/(x*x); //[pc^3/Mo*s^2]
+    /*
+    const double G = (4.3*(1e-3)); //[pc^3/Mo*s^2]
+    */
     //const double dt = 0.016f;
     RandomGenerators* rg;
     unsigned N;
