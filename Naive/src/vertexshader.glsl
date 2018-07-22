@@ -7,7 +7,7 @@ out float vMass;
 uniform mat4 MVP;
 
 void main() {
-  gl_Position = MVP * vec4(position, 1);
-  vMass = mass;
-  vertex_color = color;
+    gl_Position = MVP*vec4(position, 1);
+    vMass = mass;
+    vertex_color = color;
 }

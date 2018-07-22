@@ -7,24 +7,20 @@
 #include <unistd.h>
 #include <vector>
 
-#include "RandomGenerators.h"
 #include "Render.h"
+#include "RandomGenerators.h"
 #include "Step.h"
 
 class Simulation {
-  Render *r;
-  Step *comp;
-  unsigned N;
-  thrust::host_vector<double> positions;
-  thrust::host_vector<double> posToDraw;
-  RandomGenerators *rg;
-  const double parsecsWidth = 1.0;
-
+    Render* r;
+    Step* comp;
+    unsigned N;
+    thrust::host_vector<float> positions;
+    RandomGenerators* rg;
 public:
-  Simulation(Render *r, Step *comp, unsigned N);
-  ~Simulation();
-  void normalizePositions();
-  void makeSimulation();
+    Simulation(Render* r, Step* comp, unsigned N);
+    ~Simulation();
+    void makeSimulation();
 };
 
 #endif
