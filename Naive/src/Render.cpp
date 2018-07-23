@@ -163,7 +163,7 @@ void Render::createAndBindBuffer() {
     glBufferData(GL_ARRAY_BUFFER, sizeof(char)*3*N, V_color, GL_DYNAMIC_DRAW);
     glEnableVertexAttribArray(1);
     glVertexAttribPointer(1, 3, GL_UNSIGNED_BYTE, GL_TRUE, 0, 0);
-    glPointSize(4.0);
+    //glPointSize(4.0);
 
     glBindBuffer(GL_ARRAY_BUFFER, buffer[2]);
     glBufferData(GL_ARRAY_BUFFER, sizeof(float)*N, V_mass, GL_DYNAMIC_DRAW);
