@@ -1,3 +1,6 @@
+PAPER
+near plane and far plane (opengl)
+
 KOD
 1) Przeskalować sensowne, wejściowe, rzeczywiste dane do wykorzystania ich w programie
 2) Jeśli sie nie powiedze, to chociaz sprawdzic sensownosc jednostek przy masie czy predkosci
@@ -9,7 +12,7 @@ KOD
 8) Przerobienie kodu na 3D
 9) Integracja kodu z złączalnymi kulkami 3D
 10) kosmetyczne poprawki kodu (prywatne funkcji w Render i pewnie nie tylko, wywalic typedefy dla host_vector z Render)
-11) dodac wieksze obramowanie 
+11) dodac wieksze obramowanie
 http://ikee.lib.auth.gr/record/294535/files/Thesis.pdf
 
 const char* vertex_shader[] = {
@@ -24,17 +27,13 @@ const char* vertex_shader[] = {
     "}"
 };
 
-const char* fragment_shader[] = {
-    "#version 400\n"
-    "in vec3 vertex_color;\n"
-    "void main() {\n"
-    "    gl_FragColor = vec4(vertex_color, 1);\n"
-    "}"
-};
+const char *fragment_shader[] = {"#version 400\n"
+                                 "in vec3 vertex_color;\n"
+                                 "void main() {\n"
+                                 "    gl_FragColor = vec4(vertex_color, 1);\n"
+                                 "}"};
 
-//gl_PointSize = mass*5;
-
-
+// gl_PointSize = mass*5;
 
 // MUST READ!!!
 https://www.khronos.org/opengl/wiki/Vertex_Specification#Theory
