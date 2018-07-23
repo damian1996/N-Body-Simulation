@@ -1,6 +1,21 @@
 PAPER
 near plane and far plane (opengl)
 
+Checkout via command line
+If you cannot merge a pull request automatically here, you have the option of checking it out via command line to resolve conflicts and perform a manual merge.
+
+https://github.com/damian1996/N-Body-Simulation.git
+Step 1: From your project repository, bring in the changes and test.
+
+git fetch origin
+git checkout -b FixMainInterface origin/FixMainInterface
+git merge master
+Step 2: Merge the changes and update on GitHub.
+
+git checkout master
+git merge --no-ff FixMainInterface
+git push origin master
+
 KOD
 1) Przeskalować sensowne, wejściowe, rzeczywiste dane do wykorzystania ich w programie
 2) Jeśli sie nie powiedze, to chociaz sprawdzic sensownosc jednostek przy masie czy predkosci
