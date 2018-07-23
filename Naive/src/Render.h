@@ -47,7 +47,7 @@ public:
     static void mouse_released();
     static void mouse_scroll(double offset);
     static void mouse_move(double xpos, double ypos);
-    
+
     static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
     static void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
     static void mouse_button_callback(GLFWwindow* window, int button, int action, int mods);
@@ -70,10 +70,10 @@ private:
     int width = 1000, height = 1000;
     float last_time;
 
-    byte3d* V_color;
-    float3d* V_position;
+    char* V_color;
+    float* V_position;
     float* V_mass;
-    
+
     GLuint buffer[3];
     GLuint program, sh_fragment, sh_vertex;
     GLFWwindow* window;
