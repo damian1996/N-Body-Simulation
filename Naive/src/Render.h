@@ -2,25 +2,24 @@
 #define RENDER_H
 
 #include <cstdio>
+#include <fstream>
+#include <glm/gtc/matrix_transform.hpp> // glm::translate, glm::rotate, glm::scale, glm::perspective
+#include <glm/mat4x4.hpp> // glm::mat4
+#include <glm/vec3.hpp>   // glm::vec3
+#include <glm/vec4.hpp>   // glm::vec4
+#include <iostream>
+#include <sstream>
 #include <stdexcept>
 #include <thrust/host_vector.h>
 #include <unistd.h>
-#include <iostream>
-#include <fstream>
-#include <sstream>
-#include <glm/vec3.hpp> // glm::vec3
-#include <glm/vec4.hpp> // glm::vec4
-#include <glm/mat4x4.hpp> // glm::mat4
-#include <glm/gtc/matrix_transform.hpp> // glm::translate, glm::rotate, glm::scale, glm::perspective
 
-
-#include "gl.h"
 #include "RandomGenerators.h"
+#include "gl.h"
 
-typedef thrust::host_vector<float > tf3;
-typedef thrust::host_vector<char > tb3;
-typedef std::vector<std::array<float, 3> > f3;
-typedef std::vector<std::array<char, 3> > b3;
+typedef thrust::host_vector<float> tf3;
+typedef thrust::host_vector<char> tb3;
+typedef std::vector<std::array<float, 3>> f3;
+typedef std::vector<std::array<char, 3>> b3;
 typedef std::vector<float> w1;
 typedef float float3d[3];
 typedef unsigned char byte3d[3];

@@ -20,35 +20,30 @@ Render::Render(std::vector<float> masses, unsigned N) : N(N) {
             V_color[i*3 + j] = rg->getRandomByte();
          }
     }
+  }
 }
 
 Render::~Render() {
-    delete rg;
-    delete [] V_mass;
-    delete [] V_color;
-    delete [] V_position;
+  delete rg;
+  delete[] V_mass;
+  delete[] V_color;
+  delete[] V_position;
 }
 
 void Render::mouse_move(double xpos, double ypos) {
-  if(is_mouse_pressed) {
-    camera_phi += (ypos - mouse_position_y)*0.005;
-    camera_theta += -(xpos - mouse_position_x)*0.005;
+  if (is_mouse_pressed) {
+    camera_phi += (ypos - mouse_position_y) * 0.005;
+    camera_theta += -(xpos - mouse_position_x) * 0.005;
   }
   mouse_position_x = xpos;
   mouse_position_y = ypos;
 }
 
-void Render::mouse_pressed() {
-  is_mouse_pressed = true;
-}
+void Render::mouse_pressed() { is_mouse_pressed = true; }
 
-void Render::mouse_released() {
-  is_mouse_pressed = false;
-}
+void Render::mouse_released() { is_mouse_pressed = false; }
 
-void Render::mouse_scroll(double offset) {
-  camera_radius += offset;
-}
+void Render::mouse_scroll(double offset) { camera_radius += offset; }
 
 static void MessageCallback(GLenum source,
                      GLenum type,
@@ -63,30 +58,34 @@ static void MessageCallback(GLenum source,
           type, severity, message);
 }
 
-void error_callback(int error, const char* description) {
-    throw std::runtime_error(description);
+void error_callback(int error, const char *description) {
+  throw std::runtime_error(description);
 }
 
-void Render::key_callback(GLFWwindow* window, int key, int scancode, int action, int mods) {
-    if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
-        glfwSetWindowShouldClose(window, 1);
+void Render::key_callback(GLFWwindow *window, int key, int scancode, int action,
+                          int mods) {
+  if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
+    glfwSetWindowShouldClose(window, 1);
 }
 
-void Render::scroll_callback(GLFWwindow* window, double xoffset, double yoffset) {
-    mouse_scroll(yoffset);
+void Render::scroll_callback(GLFWwindow *window, double xoffset,
+                             double yoffset) {
+  mouse_scroll(yoffset);
 }
 
-void Render::mouse_button_callback(GLFWwindow* window, int button, int action, int mods) {
-    if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS) {
-        mouse_pressed();
-    }
-    if(button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_RELEASE) {
-        mouse_released();
-    }
+void Render::mouse_button_callback(GLFWwindow *window, int button, int action,
+                                   int mods) {
+  if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS) {
+    mouse_pressed();
+  }
+  if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_RELEASE) {
+    mouse_released();
+  }
 }
 
-void Render::cursor_position_callback(GLFWwindow* window, double xpos, double ypos) {
-    mouse_move(xpos, ypos);
+void Render::cursor_position_callback(GLFWwindow *window, double xpos,
+                                      double ypos) {
+  mouse_move(xpos, ypos);
 }
 
 void Render::setupWindow() {
@@ -109,35 +108,34 @@ void Render::setupWindow() {
     glfwSwapInterval(1); //enables v-sync
 }
 
-GLuint Render::load_shader(const char* path, int shader_type) {
-    std::string shader_code;
-    std::ifstream ShaderStream(path, std::ios::in);
-    if(ShaderStream.is_open()){
-        std::stringstream sstr;
-        sstr << ShaderStream.rdbuf();
-        shader_code = sstr.str();
-        ShaderStream.close();
-    }
-    const char *shader_code_array[] = {shader_code.c_str()};
-    GLuint shader = glCreateShader(shader_type);
-    glShaderSource(shader, 1, shader_code_array, nullptr);
-    glCompileShader(shader);
-    GLint isCompiled = 0;
-    glGetShaderiv(shader, GL_COMPILE_STATUS, &isCompiled);
-    if(isCompiled == GL_FALSE)
-    {
-        GLint maxLength = 0;
-        glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &maxLength);
-        char* errorLog = new char[maxLength];
-        glGetShaderInfoLog(shader, maxLength, &maxLength, errorLog);
-        printf("Shader compilation failed:\n");
-        printf("%s\n", errorLog);
-        delete errorLog;
-        glDeleteShader(shader);
-        exit(1);
-    }
-    return shader;
+GLuint Render::load_shader(const char *path, int shader_type) {
+  std::string shader_code;
+  std::ifstream ShaderStream(path, std::ios::in);
+  if (ShaderStream.is_open()) {
+    std::stringstream sstr;
+    sstr << ShaderStream.rdbuf();
+    shader_code = sstr.str();
+    ShaderStream.close();
   }
+  const char *shader_code_array[] = {shader_code.c_str()};
+  GLuint shader = glCreateShader(shader_type);
+  glShaderSource(shader, 1, shader_code_array, nullptr);
+  glCompileShader(shader);
+  GLint isCompiled = 0;
+  glGetShaderiv(shader, GL_COMPILE_STATUS, &isCompiled);
+  if (isCompiled == GL_FALSE) {
+    GLint maxLength = 0;
+    glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &maxLength);
+    char *errorLog = new char[maxLength];
+    glGetShaderInfoLog(shader, maxLength, &maxLength, errorLog);
+    printf("Shader compilation failed:\n");
+    printf("%s\n", errorLog);
+    delete errorLog;
+    glDeleteShader(shader);
+    exit(1);
+  }
+  return shader;
+}
 
 void Render::createAndBindBuffer() {
     glEnable(GL_DEBUG_OUTPUT);
@@ -173,63 +171,61 @@ void Render::createAndBindBuffer() {
 // "    gl_PointSize = gl_Normal.z*((weight+100.0)/70.0);"
 
 void Render::createAndCompileShaders() {
-    sh_vertex = load_shader("./src/vertexshader.glsl", GL_VERTEX_SHADER);
-    sh_fragment = load_shader("./src/fragmentshader.glsl", GL_FRAGMENT_SHADER);
+  sh_vertex = load_shader("./src/vertexshader.glsl", GL_VERTEX_SHADER);
+  sh_fragment = load_shader("./src/fragmentshader.glsl", GL_FRAGMENT_SHADER);
 }
 
 void Render::createAndLinkProgram() {
-    program = glCreateProgram();
-    glAttachShader(program, sh_vertex);
-    glAttachShader(program, sh_fragment);
-    glBindAttribLocation(program, 0, "position");
-    glBindAttribLocation(program, 1, "color");
-    glBindAttribLocation(program, 2, "mass");
-    glBindFragDataLocation (program, 0, "vertex_color");
-    glLinkProgram(program);
-    glDetachShader(program, sh_vertex);
-    glDetachShader(program, sh_fragment);
+  program = glCreateProgram();
+  glAttachShader(program, sh_vertex);
+  glAttachShader(program, sh_fragment);
+  glBindAttribLocation(program, 0, "position");
+  glBindAttribLocation(program, 1, "color");
+  glBindAttribLocation(program, 2, "mass");
+  glBindFragDataLocation(program, 0, "vertex_color");
+  glLinkProgram(program);
+  glDetachShader(program, sh_vertex);
+  glDetachShader(program, sh_fragment);
 }
 
 void Render::init() {
-    createAndBindBuffer();
-    createAndCompileShaders();
-    createAndLinkProgram();
+  createAndBindBuffer();
+  createAndCompileShaders();
+  createAndLinkProgram();
 }
 
 void Render::setupOpenGL() {
-    setupWindow();
-    init();
+  setupWindow();
+  init();
 }
 
 bool Render::ClearWindow() {
-    if(!glfwWindowShouldClose(this->window)) {
-        int wid, hei;
-        glfwGetFramebufferSize(this->window, &wid, &hei);
-        glViewport(0, 0, wid, hei);
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-        return false;
-    }
-    else {
-        destroyWindow();
-        return true;
-    }
+  if (!glfwWindowShouldClose(this->window)) {
+    int wid, hei;
+    glfwGetFramebufferSize(this->window, &wid, &hei);
+    glViewport(0, 0, wid, hei);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    return false;
+  } else {
+    destroyWindow();
+    return true;
+  }
 }
 
 bool Render::Swap() {
-    if(!glfwWindowShouldClose(this->window)) {
-        glfwSwapBuffers(this->window);
-        glfwPollEvents();
-        return false;
-    }
-    else {
-        destroyWindow();
-        return true;
-    }
+  if (!glfwWindowShouldClose(this->window)) {
+    glfwSwapBuffers(this->window);
+    glfwPollEvents();
+    return false;
+  } else {
+    destroyWindow();
+    return true;
+  }
 }
 
 void Render::destroyWindow() {
-    glfwDestroyWindow(this->window);
-    glfwTerminate();
+  glfwDestroyWindow(this->window);
+  glfwTerminate();
 }
 
 void Render::render() {
@@ -271,6 +267,7 @@ bool Render::draw(thrust::host_vector<float>& positions) {
         V_position[i*3+j] = positions[i*3+j];
       }
     }
+  }
 
     bool res;
     res = ClearWindow();
@@ -278,13 +275,14 @@ bool Render::draw(thrust::host_vector<float>& positions) {
 
     render();
 
-    res = Swap();
-    if(res) return true;
-    return false;
+  render();
+
+  res = Swap();
+  if (res)
+    return true;
+  return false;
 }
 
-float Render::getTime() {
-    return glfwGetTime();
-}
+float Render::getTime() { return glfwGetTime(); }
 
 // https://gist.github.com/shyamkkhadka/536961

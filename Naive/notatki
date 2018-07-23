@@ -1,38 +1,51 @@
-https://arxiv.org/pdf/0806.3950.pdf
-https://arxiv.org/pdf/1411.6671.pdf
-file:///home/damian/Desktop/praca%20licencjacka/materialy/Gravitational%20N-Body%20Simulatio%20-%20Aarseth,%20Sverre%20J._5510.pdf
-https://arxiv.org/pdf/1105.1082.pdf
-https://pl.wikipedia.org/wiki/Zasada_zachowania_p%C4%99du
-https://pl.wikipedia.org/wiki/Zderzenie_centralne
+https
+    : // arxiv.org/pdf/0806.3950.pdf
+      https
+      : // arxiv.org/pdf/1411.6671.pdf
+        file
+        : /// home/damian/Desktop/praca%20licencjacka/materialy/Gravitational%20N-Body%20Simulatio%20-%20Aarseth,%20Sverre%20J._5510.pdf
+          https
+          : // arxiv.org/pdf/1105.1082.pdf
+            https
+            : // pl.wikipedia.org/wiki/Zasada_zachowania_p%C4%99du
+              https
+              : // pl.wikipedia.org/wiki/Zderzenie_centralne
 
-CHAOS
-http://www.maths.ed.ac.uk/~douglas/cortina-v2.pdf
-sun-earth-moon
-https://arxiv.org/pdf/1307.7062.pdf
-evolution star clusters
-https://pdfs.semanticscholar.org/presentation/250f/ee86a085feb0a522e96075cbaebd70837a33.pdf
+                CHAOS http
+                : // www.maths.ed.ac.uk/~douglas/cortina-v2.pdf
+                  sun -
+                  earth - moon https
+                  : // arxiv.org/pdf/1307.7062.pdf
+                    evolution star clusters https
+                    : // pdfs.semanticscholar.org/presentation/250f/ee86a085feb0a522e96075cbaebd70837a33.pdf
 
+                      cudaMalloc(&image_dev, image_width *image_height * 4 *
+                                                 sizeof(uint8_t));
+cudaMalloc(&result_dev, image_width *image_height * 4 * sizeof(uint8_t));
+cudaMalloc(&kernel_dev, kernel_width *kernel_height * sizeof(float));
+cudaMemcpy(image_dev, &image[0],
+           image_width *image_height * 4 * sizeof(uint8_t),
+           cudaMemcpyHostToDevice);
+cudaMemcpy(kernel_dev, kernel_separated, kernel_size * sizeof(float),
+           cudaMemcpyHostToDevice);
 
+convolve_rows<<<num_of_blocks_row, ROW_SIZE>>>(image_dev, result_dev,
+                                               image_width, image_height,
+                                               kernel_dev, kernel_size);
+convolve_cols<<<num_of_blocks_col, COLUMN_SIZE>>>(result_dev, image_dev,
+                                                  image_width, image_height,
+                                                  kernel_dev, kernel_size);
 
-cudaMalloc(&image_dev, image_width*image_height*4*sizeof(uint8_t));
-    cudaMalloc(&result_dev, image_width*image_height*4*sizeof(uint8_t));
-    cudaMalloc(&kernel_dev, kernel_width*kernel_height*sizeof(float));
-    cudaMemcpy(image_dev, &image[0], image_width*image_height*4*sizeof(uint8_t), cudaMemcpyHostToDevice);
-    cudaMemcpy(kernel_dev, kernel_separated, kernel_size*sizeof(float), cudaMemcpyHostToDevice);
+cudaMemcpy(&image[0], image_dev,
+           image_width *image_height * 4 * sizeof(uint8_t),
+           cudaMemcpyDeviceToHost);
+cudaFree(image_dev);
+cudaFree(result_dev);
+cudaFree(kernel_dev);
 
-    convolve_rows<<<num_of_blocks_row, ROW_SIZE>>>
-        (image_dev, result_dev, image_width, image_height, kernel_dev, kernel_size);
-    convolve_cols<<<num_of_blocks_col, COLUMN_SIZE>>>
-        (result_dev, image_dev, image_width, image_height, kernel_dev, kernel_size);
-
-    cudaMemcpy(&image[0], image_dev, image_width*image_height*4*sizeof(uint8_t), cudaMemcpyDeviceToHost);
-    cudaFree(image_dev);
-    cudaFree(result_dev);
-    cudaFree(kernel_dev);
-
-    //float* d_positions = (float*) malloc(3*N*sizeof(float));
-    //float* d_velocities = (float*) malloc(3*N*sizeof(float));
-    //float* d_weights = (float*) malloc(N*sizeof(float));
+// float* d_positions = (float*) malloc(3*N*sizeof(float));
+// float* d_velocities = (float*) malloc(3*N*sizeof(float));
+// float* d_weights = (float*) malloc(N*sizeof(float));
 
 float2
 
@@ -56,103 +69,100 @@ CXXOPTIONS = -m64 -std=c++14 -g -Wall -I /usr/local/cuda/include/
 
 test . out : prog
 	time =0
-	for i in {1..5}; do
-	value =" $ $ ( $ ( TIME ) -f % e prog 2 >&1 ) "
-	time =" $ $ ( echo " $ $ time + $ $ value " | bc -l ) "
-	done
-	echo " $ $ time /5" | bc -l > test . out
+	for i in {1..5};
+do
+  value = " $ $ ( $ ( TIME ) -f % e prog 2 >&1 ) " time =
+      " $ $ ( echo " $ $ time + $ $ value " | bc -l ) " done echo
+                                          " $ $ time /5" |
+      bc - l > test.out
+
+                   "    gl_FragColor = vec4(vertex_color, 1.0);\n"
+
+                   /*
+                   NAIWNY ALGORYTM
+
+                   z siły wylicza się przyspieszenie a z tego prędkość a z tego
+                   droge
+                   i dopiero wtedy przesuwasz
+
+                   1.
+                   F = G(m1*m2)/r^2
+
+                   2.
+                   a z tego => a = F/m
+
+                   3.
+                   przyspieszenie to też wektor
+                   i kulka jakiś tam wektor sobie ma
+                   i przyspieszenie działa na prędkość tak jak prędkość na drogę
+                   czyli modyfikuje prędkość w jakimś czasie
+
+                   a wzór jest taki:
+                   v += a*dt
+
+                   4.
+                   2d to też jakaś przestrzeń
+                   i punkt może poruszać się 100 px/s w górę
+                   to nasz wektor prędkości będzie (0, 100)
+                   nom..
+                   i taka najprostsza symulacja polega na tym że bierzemy sobie
+                   jakieś dt
+                   (czyli mały odcinek czasu) np. 1/60s xd
+                   nom
+                   i obliczamy o ile punkt się poruszy zakładając że ta prędkość
+                   będzie stała
+                   czyli skoro v = s/t, z tego s = v*t czyli:
+                   x += v_x*dt
+                   y += v_y*dt
 
 
+                   */
 
-"    gl_FragColor = vec4(vertex_color, 1.0);\n"
+                   NEEDED : GPU NVIDIA
 
-/*
-NAIWNY ALGORYTM
+                                INSTALKI : CUDA GLFW /
+                   OPENGL3 THRUST
 
-z siły wylicza się przyspieszenie a z tego prędkość a z tego droge
-i dopiero wtedy przesuwasz
+                   // DO ZACHOWANIA
 
-1.
-F = G(m1*m2)/r^2
+                   bool
+                   Simulation::update() {
+    for (unsigned i = 0; i < N; i++) {
+      forces[i].fill(0.0f);
+    }
+    for (unsigned i = 0; i < N; i++) {
+      for (unsigned j = 0; j < N; j++) {
+        // sile parami F(i,j)
+        float distX = positions[j][0] - positions[i][0];
+        float distY = positions[j][1] - positions[i][1];
+        // float distXY2 = distX*distX + distY*distY; // r^2
+        // int sgnx = distX > 0 ? 1 : -1;
+        // int sgny = distY > 0 ? 1 : -1;
+        if (i != j && fabs(distX) > 1e-10 && fabs(distY) > 1e-10) {
+          float F = G * (weights[i] * weights[j]);
+          // forces[i][0] += sgnx*F/(distX*distX); // force = G(m1*m2)/r^2
+          // forces[i][1] += sgny*F/(distY*distY);
 
-2.
-a z tego => a = F/m
+          // forces[i][0] += F*distX/(distX*distX); // force = G(m1*m2)/r^2
+          // forces[i][1] += F*distY/(distY*distY);
 
-3.
-przyspieszenie to też wektor
-i kulka jakiś tam wektor sobie ma
-i przyspieszenie działa na prędkość tak jak prędkość na drogę
-czyli modyfikuje prędkość w jakimś czasie
-
-a wzór jest taki:
-v += a*dt
-
-4.
-2d to też jakaś przestrzeń
-i punkt może poruszać się 100 px/s w górę
-to nasz wektor prędkości będzie (0, 100)
-nom..
-i taka najprostsza symulacja polega na tym że bierzemy sobie jakieś dt
-(czyli mały odcinek czasu) np. 1/60s xd
-nom
-i obliczamy o ile punkt się poruszy zakładając że ta prędkość będzie stała
-czyli skoro v = s/t, z tego s = v*t czyli:
-x += v_x*dt
-y += v_y*dt
-
-
-*/
-
-NEEDED :
-GPU NVIDIA
-
-INSTALKI :
-CUDA
-GLFW / OPENGL3
-THRUST
-
-
-
-
-
-//DO ZACHOWANIA
-
-bool Simulation::update() {
-        for(unsigned i=0; i<N; i++) {
-            forces[i].fill(0.0f);
+          forces[i][0] += F * distX / (distX * distX +
+                                       distY * distY); // force = G(m1*m2)/r^2
+          forces[i][1] += F * distY / (distX * distX + distY * distY);
         }
-        for(unsigned i=0; i<N; i++) {
-            for(unsigned j=0; j<N; j++) {
-                 // sile parami F(i,j)
-                float distX = positions[j][0] - positions[i][0];
-                float distY = positions[j][1] - positions[i][1];
-                //float distXY2 = distX*distX + distY*distY; // r^2
-                //int sgnx = distX > 0 ? 1 : -1;
-                //int sgny = distY > 0 ? 1 : -1;
-                if(i!=j && fabs(distX) > 1e-10 && fabs(distY) > 1e-10) {
-                    float F = G*(weights[i]*weights[j]);
-                    //forces[i][0] += sgnx*F/(distX*distX); // force = G(m1*m2)/r^2
-                    //forces[i][1] += sgny*F/(distY*distY);
+      }
+    }
+    for (unsigned i = 0; i < N; i++) {
+      for (int j = 0; j < 2; j++) { // x, y
+        // biore sile i obliczam przyspieszenie
+        float acceleration = forces[i][j] / weights[i];
+        // przesun cialo
+        positions[i][j] += velocities[i][j] * dt + acceleration * dt * dt / 2;
+        velocities[i][j] += acceleration * dt;
+      }
+    }
 
-                    //forces[i][0] += F*distX/(distX*distX); // force = G(m1*m2)/r^2
-                    //forces[i][1] += F*distY/(distY*distY);
+    painter->sendData(positions, colors, weights);
 
-                    forces[i][0] += F*distX/(distX*distX+distY*distY); // force = G(m1*m2)/r^2
-                    forces[i][1] += F*distY/(distX*distX+distY*distY);
-                }
-            }
-        }
-        for(unsigned i=0; i<N; i++) {
-            for(int j=0; j<2; j++) { // x, y
-                // biore sile i obliczam przyspieszenie
-                float acceleration = forces[i][j]/weights[i];
-                // przesun cialo
-                positions[i][j] += velocities[i][j]*dt + acceleration*dt*dt/2;
-                velocities[i][j] += acceleration*dt;
-            }
-        }
-
-        painter->sendData(positions, colors, weights);
-
-        return painter->draw();
-}
+    return painter->draw();
+  }
