@@ -12,16 +12,16 @@
 #include "Step.h"
 
 class Simulation {
-  Render *r;
-  Step *comp;
-  unsigned N;
+  Render *rend;
+  Step *step;
+  unsigned numberOfBodies;
   thrust::host_vector<float> positions;
-  RandomGenerators *rg;
+  RandomGenerators *randomGenerator;
 
 public:
-  Simulation(Render *r, Step *comp, unsigned N);
+  Simulation(Render *rend, Step *step, unsigned numberOfBodies);
   ~Simulation();
-  void makeSimulation();
+  void MakeSimulation();
 };
 
 #endif

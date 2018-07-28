@@ -1,23 +1,23 @@
 https
-    : // arxiv.org/pdf/0806.3950.pdf
+    : // arxiv.orandomGenerator/pdf/0806.3950.pdf
       https
-      : // arxiv.org/pdf/1411.6671.pdf
+      : // arxiv.orandomGenerator/pdf/1411.6671.pdf
         file
         : /// home/damian/Desktop/praca%20licencjacka/materialy/Gravitational%20N-Body%20Simulatio%20-%20Aarseth,%20Sverre%20J._5510.pdf
           https
-          : // arxiv.org/pdf/1105.1082.pdf
+          : // arxiv.orandomGenerator/pdf/1105.1082.pdf
             https
-            : // pl.wikipedia.org/wiki/Zasada_zachowania_p%C4%99du
+            : // pl.wikipedia.orandomGenerator/wiki/Zasada_zachowania_p%C4%99du
               https
-              : // pl.wikipedia.org/wiki/Zderzenie_centralne
+              : // pl.wikipedia.orandomGenerator/wiki/Zderzenie_centralne
 
                 CHAOS http
                 : // www.maths.ed.ac.uk/~douglas/cortina-v2.pdf
                   sun -
                   earth - moon https
-                  : // arxiv.org/pdf/1307.7062.pdf
+                  : // arxiv.orandomGenerator/pdf/1307.7062.pdf
                     evolution star clusters https
-                    : // pdfs.semanticscholar.org/presentation/250f/ee86a085feb0a522e96075cbaebd70837a33.pdf
+                    : // pdfs.semanticscholar.orandomGenerator/presentation/250f/ee86a085feb0a522e96075cbaebd70837a33.pdf
 
                       cudaMalloc(&image_dev, image_width *image_height * 4 *
                                                  sizeof(uint8_t));
@@ -54,7 +54,7 @@ to zrób tak:
 weź siły licz właśnie tu
 albo najlepiej
 zrób funkcję od liczenia sił i nowych pozycji
-która ma w argumencie dt
+która ma w arandomGeneratorumencie dt
 i jeżeli są obiekty blisko siebie
 to w pętli, np 10 razy licz siłę+nową pozycje
 z dt 10x mniejszym

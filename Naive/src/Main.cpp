@@ -4,58 +4,58 @@ using namespace std;
 int main() {
   // dodac wczytanie N przez usera, poki co roboczo 100
 
-  int type, N;
+  int programVersion, numberOfBodies;
   printf("Wybierz tryb wykonywania programu\n");
   while (1) {
     printf("1. Naiwny algorytm CPU\n2. Naiwny algorytm GPU\n3. Algorytm "
            "KD-drzewa CPU\n4. Algorytm Barnes-Hut GPU\n");
-    scanf("%d", &type);
-    if (type > 4 || type <= 0) {
+    scanf("%d", &programVersion);
+    if (programVersion > 4 || programVersion <= 0) {
       printf("Nie ma takiej opcji, sprobuj ponownie\n");
       continue;
     }
     break;
   }
   printf("Podaj liczbę jednostek do poddania symulacji\n");
-  scanf("%d", &N);
-  RandomGenerators *ran_gen = new RandomGenerators();
-  std::vector<float> masses(N);
-  ran_gen->initializeWeights<std::vector<float>>(masses, N);
-  Render *r = new Render(masses, N);
+  scanf("%d", &numberOfBodies);
+  RandomGenerators *randomGenerator = new RandomGenerators();
+  std::vector<float> masses(numberOfBodies);
+  randomGenerator->initializeWeights(masses, numberOfBodies);
+  Render *rend = new Render(masses, numberOfBodies);
   Step *step;
   Simulation *sim;
 
-  switch (type) {
-  case 1: {
-    step = new StepNaive(masses, N);
-    sim = new Simulation(r, step, N);
-    sim->makeSimulation();
-    break;
-  }
-  case 2: {
-    step = new StepNaiveCuda(masses, N);
-    sim = new Simulation(r, step, N);
-    sim->makeSimulation();
-    break;
-  }
-  case 3: {
-    printf("Implementacja wciaz nie powstala, troche cierpliwosci :)\n");
-    break;
-  }
-  case 4: {
-    printf("Implementacja wciaz nie powstala, troche cierpliwosci :)\n");
-    break;
-  }
-  default:
-    break;
+  switch (programVersion) {
+    case 1: {
+      step = new StepNaive(masses, numberOfBodies);
+      sim = new Simulation(rend, step, numberOfBodies);
+      sim->MakeSimulation();
+      break;
+    }
+    case 2: {
+      step = new StepNaiveCuda(masses, numberOfBodies);
+      sim = new Simulation(rend, step, numberOfBodies);
+      sim->MakeSimulation();
+      break;
+    }
+    case 3: {
+      printf("Implementacja wciaz nie powstala, troche cierpliwosci :)\n");
+      break;
+    }
+    case 4: {
+      printf("Implementacja wciaz nie powstala, troche cierpliwosci :)\n");
+      break;
+    }
+    default:
+      break;
   }
 
-  delete ran_gen;
+  delete randomGenerator;
   return 0;
 }
 
-// https://pl.wikipedia.org/wiki/Wstrzykiwanie_zale%C5%BCno%C5%9Bci
-// https://arxiv.org/pdf/0806.3950.pdf
+// https://pl.wikipedia.orandomGenerator/wiki/Wstrzykiwanie_zale%C5%BCno%C5%9Bci
+// https://arxiv.orandomGenerator/pdf/0806.3950.pdf
 
 // file:///home/damian/Desktop/praca%20licencjacka/materialy/Gravitational%20N-Body%20Simulatio%20-%20Aarseth,%20Sverre%20J._5510.pdf
 // file:///home/damian/Desktop/praca%20licencjacka/materialy/nBody_nVidia.pdf

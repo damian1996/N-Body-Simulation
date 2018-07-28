@@ -13,22 +13,14 @@
 #include <glm/mat4x4.hpp> // glm::mat4
 #include <glm/gtc/matrix_transform.hpp> // glm::translate, glm::rotate, glm::scale, glm::perspective
 
-
 #include "gl.h"
 #include "RandomGenerators.h"
 
 typedef thrust::host_vector<float > tf3;
-typedef thrust::host_vector<char > tb3;
-typedef std::vector<std::array<float, 3> > f3;
-typedef std::vector<std::array<char, 3> > b3;
-typedef std::vector<float> w1;
-typedef float float3d[3];
-typedef unsigned char byte3d[3];
 
 class Render {
 public:
-    int counter = 0;
-    Render(std::vector<float> masses, unsigned N);
+    Render(std::vector<float> masses, unsigned numberOfBodies);
     ~Render();
     void createAndBindBuffer();
     void createAndCompileShaders();
@@ -37,9 +29,9 @@ public:
     void init();
     void setupOpenGL();
 
-    bool ClearWindow();
+    bool clearWindow();
     void destroyWindow();
-    bool Swap();
+    bool swapBuffers();
 
     static void mouse_pressed();
     static void mouse_released();
@@ -65,19 +57,20 @@ private:
     static double mouse_position_x;
     static double mouse_position_y;
 
-    int width = 1000, height = 1000;
+    const int width = 1000;
+    const int height = 1000;
     float last_time;
 
-    char* V_color;
-    float* V_position;
-    float* V_mass;
+    char* colorsToRender;
+    float* positionsToRender;
+    float* massesToRender;
 
     GLuint buffer[3];
-    GLuint program, sh_fragment, sh_vertex;
+    GLuint program, shFragment, shVertex;
     GLFWwindow* window;
 
-    RandomGenerators* rg;
-    unsigned N;
+    RandomGenerators* randomGenerator;
+    unsigned numberOfBodies;
 };
 
 #endif

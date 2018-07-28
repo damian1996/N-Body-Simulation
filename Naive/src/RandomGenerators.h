@@ -8,13 +8,13 @@
 class RandomGenerators {
 public:
   RandomGenerators();
-  float getRandomfloat(float a, float b);
-  // float randPosition(float a, float b);
-  int getRandomByte();
+  float getRandomFloat(float a, float b);
+  int getRandomColor();
   int getRandomType();
-  template <typename T> void initializeVelocities(T &velocities, unsigned N);
+  template <typename T>
+  void initializeVelocities(T &velocities, unsigned numberOfBodies);
 
-  template <typename T> void initializeWeights(T &weights, unsigned N);
+  void initializeWeights(std::vector<float>& weights, unsigned numberOfBodies);
 };
 
 #endif

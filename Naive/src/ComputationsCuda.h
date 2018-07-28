@@ -9,16 +9,18 @@ typedef thrust::host_vector<float> type;
 class Computations {
   thrust::device_vector<float> veloD;
   thrust::device_vector<float> weightsD;
+  bool firstStep;
+  bool oldMomentum[3];
 
 public:
   Computations(type velocities, type weights) {
     veloD = velocities;
     weightsD = weights;
+    firstStep = false;
   }
   ~Computations() {}
-  // void NaiveSimBridge(Render* painter, type& pos, type& velocities, type&
-  // weights, int N);
   void NaiveSimBridgeThrust(type &pos, int N, float dt);
+  bool testingMomemntum(int N);
 };
 
 #endif

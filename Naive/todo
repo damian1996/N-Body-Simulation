@@ -1,20 +1,38 @@
+Optymalizacje
+    1. tablica z wymnozonymi wagami 
+    2. F = G * weights_i * weights_j rozbic na dwie czesci
+
+
+if(mass < 1000.0) {
+      gl_PointSize = 2.0;
+    } else if((mass >= 1000.0f) && (mass <= 10000.0)) {
+      gl_PointSize = 3.0;
+    } else if((mass >= 10000.0) && (mass <= 50000.0)) {
+      gl_PointSize = 5.0;
+    } else {
+      gl_PointSize = 7.0;
+    }
+
 PAPER
 near plane and far plane (opengl)
 
 Checkout via command line
-If you cannot merge a pull request automatically here, you have the option of checking it out via command line to resolve conflicts and perform a manual merge.
+If you cannot merandomGeneratore a pull request automatically here, you have the option of checking it out via command line to resolve conflicts and perform a manual merandomGeneratore.
 
 https://github.com/damian1996/N-Body-Simulation.git
 Step 1: From your project repository, bring in the changes and test.
 
 git fetch origin
 git checkout -b FixMainInterface origin/FixMainInterface
-git merge master
-Step 2: Merge the changes and update on GitHub.
+git merandomGeneratore master
+Step 2: MerandomGeneratore the changes and update on GitHub.
 
 git checkout master
-git merge --no-ff FixMainInterface
+git merandomGeneratore --no-ff FixMainInterface
 git push origin master
+
+
+https://gist.github.com/shyamkkhadka/536961 // push another branch to master
 
 KOD
 1) Przeskalować sensowne, wejściowe, rzeczywiste dane do wykorzystania ich w programie
@@ -51,8 +69,8 @@ const char *fragment_shader[] = {"#version 400\n"
 // gl_PointSize = mass*5;
 
 // MUST READ!!!
-https://www.khronos.org/opengl/wiki/Vertex_Specification#Theory
-https://computergraphics.stackexchange.com/questions/5712/gl-static-draw-vs-gl-dynamic-draw-vs-gl-stream-draw-does-it-matter
+https://www.khronos.orandomGenerator/opengl/wiki/Vertex_Specification#Theory
+https://computerandomGeneratorraphics.stackexchange.com/questions/5712/gl-static-draw-vs-gl-dynamic-draw-vs-gl-stream-draw-does-it-matter
 https://thebookofshaders.com/02/
 wspolrzedne sferyczne
 
@@ -65,14 +83,14 @@ PAPER
 6) opis kodu do naiwnego algorytmu (co sie dzieje w poszczegolnych linijkach)
 
 
-The N-body simulations can be used in theoretical studies of the large-scale structure of the universe, galaxies, star clusters, solar systems,
+The N-body simulations can be used in theoretical studies of the larandomGeneratore-scale structure of the universe, galaxies, star clusters, solar systems,
 stellar dynamics, climate modeling, gases, liquids and plasmas. On smaller scales, quantum effects become important. N-body simulations are applied
-in a wide range of areas outside physics such as N-body simulations of large biomolecules, for example realistic protein unfolding or even simulations
+in a wide range of areas outside physics such as N-body simulations of larandomGeneratore biomolecules, for example realistic protein unfolding or even simulations
 of deoxyribonucleic acid (DNA). The N-body simulation has proven to be one of the most versatile methods.
 
 https://docs.nvidia.com/cuda/cuda-c-best-practices-guide/index.html
 https://developer.nvidia.com/gpugems/GPUGems3/gpugems3_ch31.html
-https://arxiv.org/pdf/0806.3950.pdf
+https://arxiv.orandomGenerator/pdf/0806.3950.pdf
 file:///home/damian/Desktop/praca%20licencjacka/materialy/Gravitational%20N-Body%20Simulatio%20-%20Aarseth,%20Sverre%20J._5510.pdf
 https://www.quora.com/What-is-the-average-mass-of-a-star
 

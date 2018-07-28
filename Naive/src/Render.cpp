@@ -7,26 +7,27 @@ float Render::camera_radius = 4;
 bool Render::is_mouse_pressed = false;
 double Render::mouse_position_x = 0;
 double Render::mouse_position_y = 0;
-Render::Render(std::vector<float> masses, unsigned N) : N(N) {
-    V_position = new float[3*N];
-    V_color = new char[3*N];
-    V_mass = new float[N];
-    for(unsigned i=0; i<N; i++) {
-        V_mass[i] = masses[i];
+
+Render::Render(std::vector<float> masses, unsigned numberOfBodies) : numberOfBodies(numberOfBodies) {
+    positionsToRender = new float[3*numberOfBodies];
+    colorsToRender = new char[3*numberOfBodies];
+    massesToRender = new float[numberOfBodies];
+    for(unsigned i=0; i<numberOfBodies; i++) {
+        massesToRender[i] = masses[i];
     }
-    rg = new RandomGenerators();
-    for(unsigned i=0; i<N; i++) {
+    randomGenerator = new RandomGenerators();
+    for(unsigned i=0; i<numberOfBodies; i++) {
          for(unsigned j=0; j<3; j++) {
-            V_color[i*3 + j] = rg->getRandomByte();
+            colorsToRender[i*3 + j] = randomGenerator->getRandomColor();
          }
     }
 }
 
 Render::~Render() {
-    delete rg;
-    delete [] V_mass;
-    delete [] V_color;
-    delete [] V_position;
+    delete randomGenerator;
+    delete [] massesToRender;
+    delete [] colorsToRender;
+    delete [] positionsToRender;
 }
 
 void Render::mouse_move(double xpos, double ypos) {
@@ -155,39 +156,39 @@ void Render::createAndBindBuffer() {
 
     glGenBuffers(3, buffer);
     glBindBuffer(GL_ARRAY_BUFFER, buffer[0]);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(float)*3*N, V_position, GL_DYNAMIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(float)*3*numberOfBodies, positionsToRender, GL_DYNAMIC_DRAW);
     glEnableVertexAttribArray(0);
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
 
     glBindBuffer(GL_ARRAY_BUFFER, buffer[1]);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(char)*3*N, V_color, GL_DYNAMIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(char)*3*numberOfBodies, colorsToRender, GL_DYNAMIC_DRAW);
     glEnableVertexAttribArray(1);
     glVertexAttribPointer(1, 3, GL_UNSIGNED_BYTE, GL_TRUE, 0, 0);
     //glPointSize(4.0);
 
     glBindBuffer(GL_ARRAY_BUFFER, buffer[2]);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(float)*N, V_mass, GL_DYNAMIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(float)*numberOfBodies, massesToRender, GL_DYNAMIC_DRAW);
     glEnableVertexAttribArray(2);
     glVertexAttribPointer(2, 1, GL_FLOAT, GL_FALSE, 0, 0);
 }
 // "    gl_PointSize = gl_Normal.z*((weight+100.0)/70.0);"
 
 void Render::createAndCompileShaders() {
-    sh_vertex = load_shader("./src/vertexshader.glsl", GL_VERTEX_SHADER);
-    sh_fragment = load_shader("./src/fragmentshader.glsl", GL_FRAGMENT_SHADER);
+    shVertex = load_shader("./src/vertexshader.glsl", GL_VERTEX_SHADER);
+    shFragment = load_shader("./src/fragmentshader.glsl", GL_FRAGMENT_SHADER);
 }
 
 void Render::createAndLinkProgram() {
     program = glCreateProgram();
-    glAttachShader(program, sh_vertex);
-    glAttachShader(program, sh_fragment);
+    glAttachShader(program, shVertex);
+    glAttachShader(program, shFragment);
     glBindAttribLocation(program, 0, "position");
     glBindAttribLocation(program, 1, "color");
     glBindAttribLocation(program, 2, "mass");
     glBindFragDataLocation (program, 0, "vertex_color");
     glLinkProgram(program);
-    glDetachShader(program, sh_vertex);
-    glDetachShader(program, sh_fragment);
+    glDetachShader(program, shVertex);
+    glDetachShader(program, shFragment);
 }
 
 void Render::init() {
@@ -201,7 +202,7 @@ void Render::setupOpenGL() {
     init();
 }
 
-bool Render::ClearWindow() {
+bool Render::clearWindow() {
     if(!glfwWindowShouldClose(this->window)) {
         int wid, hei;
         glfwGetFramebufferSize(this->window, &wid, &hei);
@@ -215,7 +216,7 @@ bool Render::ClearWindow() {
     }
 }
 
-bool Render::Swap() {
+bool Render::swapBuffers() {
     if(!glfwWindowShouldClose(this->window)) {
         glfwSwapBuffers(this->window);
         glfwPollEvents();
@@ -254,37 +255,34 @@ void Render::render() {
     glUniformMatrix4fv(MatrixID, 1, GL_FALSE, &mvp[0][0]);
 
     glBindBuffer(GL_ARRAY_BUFFER, buffer[0]);
-    glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(float)*3*N, V_position);
+    glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(float)*3*numberOfBodies, positionsToRender);
 
     glBindBuffer(GL_ARRAY_BUFFER, buffer[1]);
-    glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(char)*3*N, V_color);
+    glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(char)*3*numberOfBodies, colorsToRender);
 
     glBindBuffer(GL_ARRAY_BUFFER, buffer[2]);
-    glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(float)*N, V_mass);
+    glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(float)*numberOfBodies, massesToRender);
 
-    glDrawArrays(GL_POINTS, 0, N);
+    glDrawArrays(GL_POINTS, 0, numberOfBodies);
 }
 
 bool Render::draw(thrust::host_vector<float>& positions) {
-    for(unsigned i=0; i<N; i++) {
+    for(unsigned i=0; i<numberOfBodies; i++) {
       for(int j=0; j<3; j++) {
-        V_position[i*3+j] = positions[i*3+j];
+        positionsToRender[i*3+j] = positions[i*3+j];
       }
     }
 
-    bool res;
-    res = ClearWindow();
-    if(res) return true;
+    bool closePressed = clearWindow();
+    if(closePressed) return true;
 
     render();
 
-    res = Swap();
-    if(res) return true;
+    closePressed = swapBuffers();
+    if(closePressed) return true;
     return false;
 }
 
 float Render::getTime() {
     return glfwGetTime();
 }
-
-// https://gist.github.com/shyamkkhadka/536961

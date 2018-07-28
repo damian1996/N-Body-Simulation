@@ -9,13 +9,12 @@ typedef thrust::host_vector<float> tf3;
 class Step {
 protected:
   const float G = 6.674 * (1e-11);
-  // const float dt = 0.016f;
-  RandomGenerators *rg;
-  unsigned N;
+  float oldMomentumX = 0, oldMomentumY = 0, oldMomentumZ = 0;
+  RandomGenerators *randomGenerator;
+  unsigned numberOfBodies;
 
 public:
   virtual ~Step() {}
-  virtual void initialize() = 0;
   virtual void compute(tf3 &positions, float dt) = 0;
 };
 

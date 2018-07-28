@@ -1,15 +1,13 @@
 #include "StepNaiveCUDA.h"
 
-// lista inicjalizacyjna vs dziedziczenie?
-
-StepNaiveCuda::StepNaiveCuda(std::vector<float> masses, unsigned N) {
-  this->N = N;
-  weights.resize(N);
-  for (unsigned i = 0; i < N; i++) {
+StepNaiveCuda::StepNaiveCuda(std::vector<float> masses, unsigned numberOfBodies) {
+  this->numberOfBodies = numberOfBodies;
+  weights.resize(numberOfBodies);
+  for (unsigned i = 0; i < numberOfBodies; i++) {
     weights[i] = masses[i];
   }
-  rg = new RandomGenerators();
-  rg->initializeVelocities<thrust::host_vector<float>>(velocities, N);
+  randomGenerator = new RandomGenerators();
+  randomGenerator->initializeVelocities<thrust::host_vector<float>>(velocities, numberOfBodies);
   c = new Computations(velocities, weights);
 }
 
@@ -17,9 +15,9 @@ StepNaiveCuda::~StepNaiveCuda() {
   delete c;
   weights.clear();
   velocities.clear();
-  delete rg;
+  delete randomGenerator;
 }
 
 void StepNaiveCuda::compute(tf3 &positions, float dt) {
-  c->NaiveSimBridgeThrust(positions, N, dt);
+  c->NaiveSimBridgeThrust(positions, numberOfBodies, dt);
 }
