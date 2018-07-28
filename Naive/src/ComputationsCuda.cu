@@ -42,13 +42,12 @@ bool Computations::testingMomemntum(int numberOfBodies) {
     firstStep = true;
     for(int k=0; k<3; k++) oldMomentum[k] = momentum[k];
   }
-  for(int k=0; k<3; k++) {
-    if(fabs(oldMomentum[k] - momentum[k]) > 1.0) {
-      for(int k=0; k<3; k++) std::cout << momentum[k] << " \n"[k == 2];
-      return false;
-    }
-    oldMomentum[k] = momentum[k];
-  }
+  for(int k=0; k<3; k++)
+    if(fabs(oldMomentum[k] - momentum[k]) > 1.0)
+       return false;
+
+  for(int k=0; k<3; k++) oldMomentum[k] = momentum[k];
+  for(int k=0; k<3; k++) std::cout << momentum[k] << " \n"[k == 2];
   return true;
 }
 
@@ -58,6 +57,8 @@ void Computations::NaiveSimBridgeThrust(type &pos, int numberOfBodies, float dt)
   float *d_velocities = thrust::raw_pointer_cast(veloD.data());
   float *d_weights = thrust::raw_pointer_cast(weightsD.data());
   NaiveSim<<<64, (numberOfBodies + 63) / 64>>>(d_positions, d_velocities, d_weights, numberOfBodies, dt);
+  testingMomemntum(numberOfBodies);
+  //if(!testingMomemntum(numberOfBodies)) std::cout << "problemiki" << "\n";
   pos = posD;
 }
 

@@ -17,9 +17,9 @@ Render::Render(std::vector<float> masses, unsigned numberOfBodies) : numberOfBod
     }
     randomGenerator = new RandomGenerators();
     for(unsigned i=0; i<numberOfBodies; i++) {
-         for(unsigned j=0; j<3; j++) {
-            colorsToRender[i*3 + j] = randomGenerator->getRandomColor();
-         }
+       for(unsigned j=0; j<3; j++) {
+          colorsToRender[i*3 + j] = randomGenerator->getRandomColor();
+       }
     }
 }
 
@@ -272,7 +272,6 @@ bool Render::draw(thrust::host_vector<float>& positions) {
         positionsToRender[i*3+j] = positions[i*3+j];
       }
     }
-
     bool closePressed = clearWindow();
     if(closePressed) return true;
 

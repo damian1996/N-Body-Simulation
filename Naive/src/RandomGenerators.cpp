@@ -30,6 +30,7 @@ template <>
 void RandomGenerators::initializeVelocities<std::vector<float>>(
     std::vector<float> &velocities, unsigned numberOfBodies) {
   velocities.resize(3 * numberOfBodies);
+
   for (unsigned i = 0; i < numberOfBodies; i++)
     for (int j = 0; j < 3; j++)
       velocities[i * 3 + j] = getRandomFloat(-0.01f, 0.01f);
@@ -41,7 +42,7 @@ void RandomGenerators::initializeVelocities<thrust::host_vector<float>>(
   velocities.resize(3 * numberOfBodies);
   for (unsigned i = 0; i < numberOfBodies; i++)
     for (int j = 0; j < 3; j++)
-      velocities[i * 3 + j] = getRandomFloat(-0.0f, 0.0f);
+      velocities[i * 3 + j] = getRandomFloat(-0.01f, 0.01f);
 }
 
 void RandomGenerators::initializeWeights(std::vector<float> &weights, unsigned numberOfBodies) {
@@ -55,7 +56,7 @@ void RandomGenerators::initializeWeights(std::vector<float> &weights, unsigned n
       weights[i] = getRandomFloat(1000.0f, 100000.0f); // 10^10
     break;
   case 1: // 1/10 duze masy, reszta stosunkowo male
-    divi = 1; //static_cast<unsigned>(numberOfBodies/100);
+    divi = static_cast<unsigned>(numberOfBodies/100);
     for (unsigned i = 0; i < divi; i++)
       weights[i] = getRandomFloat(1000000.0f, 1010000.0f);
     for (unsigned i = divi; i < numberOfBodies; i++)
