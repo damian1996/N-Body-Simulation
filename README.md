@@ -19,7 +19,7 @@
 ### EXECUTE ###
 - **Clone repository**\
    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Move to your favourite directory and enter following command**\
-   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;` git clone https://github.com/damian1996/FlappyGil.git `
+   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;` git clone https://github.com/damian1996/N-Body-Simulation.git `
 - **Run program**\
    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Enter following commands to run program**\
    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;` cd N-Body-Simulation `\
