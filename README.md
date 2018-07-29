@@ -9,7 +9,7 @@
    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;` sudo apt-get update `\
    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;` sudo apt-get install libglm-dev glibglfw3-dev libglfw3 `
 - **Install  CUDA 9.2**\
-   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Go to https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html#pre-installation-actions**\
+   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Go to [CUDA installation](https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html#pre-installation-actions)**
    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Go to subsection 2.6 and go to the download section.**\
    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Then choose sufficient options and finally you will choose deb(local).**\
    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Later click Downlad and enter commands from installation guide below**
