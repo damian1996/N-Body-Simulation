@@ -7,5 +7,6 @@
 #include "Simulation.h"
 #include "StepNaive.h"
 #include "StepNaiveCUDA.h"
+#include "BarnesHutStep.h"
 
 #endif
