@@ -6,7 +6,9 @@ Simulation::Simulation(Render *rend, Step *step, unsigned numberOfBodies)
   positions.reserve(3 * numberOfBodies);
   for (unsigned i = 0; i < numberOfBodies; i++) {
     for (int j = 0; j < 3; j++) {
-       positions.push_back(randomGenerator->getRandomFloat(-1.0f, 1.0f));
+       float randPos = randomGenerator->getRandomFloat(-1.0f, 1.0f);
+       positions.push_back(randPos);
+       //std::cout << randPos << std::endl;
     }
   }
 }

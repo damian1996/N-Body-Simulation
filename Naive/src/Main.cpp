@@ -28,18 +28,14 @@ int main() {
   switch (programVersion) {
     case 1: {
       step = new StepNaive(masses, numberOfBodies);
-      sim = new Simulation(rend, step, numberOfBodies);
-      sim->MakeSimulation();
       break;
     }
     case 2: {
       step = new StepNaiveCuda(masses, numberOfBodies);
-      sim = new Simulation(rend, step, numberOfBodies);
-      sim->MakeSimulation();
       break;
     }
     case 3: {
-      printf("Implementacja wciaz nie powstala, troche cierpliwosci :)\n");
+      step = new BarnesHutStep(masses, numberOfBodies);
       break;
     }
     case 4: {
@@ -49,6 +45,8 @@ int main() {
     default:
       break;
   }
+  sim = new Simulation(rend, step, numberOfBodies);
+  sim->MakeSimulation();
 
   delete randomGenerator;
   return 0;
