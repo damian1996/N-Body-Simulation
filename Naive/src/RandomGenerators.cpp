@@ -33,8 +33,21 @@ void RandomGenerators::initializeVelocities<std::vector<float>>(
 
   for (unsigned i = 0; i < numberOfBodies; i++)
     for (int j = 0; j < 3; j++)
-      velocities[i * 3 + j] = getRandomFloat(-0.01f, 0.01f);
+      velocities[i * 3 + j] = getRandomFloat(-0.01, 0.01);
+      //velocities[i * 3 + j] = getRandomFloat(-0.01f, 0.01f);
 }
+
+template <>
+void RandomGenerators::initializeVelocities<std::vector<double>>(
+    std::vector<double> &velocities, unsigned numberOfBodies) {
+  velocities.resize(3 * numberOfBodies);
+
+  for (unsigned i = 0; i < numberOfBodies; i++)
+    for (int j = 0; j < 3; j++)
+      velocities[i * 3 + j] = getRandomFloat(-0.01, 0.01);
+      //velocities[i * 3 + j] = getRandomFloat(-0.01, 0.01);
+}
+
 // zderzenie plastyczne / sprezyste
 template <>
 void RandomGenerators::initializeVelocities<thrust::host_vector<float>>(
