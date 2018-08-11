@@ -28,7 +28,7 @@ void BarnesHutStep::initializingRoot() {
 void BarnesHutStep::insertNode(NodeBH* node, NodeBH* quad) {
     if(!quad->isPoint() && !quad->wasInitialized()) {
       // jesli pusty node to dodajemy
-      quad->setAttributes(node->getMass(), node->getX(), node->getY(), node->getZ());
+      quad->setAttributes(node->getMass(), node->getIndex(), node->getX(), node->getY(), node->getZ());
       return;
     }
     if(quad->isPoint() && !quad->wasInitialized()) {
@@ -69,7 +69,7 @@ void BarnesHutStep::createTree(tf3& positions) {
 
         for(auto* child : root->getQuads()) {
             if(child->isInQuad(pos[0], pos[1], pos[2])) {
-                NodeBH* node = new NodeBH(weights[i], pos, child->getBoundaries());
+                NodeBH* node = new NodeBH(weights[i], i, pos, child->getBoundaries());
                 insertNode(node, child);
                 delete node;
                 break;
@@ -122,6 +122,8 @@ void BarnesHutStep::computeForceForBody(NodeBH* r, std::array<double, 3>& pos, i
 {
     if(r->isPoint() && !r->wasInitialized())
     {
+        if(r->getIndex() == i) return; // ten sam Node
+
         // Jesli node jest zewnetrzny, to policz sile ktora wywiera ten node na obecnie rozwazane cialo
         double distX = r->getSelectedPosition(0) - pos[0];
         double distY = r->getSelectedPosition(1) - pos[1];
@@ -136,6 +138,16 @@ void BarnesHutStep::computeForceForBody(NodeBH* r, std::array<double, 3>& pos, i
     }
     else if(!r->isPoint() && r->wasInitialized())
     {
+        if(r->isInQuad(pos[0], pos[1], pos[2])) 
+        {
+            //rekurencja pomijajac ratio
+            for(auto* child : r->getQuads()) 
+            {
+                computeForceForBody(child, pos, i);
+            }
+            return;
+        }
+
         std::array<double, 6>& boundaries = r->getBoundaries();
         
         double d = distanceBetweenTwoNodes(pos[0], pos[1], pos[2], 

@@ -2,3 +2,5 @@ Naive/out/main
 Naive/out/*.o
 Naive/out/
 Naive/build/
+Naive/.vscode/
+Naive.zip

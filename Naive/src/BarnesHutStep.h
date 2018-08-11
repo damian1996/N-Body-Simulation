@@ -34,7 +34,7 @@ private:
     std::vector<double> forces;
     std::vector<double> velocities;
     double sizeFrame = 8.0; // ZWIEKSZYC (DO 32.0)
-    const double theta = 0.5;
+    const double theta = 0.1;
     const double EPS = 0.01;
 };
 
@@ -42,7 +42,6 @@ private:
 
 // https://stackoverflow.com/questions/41946007/efficient-and-well-explained-implementation-of-a-quadtree-for-2d-collision-det
 // http://www.cs.umd.edu/~hjs/pubs/ShaffCVGIP87.pdf
-
 // http://arborjs.org/docs/barnes-hut
 // https://www.khanacademy.org/science/physics/linear-momentum/center-of-mass/a/what-is-center-of-mass
 // http://iss.ices.utexas.edu/Publications/Papers/burtscher11.pdf

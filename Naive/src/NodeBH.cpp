@@ -2,8 +2,8 @@
 #include <cstdio>
 
 /* Constructor to creating complete node, which is ready to be quadrant. */
-NodeBH::NodeBH(double mass, std::array<double, 3>& pos, std::array<double, 6>& boundaries) :
-      mass(mass), totalMass(0), hasPoint(true), childrenExists(false)
+NodeBH::NodeBH(double mass, long long id, std::array<double, 3>& pos, std::array<double, 6>& boundaries) :
+      mass(mass), totalMass(0), hasPoint(true), childrenExists(false), id(id)
 {
     std::copy(std::begin(pos), std::end(pos), std::begin(this->pos));
     std::copy(std::begin(boundaries), std::end(boundaries), std::begin(this->boundaries));
@@ -84,9 +84,10 @@ bool NodeBH::isPoint() {
     return hasPoint;
 }
 
-void NodeBH::setAttributes(double mass, double x, double y, double z) {
+void NodeBH::setAttributes(double mass, long long id, double x, double y, double z) {
     hasPoint = true;
     this->mass = mass;
+    this->id = id;
     pos[0] = x;
     pos[1] = y;
     pos[2] = z;
@@ -111,7 +112,7 @@ void NodeBH::pushPointFromQuadLower() {
     addQuads(boundaries);
     for(auto* child : quads) {
         if(child->isInQuad(pos[0], pos[1], pos[2])) {
-            child->setAttributes(mass, pos[0], pos[1], pos[2]);
+            child->setAttributes(mass, id, pos[0], pos[1], pos[2]);
         }
     }
     mass = 0;
@@ -159,4 +160,8 @@ std::string NodeBH::getIndent() {
 
 void NodeBH::setIndent(std::string str) {
     indent = str;
+}
+
+long long NodeBH::getIndex() {
+    return id;
 }
