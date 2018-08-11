@@ -1,31 +1,26 @@
 #ifndef NODEBH_H
 #define NODEBH_H
 
+#include <array>
 #include <vector>
-//#include "Body.h"
-
-enum class Board { x1, x2, y1, y2, z1, z2 };
+#include <string>
 
 class NodeBH {
 public:
     NodeBH() = delete;
-    NodeBH(double mass, std::vector<double> pos, std::vector<double> boards);
-    NodeBH(double* boards);
+    NodeBH(double mass, std::array<double, 3>& pos, std::array<double, 6>& boundaries);
+    NodeBH(std::array<double, 6>& boundaries);
     ~NodeBH();
-
-private:
-    void initializeVectors();
-
-public:
-    void addQuads(std::vector<double> b);
+    void addQuads(std::array<double, 6>& b);
     bool isInQuad(double x, double y, double z);
     bool isPoint();
-    void pushQuadsLower();
+    void pushPointFromQuadLower();
     void setAttributes(double mass, double x, double y, double z);
-    void updateCenterOfMass(double mass, std::vector<double> pos);
+    void updateCenterOfMass(double mass, std::array<double, 3>& pos);
 
-    std::vector<double> getBoards();
-    std::vector<NodeBH*> getQuads();
+    std::array<double, 6>& getBoundaries();
+    std::array<NodeBH*, 8>& getQuads();
+    bool wasInitialized();
     int getNumberOfQuads();
     double getX();
     double getY();
@@ -35,21 +30,21 @@ public:
     double getSelectedCenterOfMass(int i);
     double getSelectedPosition(int i);
     void setPoint(bool val);
+    std::string getIndent();
+    void setIndent(std::string str);
 
 private:
     double mass;
-    bool hasPoint;
-    std::vector<double> boards, pos, centerOfMass, numerator;
-    std::vector<NodeBH*> quads;
     double totalMass;
-    const int numberOfQuads = 8;
-    const int x1 = static_cast<const int>(Board::x1);
-    const int x2 = static_cast<const int>(Board::x2);
-    const int y1 = static_cast<const int>(Board::y1);
-    const int y2 = static_cast<const int>(Board::y2);
-    const int z1 = static_cast<const int>(Board::z1);
-    const int z2 = static_cast<const int>(Board::z2);
-    //std::vector<Body*> bodies;
+    bool hasPoint;
+    bool childrenExists;
+    std::string indent;
+    int id;
+    std::array<double, 6> boundaries;
+    std::array<double, 3> pos;
+    std::array<double, 3> centerOfMass;
+    std::array<double, 3> numerator;
+    std::array<NodeBH*, 8> quads;
 };
 
 #endif

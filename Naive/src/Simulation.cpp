@@ -8,7 +8,6 @@ Simulation::Simulation(Render *rend, Step *step, unsigned numberOfBodies)
     for (int j = 0; j < 3; j++) {
        float randPos = randomGenerator->getRandomFloat(-1.0f, 1.0f);
        positions.push_back(randPos);
-       //std::cout << randPos << std::endl;
     }
   }
 }
@@ -27,6 +26,7 @@ void Simulation::MakeSimulation() {
 
   while(!rend->draw(positions)) {
       curr_time = rend->getTime();
+      //std::cout << curr_time - last_time << std::endl;
       step->compute(positions, (curr_time - last_time) * 10);
       last_time = curr_time;
   }

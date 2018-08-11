@@ -1,3 +1,175 @@
+void BarnesHutStep::computeForceForBody(NodeBH* r, std::array<double, 3>& pos, int i)
+{
+    if(r->isPoint() && !r->wasInitialized())
+    {
+        // Jesli node jest zewnetrzny, to policz sile ktora wywiera ten node na obecnie rozwazane cialo
+        std::array<double, 3> distForDimension;
+        double dist = EPS * EPS;
+        for(int i=0; i<3; i++) 
+        {
+            distForDimension[i] = r->getSelectedPosition(i) - pos[i];
+            dist = dist + (distForDimension[i] * distForDimension[i]);
+        } 
+        dist = dist * sqrt(dist);
+        // jak sprawdzic czy to te same bodies? Musze zachowac i != j
+        float F = G * (r->getMass() * weights[i]);
+        for(int i=0; i<3; i++) 
+        {
+            forces[i * 3 + i] += F * distForDimension[i] / dist;
+        }
+    }
+    else if(!r->isPoint() && r->wasInitialized())
+    {
+        std::array<double, 6>& boundaries = r->getBoundaries();
+        bool isFarAway = false;
+        for(int j = 0; j < 3; j++)
+        {
+            double d = dist(pos[j], r->getSelectedCenterOfMass(j));
+            double s = boundaries[2*j + 1] - boundaries[2*j];
+            if(BarnesHutStep::minS > s) BarnesHutStep::minS = s;
+            if(s/d < theta) 
+            {
+                isFarAway = true;
+            } 
+            else 
+            {
+                isFarAway = false;
+                break;
+            }
+        }
+        if(isFarAway)
+        {
+            std::array<double, 3> distForDimension;
+            double dist = EPS * EPS;
+            for(int i=0; i<3; i++) 
+            {
+                distForDimension[i] = r->getSelectedCenterOfMass(i) - pos[i];
+                dist = dist + (distForDimension[i] * distForDimension[i]);
+            } 
+            dist = dist * sqrt(dist);
+            float F = G * (r->getTotalMass() * weights[i]);
+            for(int i=0; i<3; i++) 
+            {
+                forces[i * 3 + i] += F * distForDimension[i] / dist;
+            }
+        }
+        else
+        {
+            for(auto* child : r->getQuads())
+            {
+                computeForceForBody(child, pos, i);
+            }
+        }
+    }
+}
+
+III OPCJA bez vectorow
+
+
+III OPCJA
+
+0.0029109
+0.447578
+0.666709
+0.569141
+0.690313
+0.810421
+1.04146
+1.02326
+0.780254
+0.673954
+0.610857
+0.567632
+0.523392
+0.49063
+0.461018
+0.431845
+0.396703
+0.37991
+0.36375
+0.353005
+0.349578
+0.346696
+0.340666
+0.351639
+0.343817
+0.344596
+0.347522
+0.345708
+0.353614
+0.36337
+
+I OPCJA
+
+0.00339677
+0.345306
+0.319039
+0.317166
+0.317018
+0.318118
+0.325653
+0.32024
+0.321578
+0.321631
+0.332477
+0.327175
+0.32723
+0.317413
+0.319453
+0.317104
+0.317471
+0.320036
+0.317074
+0.318926
+0.335102
+0.329858
+0.337581
+0.336142
+0.320759
+
+II OPCJA
+
+0.00321018
+0.0814953
+0.095533
+0.0972236
+0.097403
+0.0920587
+0.100372
+0.0940597
+0.0993817
+0.106551
+0.0990933
+0.108919
+0.10086
+0.0999502
+0.113015
+0.0981307
+0.0928862
+0.0982084
+0.102388
+0.094381
+
+/*for(int i=0; i<2; i++)
+{
+    for(int j=0; j<2; j++)
+    {
+        for(int k=0; k<2; k++)
+        {
+            double boardsForQuad[6] = {b[0], b[0] + (b[1]-b[0])/2, b[2], b[2] + (b[3]-b[2])/2, b[4], b[4] + (b[5] - b[4])/2};
+            //quads.push_back(new NodeBH(boardsForQuad));
+        }
+    }
+}
+*/
+
+PROFILER
+1) upewnij się że kompilujesz z opcją -g
+2) valgrind --tool=callgrind
+3) kcachegrind <wygenerowany plik>
+
+nvprof
+
 ENUMS QUICK TUTORIAL
 /* Color r = Color::blue;
 switch(r)
@@ -12,16 +184,16 @@ int n = static_cast<int>(r); // OK, n = 21 */
 
 https
     : // arxiv.orandomGenerator/pdf/0806.3950.pdf
+https
+: // arxiv.orandomGenerator/pdf/1411.6671.pdf
+  file
+  : /// home/damian/Desktop/praca%20licencjacka/materialy/Gravitational%20N-Body%20Simulatio%20-%20Aarseth,%20Sverre%20J._5510.pdf
+    https
+    : // arxiv.orandomGenerator/pdf/1105.1082.pdf
       https
-      : // arxiv.orandomGenerator/pdf/1411.6671.pdf
-        file
-        : /// home/damian/Desktop/praca%20licencjacka/materialy/Gravitational%20N-Body%20Simulatio%20-%20Aarseth,%20Sverre%20J._5510.pdf
-          https
-          : // arxiv.orandomGenerator/pdf/1105.1082.pdf
-            https
-            : // pl.wikipedia.orandomGenerator/wiki/Zasada_zachowania_p%C4%99du
-              https
-              : // pl.wikipedia.orandomGenerator/wiki/Zderzenie_centralne
+      : // pl.wikipedia.orandomGenerator/wiki/Zasada_zachowania_p%C4%99du
+        https
+        : // pl.wikipedia.orandomGenerator/wiki/Zderzenie_centralne
 
                 CHAOS http
                 : // www.maths.ed.ac.uk/~douglas/cortina-v2.pdf
