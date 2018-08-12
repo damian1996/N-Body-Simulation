@@ -14,6 +14,7 @@ public:
     ~NodeBH();
     void addQuads(std::array<double, 6>& b);
     bool isInQuad(double x, double y, double z);
+    int numberOfSubCube(double x, double y, double z);
     bool isPoint();
     void pushPointFromQuadLower();
     void setAttributes(double mass, long long id, double x, double y, double z);
@@ -34,6 +35,7 @@ public:
     std::string getIndent();
     void setIndent(std::string str);
     long long getIndex();
+    NodeBH* getChild(int i);
 
 private:
     double mass;

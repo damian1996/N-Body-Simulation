@@ -80,6 +80,18 @@ bool NodeBH::isInQuad(double x, double y, double z) {
     return true;
 }
 
+int NodeBH::numberOfSubCube(double x, double y, double z) {
+    int result = 0;
+    if(x<boundaries[0] || x>boundaries[1]) return 8;
+    if(y<boundaries[2] || y>boundaries[3]) return 8;
+    if(z<boundaries[4] || z>boundaries[5]) return 8;
+
+    if(z >= (boundaries[4] + (boundaries[5] - boundaries[4])/2)) result += 4;
+    if(y >= (boundaries[2] + (boundaries[3] - boundaries[2])/2)) result += 2;
+    if(x >= (boundaries[0] + (boundaries[1] - boundaries[0])/2)) result += 1;
+    return result;
+}
+
 bool NodeBH::isPoint() {
     return hasPoint;
 }
@@ -164,4 +176,8 @@ void NodeBH::setIndent(std::string str) {
 
 long long NodeBH::getIndex() {
     return id;
+}
+
+NodeBH* NodeBH::getChild(int i) {
+    return quads[i];
 }
