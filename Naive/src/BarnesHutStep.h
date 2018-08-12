@@ -16,7 +16,6 @@ class BarnesHutStep : public Step {
 public:
     BarnesHutStep(std::vector<float>& masses, unsigned numberOfBodies);
     ~BarnesHutStep();
-    static double minS;
     void initializingRoot();
     void insertNode(NodeBH* node, NodeBH* quad);
     void createTree(tf3 &positions);

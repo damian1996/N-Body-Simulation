@@ -1,4 +1,4 @@
-make clean
+#make clean
 if [ $1 == "debug" ]
 then    
     make
