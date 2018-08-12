@@ -112,6 +112,49 @@
       \verb http://docs.nvidia.com/cuda/cuda-runtime-api/index.html
       \endverb
     \endentry
+    \entry{visGraph}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=bbc0090900fc4e36b3185b3ab7fe3f25}{%
+           family={D.Egorov},
+           family_i={D\bibinitperiod},
+           given={A.Bezgodov},
+           given_i={A\bibinitperiod}}}%
+      }
+      \strng{namehash}{bbc0090900fc4e36b3185b3ab7fe3f25}
+      \strng{fullhash}{bbc0090900fc4e36b3185b3ab7fe3f25}
+      \field{labelalpha}{DEg15}
+      \field{sortinit}{D}
+      \field{sortinithash}{78f7c4753a2004675f316a80bdb31742}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Improved Force-Directed Method of Graph Layout Generation with Adaptive Step Length}
+      \field{year}{2015}
+    \endentry
+    \entry{dirNBody}{misc}{}
+      \name{author}{2}{}{%
+        {{hash=d701820cd316f8391094da8e15df4005}{%
+           family={D.\bibnamedelimi Richardson},
+           family_i={D\bibinitperiod\bibinitdelim R\bibinitperiod},
+           suffix={T.\bibnamedelimi Quinn},
+           suffix_i={T\bibinitperiod\bibinitdelim Q\bibinitperiod},
+           given={J.\bibnamedelimi Stadel},
+           given_i={J\bibinitperiod\bibinitdelim S\bibinitperiod}}}%
+        {{hash=853348173739a12cad76bfaff749ae3a}{%
+           family={Lake},
+           family_i={L\bibinitperiod},
+           given={G.},
+           given_i={G\bibinitperiod}}}%
+      }
+      \strng{namehash}{2351a6d5133f960ed3883758c3d5fd80}
+      \strng{fullhash}{2351a6d5133f960ed3883758c3d5fd80}
+      \field{labelalpha}{DL98}
+      \field{sortinit}{D}
+      \field{sortinithash}{78f7c4753a2004675f316a80bdb31742}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Direct Large-Scale N-Body Simulations of Planetesimal Dynamics}
+      \field{year}{1998}
+    \endentry
     \entry{haloDensity}{misc}{}
       \name{author}{1}{}{%
         {{hash=f7a0c2d04eb6c2c11c8cae261bbf3c7c}{%
@@ -127,28 +170,6 @@
       \field{labelalpha}{EDO02}
       \field{sortinit}{E}
       \field{sortinithash}{fefc5210ef4721525b2a478df41efcd4}
-      \field{extraalpha}{1}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{title}{The Halo Density Profiles with Non-Standard N-body Simulations}
-      \field{year}{2002}
-    \endentry
-    \entry{dirNBody}{misc}{}
-      \name{author}{1}{}{%
-        {{hash=f7a0c2d04eb6c2c11c8cae261bbf3c7c}{%
-           family={E.D'Onghia},
-           family_i={E\bibinitperiod},
-           suffix={C.Firmani},
-           suffix_i={C\bibinitperiod},
-           given={G.Chincarini},
-           given_i={G\bibinitperiod}}}%
-      }
-      \strng{namehash}{f7a0c2d04eb6c2c11c8cae261bbf3c7c}
-      \strng{fullhash}{f7a0c2d04eb6c2c11c8cae261bbf3c7c}
-      \field{labelalpha}{EDO02}
-      \field{sortinit}{E}
-      \field{sortinithash}{fefc5210ef4721525b2a478df41efcd4}
-      \field{extraalpha}{2}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{title}{The Halo Density Profiles with Non-Standard N-body Simulations}
