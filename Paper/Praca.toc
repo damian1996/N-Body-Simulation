@@ -18,9 +18,9 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsubsection}{\numberline {1.3.2}\relax \fontsize {12}{14}\selectfont Thrust}{4}{subsubsection.1.3.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {1.3.3}\relax \fontsize {12}{14}\selectfont OpenGL}{5}{subsubsection.1.3.3}
+\contentsline {subsubsection}{\numberline {1.3.3}\relax \fontsize {12}{14}\selectfont OpenGL}{4}{subsubsection.1.3.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {2}\relax \fontsize {17.28}{22}\selectfont Pierwsze podej\IeC {\'s}cie}{5}{section.2}
+\contentsline {section}{\numberline {2}\relax \fontsize {17.28}{22}\selectfont Pierwsze podej\IeC {\'s}cie implementacyjne}{5}{section.2}
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {2.1}\relax \fontsize {14.4}{18}\selectfont Sformu\IeC {\l }owanie problemu}{5}{subsection.2.1}
 \defcounter {refsection}{0}\relax 
@@ -42,4 +42,6 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {3.3}\relax \fontsize {14.4}{18}\selectfont Implementacja}{8}{subsection.3.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4}\relax \fontsize {17.28}{22}\selectfont Podsumowanie}{8}{section.4}
+\contentsline {section}{\numberline {4}\relax \fontsize {17.28}{22}\selectfont Wizualizacja}{8}{section.4}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {5}\relax \fontsize {17.28}{22}\selectfont Podsumowanie}{9}{section.5}

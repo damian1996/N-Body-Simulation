@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=latex 2018.6.9)  26 JUN 2018 19:36
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=latex 2018.8.7)  13 AUG 2018 00:44
 entering extended mode
  %&-line parsing enabled.
 **\let \APPmakepictures \empty \input  Praca.tex
@@ -1242,55 +1242,70 @@ Overfull \hbox (13.21939pt too wide) in paragraph at lines 89--89
 LaTeX Warning: Citation 'fund' on page 3 undefined on input line 96.
 
 
-LaTeX Warning: Citation 'threebody1' on page 3 undefined on input line 100.
+LaTeX Warning: Citation 'threebody1' on page 3 undefined on input line 101.
 
 
-LaTeX Warning: Citation 'threebody2' on page 3 undefined on input line 100.
+LaTeX Warning: Citation 'threebody2' on page 3 undefined on input line 101.
 
 
-LaTeX Warning: Citation 'SEMmisc' on page 3 undefined on input line 105.
+LaTeX Warning: Citation 'SEMmisc' on page 3 undefined on input line 106.
 
 
-LaTeX Warning: Citation 'chaosMisc' on page 3 undefined on input line 105.
+LaTeX Warning: Citation 'chaosMisc' on page 3 undefined on input line 106.
 
 
-LaTeX Warning: Citation 'haloDensity' on page 3 undefined on input line 106.
+LaTeX Warning: Citation 'haloDensity' on page 3 undefined on input line 107.
 
 
-LaTeX Warning: Citation 'dirNBody' on page 3 undefined on input line 107.
+LaTeX Warning: Citation 'dirNBody' on page 3 undefined on input line 108.
+
+
+LaTeX Warning: Citation 'visGraph' on page 3 undefined on input line 108.
 
 (./draw.pdf_tex)
+Overfull \hbox (9.27496pt too wide) in paragraph at lines 122--123
+[]\OT4/cmr/m/n/10 Repozytorium jest dost¦pne pod tym [][][][][][]. Caªo±¢ zosta
+ªa za-im-ple-men-towana w C++. Poni»ej 
+ []
+
+
 Overfull \hbox (6.46928pt too wide) in paragraph at lines 128--129
 \OT4/cmr/m/n/10 Thrust jest sz-ablonow¡ bib-liotek¡ dla CUDA bazu-j¡ca na bib-l
 iotece STL z C++. Thrust umo»li- 
  []
 
 
-Underfull \vbox (badness 1910) has occurred while \output is active []
+Overfull \hbox (3.41373pt too wide) in paragraph at lines 130--131
+\OT4/cmr/m/n/10 OpenGL jest API do tworzenia grafiki. Sko-rzys-taªem z OpenGL3,
+ w celu zwiz-ual-i-zowa-nia symu- 
+ []
 
 
-LaTeX Warning: Citation 'fund' on page 5 undefined on input line 137.
+LaTeX Warning: Citation 'fund' on page 4 undefined on input line 137.
 
 
-Overfull \hbox (6.0pt too wide) in paragraph at lines 187--187
+LaTeX Warning: Citation 'fund' on page 5 undefined on input line 154.
+
+
+Overfull \hbox (6.0pt too wide) in paragraph at lines 189--189
 [][][][][][][]  
  []
 
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 190.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 192.
 
 (/usr/share/texlive/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 190.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 192.
 
-Overfull \hbox (5.27492pt too wide) in paragraph at lines 196--196
+Overfull \hbox (5.27492pt too wide) in paragraph at lines 198--198
 []\OT4/cmr/m/n/10 Ka»de ciaªo na pocz¡tku symu-lacji ma losowan¡ pozy-cj¦, pr¦d
 -ko±¢ oraz wag¦. Jed-nos-tki przyj¦te 
  []
 
 
-Overfull \hbox (19.35822pt too wide) in paragraph at lines 206--207
+Overfull \hbox (19.35822pt too wide) in paragraph at lines 208--209
 \OT4/cmr/m/n/10 niesko«c-zonej dla ka»dego ciaªa w symu-lacji. W tym celu wyko-
 rzys-tane zostaªo, wcze±niej wprowad- 
  []
@@ -1302,37 +1317,37 @@ File: lstlang1.sty 2015/06/04 1.6 listings language file
 ) (/usr/share/texlive/texmf-dist/tex/latex/listings/lstmisc.sty
 File: lstmisc.sty 2015/06/04 1.6 (Carsten Heinz)
 )
-Overfull \hbox (6.0pt too wide) in paragraph at lines 234--234
+Overfull \hbox (6.0pt too wide) in paragraph at lines 236--236
 [][][][][][][]  
  []
 
-LaTeX Font Info:    Try loading font information for OML+cmr on input line 235.
+LaTeX Font Info:    Try loading font information for OML+cmr on input line 237.
 
 (/usr/share/texlive/texmf-dist/tex/latex/base/omlcmr.fd
 File: omlcmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <10> not available
-(Font)              Font shape `OML/cmm/m/it' tried instead on input line 235.
+(Font)              Font shape `OML/cmm/m/it' tried instead on input line 237.
 
-Overfull \hbox (1.7506pt too wide) in paragraph at lines 252--253
+Overfull \hbox (1.7506pt too wide) in paragraph at lines 254--255
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
-LaTeX Font Info:    Try loading font information for OT4+cmtt on input line 289
+LaTeX Font Info:    Try loading font information for OT4+cmtt on input line 291
 .
 (/usr/share/texlive/texmf-dist/tex/latex/polski/ot4cmtt.fd
 File: ot4cmtt.fd 2008/02/24 v1.2.1 Font defs for fonts PL (MW)
 )
 
-LaTeX Warning: Empty bibliography on input line 298.
+LaTeX Warning: Empty bibliography on input line 303.
 
 
 Package pst-pdf Warning: Picture container needs cropping..
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 300.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 300.
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 300.
-Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 300.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 305.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 305.
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 305.
+Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 305.
 
 LaTeX Warning: There were undefined references.
 
@@ -1344,14 +1359,14 @@ Package biblatex Warning: Please (re)run Biber on the file:
 Package logreq Info: Writing requests to 'Praca-autopp.run.xml'.
 \openout1 = `Praca-autopp.run.xml'.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 300.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 305.
  ) 
 Here is how much of TeX's memory you used:
  23406 strings out of 493030
- 385785 string characters out of 6136261
- 826870 words of memory out of 5000000
+ 385772 string characters out of 6136261
+ 826878 words of memory out of 5000000
  26586 multiletter control sequences out of 15000+600000
- 18915 words of font info for 54 fonts, out of 8000000 for 9000
+ 18404 words of font info for 53 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  48i,7n,99p,975b,1478s stack positions out of 5000i,500n,10000p,200000b,80000s
 

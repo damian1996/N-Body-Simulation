@@ -26,7 +26,7 @@ style=alphabetic,
 ]{biblatex}
 \addbibresource{biblio.bib}
 \hypersetup{
-  colorlinks, linkcolor=black
+  colorlinks, linkcolor=black, citecolor=red
 }
 \DeclareCaptionFont{white}{\color{white}}
 \DeclareCaptionFormat{listing}{\colorbox{gray}{\parbox{\textwidth}{#1#2#3}}}
@@ -61,7 +61,7 @@ style=alphabetic,
 		\begin{flushleft}
 			\large
 			\textit{Autor}\\
-			Damian \textsc{Stachura} % Your name
+			Damian Stachura% \textsc{Stachura}  Your name
 		\end{flushleft}
 	\end{minipage}
 	~
@@ -69,7 +69,7 @@ style=alphabetic,
 		\begin{flushright}
 			\large
 			\textit{Opiekun}\\
-			dr Piotr \textsc{Danilewski} % Supervisor's name
+			dr Maciej Ślusarek %\textsc{Ślusarek}  Supervisor's name
 		\end{flushright}
 	\end{minipage}
 	
@@ -90,21 +90,22 @@ Symulacja N ciał jest zagadnieniem z mechaniki klasycznej, które polega na wyz
 
 \subsection{\Large Szczególne przypadki}
 \bigskip
-Problem wyznaczenia ruchu dowolnej liczby ciał jest trudny, więc wielu naukowców próbowało rozstrzygnąć go dla małej, ustalonej liczby ciał.
+Problem wyznaczenia dokładnego ruchu dowolnej liczby ciał jest trudny, więc można znaleźć wiele prac skupiająych się jedynie na ustalonej, małej liczbe ciał.
 
 \subsubsection{Problem dwóch ciał}
 Problem dla dwóch ciał podlegających prawom klasycznej dynamiki Newtona i przyciągających się zgodnie z newtonowskim prawem powszechnego ciążenia został rozstrzygnięty przez J. Bernoulliego przy założeniu, że masa obiektu koncentruje się w jego środku. \cite{fund}
-Ruch dwóch ciał wygląda wtedy tak, że obiekty poruszają się po krzywych stożkowych, a rodzaj krzywej zależy od całkowitej energii układu. Przykładowo, w przypadku małej energii, gdy ciała nie mogą się od siebie uwolnić, to krążą wokół siebie po elipsach. W innych przypadkach obiekty mogą poruszać się chociażby po hiperboli. 
+
+Obydwa ciała poruszają się po krzywych stożkowych, których rodzaj zależy od całkowitej energii układu. Przykładowo, gdy energia jest mała, to ciała nie mogą się od siebie uwolnić, więc krążą wokół siebie po elipsach.
 
 \subsubsection{Problem trzech ciał}
-Problem dla N = 3 wciąż nie jest rozwiązany w ogólności. Istnieją rozwiązania dla szczególnych przypadków\cite{threebody1, threebody2}. Innym ważnym przypadkiem jest problem, w którym masa jednego z ciał jest zaniedbywalnie mała, jest to tak zwany ograniczony problem trzech ciał - przedstawiony przez J. L. Lagrange'a w XVIII wieku. Badał on układ Słońce-Ziemia-Księżyc. 
+Problem trzech ciał wciąż nie został rozwiązany w ogólności. Jednakże istnieją rozwiązania dla szczególnych przypadków, jak na przykład \cite{threebody1, threebody2}. Inną wariacją tego problemu jest system, w którym masa jednego z ciał jest zaniedbywalnie mała, jest to tak zwany ograniczony problem trzech ciał - przedstawiony przez J. L. Lagrange'a w XVIII wieku. Badał on układ Słońce-Ziemia-Księżyc. 
 
 
 \subsection{\Large Zastosowania}
 \bigskip
-Symulacje N ciał są szeroko wykorzystywanymi narzędziami w fizyce oraz astronomii. Problemem, w którym symulacje są użyteczne jest na przykład dynamika systemu z kilkoma ciałami jak układ Słońce-Ziemia-Księżyc\cite{SEMmisc}, której zrozumienie może pomóc zrozumienie działania olbrzymich systemów we wszechświecie.\cite{chaosMisc}
-W kosmologii symulacje N ciał są wykorzystywane do studiowania procesów tworzenie nieliniowych struktur jak galaktyczne halo z wpływem ciemnej materii\cite{haloDensity}. 
-Bezpośrednie symulacje N ciał są wykorzystywane na przykład do studiowania dynamicznej ewolucji klastrów gwiazd.\cite{dirNBody} 
+Symulacje N ciał są szeroko wykorzystywanymi narzędziami w fizyce oraz astronomii. Problemem, w którym symulacje są użyteczne jest na przykład dynamika systemu z kilkoma ciałami jak układ Słońce-Ziemia-Księżyc \cite{SEMmisc}, co może pomóc w zrozumieniu działania olbrzymich systemów we wszechświecie. \cite{chaosMisc}
+W kosmologii symulacje są wykorzystywane do studiowania procesów tworzenia nieliniowych struktur jak galaktyczne halo z wpływem ciemnej materii \cite{haloDensity}. 
+Z kolei, bezpośrednie symulacje N ciał są wykorzystywane na przykład do studiowania dynamicznej ewolucji klastrów gwiazd lub do symulacji dynamiki planetozymali. \cite{dirNBody}. Symulacje są wykorzystywane, również w innych dziedzinach, chociażby w algorytmach rysowania grafu skierowanego siłą \cite{visGraph}
 \newpage
 
 \begin{figure}
@@ -116,28 +117,27 @@ Bezpośrednie symulacje N ciał są wykorzystywane na przykład do studiowania d
 
 
 \subsection{\Large Implementacja i wykorzystane technologie}
-W pierwszej części mojej pracy przedstawię implementację naiwnego algorytmu symulacji N ciał, który w każdym ruchu dla każdego ciała wyznacza jego ruch w oparciu o interakcję z pozostałymi obiektami, więc każda tura działa w czasie $\mathcal{O}(N^{2})$. Kolejnym etapem mojej pracy będzie paralelizacja tego algorytmu.
-W drugiej części przybliżę moją implementację algorytmu Barnesa-Huta, który w wersji jednowątkowej ma złożoność obliczeniową $\mathcal{O}(N\log{}N)$, a następnie jego zrównolegloną wersję.
+W pierwszej części mojej pracy przedstawię równoległą implementację naiwnego algorytmu symulacji N ciał. W każdym kroku algorytm bezpośrednio wyznacza siły oddziałujące wzajemnie pomiędzy każdymi dwoma ciałami w systemie, czyli wyznacza siłę jaką pozostałe obiekty działają na wybrany. W drugiej części zaimplementuję wielowątkowo algorytm Barnes Hut'a, który korzysta z drzew ósemkowych.
 
 Repozytorium jest dostępne pod tym \href{https://github.com/damian1996/N-Body-Simulation}{linkiem}.
-Całość zaimplementowana jest w języku C++ z wykorzystaniem poniżej wymienionych technologii \\
-Instalacja do poniższych technologii jest zamieszczona w repozytorium (dla systemów Linux oraz Windows).
+Całość została zaimplementowana w C++. Poniżej wymienione są pozostałe technologie wykorzystane w projekcie. \\
+Pełna instalacja niezbędnego oprogramowania do uruchomienia symulacji jest zawarta w repozytorium (dla linuxa Ubuntu).
 \subsubsection{\large Architektura CUDA}
-CUDA to uniwersalna architektura procesorów wielordzeniowych (głównie kart graficznych) umożliwiająca zaimplementowanie ich mocy obliczeniowej w wielu problemach, które mogą się wykonywać zarówno sekwencyjne i wielowątkowo. Wykorzystałem CUDĘ w wersji v9.1.85 do paralelizacji dwóch powyżej wspomnianych algorytmów.
+CUDA to uniwersalna architektura procesorów wielordzeniowych (głównie kart graficznych) umożliwiająca zaimplementowanie ich mocy obliczeniowej w wielu problemach, które mogą się wykonywać zarówno sekwencyjne i wielowątkowo. Wykorzystałem CUDĘ w wersji v9.1.85 do paralelizacji dwóch wspomnianych powyżej algorytmów.
 \subsubsection{\large Thrust}
-Thrust jest szablonową biblioteką dla CUDA bazująca na bibliotece STL z C++. Thrust umożliwia implementację aplikacji wielowątkowych przy minimalnym wysiłku programistycznym za pośrednictwem interfejsu wysokiego poziomu, który jest w pełni zgodny z CUDA C. Wykorzystałem ją do łatwiejszego przenoszenia danych między CPU oraz GPU. Korzystałem z wersji v9.2.88. 
+Thrust jest szablonową biblioteką dla CUDA bazująca na bibliotece STL z C++. Thrust umożliwia implementację aplikacji wielowątkowych za pośrednictwem interfejsu wysokiego poziomu, który jest w pełni zgodny z CUDA C. Korzystałem z wersji v9.2.88. 
 \subsubsection{\large OpenGL}
-OpenGL jest API do tworzenia grafiki. Skorzystałem z OpenGL3, w celu zaprezentowania symulacji w 2D.
+OpenGL jest API do tworzenia grafiki. Skorzystałem z OpenGL3, w celu zwizualizowania symulacji w 3D.
 
 
-\section{\LARGE Pierwsze podejście}
+\section{\LARGE Pierwsze podejście implementacyjne}
 \bigskip
 
 \subsection{\Large Sformułowanie problemu}
-W celu przedstawienia ogólnego sformułowania problemu potrzebujemy przytoczyć następujące trzy prawa dynamiki sformułowane przez Isaaca Newtona \cite{fund}
+W celu przedstawienia ogólnego sformułowania problemu potrzebujemy przytoczyć trzy prawa dynamiki sformułowane przez Isaaca Newtona \cite{fund}
 
 \begin{theorem}
-Każde ciało pozostaje w stanie spoczynku lub ruchu jednostajnego w linii prostej, chyba że jest zmuszony zmienić ten stan zewnętrzne oddziaływanie z innymi ciałami, czyli każde ciało jest w układzie inercjalnym.
+Każde ciało pozostaje w stanie spoczynku lub ruchu jednostajnego w linii prostej, chyba że jest zmuszone zmienić ten stan przez zewnętrzne oddziaływanie z innymi ciałami, czyli każde ciało jest w układzie inercjalnym.
 \end{theorem}
 
 \begin{theorem}
@@ -148,20 +148,22 @@ Co oznacza, że w inercjalnym układzie odniesienia zachodzi równość $F=ma$, 
 \begin{theorem}
 Każdej akcji towarzyszy reakcja równa co do wartości i kierunku, lecz przeciwnie zwrócona.
 \end{theorem} 
-Co oznacza, że jeśli ciało A działa na ciało B siłą F (akcja), to ciało B działa na ciało A siłą (reakcja) o takiej samej wartości i kierunku, lecz o przeciwnym zwrocie.\\
+Co oznacza, że jeśli ciało A działa na ciało B siłą F (akcja), to ciało B działa na ciało A siłą (reakcja) o takiej samej wartości i kierunku, lecz o przeciwnym zwrocie.\\~\\
 
-Niezbędne jest również przytoczenie prawa powszechnego ciążenia Newtona 
+
+Niezbędne jest również przytoczenie prawa powszechnego ciążenia Newtona \cite{fund}
 \begin{theorem}
 Każdy obiekt przyciąga każdy inny obiekt z siłą, która jest wprost proporcjonalna do iloczynu ich mas i odwrotnie proporcjonalna do kwadratu odległości między ich środkami.
 \end{theorem}
-Czyli między dowolną parą ciał posiadających masy pojawia się siła przyciągająca, która działa na linii łączącej ich środki, a jej wartość rośnie z iloczynem ich mas i maleje z kwadratem odległości.
+Czyli między dowolną parą ciał posiadających masy pojawia się siła przyciągająca, która działa na linii łączącej ich środki, a jej wartość rośnie z iloczynem ich mas i maleje z kwadratem odległości.\\~\\
 
-
-Aplikując to prawo do symulacji N ciał, uzyskujemy że na każde $i^{th}$ ciało działa siła $F_i$ zdefiniowana następująco:\\
-$$F_i = -G\cdot m_i \sum_{j=1, j\neq i}^N \frac{m_j(r_i - r_j)}{|r_i - r_j|^3},$$gdzie $G$ to stała grawitacji, $m_i$ masa ciało na które oddziałują inne ciała, $m_j$ masy ciało oddziałujących na $i^{th}$ ciało, $r_i - r_j$ to różnica wektorów pozycji dwóch ciał, $|r_i - r_j|$ to dystans między ciałami. 
-
+Aplikując to prawo do symulacji N ciał, uzyskujemy że na każde $i$-te ciało działa siła $F_i$ zdefiniowana następująco:\\
+$$F_i = -G\cdot m_i \sum_{j=1, j\neq i}^N \frac{m_j(r_i - r_j)}{|r_i - r_j|^3},$$gdzie $G$ to stała grawitacji, $m_i$ masa ciała na które oddziałują inne ciała, $m_j$ masa ciała oddziałującego na $i$-te ciało, $r_i - r_j$ to różnica wektorów pozycji dwóch ciał, $|r_i - r_j|$ to dystans między ciałami. \\~\\
 Z wykorzystaniem powyższych praw możemy podać następującą definicję
-\paragraph{Symulacja N ciał} -  Dla N ciał mających ustalone masy oraz początkowe położenie oraz prędkość, ruch każdego obiektu jest symulowany z wykorzystaniem prawa powszechnego ciążenia oraz poprzez wyznaczenie przyspieszenia obiektu korzystając z drugiego prawa dynamiki Newtona.
+\paragraph{Symulacja N ciał} 
+\newcommand{\mi}{\boldsymbol{} \mathrel{\mkern -16mu} \boldsymbol{-}}
+$\mi$
+Dla N ciał mających ustalone masy oraz początkowe położenie i prędkość, ruch każdego obiektu jest symulowany z wykorzystaniem prawa powszechnego ciążenia oraz poprzez wyznaczenie przyspieszenia obiektu korzystając z drugiego prawa dynamiki Newtona.
 
 \subsection{\Large Jednowątkowy naiwny algorytm z pseudokodem}
 
@@ -289,6 +291,9 @@ biber Praca\\
 \url{https://www.sharelatex.com/learn/Bibliography_management_with_biblatex}\\
 inkscape -D -z --file=drawing.svg --export-pdf=draw.pdf --export-latex
 
+\section{\LARGE Wizualizacja}
+
+\newpage
 
 \section{\LARGE Podsumowanie}
 

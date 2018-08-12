@@ -2058,7 +2058,9 @@
     <bcf:citekey order="4">chaosMisc</bcf:citekey>
     <bcf:citekey order="5">haloDensity</bcf:citekey>
     <bcf:citekey order="6">dirNBody</bcf:citekey>
-    <bcf:citekey order="7">fund</bcf:citekey>
+    <bcf:citekey order="7">visGraph</bcf:citekey>
+    <bcf:citekey order="8">fund</bcf:citekey>
+    <bcf:citekey order="9">fund</bcf:citekey>
     <bcf:citekey order="0">*</bcf:citekey>
   </bcf:section>
   <bcf:sortlist section="0" name="anyt/global" type="entry" sortscheme="anyt" sortnamekeyscheme="global">
