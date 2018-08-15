@@ -1,3 +1,7 @@
+brak przecinka przed rowniez
+to w paragrafie o ciałach dodałabym odnosnik że jest obrazek albo ten obrazek wyrównała
+
+
 PROFILER
 1) upewnij się że kompilujesz z opcją -g
 2) valgrind --tool=callgrind

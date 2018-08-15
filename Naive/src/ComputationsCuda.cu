@@ -6,6 +6,7 @@ const float EPS = 0.01f;
 template <typename T>
 __global__ void NaiveSim(T *pos, T *velo, T *weigh, int numberOfBodies, float dt) {
   int thid = blockIdx.x * blockDim.x + threadIdx.x;
+  if(thid>numberOfBodies) return;
   float posX = pos[thid * 3], posY = pos[thid * 3 + 1], posZ = pos[thid * 3 + 2];
   float weighI = weigh[thid];
   float force[3] = {0.0f, 0.0f, 0.0f};
