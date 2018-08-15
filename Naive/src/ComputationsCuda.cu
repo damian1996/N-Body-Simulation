@@ -58,6 +58,5 @@ void Computations::NaiveSimBridgeThrust(type &pos, int numberOfBodies, float dt)
   float *d_weights = thrust::raw_pointer_cast(weightsD.data());
   NaiveSim<<<64, (numberOfBodies + 63) / 64>>>(d_positions, d_velocities, d_weights, numberOfBodies, dt);
   testingMomemntum(numberOfBodies);
-  //if(!testingMomemntum(numberOfBodies)) std::cout << "problemiki" << "\n";
   pos = posD;
 }

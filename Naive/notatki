@@ -1,3 +1,9 @@
+PROFILER
+1) upewnij się że kompilujesz z opcją -g
+2) valgrind --tool=callgrind
+3) kcachegrind <wygenerowany plik>
+/usr/local/cuda-9.2/bin/nvprof ./out/main
+
 void BarnesHutStep::computeForceForBody(NodeBH* r, std::array<double, 3>& pos, int i)
 {
     if(r->isPoint() && !r->wasInitialized())
@@ -5,15 +11,15 @@ void BarnesHutStep::computeForceForBody(NodeBH* r, std::array<double, 3>& pos, i
         // Jesli node jest zewnetrzny, to policz sile ktora wywiera ten node na obecnie rozwazane cialo
         std::array<double, 3> distForDimension;
         double dist = EPS * EPS;
-        for(int i=0; i<3; i++) 
+        for(int i=0; i<3; i++)
         {
             distForDimension[i] = r->getSelectedPosition(i) - pos[i];
             dist = dist + (distForDimension[i] * distForDimension[i]);
-        } 
+        }
         dist = dist * sqrt(dist);
         // jak sprawdzic czy to te same bodies? Musze zachowac i != j
         float F = G * (r->getMass() * weights[i]);
-        for(int i=0; i<3; i++) 
+        for(int i=0; i<3; i++)
         {
             forces[i * 3 + i] += F * distForDimension[i] / dist;
         }
@@ -27,11 +33,11 @@ void BarnesHutStep::computeForceForBody(NodeBH* r, std::array<double, 3>& pos, i
             double d = dist(pos[j], r->getSelectedCenterOfMass(j));
             double s = boundaries[2*j + 1] - boundaries[2*j];
             if(BarnesHutStep::minS > s) BarnesHutStep::minS = s;
-            if(s/d < theta) 
+            if(s/d < theta)
             {
                 isFarAway = true;
-            } 
-            else 
+            }
+            else
             {
                 isFarAway = false;
                 break;
@@ -41,14 +47,14 @@ void BarnesHutStep::computeForceForBody(NodeBH* r, std::array<double, 3>& pos, i
         {
             std::array<double, 3> distForDimension;
             double dist = EPS * EPS;
-            for(int i=0; i<3; i++) 
+            for(int i=0; i<3; i++)
             {
                 distForDimension[i] = r->getSelectedCenterOfMass(i) - pos[i];
                 dist = dist + (distForDimension[i] * distForDimension[i]);
-            } 
+            }
             dist = dist * sqrt(dist);
             float F = G * (r->getTotalMass() * weights[i]);
-            for(int i=0; i<3; i++) 
+            for(int i=0; i<3; i++)
             {
                 forces[i * 3 + i] += F * distForDimension[i] / dist;
             }
@@ -162,13 +168,6 @@ II OPCJA
     }
 }
 */
-
-PROFILER
-1) upewnij się że kompilujesz z opcją -g
-2) valgrind --tool=callgrind
-3) kcachegrind <wygenerowany plik>
-
-nvprof
 
 ENUMS QUICK TUTORIAL
 /* Color r = Color::blue;
