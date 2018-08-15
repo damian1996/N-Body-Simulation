@@ -14,9 +14,15 @@
 \BOOKMARK [2][-]{subsection.2.4}{Softening}{section.2}% 14
 \BOOKMARK [2][-]{subsection.2.5}{Aproksymacja kroku}{section.2}% 15
 \BOOKMARK [1][-]{section.3}{Drugie podejscie}{}% 16
-\BOOKMARK [2][-]{subsection.3.1}{Algorytm Barnesa-Huta z pseudokodem}{section.3}% 17
-\BOOKMARK [2][-]{subsection.3.2}{Zr\363wnoleglenie algorytmu Barnesa-Huta}{section.3}% 18
-\BOOKMARK [2][-]{subsection.3.3}{Implementacja}{section.3}% 19
-\BOOKMARK [1][-]{section.4}{Wizualizacja}{}% 20
-\BOOKMARK [2][-]{subsection.4.1}{OpenGL}{section.4}% 21
-\BOOKMARK [1][-]{section.5}{Podsumowanie}{}% 22
+\BOOKMARK [2][-]{subsection.3.1}{Drzewa \323semkowe}{section.3}% 17
+\BOOKMARK [2][-]{subsection.3.2}{Algorytm Barnes Hut z pseudokodem}{section.3}% 18
+\BOOKMARK [2][-]{subsection.3.3}{Tworzenie drzewa}{section.3}% 19
+\BOOKMARK [3][-]{subsubsection.3.3.1}{Funkcja CreateTree}{subsection.3.3}% 20
+\BOOKMARK [3][-]{subsubsection.3.3.2}{Funkcja InsertNode}{subsection.3.3}% 21
+\BOOKMARK [3][-]{subsubsection.3.3.3}{Z\233ozonosc tworzenia drzewa}{subsection.3.3}% 22
+\BOOKMARK [2][-]{subsection.3.4}{Spacer po drzewie}{section.3}% 23
+\BOOKMARK [2][-]{subsection.3.5}{Zr\363wnoleglenie algorytmu Barnesa Hut}{section.3}% 24
+\BOOKMARK [2][-]{subsection.3.6}{Implementacja}{section.3}% 25
+\BOOKMARK [1][-]{section.4}{Wizualizacja}{}% 26
+\BOOKMARK [2][-]{subsection.4.1}{OpenGL}{section.4}% 27
+\BOOKMARK [1][-]{section.5}{Podsumowanie}{}% 28
