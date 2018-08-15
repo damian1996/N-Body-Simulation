@@ -1,6 +1,8 @@
-brak przecinka przed rowniez
-to w paragrafie o ciałach dodałabym odnosnik że jest obrazek albo ten obrazek wyrównała
-
+1) to w paragrafie o ciałach dodałabym odnosnik że jest obrazek albo ten obrazek wyrównała
+2) dolaczanie zrodel do pracy (repo)
+3) no po prostu zaznacz że w kroku symulacji masz jednostajnie przyspieszony i przybliżasz symulację za pomoca takich kroków
+4) monospace czcionka oraz regularne wciecia listigu
+5) mniejsze wciecia kodu
 
 PROFILER
 1) upewnij się że kompilujesz z opcją -g

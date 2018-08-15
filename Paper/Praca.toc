@@ -20,13 +20,13 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {paragraph}{Symulacja N cia\IeC {\l }}{5}{section*.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.2}\relax \fontsize {14.4}{18}\selectfont Jednow\IeC {\k a}tkowa wersja naiwnego algorytmu}{5}{subsection.2.2}
+\contentsline {subsection}{\numberline {2.2}\relax \fontsize {14.4}{18}\selectfont Jednow\IeC {\k a}tkowa wersja naiwnego algorytmu}{6}{subsection.2.2}
 \defcounter {refsection}{0}\relax 
 \contentsline {paragraph}{Dow\IeC {\'o}d:}{6}{section*.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.3}\relax \fontsize {14.4}{18}\selectfont Paralelizacja naiwnego algorytmu}{6}{subsection.2.3}
+\contentsline {subsection}{\numberline {2.3}\relax \fontsize {14.4}{18}\selectfont Zr\IeC {\'o}wnoleglenie naiwnego algorytmu}{6}{subsection.2.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {2.3.1}\relax \fontsize {12}{14}\selectfont Architektura CUDA}{7}{subsubsection.2.3.1}
+\contentsline {subsubsection}{\numberline {2.3.1}\relax \fontsize {12}{14}\selectfont Architektura CUDA}{6}{subsubsection.2.3.1}
 \defcounter {refsection}{0}\relax 
 \contentsline {subsubsection}{\numberline {2.3.2}\relax \fontsize {12}{14}\selectfont Thrust}{7}{subsubsection.2.3.2}
 \defcounter {refsection}{0}\relax 
@@ -34,13 +34,13 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {2.4}\relax \fontsize {14.4}{18}\selectfont Softening}{9}{subsection.2.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.5}\relax \fontsize {14.4}{18}\selectfont Aproksymacja kroku}{10}{subsection.2.5}
+\contentsline {subsection}{\numberline {2.5}\relax \fontsize {14.4}{18}\selectfont Aproksymacja kroku}{9}{subsection.2.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3}\relax \fontsize {17.28}{22}\selectfont Drugie podej\IeC {\'s}cie}{10}{section.3}
+\contentsline {section}{\numberline {3}\relax \fontsize {17.28}{22}\selectfont Drugie podej\IeC {\'s}cie}{9}{section.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.1}\relax \fontsize {14.4}{18}\selectfont Algorytm Barnesa-Huta z pseudokodem}{10}{subsection.3.1}
+\contentsline {subsection}{\numberline {3.1}\relax \fontsize {14.4}{18}\selectfont Algorytm Barnesa-Huta z pseudokodem}{9}{subsection.3.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.2}\relax \fontsize {14.4}{18}\selectfont Zr\IeC {\'o}wnoleglenie algorytmu Barnesa-Huta}{10}{subsection.3.2}
+\contentsline {subsection}{\numberline {3.2}\relax \fontsize {14.4}{18}\selectfont Zr\IeC {\'o}wnoleglenie algorytmu Barnesa-Huta}{9}{subsection.3.2}
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {3.3}\relax \fontsize {14.4}{18}\selectfont Implementacja}{10}{subsection.3.3}
 \defcounter {refsection}{0}\relax 
