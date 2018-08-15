@@ -38,14 +38,26 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {3}\relax \fontsize {17.28}{22}\selectfont Drugie podej\IeC {\'s}cie}{9}{section.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.1}\relax \fontsize {14.4}{18}\selectfont Algorytm Barnesa-Huta z pseudokodem}{9}{subsection.3.1}
+\contentsline {subsection}{\numberline {3.1}\relax \fontsize {14.4}{18}\selectfont Drzewa \IeC {\'O}semkowe}{10}{subsection.3.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.2}\relax \fontsize {14.4}{18}\selectfont Zr\IeC {\'o}wnoleglenie algorytmu Barnesa-Huta}{9}{subsection.3.2}
+\contentsline {subsection}{\numberline {3.2}\relax \fontsize {14.4}{18}\selectfont Algorytm Barnes Hut z pseudokodem}{10}{subsection.3.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.3}\relax \fontsize {14.4}{18}\selectfont Implementacja}{10}{subsection.3.3}
+\contentsline {subsection}{\numberline {3.3}\relax \fontsize {14.4}{18}\selectfont Tworzenie drzewa}{11}{subsection.3.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4}\relax \fontsize {17.28}{22}\selectfont Wizualizacja}{10}{section.4}
+\contentsline {subsubsection}{\numberline {3.3.1}Funkcja CreateTree}{11}{subsubsection.3.3.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.1}\relax \fontsize {12}{14}\selectfont OpenGL}{10}{subsection.4.1}
+\contentsline {subsubsection}{\numberline {3.3.2}Funkcja InsertNode}{12}{subsubsection.3.3.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5}\relax \fontsize {17.28}{22}\selectfont Podsumowanie}{11}{section.5}
+\contentsline {subsubsection}{\numberline {3.3.3}Z\IeC {\l }o\IeC {\.z}ono\IeC {\'s}\IeC {\'c} tworzenia drzewa}{13}{subsubsection.3.3.3}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.4}\relax \fontsize {14.4}{18}\selectfont Spacer po drzewie}{13}{subsection.3.4}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.5}\relax \fontsize {14.4}{18}\selectfont Zr\IeC {\'o}wnoleglenie algorytmu Barnesa Hut}{15}{subsection.3.5}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.6}\relax \fontsize {14.4}{18}\selectfont Implementacja}{15}{subsection.3.6}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {4}\relax \fontsize {17.28}{22}\selectfont Wizualizacja}{15}{section.4}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {4.1}\relax \fontsize {12}{14}\selectfont OpenGL}{15}{subsection.4.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {5}\relax \fontsize {17.28}{22}\selectfont Podsumowanie}{17}{section.5}

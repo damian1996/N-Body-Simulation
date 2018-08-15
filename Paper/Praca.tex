@@ -327,19 +327,237 @@ $$F_i = -G\cdot m_i \sum_{j=1, j\neq i}^N \frac{m_j\cdot (r_i - r_j)}{(|r_i - r_
 gdzie wprowadzony $\epsilon$ ma za zadanie nie dopuścić do bardzo małych odległości w mianowniku wzoru. W pracy przyjąłem, że $\epsilon = 0.01$.
 
 \bigskip
+
 \subsection{\Large Aproksymacja kroku}
 
 \bigskip
 
 \section{\LARGE Drugie podejście}
-Aczkolwiek 
-\bigskip
-
-\subsection{\Large Algorytm Barnesa-Huta z pseudokodem}
+Zrównoleglony naiwny algorytm jest szybszy niż wersja jednowątkowa, jednakże wciąż jest zbyt wolny do symulacji układów z bardzo dużą liczbą ciał. W tym celu zaimplementujemy drugi algorytm, zwany algorytmem Barnesa Hut. \bigskip
 
 \bigskip
 
-\subsection{\Large Zrównoleglenie algorytmu Barnesa-Huta}
+\subsection{\Large Drzewa Ósemkowe}
+
+Algorytm jest oparty na drzewach, a dokładniej drzewach ósemkowych.
+Struktura drzewa ósemkowego jest następująca(rys. Figure 2):
+\begin{itemize}
+  \item w naszym przypadku cała przestrzeń trójwymiarowa jest przedstawiana przez sześcian, który jest reprezentowany przez korzeń drzewa
+  \item w klasycznej definicji korzeń drzewa ma ośmioro następników, z których każdy reprezentuje jeden z 8 podsześcianów, na które dzielimy duży sześcian reprezentowany przez korzeń.
+  \item każdy z kolejnych wierzchołków w drzewie możemy mieć 0 następników, je śli nie zawiera żadnego punktu lub 8 następników, gdy zawiera co najmniej jeden punkt
+\end{itemize}
+
+\begin{figure}
+    \centering
+    \def\svgwidth{\columnwidth}
+    \input{tree.pdf_tex}
+    \caption{Przykład drzewa ósemkowego z czterema węzłami}
+\end{figure}
+
+\subsection{\Large Algorytm Barnes Hut z pseudokodem}
+Algorytm Barnes-Hut możemy podzielić na dwie części:
+\begin{itemize}
+  \item pierwszą z nich jest stworzenie drzewa ósemkowego, które będzie reprezenotwało przestrzeń, w której obecne będą wszystkie obiekty poddawane symulacji
+  \item druga część opiera się na przejściu drzewa dla każdego z obiektów i policzenie siły działającej na niego
+\end{itemize}
+W podstawowej wersji algorytmu obie te części zaimplementujemy rekurencyjnie.
+
+\subsection{\Large Tworzenie drzewa}
+Najpierw przedstawmy strukturę węzła w naszym drzewie. Jest to ukazane w listingu poniżej.
+
+\lstset{backgroundcolor=\color{white}, numbers=left, numbersep=8pt}              
+\begin{lstlisting}[language=C++, frame=single, framerule=2pt, caption=Struktura węzła w drzewie ósemkowym]
+struct NodeBH {
+    double mass;
+    double totalMass;
+    bool hasPoint;
+    bool childrenExists;
+    std::array<double, 6> boundaries;
+    std::array<double, 3> pos;
+    std::array<double, 3> centerOfMass;
+    std::array<NodeBH*, 8> quads;
+};
+\end{lstlisting}
+
+Żeby nie tworzyć dwóch osobnych struktur dla węzłów wewnętrznych i zewnętrznych połączyliśmy wszystko w jedną strukturę. \\ Przez to nasza struktura musi zawierać masę ciała oraz jego położenie w przestrzeni(tablica pos). Dodatkowo posiada także pola, które mówią o tym czy jest węzłem wewnętrznym czy zewnętrznym oraz czy posiada punkt(czy jest pusty), a także tablicę z granicami sześcianu, to jest jaki fragment przestrzeni jest ograniczony przez węzeł.\\
+\bigskip
+Jednakże najważniejszymi polami tej struktury są tablica kwadrantów, czyli ośmiu mniejszych węzłów następników na które dzielimy naszą przestrzeń. \\ A także środek masy oraz całkowita masa punktów w przestrzeni określanej przez ten węzeł. 
+\textbf{Środek masy(barycentrum) ciała}  jest punktem w przestrzeni, który zachowuje się tak, jak gdyby w nim skupiona była cała masa układu ciał. Jest zadany następującym wzorem:
+$$ x_{srm} = \frac{\sum_{j=1}^N m_j\cdot x_j}{\sum_{j=1}^N m_j},$$ gdzie $m_j$ oznacza masę $j$-tego ciała, $x_j$ oznacza jego $x$-ową współrzędną (dla dwóch pozostałych wzory są analogiczne). \\
+\bigskip
+
+W naszej symulacji przyjmujemy jedno założenie: jeśli obiekt wyląduje poza najbardziej zewnętrznym sześcianem wtedy znika z naszej symulacji, nie jest uwzględniany w kolejnym kroku. \\
+Początkowe pozycje ciał są losowane z pewnego zakresu $[-init, init]$ w każdym wymiarze. W celu ograniczenia wypadania obiektów z symulacji korzeń drzewa określa w każdym wymiarze przestrzeń, która jest osiem razy większa od początkowej, to znaczy $[-8\cdot init, 8\cdot init]$.
+\bigskip
+
+Poniżej przedstawimy pseudokod rekurencyjnego tworzenia drzewa ósemkowego, co będzie wprowadzeniem nas do iteracyjnej implementacji tego problemu w architekturze CUDA w późniejszej części pracy.
+
+\subsubsection{Funkcja CreateTree}
+Poniższy listing przedstawia główną funkcję, która odpowiada za stworzenie drzewa ósemkowego dla naszego algorytmu.\\ 
+\bigskip
+Funkcja ta przyjmuje jako argument tablice z pozycjami wszystkich obiektów. 
+Początkowo w linii 2 tworzy następniki dla korzenia drzewa. Następnie w pętli uaktualnia środek masy korzeniowi (linia 6), a potem sprawdza czy punkt nie wyszedł poza całą przestrzeń naszego algorytmu (linia 8). W przypadku, gdy nie wyszedł, wyszukujemy, do którego z następników możemy wstawić nasz punkt (linia 9), a następnie po stworzeniu węzła dla nowego punktu, wstawiamy go do drzewa w linii 11.
+\bigskip
+
+\lstset{backgroundcolor=\color{white}, numbers=left, numbersep=8pt}              
+\begin{lstlisting}[language=C++, frame=single, framerule=2pt, caption=Pseudokod algorytmu tworzenia drzewa ósemkowego]
+void CreateTree(vector<double>& positions) {
+    root->addQuads(root->getBoundaries());
+    for(unsigned i=0; i<numberOfBodies; i++)
+    {	
+    	auto pos = copy(positions[i*3], ..., positions[i*3+2]);	        
+        root->addPointToCenterOfMass(weights[i], pos);
+        if(root->pointIsInSpace(pos)) 
+        {
+            int index = root->getIndexOfSubCube(pos);
+            NodeBH* node = new NodeBH(weights[i], pos);
+            InsertNode(node, root->getSubQuad(index));
+        }
+    }
+}
+\end{lstlisting}
+
+\bigskip
+
+\subsubsection{Funkcja InsertNode}
+
+W powyższej funkcji wywołujemy funkcję \textbf{InsertNode} dla każdego węzła wstawianego do drzewa. \\
+\bigskip
+Funkcja ta przyjmuje jako argumenty węzeł $node$, który chcemy wstawić do podprzestrzeni reprezentowanej przez drugi argument, czyli węzeł $quad$.\\ W funkcji tej obsługujemy trzy następujące przypadki:
+\begin{itemize}
+\item Gdy węzeł jest pusty, wtedy po prostu wstawiamy nowy węzeł w to miejsce. (linie 3-7)
+\item Jeśli natknęliśmy się na zewnętrzny wierzchołek drzewa, to musimy zamienić go na węzeł wewnętrzny, stworzyć dla niego osiem następników, a następnie przepchnąć punkt, który do tej pory zawierał do jednego z nich. W dalszej części tego przypadku, musimy wstawić nowy wierzchołek do tej podprzestrzeni, co robimy uaktualniająć środek masy dla korzenia poddrzewa oraz wstawiająć węzeł rekurencyjnie do odpowiedniego poddrzewa. (linie 8-21)
+\item Ostatni przypadek obejmuje wewnętrzne węzły, dla których musimy uaktualnić masę o nowy wierzchołek, a potem wstawić go rekurencyjnie do odpowiedniego następnika. (linie 22-33)
+\end{itemize}
+\bigskip
+\lstset{backgroundcolor=\color{white}, numbers=left, numbersep=8pt}              
+\begin{lstlisting}[language=C++, frame=single, framerule=2pt, caption=Wstawianie pojedynczego węzła do drzewa]
+void InsertNode(NodeBH* node, NodeBH* quad) 
+{
+    if(!quad->isPoint() and !quad->wasInitializedSubQuads()) 
+    {
+        // pusty węzeł
+        quad.insertHere(node);
+    }
+    else if(quad->isPoint() and !quad->wasInitializedSubQuads()
+    {
+        // zewnętrzny węzeł
+        quad->setPoint(false);
+        quad->pushPointFromHereLower();
+        quad->addPointToCenterOfMass(node->getMass(), 
+            node->getPositions());
+        if(quad->pointIsInQuad(node->getPositions());
+        {
+            int index = int index = quad->getIndexOfSubCube(
+                node->getPositions());
+            InsertNode(node, quad->getSubQuad(index));
+        }
+    }
+    else if(!quad->isPoint() && quad->wasInitializedSubQuads())
+    {
+        // wewnętrzny węzeł
+        quad->updateCenterOfMass(node->getMass(), 
+            node->getPositions());
+        if(quad->pointIsInQuad(node->getPositions());
+        {
+            int index = int index = quad->getIndexOfSubCube(
+                node->getPositions());
+            InsertNode(node, quad->getSubQuad(index));
+        }
+    }
+}
+\end{lstlisting}
+
+\subsubsection{Złożoność tworzenia drzewa}
+
+
+\subsection{\Large Spacer po drzewie}
+
+\lstset{backgroundcolor=\color{white}, numbers=left, numbersep=8pt}              
+\begin{lstlisting}[language=C++, frame=single, framerule=2pt, caption=Pseudokod algorytmu tworzenia drzewa ósemkowego]
+void BarnesHutStep::computeForceForBody(NodeBH* r, std::array<double, 3>& pos, int i)
+{
+    if(r->isPoint() && !r->wasInitialized())
+    {
+        if(r->getIndex() == i) return; // ten sam Node
+
+        // Jesli node jest zewnetrzny, to policz sile ktora wywiera ten node na obecnie rozwazane cialo
+        double distX = r->getSelectedPosition(0) - pos[0];
+        double distY = r->getSelectedPosition(1) - pos[1];
+        double distZ = r->getSelectedPosition(2) - pos[2];
+        double dist = (distX * distX + distY * distY + distZ * distZ) + EPS * EPS;
+        dist = dist * sqrt(dist);
+        // jak sprawdzic czy to te same bodies? Musze zachowac i != j
+        float F = G * (r->getMass() * weights[i]);
+        forces[i * 3] += F * distX / dist; // force = G(m1*m2)/r^2
+        forces[i * 3 + 1] += F * distY / dist;
+        forces[i * 3 + 2] += F * distZ / dist;
+    }
+    else if(!r->isPoint() && r->wasInitialized())
+    {
+        if(r->isInQuad(pos[0], pos[1], pos[2])) 
+        {
+            //rekurencja pomijajac ratio
+            for(auto* child : r->getQuads()) 
+            {
+                computeForceForBody(child, pos, i);
+            }
+            return;
+        }
+
+        std::array<double, 6>& boundaries = r->getBoundaries();
+        
+        double d = distanceBetweenTwoNodes(pos[0], pos[1], pos[2], 
+            r->getSelectedCenterOfMass(0),
+            r->getSelectedCenterOfMass(0),
+            r->getSelectedCenterOfMass(0));
+        double s = boundaries[1] - boundaries[0];
+
+        bool isFarAway = (s/d < theta) ? true : false;
+        /*
+        bool isFarAway = false;
+        for(int j = 0; j < 3; j++)
+        {
+            double d = dist(pos[j], r->getSelectedCenterOfMass(j));
+            double s = boundaries[2*j + 1] - boundaries[2*j];
+            if(BarnesHutStep::minS > s) BarnesHutStep::minS = s;
+            if(s/d < theta) 
+            {
+                isFarAway = true;
+            }
+            else 
+            {
+                isFarAway = false;
+                break;
+            }
+        }*/
+        if(isFarAway)
+        {
+            double distX = r->getSelectedCenterOfMass(0) - pos[0];
+            double distY = r->getSelectedCenterOfMass(1) - pos[1];
+            double distZ = r->getSelectedCenterOfMass(2)- pos[2];
+            double dist = (distX * distX + distY * distY + distZ * distZ) + EPS * EPS;
+            dist = dist * sqrt(dist);
+            // jak sprawdzic czy to te same bodies? Musze zachowac i != j
+            float F = G * (r->getTotalMass() * weights[i]);
+            forces[i * 3] += F * distX / dist; // force = G(m1*m2)/r^2
+            forces[i * 3 + 1] += F * distY / dist;
+            forces[i * 3 + 2] += F * distZ / dist;
+        }
+        else
+        {
+            for(auto* child : r->getQuads())
+            {
+                computeForceForBody(child, pos, i);
+            }
+        }
+    }
+}
+\end{lstlisting}
+
+\bigskip
+
+\subsection{\Large Zrównoleglenie algorytmu Barnesa Hut}
 
 \bigskip
  sudo apt-get install texlive-full
