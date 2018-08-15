@@ -120,15 +120,8 @@ Z kolei, bezpośrednie symulacje N ciał są wykorzystywane na przykład do stud
 W pierwszej części mojej pracy przedstawię równoległą implementację naiwnego algorytmu symulacji N ciał. W każdym kroku algorytm bezpośrednio wyznacza siły oddziałujące wzajemnie pomiędzy każdymi dwoma ciałami w systemie, czyli wyznacza siłę jaką pozostałe obiekty działają na wybrany. W drugiej części zaimplementuję wielowątkowo algorytm Barnes Hut'a, który korzysta z drzew ósemkowych.
 
 Repozytorium jest dostępne pod tym \href{https://github.com/damian1996/N-Body-Simulation}{linkiem}.
-Całość została zaimplementowana w C++. Poniżej wymienione są pozostałe technologie wykorzystane w projekcie. \\
+Całość została zaimplementowana w C++. Innymi technologiami wykorzystanymi w pracy są OpenGL, CUDA czy Thrust, które zastosowanie zostanie wspomniane później. \\
 Pełna instalacja niezbędnego oprogramowania do uruchomienia symulacji jest zawarta w repozytorium (dla linuxa Ubuntu).
-\subsubsection{\large Architektura CUDA}
-CUDA to uniwersalna architektura procesorów wielordzeniowych (głównie kart graficznych) umożliwiająca zaimplementowanie ich mocy obliczeniowej w wielu problemach, które mogą się wykonywać zarówno sekwencyjne i wielowątkowo. Wykorzystałem CUDĘ w wersji v9.1.85 do paralelizacji dwóch wspomnianych powyżej algorytmów.
-\subsubsection{\large Thrust}
-Thrust jest szablonową biblioteką dla CUDA bazująca na bibliotece STL z C++. Thrust umożliwia implementację aplikacji wielowątkowych za pośrednictwem interfejsu wysokiego poziomu, który jest w pełni zgodny z CUDA C. Korzystałem z wersji v9.2.88. 
-\subsubsection{\large OpenGL}
-OpenGL jest API do tworzenia grafiki. Skorzystałem z OpenGL3, w celu zwizualizowania symulacji w 3D.
-
 
 \section{\LARGE Pierwsze podejście implementacyjne}
 \bigskip
@@ -163,11 +156,19 @@ Z wykorzystaniem powyższych praw możemy podać następującą definicję
 \paragraph{Symulacja N ciał} 
 \newcommand{\mi}{\boldsymbol{} \mathrel{\mkern -16mu} \boldsymbol{-}}
 $\mi$
-Dla N ciał mających ustalone masy oraz początkowe położenie i prędkość, ruch każdego obiektu jest symulowany z wykorzystaniem prawa powszechnego ciążenia oraz poprzez wyznaczenie przyspieszenia obiektu korzystając z drugiego prawa dynamiki Newtona.
+Dla N ciał mających ustalone masy oraz początkowe położenie i prędkość, ruch każdego obiektu jest symulowany z wykorzystaniem prawa powszechnego ciążenia oraz poprzez wyznaczenie przyspieszenia obiektu korzystając z drugiego prawa dynamiki Newtona.\\
+\bigskip
+Potrzebujemy zdefiniować jeszcze jedno pojęcie, jakim jest \textbf{ruch jednostajnie przyśpieszony prostoliniowy}.
+Konkretniej będziemy potrzebować wyprowadzonych wzorów na zmianę prędkości i pokonaną drogę przez obiekt w danym odcinku czasu.
+$$v_k = v_p + a\cdot t,$$ gdzie $v_k$ jest prędkością po wykonaniu kroku symulacji, $v_p$ jest prędkością początkową, $a$ oznacza wektora przyśpieszenia, a $t$ to delta time.\\
+Drugim wzorem jest:
+$$s = v_p\cdot t + \frac{a\cdot t^2}{2},$$ gdzie $s$ oznacza drogą przebytą w jednym kroku, a pozostałe oznaczenia są identyczne jak powyżej. Zrodlo??? \\
 
-\subsection{\Large Jednowątkowy naiwny algorytm z pseudokodem}
+\subsection{\Large Jednowątkowa wersja naiwnego algorytmu}
 
-Najprostszy algorytm dla problemu N ciał zadany pseudokodem może wyglądać tak:\\
+Każde ciało na początku symulacji ma pseudolosową pozycję, prędkość oraz masę. W mojej symulacji odległości są wyrażone w metrach, masy ciał są podane w kilogramach, a jednostką prędkości jest metr na sekundę. \\
+Prosty pseudokod dla algorytmu symulującego problem N ciał może wyglądać tak:\\
+\bigskip
 
 \lstset{
 	backgroundcolor=\color{white},
@@ -186,83 +187,149 @@ Najprostszy algorytm dla problemu N ciał zadany pseudokodem może wyglądać ta
 	{ś}{{\'s}}1
 }
 
-\begin{lstlisting}[frame=single, framerule=2pt, caption=pseudokod]
+\begin{lstlisting}[frame=single, framerule=2pt, caption=Pseudokod naiwnego algorytmu]
 ustaw mase oraz początkową pozycję i prędkość dla każdego ciała
-while(true)
+while(true):
    for i in {1...N}:
-       uaktualnijPozycje()
-   narysujNowePozycje()
+   	  for j in {1...N}:
+   	   	 if (i!=j):
+   	   		 Force[i] += SiłaPomiedzyCiałami(i, j) 
+   for i in {1...N}:
+   	  UaktualnijPozycjeCiała(i)
 \end{lstlisting}
 
-
-Każde ciało na początku symulacji ma losowaną pozycję, prędkość oraz wagę. Jednostki przyjęte w symulacji są następujące : \\
-- jednostką wagi jest masa słońca. Masa słońca jest definiowana następująco\\
-\begin{center}
-M\textsubscript{\(\odot\)} = 1.9884\(\cdot 10^{30}\)\\
-\end{center}
-Symulowane gwiazdy mają wagi z zakresu \([0.5, 10]\) M\textsubscript{\(\odot\)}.\\
-- jednostką odległości jest parsek, czyli odległość, dla której paralaksa roczna położenia Ziemi widzianej prostopadle do płaszczyzny orbity wynosi 1 sekundę łuku. W przeliczeniu na metry i po zaokrągleniu jest to 
-\begin{center}
-\(1\) pc \(\approx\) \(3,2616\) roku świetlnego \(\approx\) \(3,086\cdot 10^{16}\) m\\
-\end{center}
-Najbardziej złożoną operacją w algorytmie jest uaktualnienie pozycji w każdym obiegu pętli nieskończonej dla każdego ciała w symulacji. W tym celu wykorzystane zostało, wcześniej wprowadzone, Prawo 4. W ten sposób może zostać policzona siła, którą na dane ciało działają wszystkie pozostałe obiekty w symulacji. 
-
-Przypominając, wzór na siłe działającą na ciało wygląda następująco :\\
+\bigskip
+Są dostosowane do wzoru na siłe, która dla $i$-tego ciała, jak już wyżej wspomniałem, wyraża się wzorem:\\
 $$F_i = -G\cdot m_i \sum_{j=1, j\neq i}^N \frac{m_j(r_i - r_j)}{|r_i - r_j|^3},$$ 
-gdzie stała grawitacji wynosi
+gdzie stała grawitacji G wynosi
 \begin{center}
-$$G = 6,67408(31)\cdot 10^{-11} \frac{m^{3}}{kg s^2},$$
+$$G = 6,67408(31)\cdot 10^{-11} \frac{m^{3}}{kg s^2}.$$
 \end{center}
-W astronomii stała grawitacji jest wyrażana jako 
-\begin{center}
-$$G = 4,3\cdot 10^{-3} \frac{pc}{M_{\odot}} \frac{km^2}{s^2}$$
-\end{center}
-Złożoność obliczeniowa naiwnej operacji uaktualnienia pozycji wszyskich obiektów, przedstawia poniższy fakt.
 
-\begin{theorem}
-Uaktualnienie pozycji wszystkich ciał ma złożoność obliczeniową $\mathcal{O}(N^{2})$.
-\end{theorem}
+W liniach 3-6 tego algorytmu liczymy bezpośrednio siłę z jaką dwa ciała oddziałują na siebie dla każdej możliwej pary ciał. Jest to najbardziej kosztowna operacja w tym algorytmie, której złożoność to $\mathcal{O}(N^{2})$. W linii 7 uaktualniamy pozycję każdego ciało uwzględniając całkowitą siłę, która na nie działa. Siła ta wynika z powyżęj przytoczonego wzoru. 
+\bigskip
+\newtheorem{twr}{Twierdzenie}
+\begin{twr}
+Jednowątkowy naiwny algorytm dla symulacji N ciał złożoność obliczeniową $\mathcal{O}(N^{2})$.
+\end{twr}
 
 \begin{myproof}
 
-\tab Dla każdego ciała najpierw musimy wyznaczyć siłę działającą na nie poprzez interakcję z innymi ciałami, czyli dla każdego z $N$ ciał musimy policzyć siłę oddziałującą nań z każdym innym obiektem, więc musimy policzyć wartość wzoru wynikającego z prawa $4$ $N\cdot N-1$ razy, czyli złożoność tej podoperacji $\mathcal{O}(N^{2})$. 
+\tab Dla każdego ciała najpierw musimy wyznaczyć siłę działającą na nie poprzez interakcję z innymi ciałami, czyli dla każdego z $N$ obiektów musimy policzyć siłę oddziałującą nań z każdym innym obiektem, więc musimy policzyć wartość wzoru wynikającego z prawa $4$ $N\cdot (N-1)$ razy. Z tego wynika, że złożoność tej podoperacji $\mathcal{O}(N^{2})$. 
 Następnie dla każdego obiektu musimy wyznaczyć jego przyśpieszenie oraz nową pozycję i prędkość, co jesteśmy w stanie zrobić w czasie $\mathcal{O}(N)$.
 Poprzez zsumowanie złożoności obu podoperacji, widzimy że złożoność obliczeniowa jednego kroku symulacji naiwnego algorytmu wynosi $\mathcal{O}(N^{2})$.
 \end{myproof}
 
-
-\lstset{backgroundcolor=\color{white}, numbers=left, numbersep=8pt}              
-
-\begin{lstlisting}[language=C++, frame=single, framerule=2pt, caption=uaktualnienie pozycji ciał]
-typedef thrust::host_vector<float> tf3;
-void StepNaive::compute(tf3& positions, float dt) {
-  std::fill(forces.begin(), forces.end(), 0);
-  for(unsigned i=0; i<N; i++) {
-    for(unsigned j=0; j<N; j++) {
-      float distX = positions[j*3] - positions[i*3];
-      float distY = positions[j*3+1] - positions[i*3+1];
-      if(i!=j && fabs(distX) > 1e-10 && fabs(distY) > 1e-10) {
-        float F = G*(weights[i]*weights[j]);
-        forces[i*3] += F*distX/(distX*distX+distY*distY);
-        forces[i*3+1] += F*distY/(distX*distX+distY*distY);
-      }
-    }
-  }
-  for(unsigned i=0; i<N; i++) {
-    for(int j=0; j<2; j++) { // x, y
-      float acceleration = forces[i*3+j]/weights[i];
-      positions[i*3+j] += velocities[i*3+j]*dt + acceleration*dt*dt/2;
-      velocities[i*3+j] += acceleration*dt;
-    }
-  }
-}
-\end{lstlisting}
-
+\bigskip
 
 \subsection{\Large Paralelizacja naiwnego algorytmu}
 
+Jednakże ten algorytm jest zbyt wolny dla dużej liczby ciał. W tym podrozdziale zoptymalizujemy go poprzez zrównoleglenie obliczeń. Siła oddziałująca na pewne ciało oraz wyznaczenie mu nowej pozycji jest niezależne od takich samych obliczeń dla innych ciał. A to oznacza, że pojedynczy krok algorytmu możemy policzyć równolegle dla każdego obiektu.
+
+\subsubsection{\large Architektura CUDA}
+W tym celu wykorzystamy architekturę CUDA. 
+Jest to uniwersalna architektura procesorów wielordzeniowych (głównie kart graficznych) umożliwiająca zaimplementowanie ich mocy obliczeniowej w wielu problemach, które mogą się wykonywać zarówno sekwencyjne i wielowątkowo. Wykorzystałem CUDĘ w wersji v9.1.85 z compute compability 3.0 i wyżej. W dzisiejszych czasach poza zastosowaniem w renderowaniu grafiki, jest również często używana do masywnych obliczeń nawet na tysiącach wątków jednocześnie. \\
+Wątki są pogrupowane w bloki. W compute compability 3.0 każdy blok może mieć do 1024 wątków. Z kolei bloki są ułożone w gridzie, który może być nawet trójwymiarowy. W wymiarze x może być aż $2^{31}-1$ wątków, w dwóch kolejnych $65535$. \cite{Cuda}  Dodatkowo wątki są grupowane w mniejsze, liczące 32 wątki, grupy niż bloki, zwane warpami. Wątki w jednym warpie są uruchamiane jednocześnie i zarządzane przez warp scheduler. \cite{Cuda} \\
 \bigskip
-\subsection{\Large Implementacja}
+Warto, także wspomnieć o podziale pamięci w programach pisanych w tej architekturze. \\Możemy wyróżnić trzy rodzaje pamięci :
+\begin{itemize}
+  \item lokalna - osobna dla każdego wątku, czyli wątki mogą mieć zmienne lokalne na swój użytek,
+  \item współdzielona - pamięć dzielona przez wszystkie wątki w bloku(ale jest jej tylko 48kb \cite{Cuda}),
+  \item globalna - najwolniejsza ze wszystkich rodzajów pamięci, ale wspólna dla wszystkich bloków.
+\end{itemize}
+
+\subsubsection{\large Thrust}
+Thrust jest szablonową biblioteką dla CUDA bazująca na bibliotece STL z C++. Thrust umożliwia implementację aplikacji wielowątkowych za pośrednictwem interfejsu wysokiego poziomu, który jest w pełni zgodny z CUDA C. Korzystałem z wersji v9.2.88. 
+
+
+\subsubsection{\large Implementacja wielowątkowa}
+W implementacji wykorzystuje dwie szablonowe struktury z biblioteki Thrust.
+Host\_vector jest odpowiednikiem std::vectora. Rezyduje w pamięci hosta 
+powiązanego z równoległym devicem. Device\_vector różni się tym, że pamięc związana 
+z nim jest w pamięci równoległego device. \\
+Implementacje podzielimy na dwie funkcje.\\
+\bigskip
+
+Funkcja NaiveSimBridge, przedstawiona w listingu 2, przyjmuje jako argument host\_vector z pozycjami wszystkich elementów symulacji, a następnie kopiuje go do device\_vectora dla odowiedzialnego za transport pozycji ciał do pamięci device'a. \\Następnie w liniach 3-5 konwertuje device\_vectory dla pozycji, prędkości i masy do raw pointerów. Wykorzystywane są w 6 linii, w której wywołujemy kernel NaiveSim. W potrójnych nawiasach specyfikujemy liczbę bloków oraz liczbę wątków w każdym bloku(jest to składnia z CUDA Runtime API). 
+W linii 7 kopiuje nowe pozycje z device'a do hosta. 
+\bigskip
+\bigskip
+\bigskip
+
+\lstset{backgroundcolor=\color{white}, numbers=left, numbersep=8pt}              
+\begin{lstlisting}[language=C++, frame=single, framerule=2pt, caption=Bridge pomiędzy główną pętlą a kernelem]
+void NaiveSimBridge(host_vector &pos, int numberOfBodies, float dt) {
+  thrust::device_vector<float> posD = pos;
+  float *d_positions = thrust::raw_pointer_cast(posD.data());
+  float *d_velocities = thrust::raw_pointer_cast(veloD.data());
+  float *d_weights = thrust::raw_pointer_cast(weightsD.data());
+  NaiveSim<<<numberOfBlocks, threadsPerBlock>>>(d_positions, 
+  	d_velocities, d_weights, numberOfBodies, dt);
+  pos = posD;
+}
+\end{lstlisting}
+
+\bigskip
+\bigskip
+Kernelem nazywamy funkcję, którą możemy uruchomić dla wielu wątków w pamięci device'a. W tym przypadku kernel NaiveSim, ukazany w listingu 3, jest odpowiedzialny za wyznaczenie nowej pozycji dla każdego ciała. \\
+\bigskip
+W pierwszej linii mamy stałą G, której wartość oznacza wcześniej zdefiniowaną stałą grawitacji.
+W sygnaturze kernela widzimy, że przyjmuje trzy raw\_pointery do odpowiednio pozycji, prędkości oraz mas. A poza tym dostaje również delta time, czyli odcinek czasu, w którym wykonywany jest dany krok oraz całkowitą liczbę ciał w symulacji. W 6 linii wyznaczamy indeks obiektu, dla którego będziemy prowadzić obliczenia. Jako że korzystamy tylko z jednowymiarowrgo schematu bloków, to wystarczy wymnożyć id bloku z rozmiare pojedynczego bloku oraz dodac id wątku w bloku. 
+W linii 7 mamy zabezpiecznie na wypadek gdyby obiekt o takim indeksie nie istniał, gdyż czasami liczba wywołanych wątków jest większa niz rzeczywista liczba obiektów. \\
+\bigskip
+W liniach 8-10 tworzymy zmienne lokalne dla dotychczasowych pozycji oraz masy naszego ciała, żeby zdecydowanie ograniczyć odwołania do droższej pamięci globalnej oraz tworzymy tablicę, w której będziemy liczyć siły działające na ciało.\\
+\bigskip
+Dalej mamy część, dla której równoleglimy nasz algorytm. Najpierw w liniach 12-23 mamy pętlę, w której liczymy siłę działającą na obiekt o id, któ©ej jest równe wcześniej wyliczonemu thid(threadId) poprzez każdy inny obiekt w symulacji. Postępujemy zgodnie ze wzorem z Prawa 4. W liniach 15-16 wyliczamy wektory odległości między naszym obiektem a każdym innym. W następnych dwóch liniach wyliczamy odległość między tymi dwoma obiektami i podnosimy ją do potęgi trzeciej, jak we wzorze. Z kolei w ostatnich liniach tej pętli podstawiamy wszystkie wartości do wzoru, aby obliczyć siłę działającą na ciało. \\
+\bigskip
+Mając policzoną siłę oddziałującą na obiekt, przechodzimy do wyliczenia nowej pozycji dla obiektu. Jako, że obiekt porusza się ruchem jednostajnym przyśpieszonym, to możemy w tym celu wykorzystać wcześniej wprowadzone wzory.\\ Najpierw w linii 25, korzystając z prawa 2, wyliczamy wektor przyśpieszenia ciała. W linii 26 do aktualnej pozycji dodajemy wektor drogi, o którą przesuwamy ciało po obecnym kroku. I w końcu, linia 27 aktualizuje wektor prędkości.
+\bigskip
+\bigskip
+
+\lstset{backgroundcolor=\color{white}, numbers=left, numbersep=8pt}              
+\begin{lstlisting}[language=C++, frame=single, framerule=2pt, caption=Kernel NaiveSim]
+const double G = 6.674 * (1e-11);
+template <typename T>
+__global__ 
+void NaiveSim(T *pos, T *velo, T *weigh, int numberOfBodies, double dt) 
+{
+  int thid = blockIdx.x * blockDim.x + threadIdx.x;
+  if(thid>=numberOfBodies) return;
+  double pos[3] = {pos[thid*3], pos[thid*3+1], pos[thid*3+2]};
+  double weighI = weigh[thid];
+  double force[3] = {0.0, 0.0, 0.0};
+
+  for (int j = 0; j < numberOfBodies; j++) {
+    if (j != thid) {
+      double d[3];
+      for(int k=0; k<3; k++) 
+      	  d[k] = pos[j*3 + k] - pos[k];
+      float dist = (d[0]*d[0] + d[1]*d[1] + d[2]*d[2]);
+      dist = dist*sqrt(dist);
+      float F = G * (weighI * weigh[j]);
+      for(int k=0; k<3; k++) 
+		 force[k] += F * d[k] / dist;	
+    }
+  }
+  for(int k=0; k<3; k++) {
+    float acc = force[k] / weighI;
+    pos[thid*3+k] += velo[thid*3+k]*dt + acc*dt*dt/2;
+    velo[thid*3+k] += acc*dt;
+  }
+}
+\end{lstlisting}
+\bigskip
+Wykorzystując architekturę CUDA, mogliśmy przyśpieszyć nasz algorytm. Jednakże, symulacja implementowana tym algorytmem ma jeszcze jeden duży problem. Gdy obiekty są bardzo blisko siebie, to znaczy odległość między nimi jest bliska zera, to wtedy siła, którą na siebie działają jest ogromna. Wtedy ciała wyraźnie się oddalają od siebie, co jest nienaturalne.
+W dwóćh następnych podrozdziałach podam dwie optymalizacje, które ograniczają skutki takich sytuacji.
+
+\bigskip
+\subsection{\Large Softening} 
+
+Pierwszą optymalizacją jest, tak zwany softening. Polega na modyfikacji wzoru wprowadzonego w Prawie 4, do następującej postaci:
+$$F_i = -G\cdot m_i \sum_{j=1, j\neq i}^N \frac{m_j\cdot (r_i - r_j)}{(|r_i - r_j|^2 + \epsilon^{2})^{\frac{3}{2}}},$$ 
+gdzie wprowadzony $\epsilon$ ma za zadanie nie dopuścić do bardzo małych odległośći w mianowniku wzoru. W mojej pracy przyjąłem, że $\epsilon = 0.01$.
+
+\bigskip
+\subsection{\Large Aproksymacja kroku}
 
 \bigskip
 
@@ -292,6 +359,26 @@ biber Praca\\
 inkscape -D -z --file=drawing.svg --export-pdf=draw.pdf --export-latex
 
 \section{\LARGE Wizualizacja}
+
+\subsection{\large OpenGL}
+OpenGL jest API do tworzenia grafiki. Skorzystałem z OpenGL3, w celu zwizualizowania symulacji w 3D.
+
+
+
+ Masa słońca jest definiowana następująco\\
+\begin{center}
+M\textsubscript{\(\odot\)} = 1.9884\(\cdot 10^{30}\)\\
+\end{center}
+Symulowane gwiazdy mają wagi z zakresu \([0.5, 10]\) M\textsubscript{\(\odot\)}.\\
+- jednostką odległości jest parsek, czyli odległość, dla której paralaksa roczna położenia Ziemi widzianej prostopadle do płaszczyzny orbity wynosi 1 sekundę łuku. W przeliczeniu na metry i po zaokrągleniu jest to 
+\begin{center}
+\(1\) pc \(\approx\) \(3,2616\) roku świetlnego \(\approx\) \(3,086\cdot 10^{16}\) m\\
+\end{center}
+
+W astronomii stała grawitacji jest wyrażana jako 
+\begin{center}
+$$G = 4,3\cdot 10^{-3} \frac{pc}{M_{\odot}} \frac{km^2}{s^2}$$
+\end{center}
 
 \newpage
 

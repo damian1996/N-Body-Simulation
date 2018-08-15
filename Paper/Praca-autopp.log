@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=latex 2018.8.7)  13 AUG 2018 00:44
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=latex 2018.8.7)  15 AUG 2018 14:04
 entering extended mode
  %&-line parsing enabled.
 **\let \APPmakepictures \empty \input  Praca.tex
@@ -1263,51 +1263,67 @@ LaTeX Warning: Citation 'dirNBody' on page 3 undefined on input line 108.
 LaTeX Warning: Citation 'visGraph' on page 3 undefined on input line 108.
 
 (./draw.pdf_tex)
-Overfull \hbox (9.27496pt too wide) in paragraph at lines 122--123
-[]\OT4/cmr/m/n/10 Repozytorium jest dost¦pne pod tym [][][][][][]. Caªo±¢ zosta
-ªa za-im-ple-men-towana w C++. Poni»ej 
+Overfull \hbox (6.64987pt too wide) in paragraph at lines 122--123
+\OT4/cmr/m/n/10 nymi tech-nolo-giami wyko-rzys-tanymi w pracy s¡ OpenGL, CUDA c
+zy Thrust, które za-s-tosowanie 
  []
 
 
-Overfull \hbox (6.46928pt too wide) in paragraph at lines 128--129
-\OT4/cmr/m/n/10 Thrust jest sz-ablonow¡ bib-liotek¡ dla CUDA bazu-j¡ca na bib-l
-iotece STL z C++. Thrust umo»li- 
- []
+LaTeX Warning: Citation 'fund' on page 4 undefined on input line 130.
 
 
-Overfull \hbox (3.41373pt too wide) in paragraph at lines 130--131
-\OT4/cmr/m/n/10 OpenGL jest API do tworzenia grafiki. Sko-rzys-taªem z OpenGL3,
- w celu zwiz-ual-i-zowa-nia symu- 
- []
+LaTeX Warning: Citation 'fund' on page 5 undefined on input line 147.
 
 
-LaTeX Warning: Citation 'fund' on page 4 undefined on input line 137.
-
-
-LaTeX Warning: Citation 'fund' on page 5 undefined on input line 154.
-
-
-Overfull \hbox (6.0pt too wide) in paragraph at lines 189--189
+Overfull \hbox (6.0pt too wide) in paragraph at lines 190--190
 [][][][][][][]  
  []
 
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 192.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 193.
 
 (/usr/share/texlive/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 192.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 193.
+\c@twr=\count367
 
-Overfull \hbox (5.27492pt too wide) in paragraph at lines 198--198
-[]\OT4/cmr/m/n/10 Ka»de ciaªo na pocz¡tku symu-lacji ma losowan¡ pozy-cj¦, pr¦d
--ko±¢ oraz wag¦. Jed-nos-tki przyj¦te 
+Overfull \hbox (30.74713pt too wide) in paragraph at lines 230--231
+\OT4/cmr/m/n/10 wielordzeniowych (gªównie kart graficznych) umo»li-wia-j¡ca za-
+im-ple-men-towanie ich mocy obliczeniowej 
  []
 
 
-Overfull \hbox (19.35822pt too wide) in paragraph at lines 208--209
-\OT4/cmr/m/n/10 niesko«c-zonej dla ka»dego ciaªa w symu-lacji. W tym celu wyko-
-rzys-tane zostaªo, wcze±niej wprowad- 
+Overfull \hbox (6.58034pt too wide) in paragraph at lines 230--231
+\OT4/cmr/m/n/10 poza za-s-tosowaniem w ren-derowa-niu grafiki, jest równie» cz¦
+sto u»y-wana do masy-wnych oblicze« 
+ []
+
+
+LaTeX Warning: Citation 'Cuda' on page 7 undefined on input line 232.
+
+
+LaTeX Warning: Citation 'Cuda' on page 7 undefined on input line 232.
+
+
+Overfull \hbox (9.08046pt too wide) in paragraph at lines 236--237
+[]\OT4/cmr/m/n/10 lokalna - os-obna dla ka»dego w¡tku, czyli w¡tki mog¡ mie¢ zm
+i-enne lokalne na swój u»ytek,  
+ []
+
+
+LaTeX Warning: Citation 'Cuda' on page 7 undefined on input line 237.
+
+
+Overfull \hbox (6.46928pt too wide) in paragraph at lines 242--243
+\OT4/cmr/m/n/10 Thrust jest sz-ablonow¡ bib-liotek¡ dla CUDA bazu-j¡ca na bib-l
+iotece STL z C++. Thrust umo»li- 
+ []
+
+
+Overfull \hbox (6.886pt too wide) in paragraph at lines 253--258
+\OT4/cmr/m/n/10 iasach specy-fiku-jemy liczb¦ bloków oraz liczb¦ w¡tków w ka»dy
+m bloku(jest to skªad-nia z CUDA 
  []
 
 (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
@@ -1317,37 +1333,65 @@ File: lstlang1.sty 2015/06/04 1.6 listings language file
 ) (/usr/share/texlive/texmf-dist/tex/latex/listings/lstmisc.sty
 File: lstmisc.sty 2015/06/04 1.6 (Carsten Heinz)
 )
-Overfull \hbox (6.0pt too wide) in paragraph at lines 236--236
+Overfull \hbox (6.0pt too wide) in paragraph at lines 260--260
 [][][][][][][]  
  []
 
-LaTeX Font Info:    Try loading font information for OML+cmr on input line 237.
+LaTeX Font Info:    Try loading font information for OML+cmr on input line 262.
 
 (/usr/share/texlive/texmf-dist/tex/latex/base/omlcmr.fd
 File: omlcmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <10> not available
-(Font)              Font shape `OML/cmm/m/it' tried instead on input line 237.
+(Font)              Font shape `OML/cmm/m/it' tried instead on input line 262.
 
-Overfull \hbox (1.7506pt too wide) in paragraph at lines 254--255
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+Overfull \hbox (7.08046pt too wide) in paragraph at lines 276--278
+\OT4/cmr/m/n/10 deks obiektu, dla którego b¦dziemy prowadzi¢ obliczenia. Jako »
+e ko-rzys-tamy tylko z jed-nowymi- 
  []
 
-LaTeX Font Info:    Try loading font information for OT4+cmtt on input line 291
+
+Overfull \hbox (0.49701pt too wide) in paragraph at lines 276--278
+\OT4/cmr/m/n/10 in-dek-sie nie ist-niaª, gdy» cza-sami liczba wywoªanych w¡tków
+ jest wi¦k-sza niz rzeczy-wista liczba 
+ []
+
+
+Overfull \hbox (3.08043pt too wide) in paragraph at lines 282--282
+\OT4/cmr/m/n/10 thid(threadId) poprzez ka»dy inny obiekt w symu-lacji. Post¦pu-
+jemy zgod-nie ze wzorem z Prawa 
+ []
+
+
+Overfull \hbox (6.0pt too wide) in paragraph at lines 289--289
+[][][][][][][]  
+ []
+
+
+Overfull \hbox (7.75066pt too wide) in paragraph at lines 293--294
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+LaTeX Font Info:    Try loading font information for OT4+cmtt on input line 358
 .
 (/usr/share/texlive/texmf-dist/tex/latex/polski/ot4cmtt.fd
 File: ot4cmtt.fd 2008/02/24 v1.2.1 Font defs for fonts PL (MW)
 )
+Overfull \hbox (3.41373pt too wide) in paragraph at lines 364--365
+\OT4/cmr/m/n/10 OpenGL jest API do tworzenia grafiki. Sko-rzys-taªem z OpenGL3,
+ w celu zwiz-ual-i-zowa-nia symu- 
+ []
 
-LaTeX Warning: Empty bibliography on input line 303.
+
+LaTeX Warning: Empty bibliography on input line 390.
 
 
 Package pst-pdf Warning: Picture container needs cropping..
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 305.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 305.
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 305.
-Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 305.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 392.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 392.
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 392.
+Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 392.
 
 LaTeX Warning: There were undefined references.
 
@@ -1359,15 +1403,15 @@ Package biblatex Warning: Please (re)run Biber on the file:
 Package logreq Info: Writing requests to 'Praca-autopp.run.xml'.
 \openout1 = `Praca-autopp.run.xml'.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 305.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 392.
  ) 
 Here is how much of TeX's memory you used:
- 23406 strings out of 493030
- 385772 string characters out of 6136261
- 826878 words of memory out of 5000000
- 26586 multiletter control sequences out of 15000+600000
+ 23447 strings out of 493030
+ 386289 string characters out of 6136261
+ 830880 words of memory out of 5000000
+ 26627 multiletter control sequences out of 15000+600000
  18404 words of font info for 53 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 48i,7n,99p,975b,1478s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 48i,7n,99p,975b,2011s stack positions out of 5000i,500n,10000p,200000b,80000s
 
 No pages of output.

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.8.7)  13 AUG 2018 00:44
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.8.7)  15 AUG 2018 14:04
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -1395,56 +1395,62 @@ Overfull \hbox (13.21939pt too wide) in paragraph at lines 89--89
 ±-ci-ach i poªo»e-ni-ach pocz¡tkowych 
  []
 
-[3] (./draw.pdf_tex <draw.pdf, id=140, page=1, 1201.90314pt x 531.12717pt>
+[3] (./draw.pdf_tex <draw.pdf, id=145, page=1, 1201.90314pt x 531.12717pt>
 File: draw.pdf Graphic file (type pdf)
 
 <use draw.pdf, page 1>
 Package pdftex.def Info: draw.pdf, page1 used on input line 52.
 (pdftex.def)             Requested size: 418.25368pt x 184.82751pt.
 )
-Overfull \hbox (9.27496pt too wide) in paragraph at lines 122--123
-[]\OT4/cmr/m/n/10 Repozytorium jest dost¦pne pod tym [][]linkiem[][]. Caªo±¢ zo
-staªa za-im-ple-men-towana w C++. Poni»ej 
+Overfull \hbox (6.64987pt too wide) in paragraph at lines 122--123
+\OT4/cmr/m/n/10 nymi tech-nolo-giami wyko-rzys-tanymi w pracy s¡ OpenGL, CUDA c
+zy Thrust, które za-s-tosowanie 
+ []
+
+[4 <./draw.pdf>] [5]
+Overfull \hbox (6.0pt too wide) in paragraph at lines 190--190
+[][][][][][][]  
+ []
+
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 193.
+
+(/usr/share/texlive/texmf-dist/tex/latex/base/omscmr.fd
+File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 193.
+\c@twr=\count371
+
+Overfull \hbox (30.74713pt too wide) in paragraph at lines 230--231
+\OT4/cmr/m/n/10 wielordzeniowych (gªównie kart graficznych) umo»li-wia-j¡ca za-
+im-ple-men-towanie ich mocy obliczeniowej 
  []
 
 
-Overfull \hbox (6.46928pt too wide) in paragraph at lines 128--129
+Overfull \hbox (6.58034pt too wide) in paragraph at lines 230--231
+\OT4/cmr/m/n/10 poza za-s-tosowaniem w ren-derowa-niu grafiki, jest równie» cz¦
+sto u»y-wana do masy-wnych oblicze« 
+ []
+
+[6]
+Overfull \hbox (9.08046pt too wide) in paragraph at lines 236--237
+[]\OT4/cmr/m/n/10 lokalna - os-obna dla ka»dego w¡tku, czyli w¡tki mog¡ mie¢ zm
+i-enne lokalne na swój u»ytek,  
+ []
+
+
+Overfull \hbox (6.46928pt too wide) in paragraph at lines 242--243
 \OT4/cmr/m/n/10 Thrust jest sz-ablonow¡ bib-liotek¡ dla CUDA bazu-j¡ca na bib-l
 iotece STL z C++. Thrust umo»li- 
  []
 
 
-Overfull \hbox (3.41373pt too wide) in paragraph at lines 130--131
-\OT4/cmr/m/n/10 OpenGL jest API do tworzenia grafiki. Sko-rzys-taªem z OpenGL3,
- w celu zwiz-ual-i-zowa-nia symu- 
+Overfull \hbox (6.886pt too wide) in paragraph at lines 253--258
+\OT4/cmr/m/n/10 iasach specy-fiku-jemy liczb¦ bloków oraz liczb¦ w¡tków w ka»dy
+m bloku(jest to skªad-nia z CUDA 
  []
 
-[4 <./draw.pdf>]
-Overfull \hbox (6.0pt too wide) in paragraph at lines 189--189
-[][][][][][][]  
- []
-
-[5]
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 192.
-
- (/usr/share/texlive/texmf-dist/tex/latex/base/omscmr.fd
-File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
-)
-LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 192.
-
-Overfull \hbox (5.27492pt too wide) in paragraph at lines 198--198
-[]\OT4/cmr/m/n/10 Ka»de ciaªo na pocz¡tku symu-lacji ma losowan¡ pozy-cj¦, pr¦d
--ko±¢ oraz wag¦. Jed-nos-tki przyj¦te 
- []
-
-
-Overfull \hbox (19.35822pt too wide) in paragraph at lines 208--209
-\OT4/cmr/m/n/10 niesko«c-zonej dla ka»dego ciaªa w symu-lacji. W tym celu wyko-
-rzys-tane zostaªo, wcze±niej wprowad- 
- []
-
-[6] (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
+(/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2015/06/04 1.6 listings language file
 )
 (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
@@ -1453,60 +1459,96 @@ File: lstlang1.sty 2015/06/04 1.6 listings language file
 (/usr/share/texlive/texmf-dist/tex/latex/listings/lstmisc.sty
 File: lstmisc.sty 2015/06/04 1.6 (Carsten Heinz)
 )
-Overfull \hbox (6.0pt too wide) in paragraph at lines 236--236
+Overfull \hbox (6.0pt too wide) in paragraph at lines 260--260
 [][][][][][][]  
  []
 
-LaTeX Font Info:    Try loading font information for OML+cmr on input line 237.
+LaTeX Font Info:    Try loading font information for OML+cmr on input line 262.
 
 (/usr/share/texlive/texmf-dist/tex/latex/base/omlcmr.fd
 File: omlcmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <10> not available
-(Font)              Font shape `OML/cmm/m/it' tried instead on input line 237.
-
-Overfull \hbox (1.7506pt too wide) in paragraph at lines 254--255
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+(Font)              Font shape `OML/cmm/m/it' tried instead on input line 262.
+ [7]
+Overfull \hbox (7.08046pt too wide) in paragraph at lines 276--278
+\OT4/cmr/m/n/10 deks obiektu, dla którego b¦dziemy prowadzi¢ obliczenia. Jako »
+e ko-rzys-tamy tylko z jed-nowymi- 
  []
 
-[7]
-LaTeX Font Info:    Try loading font information for OT4+cmtt on input line 291
+
+Overfull \hbox (0.49701pt too wide) in paragraph at lines 276--278
+\OT4/cmr/m/n/10 in-dek-sie nie ist-niaª, gdy» cza-sami liczba wywoªanych w¡tków
+ jest wi¦k-sza niz rzeczy-wista liczba 
+ []
+
+
+Overfull \hbox (3.08043pt too wide) in paragraph at lines 282--282
+\OT4/cmr/m/n/10 thid(threadId) poprzez ka»dy inny obiekt w symu-lacji. Post¦pu-
+jemy zgod-nie ze wzorem z Prawa 
+ []
+
+
+Overfull \hbox (6.0pt too wide) in paragraph at lines 289--289
+[][][][][][][]  
+ []
+
+[8]
+Overfull \hbox (7.75066pt too wide) in paragraph at lines 293--294
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+[9]
+LaTeX Font Info:    Try loading font information for OT4+cmtt on input line 358
 .
  (/usr/share/texlive/texmf-dist/tex/latex/polski/ot4cmtt.fd
 File: ot4cmtt.fd 2008/02/24 v1.2.1 Font defs for fonts PL (MW)
-) [8] [9]
-Overfull \hbox (0.46933pt too wide) in paragraph at lines 304--304
+)
+Overfull \hbox (3.41373pt too wide) in paragraph at lines 364--365
+\OT4/cmr/m/n/10 OpenGL jest API do tworzenia grafiki. Sko-rzys-taªem z OpenGL3,
+ w celu zwiz-ual-i-zowa-nia symu- 
+ []
+
+[10] [11]
+Overfull \hbox (0.46933pt too wide) in paragraph at lines 391--391
 []\OT4/cmr/m/n/10 Richard Mont-gomery Alain Chenciner. ``A re-mark-able pe-ri-o
 dic so-lu-tion of the three- 
  []
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 305.
-[10]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 305.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 392.
+[12]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 392.
  (./Praca.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 305.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 305.
-Package rerunfilecheck Info: File `Praca.out' has not changed.
-(rerunfilecheck)             Checksum: 8B09B1B63E0EBBA8A66094762B2CAE38;1438.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 392.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 392.
+
+
+Package rerunfilecheck Warning: File `Praca.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `Praca.out':
+(rerunfilecheck)             Before: B64FBEC166A16B6F9FDFA1ECFC376455;1518
+(rerunfilecheck)             After:  518813ED0AE6C3DF8547E5E914ADD37F;1574.
 Package logreq Info: Writing requests to 'Praca.run.xml'.
 \openout1 = `Praca.run.xml'.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 305.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 392.
  ) 
 Here is how much of TeX's memory you used:
- 23737 strings out of 493029
- 390095 string characters out of 6136235
- 835258 words of memory out of 5000000
- 26806 multiletter control sequences out of 15000+600000
+ 23803 strings out of 493029
+ 390932 string characters out of 6136235
+ 839265 words of memory out of 5000000
+ 26848 multiletter control sequences out of 15000+600000
  18404 words of font info for 53 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 48i,8n,99p,938b,1550s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 48i,8n,99p,938b,2026s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/pl/pltt.enc}{/usr/share/texliv
-e/texmf-dist/fonts/enc/dvips/pl/plms.enc}{/usr/share/texlive/texmf-dist/fonts/e
-nc/dvips/pl/plrm.enc}{/usr/share/texlive/texmf-dist/fonts/enc/dvips/pl/plme.enc
-}{/usr/share/texlive/texmf-dist/fonts/enc/dvips/pl/plmi.enc}{/usr/share/texlive
-/texmf-dist/fonts/enc/dvips/pl/plit.enc}{/usr/share/texlive/texmf-dist/fonts/en
-c/dvips/pl/plsc.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/
+e/texmf-dist/fonts/enc/dvips/pl/plsc.enc}{/usr/share/texlive/texmf-dist/fonts/e
+nc/dvips/pl/plms.enc}{/usr/share/texlive/texmf-dist/fonts/enc/dvips/pl/plrm.enc
+}{/usr/share/texlive/texmf-dist/fonts/enc/dvips/pl/plme.enc}{/usr/share/texlive
+/texmf-dist/fonts/enc/dvips/pl/plmi.enc}{/usr/share/texlive/texmf-dist/fonts/en
+c/dvips/pl/plit.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/
 cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cms
 y10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msam
 10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/pl/plbsy10.pfb></usr/s
@@ -1517,15 +1559,15 @@ l/plex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/pl/plmi10.pfb></
 usr/share/texlive/texmf-dist/fonts/type1/public/pl/plmi7.pfb></usr/share/texliv
 e/texmf-dist/fonts/type1/public/pl/plr10.pfb></usr/share/texlive/texmf-dist/fon
 ts/type1/public/pl/plr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/
-pl/plr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/pl/plsy10.pfb></u
-sr/share/texlive/texmf-dist/fonts/type1/public/pl/plsy7.pfb></usr/share/texlive
-/texmf-dist/fonts/type1/public/pl/plti10.pfb></usr/share/texlive/texmf-dist/fon
-ts/type1/public/pl/plti12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public
-/pl/pltt10.pfb>
-Output written on Praca.pdf (10 pages, 163776 bytes).
+pl/plr5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/pl/plr7.pfb></usr
+/share/texlive/texmf-dist/fonts/type1/public/pl/plsy10.pfb></usr/share/texlive/
+texmf-dist/fonts/type1/public/pl/plsy7.pfb></usr/share/texlive/texmf-dist/fonts
+/type1/public/pl/plti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/p
+l/plti12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/pl/pltt10.pfb>
+Output written on Praca.pdf (12 pages, 176575 bytes).
 PDF statistics:
- 329 PDF objects out of 1000 (max. 8388607)
- 295 compressed objects within 3 object streams
- 86 named destinations out of 1000 (max. 500000)
- 166 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 376 PDF objects out of 1000 (max. 8388607)
+ 338 compressed objects within 4 object streams
+ 110 named destinations out of 1000 (max. 500000)
+ 174 words of extra memory for PDF output out of 10000 (max. 10000000)
 
