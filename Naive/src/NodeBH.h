@@ -10,32 +10,76 @@ class NodeBH {
 public:
     NodeBH() = delete;
     NodeBH(double mass, long long id, std::array<double, 3>& pos, std::array<double, 6>& boundaries);
-    NodeBH(std::array<double, 6>& boundaries);
-    ~NodeBH();
-    void addQuads(std::array<double, 6>& b);
+    NodeBH(std::array<double, 6>& board) {
+        for(int i=0; i<6; i++) {
+          boundaries[i] = board[i];
+        }
+        std::fill(numerator.begin(), numerator.end(), 0.0);
+        mass = 0;
+        totalMass = 0;
+        hasPoint = false;
+        childrenExists = false;
+    }
+    ~NodeBH() {
+
+    }
+    std::array<double, 6>& getBoundaries() {
+        return boundaries;
+    }
+    bool wasInitialized() {
+      return childrenExists;
+    }
+    int getNumberOfQuads() {
+        return quads.size();
+    }
+    double getX() {
+        return pos[0];
+    }
+    double getY() {
+        return pos[1];
+    }
+    double getZ() {
+        return pos[2];
+    }
+    double getMass() {
+        return mass;
+    }
+    double getTotalMass() {
+        return totalMass;
+    }
+    double getSelectedCenterOfMass(int i) {
+        return centerOfMass[i];
+    }
+    double getSelectedPosition(int i) {
+        return pos[i];
+    }
+    void setPoint(bool val) {
+        hasPoint = val;
+    }
+    std::string getIndent() {
+        return indent;
+    }
+    void setIndent(std::string str) {
+        indent = str;
+    }
+    long long getIndex() {
+        return id;
+    }
+    NodeBH* getChild(int i) {
+        return quads[i];
+    }
+    bool isPoint() {
+      return hasPoint;
+    }
+    std::array<NodeBH*, 8>& getQuads() {
+        return quads;
+    }
     bool isInQuad(double x, double y, double z);
+    void addQuads(std::array<double, 6>& b);
     int numberOfSubCube(double x, double y, double z);
-    bool isPoint();
     void pushPointFromQuadLower();
     void setAttributes(double mass, long long id, double x, double y, double z);
     void updateCenterOfMass(double mass, std::array<double, 3>& pos);
-
-    std::array<double, 6>& getBoundaries();
-    std::array<NodeBH*, 8>& getQuads();
-    bool wasInitialized();
-    int getNumberOfQuads();
-    double getX();
-    double getY();
-    double getZ();
-    double getMass();
-    double getTotalMass();
-    double getSelectedCenterOfMass(int i);
-    double getSelectedPosition(int i);
-    void setPoint(bool val);
-    std::string getIndent();
-    void setIndent(std::string str);
-    long long getIndex();
-    NodeBH* getChild(int i);
 
 private:
     double mass;

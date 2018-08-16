@@ -15,10 +15,10 @@ N = 200
 
 
 1) https://en.wikipedia.org/wiki/Z-order_curve#Efficiently_building_quadtrees SORT Z ORDER CURVE
-2)
 
 
 
+POPRAWKI
 1) to w paragrafie o ciałach dodałabym odnosnik że jest obrazek albo ten obrazek wyrównała
 2) dolaczanie zrodel do pracy (repo)
 3) no po prostu zaznacz że w kroku symulacji masz jednostajnie przyspieszony i przybliżasz symulację za pomoca takich kroków
@@ -31,157 +31,22 @@ PROFILER
 3) kcachegrind <wygenerowany plik>
 /usr/local/cuda-9.2/bin/nvprof ./out/main
 
-void BarnesHutStep::computeForceForBody(NodeBH* r, std::array<double, 3>& pos, int i)
-{
-    if(r->isPoint() && !r->wasInitialized())
-    {
-        // Jesli node jest zewnetrzny, to policz sile ktora wywiera ten node na obecnie rozwazane cialo
-        std::array<double, 3> distForDimension;
-        double dist = EPS * EPS;
-        for(int i=0; i<3; i++)
-        {
-            distForDimension[i] = r->getSelectedPosition(i) - pos[i];
-            dist = dist + (distForDimension[i] * distForDimension[i]);
-        }
-        dist = dist * sqrt(dist);
-        // jak sprawdzic czy to te same bodies? Musze zachowac i != j
-        float F = G * (r->getMass() * weights[i]);
-        for(int i=0; i<3; i++)
-        {
-            forces[i * 3 + i] += F * distForDimension[i] / dist;
-        }
-    }
-    else if(!r->isPoint() && r->wasInitialized())
-    {
-        std::array<double, 6>& boundaries = r->getBoundaries();
-        bool isFarAway = false;
-        for(int j = 0; j < 3; j++)
-        {
-            double d = dist(pos[j], r->getSelectedCenterOfMass(j));
-            double s = boundaries[2*j + 1] - boundaries[2*j];
-            if(BarnesHutStep::minS > s) BarnesHutStep::minS = s;
-            if(s/d < theta)
-            {
-                isFarAway = true;
-            }
-            else
-            {
-                isFarAway = false;
-                break;
-            }
-        }
-        if(isFarAway)
-        {
-            std::array<double, 3> distForDimension;
-            double dist = EPS * EPS;
-            for(int i=0; i<3; i++)
-            {
-                distForDimension[i] = r->getSelectedCenterOfMass(i) - pos[i];
-                dist = dist + (distForDimension[i] * distForDimension[i]);
-            }
-            dist = dist * sqrt(dist);
-            float F = G * (r->getTotalMass() * weights[i]);
-            for(int i=0; i<3; i++)
-            {
-                forces[i * 3 + i] += F * distForDimension[i] / dist;
-            }
-        }
-        else
-        {
-            for(auto* child : r->getQuads())
-            {
-                computeForceForBody(child, pos, i);
-            }
-        }
-    }
-}
 
-III OPCJA bez vectorow
+Masa słońca jest definiowana następująco\\
+\begin{center}
+M\textsubscript{\(\odot\)} = 1.9884\(\cdot 10^{30}\)\\
+\end{center}
+Symulowane gwiazdy mają wagi z zakresu \([0.5, 10]\) M\textsubscript{\(\odot\)}.\\
+- jednostką odległości jest parsek, czyli odległość, dla której paralaksa roczna położenia Ziemi widzianej prostopadle do płaszczyzny orbity wynosi 1 sekundę łuku. W przeliczeniu na metry i po zaokrągleniu jest to
+\begin{center}
+\(1\) pc \(\approx\) \(3,2616\) roku świetlnego \(\approx\) \(3,086\cdot 10^{16}\) m\\
+\end{center}
 
+W astronomii stała grawitacji jest wyrażana jako
+\begin{center}
+$$G = 4,3\cdot 10^{-3} \frac{pc}{M_{\odot}} \frac{km^2}{s^2}$$
+\end{center}
 
-III OPCJA
-
-0.0029109
-0.447578
-0.666709
-0.569141
-0.690313
-0.810421
-1.04146
-1.02326
-0.780254
-0.673954
-0.610857
-0.567632
-0.523392
-0.49063
-0.461018
-0.431845
-0.396703
-0.37991
-0.36375
-0.353005
-0.349578
-0.346696
-0.340666
-0.351639
-0.343817
-0.344596
-0.347522
-0.345708
-0.353614
-0.36337
-
-I OPCJA
-
-0.00339677
-0.345306
-0.319039
-0.317166
-0.317018
-0.318118
-0.325653
-0.32024
-0.321578
-0.321631
-0.332477
-0.327175
-0.32723
-0.317413
-0.319453
-0.317104
-0.317471
-0.320036
-0.317074
-0.318926
-0.335102
-0.329858
-0.337581
-0.336142
-0.320759
-
-II OPCJA
-
-0.00321018
-0.0814953
-0.095533
-0.0972236
-0.097403
-0.0920587
-0.100372
-0.0940597
-0.0993817
-0.106551
-0.0990933
-0.108919
-0.10086
-0.0999502
-0.113015
-0.0981307
-0.0928862
-0.0982084
-0.102388
-0.094381
 
 /*for(int i=0; i<2; i++)
 {
@@ -207,27 +72,6 @@ switch(r)
 // int n = r; // error: no scoped enum to int conversion
 int n = static_cast<int>(r); // OK, n = 21 */
 
-
-https
-    : // arxiv.orandomGenerator/pdf/0806.3950.pdf
-https
-: // arxiv.orandomGenerator/pdf/1411.6671.pdf
-  file
-  : /// home/damian/Desktop/praca%20licencjacka/materialy/Gravitational%20N-Body%20Simulatio%20-%20Aarseth,%20Sverre%20J._5510.pdf
-    https
-    : // arxiv.orandomGenerator/pdf/1105.1082.pdf
-      https
-      : // pl.wikipedia.orandomGenerator/wiki/Zasada_zachowania_p%C4%99du
-        https
-        : // pl.wikipedia.orandomGenerator/wiki/Zderzenie_centralne
-
-                CHAOS http
-                : // www.maths.ed.ac.uk/~douglas/cortina-v2.pdf
-                  sun -
-                  earth - moon https
-                  : // arxiv.orandomGenerator/pdf/1307.7062.pdf
-                    evolution star clusters https
-                    : // pdfs.semanticscholar.orandomGenerator/presentation/250f/ee86a085feb0a522e96075cbaebd70837a33.pdf
 
                       cudaMalloc(&image_dev, image_width *image_height * 4 *
                                                  sizeof(uint8_t));
@@ -334,45 +178,3 @@ do
                    OPENGL3 THRUST
 
                    // DO ZACHOWANIA
-
-                   bool
-                   Simulation::update() {
-    for (unsigned i = 0; i < N; i++) {
-      forces[i].fill(0.0f);
-    }
-    for (unsigned i = 0; i < N; i++) {
-      for (unsigned j = 0; j < N; j++) {
-        // sile parami F(i,j)
-        float distX = positions[j][0] - positions[i][0];
-        float distY = positions[j][1] - positions[i][1];
-        // float distXY2 = distX*distX + distY*distY; // r^2
-        // int sgnx = distX > 0 ? 1 : -1;
-        // int sgny = distY > 0 ? 1 : -1;
-        if (i != j && fabs(distX) > 1e-10 && fabs(distY) > 1e-10) {
-          float F = G * (weights[i] * weights[j]);
-          // forces[i][0] += sgnx*F/(distX*distX); // force = G(m1*m2)/r^2
-          // forces[i][1] += sgny*F/(distY*distY);
-
-          // forces[i][0] += F*distX/(distX*distX); // force = G(m1*m2)/r^2
-          // forces[i][1] += F*distY/(distY*distY);
-
-          forces[i][0] += F * distX / (distX * distX +
-                                       distY * distY); // force = G(m1*m2)/r^2
-          forces[i][1] += F * distY / (distX * distX + distY * distY);
-        }
-      }
-    }
-    for (unsigned i = 0; i < N; i++) {
-      for (int j = 0; j < 2; j++) { // x, y
-        // biore sile i obliczam przyspieszenie
-        float acceleration = forces[i][j] / weights[i];
-        // przesun cialo
-        positions[i][j] += velocities[i][j] * dt + acceleration * dt * dt / 2;
-        velocities[i][j] += acceleration * dt;
-      }
-    }
-
-    painter->sendData(positions, colors, weights);
-
-    return painter->draw();
-  }

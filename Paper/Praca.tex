@@ -114,7 +114,7 @@ Z kolei, bezpośrednie symulacje N ciał są wykorzystywane na przykład do stud
 \begin{figure}
     \centering
     \def\svgwidth{\columnwidth}
-    \input{draw.pdf_tex}
+    \input{kulki.pdf_tex}
     \caption{Symulacja dwóch ciał poruszających się po elipsach}
 \end{figure}
 
@@ -260,8 +260,6 @@ W linii 7 kopiuje nowe pozycje z device'a do hosta.
 void NaiveSimBridge(host_vector &pos, int numberOfBodies, float dt) {
   thrust::device_vector<float> posD = pos;
   float *d_positions = thrust::raw_pointer_cast(posD.data());
-  float *d_velocities = thrust::raw_pointer_cast(veloD.data());
-  float *d_weights = thrust::raw_pointer_cast(weightsD.data());
   NaiveSim<<<numberOfBlocks, threadsPerBlock>>>(d_positions, 
   	d_velocities, d_weights, numberOfBodies, dt);
   pos = posD;
@@ -553,23 +551,6 @@ inkscape -D -z --file=drawing.svg --export-pdf=draw.pdf --export-latex
 
 \subsection{\large OpenGL}
 OpenGL jest API do tworzenia grafiki. Skorzystałem z OpenGL3, w celu zwizualizowania symulacji w 3D.
-
-
-
-Masa słońca jest definiowana następująco\\
-\begin{center}
-M\textsubscript{\(\odot\)} = 1.9884\(\cdot 10^{30}\)\\
-\end{center}
-Symulowane gwiazdy mają wagi z zakresu \([0.5, 10]\) M\textsubscript{\(\odot\)}.\\
-- jednostką odległości jest parsek, czyli odległość, dla której paralaksa roczna położenia Ziemi widzianej prostopadle do płaszczyzny orbity wynosi 1 sekundę łuku. W przeliczeniu na metry i po zaokrągleniu jest to 
-\begin{center}
-\(1\) pc \(\approx\) \(3,2616\) roku świetlnego \(\approx\) \(3,086\cdot 10^{16}\) m\\
-\end{center}
-
-W astronomii stała grawitacji jest wyrażana jako 
-\begin{center}
-$$G = 4,3\cdot 10^{-3} \frac{pc}{M_{\odot}} \frac{km^2}{s^2}$$
-\end{center}
 
 \newpage
 

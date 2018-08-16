@@ -60,7 +60,8 @@
        y1="543.79077"
        x2="1131.4286"
        y2="543.79077"
-       gradientUnits="userSpaceOnUse" />
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="translate(0,-8.5714111)" />
     <linearGradient
        inkscape:collect="always"
        xlink:href="#linearGradient5380"
@@ -78,21 +79,23 @@
      borderopacity="1"
      inkscape:pageopacity="1"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.35"
-     inkscape:cx="-111.62262"
-     inkscape:cy="768.29021"
+     inkscape:zoom="0.49497475"
+     inkscape:cx="905.08641"
+     inkscape:cy="265.18942"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
-     inkscape:window-width="1855"
-     inkscape:window-height="1056"
-     inkscape:window-x="65"
+     inkscape:window-width="1325"
+     inkscape:window-height="744"
+     inkscape:window-x="41"
      inkscape:window-y="24"
      inkscape:window-maximized="1"
      fit-margin-top="0.2"
      fit-margin-right="0.2"
      fit-margin-left="0.2"
-     fit-margin-bottom="0.2" />
+     fit-margin-bottom="0.2"
+     inkscape:object-nodes="true"
+     inkscape:snap-intersection-paths="true" />
   <metadata
      id="metadata4812">
     <rdf:RDF>
@@ -101,7 +104,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -121,7 +124,7 @@
        style="opacity:1;fill:none;fill-opacity:1;stroke:url(#linearGradient5378);stroke-width:2.48031497;stroke-miterlimit:4;stroke-dasharray:none"
        id="path5357-6"
        cx="717.14288"
-       cy="543.79077"
+       cy="535.21936"
        rx="414.28571"
        ry="274.28571" />
     <ellipse
@@ -141,13 +144,13 @@
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:62.5px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#ed0000;fill-opacity:1;stroke:none;stroke-width:0.35433072;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       x="357.14285"
-       y="555.21936"
+       x="358.10165"
+       y="554.81165"
        id="text6901"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan6903"
-         x="357.14285"
-         y="555.21936">+</tspan></text>
+         x="358.10165"
+         y="554.81165">+</tspan></text>
   </g>
 </svg>

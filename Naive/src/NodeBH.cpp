@@ -18,24 +18,20 @@ NodeBH::NodeBH(double mass, long long id, std::array<double, 3>& pos, std::array
     }
 }
 
+bool NodeBH::isInQuad(double x, double y, double z) {
+    if(!(x>=boundaries[0] && x<=boundaries[1])) return false;
+    if(!(y>=boundaries[2] && y<=boundaries[3])) return false;
+    if(!(z>=boundaries[4] && z<=boundaries[5])) return false;
+    return true;
+}
+
 /* Constructor to creating empty node, which is ready to be quadrant. */
-NodeBH::NodeBH(std::array<double, 6>& board) {
-    for(int i=0; i<6; i++) {
-      boundaries[i] = board[i];
-    }
-    std::fill(numerator.begin(), numerator.end(), 0.0);
-    mass = 0;
-    totalMass = 0;
-    hasPoint = false;
-    childrenExists = false;
-}
-
-NodeBH::~NodeBH() {
-}
-
 void NodeBH::addQuads(std::array<double, 6>& b)
 {
     childrenExists = true;
+    
+
+
     std::array<double, 6> boundariesForQuad = {b[0], b[0] + (b[1]-b[0])/2, b[2], b[2] + (b[3]-b[2])/2, b[4], b[4] + (b[5] - b[4])/2};
     quads[0] = new NodeBH(boundariesForQuad);
 
@@ -61,25 +57,6 @@ void NodeBH::addQuads(std::array<double, 6>& b)
     quads[7] = new NodeBH(boundariesForQuad);
 }
 
-bool NodeBH::wasInitialized() {
-    return childrenExists;
-}
-
-int NodeBH::getNumberOfQuads() {
-    return quads.size();
-}
-
-std::array<NodeBH*, 8>& NodeBH::getQuads() {
-    return quads;
-}
-
-bool NodeBH::isInQuad(double x, double y, double z) {
-    if(!(x>=boundaries[0] && x<=boundaries[1])) return false;
-    if(!(y>=boundaries[2] && y<=boundaries[3])) return false;
-    if(!(z>=boundaries[4] && z<=boundaries[5])) return false;
-    return true;
-}
-
 int NodeBH::numberOfSubCube(double x, double y, double z) {
     int result = 0;
     if(x<boundaries[0] || x>boundaries[1]) return 8;
@@ -92,9 +69,6 @@ int NodeBH::numberOfSubCube(double x, double y, double z) {
     return result;
 }
 
-bool NodeBH::isPoint() {
-    return hasPoint;
-}
 
 void NodeBH::setAttributes(double mass, long long id, double x, double y, double z) {
     hasPoint = true;
@@ -128,56 +102,4 @@ void NodeBH::pushPointFromQuadLower() {
         }
     }
     mass = 0;
-}
-
-std::array<double, 6>& NodeBH::getBoundaries() {
-    return boundaries;
-}
-
-double NodeBH::getX() {
-    return pos[0];
-}
-
-double NodeBH::getY() {
-    return pos[1];
-}
-
-double NodeBH::getZ() {
-    return pos[2];
-}
-
-double NodeBH::getMass() {
-    return mass;
-}
-
-double NodeBH::getTotalMass() {
-    return totalMass;
-}
-
-double NodeBH::getSelectedCenterOfMass(int i) {
-    return centerOfMass[i];
-}
-
-double NodeBH::getSelectedPosition(int i) {
-    return pos[i];
-}
-
-void NodeBH::setPoint(bool val) {
-    hasPoint = val;
-}
-
-std::string NodeBH::getIndent() {
-    return indent;
-}
-
-void NodeBH::setIndent(std::string str) {
-    indent = str;
-}
-
-long long NodeBH::getIndex() {
-    return id;
-}
-
-NodeBH* NodeBH::getChild(int i) {
-    return quads[i];
 }

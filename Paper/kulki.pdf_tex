@@ -1,6 +1,6 @@
 %% Creator: Inkscape inkscape 0.91, www.inkscape.org
 %% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
-%% Accompanies image file 'draw.pdf' (pdf, eps, ps)
+%% Accompanies image file 'kulki.pdf' (pdf, eps, ps)
 %%
 %% To include the image in your LaTeX document, write
 %%   \input{<filename>.pdf_tex}
@@ -36,7 +36,7 @@
   }%
   \providecommand\rotatebox[2]{#2}%
   \ifx\svgwidth\undefined%
-    \setlength{\unitlength}{1197.41283169bp}%
+    \setlength{\unitlength}{496.45654297bp}%
     \ifx\svgscale\undefined%
       \relax%
     \else%
@@ -48,8 +48,7 @@
   \global\let\svgwidth\undefined%
   \global\let\svgscale\undefined%
   \makeatother%
-  \begin{picture}(1,0.44190512)%
-    \put(0,0){\includegraphics[width=\unitlength,page=1]{draw.pdf}}%
-    \put(0.48250624,0.21311221){\color[rgb]{0.92941176,0,0}\makebox(0,0)[lb]{\smash{+}}}%
+  \begin{picture}(1,0.4350297)%
+    \put(0,0){\includegraphics[width=\unitlength,page=1]{kulki.pdf}}%
   \end{picture}%
 \endgroup%
