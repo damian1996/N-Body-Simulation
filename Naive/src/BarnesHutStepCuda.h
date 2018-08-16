@@ -25,7 +25,7 @@ private:
     std::vector<double> forces;
     std::vector<double> velocities;
     double sizeFrame = 8.0;
-    const double theta = 0.1;
+    const double theta = 1;
     const double EPS = 0.01;
 };
 

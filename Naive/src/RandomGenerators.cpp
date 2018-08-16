@@ -60,7 +60,7 @@ void RandomGenerators::initializeVelocities<thrust::host_vector<float>>(
 
 void RandomGenerators::initializeWeights(std::vector<float> &weights, unsigned numberOfBodies) {
   weights.resize(numberOfBodies);
-  int typeMass = getRandomType();
+  int typeMass = 1; //getRandomType();
   unsigned divi;
   printf("TYP %d\n", typeMass);
   switch (typeMass) {

@@ -10,9 +10,7 @@ __global__ void NaiveSim(T *pos, T *velo, T *weigh, int numberOfBodies, float dt
   float posX = pos[thid * 3], posY = pos[thid * 3 + 1], posZ = pos[thid * 3 + 2];
   float weighI = weigh[thid];
   float force[3] = {0.0f, 0.0f, 0.0f};
-
-  for (int j = 0; j < numberOfBodies; j++) {
-    if (j != thid) {
+  for (int j = 0; j < thid; j++) {
       float distX = pos[j * 3] - posX;
       float distY = pos[j * 3 + 1] - posY;
       float distZ = pos[j * 3 + 2] - posZ;
@@ -20,10 +18,23 @@ __global__ void NaiveSim(T *pos, T *velo, T *weigh, int numberOfBodies, float dt
       float dist = (distX * distX + distY * distY + distZ * distZ) + EPS * EPS;
       dist = dist*sqrt(dist);
       float F = G * (weighI * weigh[j]);
-      force[0] += F*distX/dist;
-      force[1] += F*distY/dist;
-      force[2] += F*distZ/dist;
-    }
+      float cosik = F/dist;
+      force[0] += cosik*distX;
+      force[1] += cosik*distY;
+      force[2] += cosik*distZ;
+  }
+  for (int j = thid+1; j < numberOfBodies; j++) {
+      float distX = pos[j * 3] - posX;
+      float distY = pos[j * 3 + 1] - posY;
+      float distZ = pos[j * 3 + 2] - posZ;
+
+      float dist = (distX * distX + distY * distY + distZ * distZ) + EPS * EPS;
+      dist = dist*sqrt(dist);
+      float F = G * (weighI * weigh[j]);
+      float cosik = F/dist;
+      force[0] += cosik*distX;
+      force[1] += cosik*distY;
+      force[2] += cosik*distZ;
   }
   for(int k=0; k<3; k++) {
     float acc = force[k] / weighI;
@@ -55,9 +66,7 @@ bool Computations::testingMomemntum(int numberOfBodies) {
 void Computations::NaiveSimBridgeThrust(type &pos, int numberOfBodies, float dt) {
   thrust::device_vector<float> posD = pos;
   float *d_positions = thrust::raw_pointer_cast(posD.data());
-  float *d_velocities = thrust::raw_pointer_cast(veloD.data());
-  float *d_weights = thrust::raw_pointer_cast(weightsD.data());
   NaiveSim<<<64, (numberOfBodies + 63) / 64>>>(d_positions, d_velocities, d_weights, numberOfBodies, dt);
-  testingMomemntum(numberOfBodies);
+  //testingMomemntum(numberOfBodies);
   pos = posD;
 }

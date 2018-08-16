@@ -43,7 +43,7 @@ bool StepNaive::testingMomemntum() {
 }
 
 void StepNaive::compute(tf3 &positions, float dt) {
-  assert(testingMomemntum());
+  //assert(testingMomemntum());
   float EPS = 0.01;
   std::fill(forces.begin(), forces.end(), 0.0);
   for (unsigned i = 0; i < numberOfBodies; i++) {
