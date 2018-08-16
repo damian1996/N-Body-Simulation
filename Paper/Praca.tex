@@ -35,6 +35,9 @@ style=alphabetic,
 \newenvironment{myproof}[2] {\paragraph{Dowód:}}{\hfill$\square$}
 \newcommand\tab[1][1cm]{\hspace*{#1}}
 
+\theoremstyle{definition}
+\newtheorem{definition}{Definicja}[section]
+
 %\geometry{left=2.5cm,right=2.5cm,top=10.0cm,bottom=2.5cm}
 \begin{document}
 
@@ -473,31 +476,29 @@ void InsertNode(NodeBH* node, NodeBH* quad)
 
 \subsection{\Large Spacer po drzewie}
 
-\lstset{backgroundcolor=\color{white}, numbers=left, numbersep=8pt}              
-\begin{lstlisting}[language=C++, frame=single, framerule=2pt, caption=Pseudokod algorytmu tworzenia drzewa ósemkowego]
-void BarnesHutStep::computeForceForBody(NodeBH* r, std::array<double, 3>& pos, int i)
-{
-    if(r->isPoint() && !r->wasInitialized())
-    {
-        if(r->getIndex() == i) return; // ten sam Node
+Drzewo zostało stworzone w celu szybszego liczenia siły jaka działa na ciało.\\ Najprostszym podejściem byłoby przejście po drzewie, a kiedy napotkamy punkt w którymś z kwadrantów, to liczymy siłę z jaką oddziałuje na nasz obecny punkt. Jednakże w tym przypadku wciąż musielibyśmy przejść wszystkie węzły w drzewie, więc złożoność nie uległaby poprawie.\\
+\bigskip
+Z tego powodu wprowadzamy następującą definicję\cite{Aarseth} :
+\theoremstyle{definition}
+\begin{definition}{Ratio}
+Niech s będzie szerokością obszaru obejmowanego przez sześcian oraz niech d będzie odległością między środkiem masy obszaru a punktem, to jeśli $s/d < \Theta$, wtedy liczymy siłę między środkiem masy obszaru a punktem. W przeciwnym przypadku wywołujemy się rekurencyjnie na ośmiu podsześcianach.
+\end{definition}
 
-        // Jesli node jest zewnetrzny, to policz sile ktora wywiera ten node na obecnie rozwazane cialo
-        double distX = r->getSelectedPosition(0) - pos[0];
-        double distY = r->getSelectedPosition(1) - pos[1];
-        double distZ = r->getSelectedPosition(2) - pos[2];
-        double dist = (distX * distX + distY * distY + distZ * distZ) + EPS * EPS;
-        dist = dist * sqrt(dist);
-        // jak sprawdzic czy to te same bodies? Musze zachowac i != j
-        float F = G * (r->getMass() * weights[i]);
-        forces[i * 3] += F * distX / dist; // force = G(m1*m2)/r^2
-        forces[i * 3 + 1] += F * distY / dist;
-        forces[i * 3 + 2] += F * distZ / dist;
+\lstset{backgroundcolor=\color{white}, numbers=left, numbersep=8pt}              
+\begin{lstlisting}[language=C++, frame=single, framerule=2pt, caption=Liczenie siły oddziałującej na ciało w układzie]
+void computeForceForBody(NodeBH* r, std::array<double, 3>& pos, int i)
+{
+    if(r->isPoint() && !r->wasInitializedSubQuads())
+    {
+        if(r->getIndex() == i) return;
+		// węzeł zewnętrzny		
+    	for(int k=0; k<3; k++) 
+          forces[i*3+k] += forcesBetweenTwoNodes(r, pos);
     }
     else if(!r->isPoint() && r->wasInitialized())
     {
-        if(r->isInQuad(pos[0], pos[1], pos[2])) 
+        if(r->pointIsInQuad(pos)) 
         {
-            //rekurencja pomijajac ratio
             for(auto* child : r->getQuads()) 
             {
                 computeForceForBody(child, pos, i);
@@ -506,43 +507,15 @@ void BarnesHutStep::computeForceForBody(NodeBH* r, std::array<double, 3>& pos, i
         }
 
         std::array<double, 6>& boundaries = r->getBoundaries();
-        
-        double d = distanceBetweenTwoNodes(pos[0], pos[1], pos[2], 
-            r->getSelectedCenterOfMass(0),
-            r->getSelectedCenterOfMass(0),
-            r->getSelectedCenterOfMass(0));
+        double d = distanceBetweenTwoNodes(pos, 
+        	r->getSelectedCenterOfMass());
         double s = boundaries[1] - boundaries[0];
-
         bool isFarAway = (s/d < theta) ? true : false;
-        /*
-        bool isFarAway = false;
-        for(int j = 0; j < 3; j++)
-        {
-            double d = dist(pos[j], r->getSelectedCenterOfMass(j));
-            double s = boundaries[2*j + 1] - boundaries[2*j];
-            if(BarnesHutStep::minS > s) BarnesHutStep::minS = s;
-            if(s/d < theta) 
-            {
-                isFarAway = true;
-            }
-            else 
-            {
-                isFarAway = false;
-                break;
-            }
-        }*/
         if(isFarAway)
         {
-            double distX = r->getSelectedCenterOfMass(0) - pos[0];
-            double distY = r->getSelectedCenterOfMass(1) - pos[1];
-            double distZ = r->getSelectedCenterOfMass(2)- pos[2];
-            double dist = (distX * distX + distY * distY + distZ * distZ) + EPS * EPS;
-            dist = dist * sqrt(dist);
-            // jak sprawdzic czy to te same bodies? Musze zachowac i != j
-            float F = G * (r->getTotalMass() * weights[i]);
-            forces[i * 3] += F * distX / dist; // force = G(m1*m2)/r^2
-            forces[i * 3 + 1] += F * distY / dist;
-            forces[i * 3 + 2] += F * distZ / dist;
+        	for(int k=0; k<3; k++) 
+       		   forces[i*3+k] += forcesBetweenTwoNodes(pos,
+       		   		r->getSelectedCenterOfMass());
         }
         else
         {
@@ -556,6 +529,8 @@ void BarnesHutStep::computeForceForBody(NodeBH* r, std::array<double, 3>& pos, i
 \end{lstlisting}
 
 \bigskip
+
+\textbf{Tutaj dodać opis do algo, można zrobić potem, gdyż mało istotne. Dodatkowo dołożyć cytacje i poprawić bibliografie}
 
 \subsection{\Large Zrównoleglenie algorytmu Barnesa Hut}
 

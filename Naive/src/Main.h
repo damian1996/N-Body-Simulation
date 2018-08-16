@@ -8,5 +8,6 @@
 #include "StepNaive.h"
 #include "StepNaiveCUDA.h"
 #include "BarnesHutStep.h"
+#include "BarnesHutStepCuda.h"
 
 #endif

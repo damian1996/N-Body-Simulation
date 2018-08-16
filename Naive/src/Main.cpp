@@ -39,6 +39,7 @@ int main() {
       break;
     }
     case 4: {
+      step = new BarnesHutStepCuda(masses, numberOfBodies);
       printf("Implementacja wciaz nie powstala, troche cierpliwosci :)\n");
       break;
     }
