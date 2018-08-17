@@ -20,7 +20,7 @@ typedef thrust::host_vector<float > tf3;
 
 class Render {
 public:
-    Render(std::vector<float> masses, unsigned numberOfBodies);
+    Render(std::vector<float> masses, unsigned numberOfBodies, float cubeSize);
     ~Render();
     void createAndBindBuffer();
     void createAndCompileShaders();
@@ -65,10 +65,15 @@ private:
     float* positionsToRender;
     float* massesToRender;
 
-    GLuint buffer[3];
+    float* cubeVertices;
+
+    GLuint buffer[4];
+    GLuint buffer_cube[1];
+    GLuint vao;
+    GLuint vao_cube;
     GLuint program, shFragment, shVertex;
     GLFWwindow* window;
-
+    float cubeSize;
     RandomGenerators* randomGenerator;
     unsigned numberOfBodies;
 };

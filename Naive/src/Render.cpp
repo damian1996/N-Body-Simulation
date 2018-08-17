@@ -8,7 +8,7 @@ bool Render::is_mouse_pressed = false;
 double Render::mouse_position_x = 0;
 double Render::mouse_position_y = 0;
 
-Render::Render(std::vector<float> masses, unsigned numberOfBodies) : numberOfBodies(numberOfBodies) {
+Render::Render(std::vector<float> masses, unsigned numberOfBodies, float cubeSize) : numberOfBodies(numberOfBodies), cubeSize(cubeSize) {
     positionsToRender = new float[3*numberOfBodies];
     colorsToRender = new char[3*numberOfBodies];
     massesToRender = new float[numberOfBodies];
@@ -21,6 +21,34 @@ Render::Render(std::vector<float> masses, unsigned numberOfBodies) : numberOfBod
           colorsToRender[i*3 + j] = randomGenerator->getRandomColor();
        }
     }
+    cubeVertices = new float[24*3]{
+        -cubeSize, -cubeSize,  cubeSize,
+         cubeSize, -cubeSize,  cubeSize,
+         cubeSize, -cubeSize,  cubeSize,
+         cubeSize,  cubeSize,  cubeSize,
+         cubeSize,  cubeSize,  cubeSize,
+        -cubeSize,  cubeSize,  cubeSize,
+        -cubeSize,  cubeSize,  cubeSize,
+        -cubeSize, -cubeSize,  cubeSize,
+
+        -cubeSize, -cubeSize, -cubeSize,
+         cubeSize, -cubeSize, -cubeSize,
+         cubeSize, -cubeSize, -cubeSize,
+         cubeSize,  cubeSize, -cubeSize,
+         cubeSize,  cubeSize, -cubeSize,
+        -cubeSize,  cubeSize, -cubeSize,
+        -cubeSize,  cubeSize, -cubeSize,
+        -cubeSize, -cubeSize, -cubeSize,
+
+        -cubeSize, -cubeSize,  cubeSize,
+        -cubeSize, -cubeSize, -cubeSize,
+        -cubeSize,  cubeSize,  cubeSize,
+        -cubeSize,  cubeSize, -cubeSize,
+         cubeSize, -cubeSize,  cubeSize,
+         cubeSize, -cubeSize, -cubeSize,
+         cubeSize,  cubeSize,  cubeSize,
+         cubeSize,  cubeSize, -cubeSize
+    };
 }
 
 Render::~Render() {
@@ -28,6 +56,7 @@ Render::~Render() {
     delete [] massesToRender;
     delete [] colorsToRender;
     delete [] positionsToRender;
+    delete [] cubeVertices;
 }
 
 void Render::mouse_move(double xpos, double ypos) {
@@ -150,11 +179,10 @@ void Render::createAndBindBuffer() {
     //glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glEnable(GL_VERTEX_PROGRAM_POINT_SIZE);
 
-    GLuint vao;
     glGenVertexArrays(1, &vao);
     glBindVertexArray(vao);
 
-    glGenBuffers(3, buffer);
+    glGenBuffers(4, buffer);
     glBindBuffer(GL_ARRAY_BUFFER, buffer[0]);
     glBufferData(GL_ARRAY_BUFFER, sizeof(float)*3*numberOfBodies, positionsToRender, GL_DYNAMIC_DRAW);
     glEnableVertexAttribArray(0);
@@ -170,6 +198,15 @@ void Render::createAndBindBuffer() {
     glBufferData(GL_ARRAY_BUFFER, sizeof(float)*numberOfBodies, massesToRender, GL_DYNAMIC_DRAW);
     glEnableVertexAttribArray(2);
     glVertexAttribPointer(2, 1, GL_FLOAT, GL_FALSE, 0, 0);
+
+    glGenVertexArrays(1, &vao_cube);
+    glBindVertexArray(vao_cube);
+    glGenBuffers(1, buffer_cube);
+
+    glBindBuffer(GL_ARRAY_BUFFER, buffer_cube[0]);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(float)*24*3, cubeVertices, GL_STATIC_DRAW);
+    glEnableVertexAttribArray(0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
 }
 // "    gl_PointSize = gl_Normal.z*((weight+100.0)/70.0);"
 
@@ -254,6 +291,8 @@ void Render::render() {
     GLuint MatrixID = glGetUniformLocation(program, "MVP");
     glUniformMatrix4fv(MatrixID, 1, GL_FALSE, &mvp[0][0]);
 
+    glBindVertexArray(vao);
+
     glBindBuffer(GL_ARRAY_BUFFER, buffer[0]);
     glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(float)*3*numberOfBodies, positionsToRender);
 
@@ -263,7 +302,13 @@ void Render::render() {
     glBindBuffer(GL_ARRAY_BUFFER, buffer[2]);
     glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(float)*numberOfBodies, massesToRender);
 
+
     glDrawArrays(GL_POINTS, 0, numberOfBodies);
+
+    glBindVertexArray(vao_cube);
+    glBindBuffer(GL_ARRAY_BUFFER, buffer_cube[0]);
+
+    glDrawArrays(GL_LINES, 0, 24);
 }
 
 bool Render::draw(thrust::host_vector<float>& positions) {

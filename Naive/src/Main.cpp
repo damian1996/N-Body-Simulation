@@ -21,26 +21,29 @@ int main() {
   RandomGenerators *randomGenerator = new RandomGenerators();
   std::vector<float> masses(numberOfBodies);
   randomGenerator->initializeWeights(masses, numberOfBodies);
-  Render *rend = new Render(masses, numberOfBodies);
+  Render *rend;// = new Render(masses, numberOfBodies);
   Step *step;
   Simulation *sim;
 
   switch (programVersion) {
     case 1: {
+      rend = new Render(masses, numberOfBodies, 1.0);
       step = new StepNaive(masses, numberOfBodies);
       break;
     }
     case 2: {
+      rend = new Render(masses, numberOfBodies, 1.0);
       step = new StepNaiveCuda(masses, numberOfBodies);
       break;
     }
     case 3: {
+      rend = new Render(masses, numberOfBodies, 8.0);
       step = new BarnesHutStep(masses, numberOfBodies);
       break;
     }
     case 4: {
+      rend = new Render(masses, numberOfBodies, -1);
       step = new BarnesHutStepCuda(masses, numberOfBodies);
-      printf("Implementacja wciaz nie powstala, troche cierpliwosci :)\n");
       break;
     }
     default:
