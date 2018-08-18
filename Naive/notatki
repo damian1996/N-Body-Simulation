@@ -1,29 +1,26 @@
-N = 5000
-0.0238222 n^2
-0.00160737 n^2 GPU
-0.118326 nlogn
+\bigskip
+ sudo apt-get install texlive-full
 
-N = 1000
-0.00104774 n^2
-0.000407762 n^2 gpu
-0.00755371 nlogn
+\subsection{\Large Implementacja}
 
-N = 200
-0.000185173 n^2
-0.000253185 n^2 GPU
-0.000438186 nlogn
+$http://www.deltami.edu.pl/temat/fizyka/mechanika/2015/11/26/Problem_dwoch_cial/$
+\bigskip
+apt-get install texlive-lang-polish\\
+Random citation embeddeed in text.s\\
+ sudo apt-get install texlive-bibtex-extra\\
+ sudo apt-get install texlive-bibtex-extra biber\\
+biber Praca\\
+\url{https://www.sharelatex.com/learn/Bibliography_management_with_biblatex}\\
+inkscape -D -z --file=drawing.svg --export-pdf=draw.pdf --export-latex
 
+\section{\LARGE Wizualizacja}
 
 1) https://en.wikipedia.org/wiki/Z-order_curve#Efficiently_building_quadtrees SORT Z ORDER CURVE
 
 
 
 POPRAWKI
-1) to w paragrafie o ciałach dodałabym odnosnik że jest obrazek albo ten obrazek wyrównała
 2) dolaczanie zrodel do pracy (repo)
-3) no po prostu zaznacz że w kroku symulacji masz jednostajnie przyspieszony i przybliżasz symulację za pomoca takich kroków
-4) monospace czcionka oraz regularne wciecia listigu
-5) mniejsze wciecia kodu
 
 PROFILER
 1) upewnij się że kompilujesz z opcją -g
