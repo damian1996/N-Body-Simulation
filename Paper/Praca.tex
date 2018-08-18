@@ -6,6 +6,7 @@
 \usepackage{amsthm}
 \usepackage{amsfonts}
 \usepackage{amssymb}
+\usepackage{bera}
 \usepackage{blindtext}
 %\usepackage{algorithm}
 %\usepackage[noend]{algpseudocode}
@@ -26,10 +27,11 @@ style=alphabetic,
 ]{biblatex}
 \addbibresource{biblio.bib}
 \hypersetup{
-  colorlinks, linkcolor=black, citecolor=red
+  colorlinks, linkcolor=red, citecolor=red
 }
 \DeclareCaptionFont{white}{\color{white}}
 \DeclareCaptionFormat{listing}{\colorbox{gray}{\parbox{\textwidth}{#1#2#3}}}
+\definecolor{mygreen}{rgb}{0,0.6,0}
 \captionsetup[lstlisting]{format=listing,labelfont=white,textfont=white}
 \newtheorem{theorem}{Prawo}
 \newenvironment{myproof}[2] {\paragraph{Dowód:}}{\hfill$\square$}
@@ -98,7 +100,7 @@ Problem wyznaczenia dokładnego ruchu dowolnej liczby ciał jest trudny, więc m
 \subsubsection{Problem dwóch ciał}
 Problem dla dwóch ciał podlegających prawom klasycznej dynamiki Newtona i przyciągających się zgodnie z newtonowskim prawem powszechnego ciążenia został rozstrzygnięty przez J. Bernoulliego przy założeniu, że masa obiektu koncentruje się w jego środku. \cite{fund}
 
-Obydwa ciała poruszają się po krzywych stożkowych, których rodzaj zależy od całkowitej energii układu. Przykładowo, gdy energia jest mała, to ciała nie mogą się od siebie uwolnić, więc krążą wokół siebie po elipsach. (rys. Figure 1)
+Obydwa ciała poruszają się po krzywych stożkowych, których rodzaj zależy od całkowitej energii układu. Przykładowo, gdy energia jest mała, to ciała nie mogą się od siebie uwolnić, więc krążą wokół siebie po elipsach. (Figure \ref{fig:kulki})
 
 \subsubsection{Problem trzech ciał}
 Problem trzech ciał wciąż nie został rozwiązany w ogólności. Jednakże istnieją rozwiązania dla szczególnych przypadków, jak na przykład \cite{threebody1, threebody2}. Inną wariacją tego problemu jest system, w którym masa jednego z ciał jest zaniedbywalnie mała, jest to tak zwany ograniczony problem trzech ciał - przedstawiony przez J. L. Lagrange'a w XVIII wieku. Badał on układ Słońce-Ziemia-Księżyc. 
@@ -116,6 +118,7 @@ Z kolei, bezpośrednie symulacje N ciał są wykorzystywane na przykład do stud
     \def\svgwidth{\columnwidth}
     \input{kulki.pdf_tex}
     \caption{Symulacja dwóch ciał poruszających się po elipsach}
+    \label{fig:kulki}
 \end{figure}
 
 
@@ -130,7 +133,7 @@ Pełna instrukcja instalacji niezbędnego oprogramowania do uruchomienia symulac
 \bigskip
 
 \subsection{\Large Sformułowanie problemu}
-W celu przedstawienia ogólnego sformułowania problemu potrzebujemy przytoczyć trzy prawa dynamiki sformułowane przez Isaaca Newtona \cite{fund}
+W celu przedstawienia ogólnego sformułowania problemu potrzebujemy przytoczyć trzy prawa dynamiki sformułowane przez Isaaca Newtona: \cite{fund}
 
 \begin{theorem}
 Każde ciało pozostaje w stanie spoczynku lub ruchu jednostajnego w linii prostej, chyba że jest zmuszone zmienić ten stan przez zewnętrzne oddziaływanie z innymi ciałami, czyli każde ciało jest w układzie inercjalnym.
@@ -177,11 +180,13 @@ Każde ciało na początku symulacji ma pseudolosową pozycję, prędkość oraz
 
 Prosty pseudokod dla algorytmu symulującego problem N ciał może wyglądać tak:\\
 \bigskip
-
 \lstset{
 	backgroundcolor=\color{white},
+	basicstyle=\footnotesize\fontfamily{fvm}\selectfont,
 	numbers=left, 
 	numbersep=8pt,	
+	keywordstyle=\color{blue},
+	commentstyle = \color{mygreen},
 	literate=%
 	%	zażółć gęślą jaźń
 	{ź}{{\'z}}1
@@ -194,7 +199,6 @@ Prosty pseudokod dla algorytmu symulującego problem N ciał może wyglądać ta
 	{ę}{{\k{e}}}1
 	{ś}{{\'s}}1
 }
-
 \begin{lstlisting}[frame=single, framerule=2pt, caption=Pseudokod naiwnego algorytmu]
 ustaw masę oraz początkową pozycję i prędkość dla każdego ciała
 while(true):
@@ -255,8 +259,7 @@ W linii 7 kopiuje nowe pozycje z device'a do hosta.
 \bigskip
 \bigskip
 
-\lstset{backgroundcolor=\color{white}, numbers=left, numbersep=8pt}              
-\begin{lstlisting}[language=C++, frame=single, framerule=2pt, caption=Bridge pomiędzy główną pętlą a kernelem]
+\lstset{backgroundcolor=\color{white}, basicstyle=\footnotesize\fontfamily{fvm}\selectfont, numbers=left, numbersep=8pt, keywordstyle=\color{blue},commentstyle = \color{mygreen}}\begin{lstlisting}[language=C++, frame=single, framerule=2pt, caption=Bridge pomiędzy główną pętlą a kernelem]
 void NaiveSimBridge(host_vector &pos, int numberOfBodies, float dt) {
   thrust::device_vector<float> posD = pos;
   float *d_positions = thrust::raw_pointer_cast(posD.data());
@@ -271,8 +274,7 @@ void NaiveSimBridge(host_vector &pos, int numberOfBodies, float dt) {
 Kernelem nazywamy funkcję, którą możemy uruchomić dla wielu wątków w pamięci device'a. W tym przypadku kernel NaiveSim, ukazany w listingu 3, jest odpowiedzialny za wyznaczenie nowej pozycji dla każdego ciała. \\
 \bigskip
 
-\lstset{backgroundcolor=\color{white}, numbers=left, numbersep=8pt}              
-\begin{lstlisting}[language=C++, frame=single, framerule=2pt, caption=Kernel NaiveSim]
+\lstset{backgroundcolor=\color{white}, basicstyle=\footnotesize\fontfamily{fvm}\selectfont, numbers=left, numbersep=8pt, keywordstyle=\color{blue},commentstyle = \color{mygreen}}\begin{lstlisting}[language=C++, frame=single, framerule=2pt, caption=Kernel NaiveSim]
 const double G = 6.674 * (1e-11);
 template <typename T>
 __global__ void 
@@ -288,12 +290,12 @@ NaiveSim(T *pos, T *velo, T *weigh, int numberOfBodies, double dt)
     if (j != thid) {
       double d[3];
       for(int k=0; k<3; k++) 
-      	  d[k] = pos[j*3 + k] - pos[k];
+        d[k] = pos[j*3 + k] - pos[k];
       float dist = (d[0]*d[0] + d[1]*d[1] + d[2]*d[2]);
       dist = dist*sqrt(dist);
       float F = G * (weighI * weigh[j]);
-      for(int k=0; k<3; k++) 
-		 force[k] += F * d[k] / dist;	
+      for(int k=0; k<3; k++)
+        force[k] += F * d[k] / dist;	
     }
   }
   for(int k=0; k<3; k++) {
@@ -306,14 +308,14 @@ NaiveSim(T *pos, T *velo, T *weigh, int numberOfBodies, double dt)
 \bigskip
 
 W pierwszej linii mamy stałą G, której wartość oznacza wcześniej zdefiniowaną stałą grawitacji.
-W sygnaturze kernela widzimy, że przyjmuje trzy raw\_pointery do odpowiednio pozycji, prędkości oraz mas. A poza tym dostaje również delta time, czyli odcinek czasu, w którym wykonywany jest dany krok oraz całkowitą liczbę ciał w symulacji. W 6 linii wyznaczamy indeks obiektu, dla którego będziemy prowadzić obliczenia. Jako że korzystamy tylko z jednowymiarowego schematu bloków, to wystarczy wymnożyć identyfikator bloku z rozmiarem pojedynczego bloku oraz dodać identyfikator wątku w bloku. 
+W sygnaturze kernela widzimy, że przyjmuje trzy raw\_pointery do odpowiednio pozycji, prędkości oraz mas. A poza tym dostaje również  odcinek czasu, w którym wykonywany jest dany krok oraz całkowitą liczbę ciał w symulacji. W 6 linii wyznaczamy indeks obiektu, dla którego będziemy prowadzić obliczenia. Jako że korzystamy tylko z jednowymiarowego schematu bloków, to wystarczy wymnożyć identyfikator bloku z rozmiarem pojedynczego bloku oraz dodać identyfikator wątku w bloku. 
 W linii 7 mamy zabezpiecznie na wypadek gdyby obiekt o takim indeksie nie istniał, gdyż czasami liczba wywołanych wątków jest większa niz rzeczywista liczba obiektów. \\
 \bigskip
 W liniach 8-10 tworzymy zmienne lokalne dla dotychczasowych pozycji oraz masy naszego ciała, żeby zdecydowanie ograniczyć odwołania do droższej pamięci globalnej oraz tworzymy tablicę, w której będziemy liczyć siły działające na ciało.\\
 \bigskip
 Dalej mamy część, dla której równoleglimy nasz algorytm. Najpierw w liniach 12-23 mamy pętlę, w której liczymy siłę działającą na obiekt o identyfikator, której jest równe wcześniej wyliczonemu thid(threadId) poprzez każdy inny obiekt w symulacji. Postępujemy zgodnie ze wzorem z Prawa 4. W liniach 15-16 wyliczamy wektory odległości między naszym obiektem a każdym innym. W następnych dwóch liniach wyliczamy odległość między tymi dwoma obiektami i podnosimy ją do potęgi trzeciej, tak jak we wzorze. Z kolei w ostatnich liniach tej pętli podstawiamy wszystkie wartości do wzoru, aby obliczyć siłę działającą na ciało. \\
 \bigskip
-Mając policzoną siłę oddziałującą na obiekt, przechodzimy do wyliczenia nowej pozycji dla obiektu. Jako, że obiekt porusza się ruchem jednostajnym przyśpieszonym, to możemy w tym celu wykorzystać wcześniej wprowadzone wzory.\\ Najpierw w linii 25, korzystając z prawa 2, wyliczamy wektor przyśpieszenia ciała. W linii 26 do aktualnej pozycji dodajemy wektor drogi, o którą przesuwamy ciało po obecnym kroku. I w końcu, linia 27 aktualizuje wektor prędkości.
+Mając policzoną siłę oddziałującą na obiekt, przechodzimy do wyliczenia nowej pozycji dla obiektu. Jako, że ruch obiektu aproksymujemy poprzez przyjęcie że obiekt w pojedynczmy kroku porusza się ruchem jednostajnym przyśpieszonym, a następnie łączenie ze sobą kolejnych kroków symulacji, to możemy w tym celu wykorzystać wcześniej wprowadzone wzory.\\ Najpierw w linii 25, korzystając z prawa 2, wyliczamy wektor przyśpieszenia ciała. W linii 26 do aktualnej pozycji dodajemy wektor drogi, o którą przesuwamy ciało po obecnym kroku. I w końcu, linia 27 aktualizuje wektor prędkości.
 \bigskip
 \bigskip
 
@@ -366,8 +368,7 @@ W podstawowej wersji algorytmu obie te części zaimplementujemy rekurencyjnie.
 \subsection{\Large Tworzenie drzewa}
 Najpierw przedstawmy strukturę węzła w naszym drzewie. Jest to ukazane w listingu poniżej.
 
-\lstset{backgroundcolor=\color{white}, numbers=left, numbersep=8pt}              
-\begin{lstlisting}[language=C++, frame=single, framerule=2pt, caption=Struktura węzła w drzewie ósemkowym]
+\lstset{backgroundcolor=\color{white}, basicstyle=\footnotesize\fontfamily{fvm}\selectfont, numbers=left, numbersep=8pt, keywordstyle=\color{blue},commentstyle = \color{mygreen}}\begin{lstlisting}[language=C++, frame=single, framerule=2pt, caption=Struktura węzła w drzewie ósemkowym]
 struct NodeBH {
     double mass;
     double totalMass;
@@ -400,8 +401,7 @@ Funkcja ta przyjmuje jako argument tablice z pozycjami wszystkich obiektów.
 Początkowo w linii 2 tworzy następniki dla korzenia drzewa. Następnie w pętli uaktualnia środek masy korzeniowi (linia 6), a potem sprawdza czy punkt nie wyszedł poza całą przestrzeń naszego algorytmu (linia 8). W przypadku, gdy nie wyszedł, wyszukujemy, do którego z następników możemy wstawić nasz punkt (linia 9), a następnie po stworzeniu węzła dla nowego punktu, wstawiamy go do drzewa w linii 11.
 \bigskip
 
-\lstset{backgroundcolor=\color{white}, numbers=left, numbersep=8pt}              
-\begin{lstlisting}[language=C++, frame=single, framerule=2pt, caption=Pseudokod algorytmu tworzenia drzewa ósemkowego]
+\lstset{backgroundcolor=\color{white}, basicstyle=\footnotesize\fontfamily{fvm}\selectfont, numbers=left, numbersep=8pt, keywordstyle=\color{blue},commentstyle = \color{mygreen}}\begin{lstlisting}[language=C++, frame=single, framerule=2pt, caption=Pseudokod algorytmu tworzenia drzewa ósemkowego]
 void CreateTree(vector<double>& positions) {
     root->addQuads(root->getBoundaries());
     for(unsigned i=0; i<numberOfBodies; i++)
@@ -431,7 +431,7 @@ Funkcja ta przyjmuje jako argumenty węzeł $node$, który chcemy wstawić do po
 \item Ostatni przypadek obejmuje wewnętrzne węzły, dla których musimy uaktualnić masę o nowy wierzchołek, a potem wstawić go rekurencyjnie do odpowiedniego następnika. (linie 22-33)
 \end{itemize}
 \bigskip
-\lstset{backgroundcolor=\color{white}, numbers=left, numbersep=8pt}              
+\lstset{backgroundcolor=\color{white}, basicstyle=\footnotesize\fontfamily{fvm}\selectfont, numbers=left, numbersep=8pt, keywordstyle=\color{blue},commentstyle = \color{mygreen}}
 \begin{lstlisting}[language=C++, frame=single, framerule=2pt, caption=Wstawianie pojedynczego węzła do drzewa]
 void InsertNode(NodeBH* node, NodeBH* quad) 
 {
@@ -482,7 +482,7 @@ Z tego powodu wprowadzamy następującą definicję\cite{Aarseth} :
 Niech s będzie szerokością obszaru obejmowanego przez sześcian oraz niech d będzie odległością między środkiem masy obszaru a punktem, to jeśli $s/d < \Theta$, wtedy liczymy siłę między środkiem masy obszaru a punktem. W przeciwnym przypadku wywołujemy się rekurencyjnie na ośmiu podsześcianach.
 \end{definition}
 
-\lstset{backgroundcolor=\color{white}, numbers=left, numbersep=8pt}              
+\lstset{backgroundcolor=\color{white}, basicstyle=\footnotesize\fontfamily{fvm}\selectfont, numbers=left, numbersep=8pt, keywordstyle=\color{blue},commentstyle = \color{mygreen}} 
 \begin{lstlisting}[language=C++, frame=single, framerule=2pt, caption=Liczenie siły oddziałującej na ciało w układzie]
 void computeForceForBody(NodeBH* r, std::array<double, 3>& pos, int i)
 {
@@ -511,9 +511,9 @@ void computeForceForBody(NodeBH* r, std::array<double, 3>& pos, int i)
         bool isFarAway = (s/d < theta) ? true : false;
         if(isFarAway)
         {
-        	for(int k=0; k<3; k++) 
-       		   forces[i*3+k] += forcesBetweenTwoNodes(pos,
-       		   		r->getSelectedCenterOfMass());
+            for(int k=0; k<3; k++) 
+                forces[i*3+k] += forcesBetweenTwoNodes(pos,
+                    r->getSelectedCenterOfMass());
         }
         else
         {
@@ -532,57 +532,49 @@ void computeForceForBody(NodeBH* r, std::array<double, 3>& pos, int i)
 
 \subsection{\Large Zrównoleglenie algorytmu Barnesa Hut}
 
-\bigskip
- sudo apt-get install texlive-full
-
-\subsection{\Large Implementacja}
-
-$http://www.deltami.edu.pl/temat/fizyka/mechanika/2015/11/26/Problem_dwoch_cial/$
-\bigskip
-apt-get install texlive-lang-polish\\
-Random citation embeddeed in text.s\\
- sudo apt-get install texlive-bibtex-extra\\
- sudo apt-get install texlive-bibtex-extra biber\\
-biber Praca\\
-\url{https://www.sharelatex.com/learn/Bibliography_management_with_biblatex}\\
-inkscape -D -z --file=drawing.svg --export-pdf=draw.pdf --export-latex
-
-\section{\LARGE Wizualizacja}
-
 \subsection{\large OpenGL}
 OpenGL jest API do tworzenia grafiki. Skorzystałem z OpenGL3, w celu zwizualizowania symulacji w 3D. \\
 Najistotniejszym punktem kodu OpenGL-owego jest rysowanie symulacji w każdym kroku, za które odpowiada funkcja \textbf{Render}:
-\lstset{backgroundcolor=\color{white}, numbers=left, numbersep=8pt}              
+\lstset{backgroundcolor=\color{white}, basicstyle=\footnotesize\fontfamily{fvm}\selectfont, numbers=left, numbersep=8pt, keywordstyle=\color{blue},commentstyle = \color{mygreen}}              
 \begin{lstlisting}[language=C++, frame=single, framerule=2pt, caption=Pseudokod renderowania symulacji]
 void Render() 
 {
-	glUseProgram(program);
+    glUseProgram(program);
     glm::mat4 view = glm::lookAt(
         glm::vec3(
         camera_radius*sin(camera_theta),
         camera_radius*cos(camera_theta)*cos(camera_phi),
         camera_radius*cos(camera_theta)*sin(camera_phi)
-        ), // the position of your camera, in world space
-        glm::vec3(0, 0, 0),   // where you want to look at, in world space
-        glm::vec3(0, 1, 0)        // probably glm::vec3(0,1,0), but (0,-1,0) would make you looking upside-down, which can be great too
+        ),
+        glm::vec3(0, 0, 0),
+        glm::vec3(0, 1, 0)
     );
     glm::mat4 projection = glm::perspective(
-        glm::radians(45.0f), // The vertical Field of View, in radians: the amount of "zoom". Think "camera lens". Usually between 90 (extra wide) and 30 (quite zoomed in)
-        1.0f*width/height,       // Aspect Ratio. Depends on the size of your window. Notice that 4/3 == 800/600 == 1280/960, sounds familiar ?
-        0.1f,              // Near clipping plane. Keep as big as possible, or you'll get precision issues.
-        100.0f             // Far clipping plane. Keep as little as possible.
+        glm::radians(45.0f),
+        1.0f*width/height,
+        0.1f,
+        100.0f
     );
     glm::mat4 mvp = projection * view;
     GLuint MatrixID = glGetUniformLocation(program, "MVP");
     glUniformMatrix4fv(MatrixID, 1, GL_FALSE, &mvp[0][0]);
-	
-	UpdateBuffers();
-	DrawPoints();
+    
+    UpdateBuffers();
+    DrawPoints();
 }
 \end{lstlisting}
 \bigskip
 
-\textbf{Delta time}, czyli czas przeznaczony na każdy krok symulacji jest wyliczany poprzez odjęcie od poprzednio zapisanego czasu od obecnego czasu systemowego. To pozwala uzyskać odcinek czasu dla kroku. 
+Render polega głównie na wykorzystaniu macierzy Model-View-Projection (MVP). 
+W linii 19 wymnażamy wszystkie macierze ze sobą (odpowiedzialnego za każdy z kroków MVP), uzyskując wyrenderowaną pozycję naszych obiektów).\\
+
+Bardziej szczegółowo, najpierw ustawiamy kamerę, do czego służy funkcja \textbf{lookAt}, która jako pierwszy argument przyjmuje współrzędne kamery, następnie punkt na który patrzymy, a w ostatnim parametrze ustawiamy, że patrzymy z góry do dołu.\\
+Z kolei funkcja \textbf{perspective} odpowiada za rzutowanie, a w argumentach przyjmuje:
+\begin{itemize}
+\item kąt z jakiego patrzymy na punkt podany w radianach
+\item \textbf{aspect rato}, czyli proporcje pomiędzy szerokością i wysokością obrazu
+\item \textbf{far clipping plane} oraz \textbf{near clipping plane}, które wyznaczają płaszczyzny, które ograniczają obszar renderowania
+\end{itemize} 
 
 \newpage
 
