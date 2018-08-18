@@ -18,21 +18,7 @@
 
 
 \refsection{0}
-  \sortlist[entry]{anyt/global}
-    \entry{tutMat}{misc}{}
-      \name{author}{1}{}{%
-        {{hash=0d1b08c34858921bc7c662b228acb7ba}{%
-           family={???},
-           family_i={?\bibinitperiod}}}%
-      }
-      \strng{namehash}{0d1b08c34858921bc7c662b228acb7ba}
-      \strng{fullhash}{0d1b08c34858921bc7c662b228acb7ba}
-      \field{sortinit}{h}
-      \field{sortinithash}{82012198d5dfa657b8c4a168793268a6}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{title}{http://www.opengl-tutorial.org/beginners-tutorials/tutorial-3-matrices/}
-    \endentry
+  \sortlist[entry]{nty/global}
     \entry{Aarseth}{book}{}
       \name{author}{1}{}{%
         {{hash=ec347883cb6bf5817c11457be032dac6}{%
@@ -46,7 +32,6 @@
       }
       \strng{namehash}{ec347883cb6bf5817c11457be032dac6}
       \strng{fullhash}{ec347883cb6bf5817c11457be032dac6}
-      \field{labelalpha}{Aar03}
       \field{sortinit}{A}
       \field{sortinithash}{b685c7856330eaee22789815b49de9bb}
       \field{labelnamesource}{author}
@@ -64,7 +49,6 @@
       }
       \strng{namehash}{d37810d1c7f8e6d56d03544d8d583711}
       \strng{fullhash}{d37810d1c7f8e6d56d03544d8d583711}
-      \field{labelalpha}{Ala00}
       \field{sortinit}{A}
       \field{sortinithash}{b685c7856330eaee22789815b49de9bb}
       \field{labelnamesource}{author}
@@ -86,10 +70,8 @@
       }
       \strng{namehash}{61a23953300b78e83f381e02ca45c5e4}
       \strng{fullhash}{61a23953300b78e83f381e02ca45c5e4}
-      \field{labelalpha}{Cor}
       \field{sortinit}{C}
       \field{sortinithash}{59f25d509f3381b07695554a9f35ecb2}
-      \field{extraalpha}{1}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{edition}{v9.1.85, 2018}
@@ -111,10 +93,8 @@
       }
       \strng{namehash}{61a23953300b78e83f381e02ca45c5e4}
       \strng{fullhash}{61a23953300b78e83f381e02ca45c5e4}
-      \field{labelalpha}{Cor}
       \field{sortinit}{C}
       \field{sortinithash}{59f25d509f3381b07695554a9f35ecb2}
-      \field{extraalpha}{2}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{edition}{v9.1.85, 2018}
@@ -125,24 +105,6 @@
       \verb{url}
       \verb http://docs.nvidia.com/cuda/cuda-runtime-api/index.html
       \endverb
-    \endentry
-    \entry{visGraph}{misc}{}
-      \name{author}{1}{}{%
-        {{hash=bbc0090900fc4e36b3185b3ab7fe3f25}{%
-           family={D.Egorov},
-           family_i={D\bibinitperiod},
-           given={A.Bezgodov},
-           given_i={A\bibinitperiod}}}%
-      }
-      \strng{namehash}{bbc0090900fc4e36b3185b3ab7fe3f25}
-      \strng{fullhash}{bbc0090900fc4e36b3185b3ab7fe3f25}
-      \field{labelalpha}{DEg15}
-      \field{sortinit}{D}
-      \field{sortinithash}{78f7c4753a2004675f316a80bdb31742}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{title}{Improved Force-Directed Method of Graph Layout Generation with Adaptive Step Length}
-      \field{year}{2015}
     \endentry
     \entry{dirNBody}{misc}{}
       \name{author}{2}{}{%
@@ -161,13 +123,29 @@
       }
       \strng{namehash}{2351a6d5133f960ed3883758c3d5fd80}
       \strng{fullhash}{2351a6d5133f960ed3883758c3d5fd80}
-      \field{labelalpha}{DL98}
       \field{sortinit}{D}
       \field{sortinithash}{78f7c4753a2004675f316a80bdb31742}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{title}{Direct Large-Scale N-Body Simulations of Planetesimal Dynamics}
       \field{year}{1998}
+    \endentry
+    \entry{visGraph}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=bbc0090900fc4e36b3185b3ab7fe3f25}{%
+           family={D.Egorov},
+           family_i={D\bibinitperiod},
+           given={A.Bezgodov},
+           given_i={A\bibinitperiod}}}%
+      }
+      \strng{namehash}{bbc0090900fc4e36b3185b3ab7fe3f25}
+      \strng{fullhash}{bbc0090900fc4e36b3185b3ab7fe3f25}
+      \field{sortinit}{D}
+      \field{sortinithash}{78f7c4753a2004675f316a80bdb31742}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Improved Force-Directed Method of Graph Layout Generation with Adaptive Step Length}
+      \field{year}{2015}
     \endentry
     \entry{haloDensity}{misc}{}
       \name{author}{1}{}{%
@@ -181,7 +159,6 @@
       }
       \strng{namehash}{f7a0c2d04eb6c2c11c8cae261bbf3c7c}
       \strng{fullhash}{f7a0c2d04eb6c2c11c8cae261bbf3c7c}
-      \field{labelalpha}{EDO02}
       \field{sortinit}{E}
       \field{sortinithash}{fefc5210ef4721525b2a478df41efcd4}
       \field{labelnamesource}{author}
@@ -201,7 +178,6 @@
       }
       \strng{namehash}{8187f24c92ead200b9daa9953b47a9c1}
       \strng{fullhash}{8187f24c92ead200b9daa9953b47a9c1}
-      \field{labelalpha}{GLo03}
       \field{sortinit}{G}
       \field{sortinithash}{1c854ef9177a91bf894e66485bdbd3ed}
       \field{labelnamesource}{author}
@@ -215,13 +191,12 @@
     \endentry
     \entry{thrust}{manual}{}
       \name{author}{1}{}{%
-        {{hash=820cdded81a7d1272273f2bec9b3c7d6}{%
-           family={GOOGLE?},
+        {{hash=c2f0039b9a0105fc0d3a9c22ea24b1c0}{%
+           family={GOOGLE},
            family_i={G\bibinitperiod}}}%
       }
-      \strng{namehash}{820cdded81a7d1272273f2bec9b3c7d6}
-      \strng{fullhash}{820cdded81a7d1272273f2bec9b3c7d6}
-      \field{labelalpha}{GOO}
+      \strng{namehash}{c2f0039b9a0105fc0d3a9c22ea24b1c0}
+      \strng{fullhash}{c2f0039b9a0105fc0d3a9c22ea24b1c0}
       \field{sortinit}{G}
       \field{sortinithash}{1c854ef9177a91bf894e66485bdbd3ed}
       \field{labelnamesource}{author}
@@ -245,7 +220,6 @@
       }
       \strng{namehash}{638160ae56a17712d83fafc12a740c80}
       \strng{fullhash}{638160ae56a17712d83fafc12a740c80}
-      \field{labelalpha}{Gro17}
       \field{sortinit}{G}
       \field{sortinithash}{1c854ef9177a91bf894e66485bdbd3ed}
       \field{labelnamesource}{author}
@@ -270,13 +244,47 @@
       }
       \strng{namehash}{72b90f0c3473f7bf08465574cbe2cedc}
       \strng{fullhash}{72b90f0c3473f7bf08465574cbe2cedc}
-      \field{labelalpha}{Heg91}
       \field{sortinit}{H}
       \field{sortinithash}{82012198d5dfa657b8c4a168793268a6}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{title}{CHAOS IN THE N-BODY PROBLEM OF STELLAR DYNAMICS}
       \field{year}{1991}
+    \endentry
+    \entry{tutMat}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=0d1b08c34858921bc7c662b228acb7ba}{%
+           family={???},
+           family_i={?\bibinitperiod}}}%
+      }
+      \strng{namehash}{0d1b08c34858921bc7c662b228acb7ba}
+      \strng{fullhash}{0d1b08c34858921bc7c662b228acb7ba}
+      \field{sortinit}{h}
+      \field{sortinithash}{82012198d5dfa657b8c4a168793268a6}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{http://www.opengl-tutorial.org/beginners-tutorials/tutorial-3-matrices/}
+    \endentry
+    \entry{barnhut}{article}{}
+      \name{author}{1}{}{%
+        {{hash=b4b2efb1ebff4322ef9b164bf6ffeb86}{%
+           family={J.\bibnamedelimi Barnes},
+           family_i={J\bibinitperiod\bibinitdelim B\bibinitperiod},
+           given={P.\bibnamedelimi Hut},
+           given_i={P\bibinitperiod\bibinitdelim H\bibinitperiod}}}%
+      }
+      \strng{namehash}{b4b2efb1ebff4322ef9b164bf6ffeb86}
+      \strng{fullhash}{b4b2efb1ebff4322ef9b164bf6ffeb86}
+      \field{sortinit}{J}
+      \field{sortinithash}{ec3950a647c092421b9fcca6d819504a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Nature}
+      \field{title}{A hierarchical O(N log N) force-calculation algorithm}
+      \field{volume}{324}
+      \field{year}{1986}
+      \field{pages}{446\bibrangedash 449}
+      \range{pages}{4}
     \endentry
     \entry{SEMmisc}{misc}{}
       \name{author}{1}{}{%
@@ -286,7 +294,6 @@
       }
       \strng{namehash}{6235e0ac4972a6a88d26ad227d40feac}
       \strng{fullhash}{6235e0ac4972a6a88d26ad227d40feac}
-      \field{labelalpha}{JEi}
       \field{sortinit}{J}
       \field{sortinithash}{ec3950a647c092421b9fcca6d819504a}
       \field{labelnamesource}{author}
@@ -305,7 +312,6 @@
       }
       \strng{namehash}{c80df4a88bc38a808f57006ebf998123}
       \strng{fullhash}{c80df4a88bc38a808f57006ebf998123}
-      \field{labelalpha}{Lar07}
       \field{sortinit}{L}
       \field{sortinithash}{872351f18d0f736066eda0bf18bfa4f7}
       \field{labelnamesource}{author}
@@ -315,25 +321,6 @@
       \field{year}{2007}
       \field{pages}{677\bibrangedash 694}
       \range{pages}{18}
-    \endentry
-    \entry{helsinkiSeminar}{article}{}
-      \name{author}{1}{}{%
-        {{hash=c7edfb29fd98cf09d373b307c9f2fd57}{%
-           family={Lindholm},
-           family_i={L\bibinitperiod},
-           given={Tancred},
-           given_i={T\bibinitperiod}}}%
-      }
-      \strng{namehash}{c7edfb29fd98cf09d373b307c9f2fd57}
-      \strng{fullhash}{c7edfb29fd98cf09d373b307c9f2fd57}
-      \field{labelalpha}{Lin99}
-      \field{sortinit}{L}
-      \field{sortinithash}{872351f18d0f736066eda0bf18bfa4f7}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{journaltitle}{University of Helsinki}
-      \field{title}{Seminar presentation. N-body algorithms}
-      \field{year}{1999}
     \endentry
     \entry{barneshut}{inbook}{}
       \name{author}{1}{}{%
@@ -348,7 +335,6 @@
       }
       \strng{namehash}{57679aa3518cad7be072b48f9028f053}
       \strng{fullhash}{57679aa3518cad7be072b48f9028f053}
-      \field{labelalpha}{Mar11}
       \field{sortinit}{M}
       \field{sortinithash}{2684bec41e9697b92699b46491061da2}
       \field{labelnamesource}{author}
@@ -358,6 +344,27 @@
       \field{year}{2011}
       \field{pages}{75\bibrangedash 92}
       \range{pages}{18}
+    \endentry
+    \entry{octree}{article}{}
+      \name{author}{1}{}{%
+        {{hash=3f9f4503bcf9e76a8ce7b09746ae74dc}{%
+           family={Meagher},
+           family_i={M\bibinitperiod},
+           given={Donald},
+           given_i={D\bibinitperiod}}}%
+      }
+      \strng{namehash}{3f9f4503bcf9e76a8ce7b09746ae74dc}
+      \strng{fullhash}{3f9f4503bcf9e76a8ce7b09746ae74dc}
+      \field{sortinit}{M}
+      \field{sortinithash}{2684bec41e9697b92699b46491061da2}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Computer Graphics and Image Processing}
+      \field{title}{Geometric Modeling Using Octree Encoding}
+      \field{volume}{19}
+      \field{year}{1981}
+      \field{pages}{129\bibrangedash 147}
+      \range{pages}{19}
     \endentry
     \entry{fund}{inbook}{}
       \name{author}{1}{}{%
@@ -374,7 +381,6 @@
       }
       \strng{namehash}{a2626036b795a6385df4ae0ad444c829}
       \strng{fullhash}{a2626036b795a6385df4ae0ad444c829}
-      \field{labelalpha}{Rog71}
       \field{sortinit}{R}
       \field{sortinithash}{c7387613477035a752d935acfc3e3ea2}
       \field{labelnamesource}{author}

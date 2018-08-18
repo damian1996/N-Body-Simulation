@@ -6,9 +6,9 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {1.1}\relax \fontsize {14.4}{18}\selectfont Szczeg\IeC {\'o}lne przypadki}{3}{subsection.1.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {1.1.1}Problem dw\IeC {\'o}ch cia\IeC {\l }}{3}{subsubsection.1.1.1}
+\contentsline {subsubsection}{\numberline {1.1.1}\relax \fontsize {12}{14}\selectfont Problem dw\IeC {\'o}ch cia\IeC {\l }}{3}{subsubsection.1.1.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {1.1.2}Problem trzech cia\IeC {\l }}{3}{subsubsection.1.1.2}
+\contentsline {subsubsection}{\numberline {1.1.2}\relax \fontsize {12}{14}\selectfont Problem trzech cia\IeC {\l }}{3}{subsubsection.1.1.2}
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {1.2}\relax \fontsize {14.4}{18}\selectfont Zastosowania}{3}{subsection.1.2}
 \defcounter {refsection}{0}\relax 
@@ -44,16 +44,22 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {3.3}\relax \fontsize {14.4}{18}\selectfont Tworzenie drzewa}{11}{subsection.3.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {3.3.1}Funkcja CreateTree}{12}{subsubsection.3.3.1}
+\contentsline {subsubsection}{\numberline {3.3.1}\relax \fontsize {12}{14}\selectfont Funkcja CreateTree}{12}{subsubsection.3.3.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {3.3.2}Funkcja InsertNode}{12}{subsubsection.3.3.2}
+\contentsline {subsubsection}{\numberline {3.3.2}\relax \fontsize {12}{14}\selectfont Funkcja InsertNode}{12}{subsubsection.3.3.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {3.3.3}Z\IeC {\l }o\IeC {\.z}ono\IeC {\'s}\IeC {\'c} tworzenia drzewa}{13}{subsubsection.3.3.3}
+\contentsline {subsubsection}{\numberline {3.3.3}\relax \fontsize {12}{14}\selectfont Z\IeC {\l }o\IeC {\.z}ono\IeC {\'s}\IeC {\'c} tworzenia drzewa}{13}{subsubsection.3.3.3}
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {3.4}\relax \fontsize {14.4}{18}\selectfont Spacer po drzewie}{13}{subsection.3.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.5}\relax \fontsize {14.4}{18}\selectfont Zr\IeC {\'o}wnoleglenie algorytmu Barnesa Hut}{14}{subsection.3.5}
+\contentsline {section}{\numberline {4}\relax \fontsize {17.28}{22}\selectfont Zr\IeC {\'o}wnoleglenie algorytmu Barnesa Hut}{14}{section.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.6}\relax \fontsize {12}{14}\selectfont OpenGL}{14}{subsection.3.6}
+\contentsline {subsection}{\numberline {4.1}\relax \fontsize {14.4}{18}\selectfont R\IeC {\'o}wnoleg\IeC {\l }a implementacja drzew \IeC {\'o}semkowych}{14}{subsection.4.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4}\relax \fontsize {17.28}{22}\selectfont Podsumowanie}{16}{section.4}
+\contentsline {section}{\numberline {5}\relax \fontsize {14.4}{18}\selectfont Wizualizacja}{14}{section.5}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {5.1}\relax \fontsize {12}{14}\selectfont OpenGL}{15}{subsection.5.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {5.2}\relax \fontsize {12}{14}\selectfont Renderowanie symulacji}{15}{subsection.5.2}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {6}\relax \fontsize {17.28}{22}\selectfont Podsumowanie}{16}{section.6}

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.8.7)  18 AUG 2018 11:28
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.8.7)  18 AUG 2018 13:42
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -1274,8 +1274,8 @@ Package biblatex Info: Trying to load biblatex default data model...
 Package biblatex Info: ... file 'blx-dm.def' found.
 
 (/usr/share/texlive/texmf-dist/tex/latex/biblatex/blx-dm.def)
-Package biblatex Info: Trying to load biblatex style data model...
-Package biblatex Info: ... file 'alphabetic.dbx' not found.
+Package biblatex Info: Trying to load biblatex citestyle data model...
+Package biblatex Info: ... file 'numeric.dbx' not found.
 Package biblatex Info: Trying to load biblatex custom data model...
 Package biblatex Info: ... file 'biblatex-dm.cfg' not found.
 \c@afterword=\count285
@@ -1369,11 +1369,11 @@ File: biblatex_.def
 \c@biburllcpenalty=\count356
 \c@smartand=\count357
 )
-Package biblatex Info: Trying to load bibliography style 'alphabetic'...
-Package biblatex Info: ... file 'alphabetic.bbx' found.
+Package biblatex Info: Trying to load bibliography style 'numeric'...
+Package biblatex Info: ... file 'numeric.bbx' found.
 
-(/usr/share/texlive/texmf-dist/tex/latex/biblatex/bbx/alphabetic.bbx
-File: alphabetic.bbx 2016/03/03 v3.3 biblatex bibliography style (PK/JW/AB)
+(/usr/share/texlive/texmf-dist/tex/latex/biblatex/bbx/numeric.bbx
+File: numeric.bbx 2016/03/03 v3.3 biblatex bibliography style (PK/JW/AB)
 Package biblatex Info: Trying to load bibliography style 'standard'...
 Package biblatex Info: ... file 'standard.bbx' found.
 
@@ -1382,16 +1382,17 @@ File: standard.bbx 2016/03/03 v3.3 biblatex bibliography style (PK/JW/AB)
 \c@bbx:relatedcount=\count358
 \c@bbx:relatedtotal=\count359
 ))
-Package biblatex Info: Trying to load citation style 'alphabetic'...
-Package biblatex Info: ... file 'alphabetic.cbx' found.
+Package biblatex Info: Trying to load citation style 'numeric'...
+Package biblatex Info: ... file 'numeric.cbx' found.
 
-(/usr/share/texlive/texmf-dist/tex/latex/biblatex/cbx/alphabetic.cbx
-File: alphabetic.cbx 2016/03/03 v3.3 biblatex citation style (PK/JW/AB)
+(/usr/share/texlive/texmf-dist/tex/latex/biblatex/cbx/numeric.cbx
+File: numeric.cbx 2016/03/03 v3.3 biblatex citation style (PK/JW/AB)
 Package biblatex Info: Redefining '\cite'.
 Package biblatex Info: Redefining '\parencite'.
 Package biblatex Info: Redefining '\footcite'.
 Package biblatex Info: Redefining '\footcitetext'.
 Package biblatex Info: Redefining '\smartcite'.
+Package biblatex Info: Redefining '\supercite'.
 Package biblatex Info: Redefining '\textcite'.
 Package biblatex Info: Redefining '\textcites'.
 Package biblatex Info: Redefining '\cites'.
@@ -1404,7 +1405,7 @@ Package biblatex Info: ... file 'biblatex.cfg' found.
 (/usr/share/texlive/texmf-dist/tex/latex/biblatex/biblatex.cfg
 File: biblatex.cfg 
 )))
-Package hyperref Info: Option `colorlinks' set `true' on input line 31.
+Package hyperref Info: Option `colorlinks' set `true' on input line 32.
 \c@theorem=\count360
 \c@definition=\count361
 Package biblatex Info: Trying to load language 'english'...
@@ -1426,28 +1427,28 @@ LaTeX Warning: Unused global option(s):
 (./Praca.aux)
 \openout1 = `Praca.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 44.
-LaTeX Font Info:    ... okay on input line 44.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 44.
-LaTeX Font Info:    ... okay on input line 44.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 44.
-LaTeX Font Info:    ... okay on input line 44.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 44.
-LaTeX Font Info:    ... okay on input line 44.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 44.
-LaTeX Font Info:    ... okay on input line 44.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 44.
-LaTeX Font Info:    ... okay on input line 44.
-LaTeX Font Info:    Checking defaults for OT4/cmr/m/n on input line 44.
-LaTeX Font Info:    ... okay on input line 44.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 44.
-LaTeX Font Info:    Try loading font information for TS1+cmr on input line 44.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 45.
+LaTeX Font Info:    ... okay on input line 45.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 45.
+LaTeX Font Info:    ... okay on input line 45.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 45.
+LaTeX Font Info:    ... okay on input line 45.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 45.
+LaTeX Font Info:    ... okay on input line 45.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 45.
+LaTeX Font Info:    ... okay on input line 45.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 45.
+LaTeX Font Info:    ... okay on input line 45.
+LaTeX Font Info:    Checking defaults for OT4/cmr/m/n on input line 45.
+LaTeX Font Info:    ... okay on input line 45.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 45.
+LaTeX Font Info:    Try loading font information for TS1+cmr on input line 45.
  (/usr/share/texlive/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 44.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 44.
-LaTeX Font Info:    ... okay on input line 44.
+LaTeX Font Info:    ... okay on input line 45.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 45.
+LaTeX Font Info:    ... okay on input line 45.
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: hyperref package is loaded.
 Package caption Info: listings package is loaded.
@@ -1502,14 +1503,14 @@ Package caption Info: End \AtBeginDocument code.
 \everyMPtoPDFconversion=\toks48
 )
 \c@lstlisting=\count370
-Package ragged2e Info: ABD: executing \RaggedRight on input line 44.
+Package ragged2e Info: ABD: executing \RaggedRight on input line 45.
  ABD: EverySelectfont initializing macros
-LaTeX Info: Redefining \selectfont on input line 44.
+LaTeX Info: Redefining \selectfont on input line 45.
 
 Preview: Fontsize 10pt
 Preview: PDFoutput 1
 \AtBeginShipoutBox=\box36
-Package hyperref Info: Link coloring ON on input line 44.
+Package hyperref Info: Link coloring ON on input line 45.
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
 
@@ -1518,9 +1519,9 @@ Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 )
 \c@section@level=\count371
 )
-LaTeX Info: Redefining \ref on input line 44.
-LaTeX Info: Redefining \pageref on input line 44.
-LaTeX Info: Redefining \nameref on input line 44.
+LaTeX Info: Redefining \ref on input line 45.
+LaTeX Info: Redefining \pageref on input line 45.
+LaTeX Info: Redefining \nameref on input line 45.
 
 (./Praca.out) (./Praca.out)
 \@outlinefile=\write4
@@ -1534,55 +1535,55 @@ Package biblatex Info: Automatic encoding selection.
 Package biblatex Info: Trying to load bibliographic data...
 Package biblatex Info: ... file 'Praca.bbl' found.
  (./Praca.bbl)
-Package biblatex Info: Reference section=0 on input line 44.
-Package biblatex Info: Reference segment=0 on input line 44.
+Package biblatex Info: Reference section=0 on input line 45.
+Package biblatex Info: Reference segment=0 on input line 45.
 
 
 LaTeX Font Warning: Font shape `T1/fve/m/sc' undefined
-(Font)              using `T1/fve/m/n' instead on input line 53.
+(Font)              using `T1/fve/m/n' instead on input line 54.
 
 LaTeX Font Info:    Font shape `T1/fve/m/sc' will be
-(Font)              scaled to size 12.9599pt on input line 53.
+(Font)              scaled to size 12.9599pt on input line 54.
 LaTeX Font Info:    Font shape `T1/fve/m/sc' will be
-(Font)              scaled to size 8.99994pt on input line 55.
+(Font)              scaled to size 8.99994pt on input line 56.
 LaTeX Font Info:    Font shape `T1/fve/m/n' will be
-(Font)              scaled to size 18.66588pt on input line 61.
+(Font)              scaled to size 18.66588pt on input line 62.
 LaTeX Font Info:    Font shape `T1/fve/b/n' will be
-(Font)              scaled to size 18.66588pt on input line 61.
+(Font)              scaled to size 18.66588pt on input line 62.
 LaTeX Font Info:    Font shape `T1/fve/m/n' will be
-(Font)              scaled to size 10.79993pt on input line 67.
-LaTeX Font Info:    Font shape `T1/fve/m/it' in size <12> not available
-(Font)              Font shape `T1/fve/m/sl' tried instead on input line 68.
-LaTeX Font Info:    Font shape `T1/fve/m/sl' will be
 (Font)              scaled to size 10.79993pt on input line 68.
-LaTeX Font Info:    Try loading font information for OML+plm on input line 71.
+LaTeX Font Info:    Font shape `T1/fve/m/it' in size <12> not available
+(Font)              Font shape `T1/fve/m/sl' tried instead on input line 69.
+LaTeX Font Info:    Font shape `T1/fve/m/sl' will be
+(Font)              scaled to size 10.79993pt on input line 69.
+LaTeX Font Info:    Try loading font information for OML+plm on input line 72.
 (/usr/share/texlive/texmf-dist/tex/latex/polski/omlplm.fd
 File: omlplm.fd 2008/02/24 v1.2.1 Font defs for fonts PL (MW)
 )
-LaTeX Font Info:    Try loading font information for OMS+plsy on input line 71.
+LaTeX Font Info:    Try loading font information for OMS+plsy on input line 72.
 
 
 (/usr/share/texlive/texmf-dist/tex/latex/polski/omsplsy.fd
 File: omsplsy.fd 2008/02/24 v1.2.1 Font defs for fonts PL (MW)
 )
-LaTeX Font Info:    Try loading font information for OMX+plex on input line 71.
+LaTeX Font Info:    Try loading font information for OMX+plex on input line 72.
 
 
 (/usr/share/texlive/texmf-dist/tex/latex/polski/omxplex.fd
 File: omxplex.fd 2008/02/24 v1.2.1 Font defs for fonts PL (MW)
 )
 LaTeX Font Info:    External font `plex10' loaded for size
-(Font)              <10> on input line 71.
+(Font)              <10> on input line 72.
 LaTeX Font Info:    External font `plex10' loaded for size
-(Font)              <7> on input line 71.
+(Font)              <7> on input line 72.
 LaTeX Font Info:    External font `plex10' loaded for size
-(Font)              <5> on input line 71.
-LaTeX Font Info:    Try loading font information for U+msa on input line 71.
+(Font)              <5> on input line 72.
+LaTeX Font Info:    Try loading font information for U+msa on input line 72.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 71.
+LaTeX Font Info:    Try loading font information for U+msb on input line 72.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
@@ -1593,9 +1594,9 @@ Non-PDF special ignored!
 Non-PDF special ignored!
 Non-PDF special ignored!{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
 LaTeX Font Info:    Font shape `T1/fve/m/n' will be
-(Font)              scaled to size 12.9599pt on input line 88.
+(Font)              scaled to size 12.9599pt on input line 89.
 LaTeX Font Info:    Font shape `T1/fve/b/n' will be
-(Font)              scaled to size 12.9599pt on input line 88.
+(Font)              scaled to size 12.9599pt on input line 89.
 
 (./Praca.toc
 LaTeX Font Info:    Font shape `T1/fve/b/n' will be
@@ -1608,32 +1609,20 @@ LaTeX Font Info:    Font shape `T1/fve/b/n' will be
 
  [2]
 LaTeX Font Info:    Font shape `T1/fve/b/n' will be
-(Font)              scaled to size 10.79993pt on input line 96.
+(Font)              scaled to size 10.79993pt on input line 97.
 
-Overfull \hbox (5.80487pt too wide) in paragraph at lines 98--99
+Overfull \hbox (5.80487pt too wide) in paragraph at lines 99--100
 \T1/fve/m/sc/10 Problem wyz-naczenia dokªad-nego ruchu dowol-nej liczby ciaª je
 st trudny, wi¦c mo»na znale¹¢ 
  []
 
 
-Overfull \hbox (5.65178pt too wide) in paragraph at lines 106--107
-\T1/fve/m/sc/10 ogranic-zony prob-lem trzech ciaª - przed-staw-iony przez J. L.
- La-grange'a w XVIII wieku. Badaª 
- []
-
-
-Overfull \hbox (1.70078pt too wide) in paragraph at lines 111--114
+Overfull \hbox (1.70078pt too wide) in paragraph at lines 112--115
 \T1/fve/m/sc/10 Symulacje N ciaª s¡ sze-roko wyko-rzysty-wanymi narz¦dzi-ami w 
 fizyce oraz as-tronomii. Prob- 
  []
 
-
-Overfull \hbox (4.26578pt too wide) in paragraph at lines 111--114
-\T1/fve/m/sc/10 wane do stu-diowa-nia pro-cesów tworzenia nielin-iowych struk-t
-ur jak galak-ty-czne halo z wpªy- 
- []
-
-[3] (./kulki.pdf_tex <kulki.pdf, id=170, page=1, 498.31825pt x 216.78325pt>
+[3] (./kulki.pdf_tex <kulki.pdf, id=185, page=1, 498.31825pt x 216.78325pt>
 File: kulki.pdf Graphic file (type pdf)
 
 <use kulki.pdf, page 1>
@@ -1641,95 +1630,107 @@ Package pdftex.def Info: kulki.pdf, page1 used on input line 52.
 (pdftex.def)             Requested size: 418.25368pt x 181.95114pt.
 )
 LaTeX Font Info:    Font shape `T1/fve/m/it' in size <10> not available
-(Font)              Font shape `T1/fve/m/sl' tried instead on input line 138.
+(Font)              Font shape `T1/fve/m/sl' tried instead on input line 139.
 LaTeX Font Info:    Font shape `T1/fve/m/sl' will be
-(Font)              scaled to size 8.99994pt on input line 138.
+(Font)              scaled to size 8.99994pt on input line 139.
 
-Overfull \hbox (1.1199pt too wide) in paragraph at lines 139--140
+Overfull \hbox (1.1199pt too wide) in paragraph at lines 140--141
 [][]\T1/fve/b/n/10 Prawo 1. []\T1/fve/m/sl/10 Ka»de ciaªo po-zostaje w stanie s
 poczynku lub ruchu jed-nos-ta-jnego w linii prostej, 
  []
 
 [4 <./kulki.pdf>]
-Overfull \hbox (20.1146pt too wide) in paragraph at lines 157--157
+Overfull \hbox (20.1146pt too wide) in paragraph at lines 158--158
 \T1/fve/m/sc/10 dzi-aªa na linii ª¡cz¡cej ich ±rodki, a jej warto±¢ ro±nie z il
 oczynem ich mas i maleje z kwadratem 
  []
 
 
-Overfull \hbox (10.07281pt too wide) in paragraph at lines 159--159
+Overfull \hbox (10.07281pt too wide) in paragraph at lines 160--160
 []\T1/fve/m/sc/10 Aplikuj¡c to prawo do symu-lacji N ciaª, uzysku-jemy »e na ka
 »de $\OML/plm/m/it/10 i$\T1/fve/m/sc/10 -te ciaªo dzi-aªa siªa $\OML/plm/m/it/1
 0 F[]$ \T1/fve/m/sc/10 zdefin- 
  []
 
 [5]
-Overfull \hbox (6.0pt too wide) in paragraph at lines 202--202
+Overfull \hbox (6.0pt too wide) in paragraph at lines 203--203
 [][][][][][][]  
  []
 
 LaTeX Font Info:    Font shape `T1/fve/m/n' will be
-(Font)              scaled to size 7.19995pt on input line 202.
-LaTeX Font Info:    Try loading font information for T1+fvm on input line 202.
+(Font)              scaled to size 7.19995pt on input line 203.
+LaTeX Font Info:    Try loading font information for T1+fvm on input line 203.
 (/usr/share/texlive/texmf-dist/tex/latex/bera/t1fvm.fd
 File: t1fvm.fd 2004/09/07 scalable font definitions for T1/fvm.
 )
 LaTeX Font Info:    Font shape `T1/fvm/m/n' will be
-(Font)              scaled to size 7.19995pt on input line 202.
+(Font)              scaled to size 7.19995pt on input line 203.
 \c@twr=\count372
 
-Overfull \hbox (3.01483pt too wide) in paragraph at lines 215--218
+Overfull \hbox (3.01483pt too wide) in paragraph at lines 216--219
 []\T1/fve/m/sc/10 W lini-ach 3-6 tego al-go-rytmu liczymy bezpo±red-nio siª¦ z 
 jak¡ dwa ciaªa odd-zi-aªuj¡ na siebie 
  []
 
 
-Overfull \hbox (5.54787pt too wide) in paragraph at lines 219--220
+Overfull \hbox (5.54787pt too wide) in paragraph at lines 220--221
 [][]\T1/fve/b/n/10 Twierdzenie 1. []\T1/fve/m/sc/10 Jed-now¡tkowy nai-wny al-go
 -rytm dla symu-lacji N ciaª zªo»ono±¢ obliczeniow¡ 
  []
 
 
-Overfull \hbox (8.6539pt too wide) in paragraph at lines 224--228
+Overfull \hbox (8.6539pt too wide) in paragraph at lines 225--229
 \OT4/cmr/m/n/10 4$\T1/fve/m/sc/10 . Z tego wynika, »e zªo»ono±¢ tej pod-op-er-a
 cji $\OMS/plsy/m/n/10 O\OT4/cmr/m/n/10 (\OML/plm/m/it/10 N[]\OT4/cmr/m/n/10 )$\
 T1/fve/m/sc/10 . Nast¦p-nie dla ka»dego obiektu musimy 
  []
 
 
-Overfull \hbox (22.20258pt too wide) in paragraph at lines 236--237
+Overfull \hbox (22.20258pt too wide) in paragraph at lines 237--238
 \T1/fve/m/sc/10 W tym celu wyko-rzys-tamy ar-chitek-tur¦ CUDA. Jest to uni-w-er
 -salna ar-chitek-tura kart graficznych 
  []
 
 
-Overfull \hbox (9.46779pt too wide) in paragraph at lines 236--237
+Overfull \hbox (9.46779pt too wide) in paragraph at lines 237--238
 \T1/fve/m/sc/10 z com-pute com-pa-bil-ity 3.0 i wy»ej. W dzisiejszych cza-sach 
 poza za-s-tosowaniem w ren-derowa- 
  []
 
 
-Overfull \hbox (3.4018pt too wide) in paragraph at lines 236--237
+Overfull \hbox (3.4018pt too wide) in paragraph at lines 237--238
 \T1/fve/m/sc/10 niu grafiki, jest równie» cz¦sto u»y-wana do masy-wnych oblicze
 « nawet na tysi¡-cach w¡tków 
  []
 
 [6]
-LaTeX Font Info:    Try loading font information for TS1+fve on input line 242.
+LaTeX Font Info:    Try loading font information for TS1+fve on input line 243.
 
  (/usr/share/texlive/texmf-dist/tex/latex/bera/ts1fve.fd
 File: ts1fve.fd 2004/09/07 scalable font definitions for TS1/fve.
 )
 LaTeX Font Info:    Font shape `TS1/fve/m/n' will be
-(Font)              scaled to size 8.99994pt on input line 242.
+(Font)              scaled to size 8.99994pt on input line 243.
 
-Overfull \hbox (5.03084pt too wide) in paragraph at lines 256--256
+Overfull \hbox (9.65675pt too wide) in paragraph at lines 253--254
+\T1/fve/m/sc/10 W im-ple-men-tacji wyko-rzys-tuje dwie sz-ablonowe struk-tury z
+ bib-lioteki Thrust. \T1/fve/b/n/10 host_vector\T1/fve/m/sc/10 [[][]9[][]] 
+ []
+
+
+Overfull \hbox (3.50984pt too wide) in paragraph at lines 253--254
+\T1/fve/m/sc/10 de-vicem. \T1/fve/b/n/10 de-vice_vector\T1/fve/m/sc/10 [[][]9[]
+[]] ró»ni si¦ tym, »e pami¦¢ zwi¡zana z nim jest w pami¦ci de-vice'a.  
+ []
+
+
+Overfull \hbox (5.03084pt too wide) in paragraph at lines 257--257
 []\T1/fve/m/sc/10 Funkcja NaiveS-im-Bridge, przed-staw-iona w listingu 2, przyj
 -muje jako ar-gu-ment \T1/fve/b/n/10 host_vector 
  []
 
 
-Overfull \hbox (9.64764pt too wide) in paragraph at lines 256--261
+Overfull \hbox (9.64764pt too wide) in paragraph at lines 257--262
 \T1/fve/m/sc/10 point-erów. Wyko-rzysty-wane s¡ w 6 linii, w której wywoªu-jemy
  ker-nel NaiveSim. W potrójnych 
  []
@@ -1743,159 +1744,165 @@ File: lstlang1.sty 2015/06/04 1.6 listings language file
 (/usr/share/texlive/texmf-dist/tex/latex/listings/lstmisc.sty
 File: lstmisc.sty 2015/06/04 1.6 (Carsten Heinz)
 )
-Overfull \hbox (6.0pt too wide) in paragraph at lines 262--262
+Overfull \hbox (6.0pt too wide) in paragraph at lines 263--263
 [][][][][][][]  
  []
 
 [7]
-Overfull \hbox (6.0pt too wide) in paragraph at lines 277--277
+Overfull \hbox (6.0pt too wide) in paragraph at lines 278--278
 [][][][][][][]  
  []
 
 
-Overfull \hbox (6.91185pt too wide) in paragraph at lines 314--314
+Overfull \hbox (6.91185pt too wide) in paragraph at lines 315--315
 \T1/fve/m/sc/10 ciaªa, »eby zde-cy-dowanie ograniczy¢ odwoªa-nia do dro»szej pa
 mi¦ci glob-al-nej oraz tworzymy 
  []
 
 [8]
-Overfull \hbox (0.28787pt too wide) in paragraph at lines 318--318
+Overfull \hbox (0.28787pt too wide) in paragraph at lines 319--319
 \T1/fve/m/sc/10 kroku porusza si¦ ruchem jed-nos-ta-jnym przy±pies-zonym, a nas
 t¦p-nie ª¡cze-nie ze sob¡ kole- 
  []
 
 
-Overfull \hbox (0.8548pt too wide) in paragraph at lines 318--318
+Overfull \hbox (0.8548pt too wide) in paragraph at lines 319--319
 \T1/fve/m/sc/10 jnych kroków symu-lacji, to mo»emy w tym celu wyko-rzys-ta¢ wcz
 e±niej wprowad-zone wzory.  
  []
 
 
-Overfull \hbox (8.36975pt too wide) in paragraph at lines 318--321
+Overfull \hbox (8.36975pt too wide) in paragraph at lines 319--322
 \T1/fve/m/sc/10 26 do ak-tu-al-nej pozy-cji do-da-jemy wek-tor drogi, o któr¡ p
 rze-suwamy ciaªo po obec-nym kroku. 
  []
 
 [9]
-Overfull \hbox (13.54294pt too wide) in paragraph at lines 349--350
+Overfull \hbox (13.54294pt too wide) in paragraph at lines 350--351
 []\T1/fve/m/sc/10 w klasy-cznej definicji ko-rze« drzewa ma o±mioro nast¦p-nikó
 w, z których ka»dy reprezen- 
  []
 
-(./tree.pdf_tex <tree.pdf, id=273, page=1, 652.70511pt x 357.33972pt>
+(./tree.pdf_tex <tree.pdf, id=300, page=1, 652.70511pt x 357.33972pt>
 File: tree.pdf Graphic file (type pdf)
 
 <use tree.pdf, page 1>
 Package pdftex.def Info: tree.pdf, page1 used on input line 52.
 (pdftex.def)             Requested size: 418.25368pt x 228.98561pt.
 ) [10 <./tree.pdf>]
-Overfull \hbox (10.09772pt too wide) in paragraph at lines 369--370
+Overfull \hbox (10.09772pt too wide) in paragraph at lines 370--371
 \T1/fve/m/sc/10 Najpierw przed-stawmy struk-tur¦ w¦zªa w naszym drzewie. Jest t
 o ukazane w listingu poni»ej.  
  []
 
 
-Overfull \hbox (6.0pt too wide) in paragraph at lines 371--371
+Overfull \hbox (6.0pt too wide) in paragraph at lines 372--372
 [][][][][][][]  
  []
 
 
-Overfull \hbox (34.2536pt too wide) in paragraph at lines 384--384
+Overfull \hbox (34.2536pt too wide) in paragraph at lines 385--385
 []\T1/fve/m/sc/10 ›eby nie tworzy¢ dwóch os-ob-nych struk-tur dla w¦zªów wewn¦t
 rznych i zewn¦trznych poª¡czyli±my 
  []
 
 
-Overfull \hbox (3.24876pt too wide) in paragraph at lines 384--384
+Overfull \hbox (3.24876pt too wide) in paragraph at lines 385--385
 []\T1/fve/m/sc/10 Przez to nasza struk-tura musi za-w-iera¢ mas¦ ciaªa oraz jeg
 o poªo»e-nie w przestrzeni(tablica 
  []
 
 
-Overfull \hbox (8.95476pt too wide) in paragraph at lines 386--386
+Overfull \hbox (8.95476pt too wide) in paragraph at lines 387--387
 []\T1/fve/m/sc/10 Jednak»e na-jwa»niejszymi po-lami tej struk-tury s¡ tablica k
 wad-ran-tów, czyli o±miu mniejszych 
  []
 
 
-Overfull \hbox (6.3357pt too wide) in paragraph at lines 386--388
+Overfull \hbox (6.3357pt too wide) in paragraph at lines 387--389
 []\T1/fve/m/sc/10 A tak»e ±rodek masy oraz caªkowita masa punk-tów w przestrzen
 i okre±lanej przez ten w¦zeª. 
  []
 
 
-Overfull \hbox (2.2589pt too wide) in paragraph at lines 395--396
+Overfull \hbox (2.2589pt too wide) in paragraph at lines 396--397
 []\T1/fve/m/sc/10 Poni»ej przed-staw-imy pseu-dokod rekuren-cyjnego tworzenia d
 rzewa ósemkowego, co b¦dzie 
  []
 
 
-Overfull \hbox (28.1606pt too wide) in paragraph at lines 398--398
+Overfull \hbox (28.1606pt too wide) in paragraph at lines 399--399
 \T1/fve/m/sc/10 Poni»szy list-ing przed-stawia gªówn¡ funkcj¦, która odpowiada 
 za stworze-nie drzewa ósemkowego 
  []
 
 [11]
-Overfull \hbox (6.0pt too wide) in paragraph at lines 404--404
+Overfull \hbox (6.0pt too wide) in paragraph at lines 405--405
 [][][][][][][]  
  []
 
 
-Overfull \hbox (11.03198pt too wide) in paragraph at lines 430--431
+Overfull \hbox (11.03198pt too wide) in paragraph at lines 431--432
 \T1/fve/m/sc/10 ±rodek masy dla ko-rzenia pod-drzewa oraz wstaw-ia-j¡¢ w¦zeª re
 kuren-cyjnie do odpowied- 
  []
 
 
-Overfull \hbox (6.0pt too wide) in paragraph at lines 435--435
+Overfull \hbox (6.0pt too wide) in paragraph at lines 436--436
 [][][][][][][]  
  []
 
 [12]
-Overfull \hbox (6.0pt too wide) in paragraph at lines 486--486
+Overfull \hbox (6.0pt too wide) in paragraph at lines 487--487
 [][][][][][][]  
  []
 
 [13]
-Overfull \hbox (11.14177pt too wide) in paragraph at lines 531--532
+Overfull \hbox (11.14177pt too wide) in paragraph at lines 530--531
 []\T1/fve/b/n/10 Tutaj do-da¢ opis do algo, mo»na zro-bi¢ potem, gdy» maªo is-t
 otne. Do-datkowo doªo»y¢ 
  []
 
-
-Overfull \hbox (6.0pt too wide) in paragraph at lines 539--539
+[14]
+Overfull \hbox (6.0pt too wide) in paragraph at lines 549--549
 [][][][][][][]  
  []
 
-[14]
-Overfull \hbox (2.9338pt too wide) in paragraph at lines 571--571
-\T1/fve/m/sc/10 jako pier-wszy ar-gu-ment przyj-muje wspóªrz¦dne kamery, nast¦p
--nie punkt na który pa-trzymy, 
+
+Overfull \hbox (6.70482pt too wide) in paragraph at lines 578--579
+\T1/fve/m/sc/10 linii 19 wym-na»amy wszys-tkie macierze ze sob¡ (odpowiedzial-n
+ego za ka»dy z kroków MVP), 
  []
 
 [15] [16]
 LaTeX Font Info:    Font shape `T1/fvm/m/n' will be
-(Font)              scaled to size 8.99994pt on input line 586.
+(Font)              scaled to size 8.99994pt on input line 596.
 
-Overfull \hbox (4.4379pt too wide) in paragraph at lines 587--587
-[]\T1/fve/m/sc/10 G.Chincarini E.D'Onghia C.Firmani. \T1/fve/m/sl/10 The Halo D
-en-sity Pro-files with Non-Standard 
+Overfull \hbox (10.65692pt too wide) in paragraph at lines 597--597
+[]\T1/fve/m/sc/10 Keshav Pin-gali Mar-tin Burtscher. ``GPU Com-put-ing Gems Eme
+r-ald Edi-tion''. In: NVIDIA 
  []
 
 
-Overfull \hbox (1.55795pt too wide) in paragraph at lines 587--587
-\T1/fve/m/sc/10 ics''. In: DOVER PUB-LI-CA-TIONS, 1971. Chap. 1 TWO-BODY OR-BIT
-AL ME-CHAN- 
+Overfull \hbox (5.23pt too wide) in paragraph at lines 597--597
+[]\T1/fve/m/sc/10 Donald Meagher. ``Ge-o-met-ric Mod-el-ing Us-ing Oc-tree En-c
+od-ing''. In: \T1/fve/m/sl/10 Com-puter Graph- 
  []
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 589.
+
+Overfull \hbox (3.96095pt too wide) in paragraph at lines 597--597
+\T1/fve/m/sc/10 In: DOVER PUB-LI-CA-TIONS, 1971. Chap. 1 TWO-BODY OR-BITAL ME-C
+HAN-ICS, pp. 1^^U 
+ []
+
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 599.
 [17]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 589.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 599.
  (./Praca.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 589.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 589.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 599.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 599.
 Package rerunfilecheck Info: File `Praca.out' has not changed.
-(rerunfilecheck)             Checksum: 05DE40C1FD4C31AA27146D8BE8A4DA3E;1910.
+(rerunfilecheck)             Checksum: 1AEF1C7A1CC3ED83DCFE3380D554AFB4;2116.
 
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
@@ -1903,13 +1910,13 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 Package logreq Info: Writing requests to 'Praca.run.xml'.
 \openout1 = `Praca.run.xml'.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 589.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 599.
  ) 
 Here is how much of TeX's memory you used:
- 24688 strings out of 493029
- 403867 string characters out of 6136235
- 845867 words of memory out of 5000000
- 27552 multiletter control sequences out of 15000+600000
+ 24707 strings out of 493029
+ 404140 string characters out of 6136235
+ 848307 words of memory out of 5000000
+ 27567 multiletter control sequences out of 15000+600000
  53149 words of font info for 70 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  48i,8n,99p,938b,2062s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1930,10 +1937,10 @@ e/texlive/texmf-dist/fonts/type1/public/pl/plr5.pfb></usr/share/texlive/texmf-d
 ist/fonts/type1/public/pl/plr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/p
 ublic/pl/plsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/pl/plsy7.
 pfb>
-Output written on Praca.pdf (17 pages, 162030 bytes).
+Output written on Praca.pdf (17 pages, 163351 bytes).
 PDF statistics:
- 610 PDF objects out of 1000 (max. 8388607)
- 549 compressed objects within 6 object streams
- 248 named destinations out of 1000 (max. 500000)
- 219 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 637 PDF objects out of 1000 (max. 8388607)
+ 576 compressed objects within 6 object streams
+ 252 named destinations out of 1000 (max. 500000)
+ 243 words of extra memory for PDF output out of 10000 (max. 10000000)
 
