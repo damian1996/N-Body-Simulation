@@ -19,5 +19,3 @@ else
     ./out/main < input
 fi
 
-
-/usr/local/cuda-9.2/bin/nvprof ./out/main

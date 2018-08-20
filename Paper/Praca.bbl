@@ -300,6 +300,23 @@
       \field{labeltitlesource}{title}
       \field{title}{N-Body Simulation of the Formation of the Earth-Moon System from a Single Giant Impact}
     \endentry
+    \entry{tero}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=9c6cb97b8c2c22b41d64c2c4f4520c11}{%
+           family={Karras},
+           family_i={K\bibinitperiod},
+           given={Tero},
+           given_i={T\bibinitperiod}}}%
+      }
+      \strng{namehash}{9c6cb97b8c2c22b41d64c2c4f4520c11}
+      \strng{fullhash}{9c6cb97b8c2c22b41d64c2c4f4520c11}
+      \field{sortinit}{K}
+      \field{sortinithash}{a7d5b3aec5a0890aae7baf85a209abfc}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Maximizing Parallelism in the Construction of BVHs, Octrees, and k-d Trees}
+      \field{year}{2012}
+    \endentry
     \entry{fastNbody}{inbook}{}
       \name{author}{1}{}{%
         {{hash=c80df4a88bc38a808f57006ebf998123}{%

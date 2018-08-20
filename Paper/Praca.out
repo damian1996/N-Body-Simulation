@@ -22,8 +22,12 @@
 \BOOKMARK [3][-]{subsubsection.3.3.3}{Z\233ozonosc tworzenia drzewa}{subsection.3.3}% 22
 \BOOKMARK [2][-]{subsection.3.4}{Spacer po drzewie}{section.3}% 23
 \BOOKMARK [1][-]{section.4}{Zr\363wnoleglenie algorytmu Barnesa Hut}{}% 24
-\BOOKMARK [2][-]{subsection.4.1}{R\363wnoleg\233a implementacja drzew \363semkowych}{section.4}% 25
-\BOOKMARK [1][-]{section.5}{Wizualizacja}{}% 26
-\BOOKMARK [2][-]{subsection.5.1}{OpenGL}{section.5}% 27
-\BOOKMARK [2][-]{subsection.5.2}{Renderowanie symulacji}{section.5}% 28
-\BOOKMARK [1][-]{section.6}{Podsumowanie}{}% 29
+\BOOKMARK [2][-]{subsection.4.1}{Kody Mortona}{section.4}% 25
+\BOOKMARK [2][-]{subsection.4.2}{R\363wnoleg\233a implementacja drzew \363semkowych}{section.4}% 26
+\BOOKMARK [2][-]{subsection.4.3}{Implementacja}{section.4}% 27
+\BOOKMARK [3][-]{subsubsection.4.3.1}{Kody Mortona}{subsection.4.3}% 28
+\BOOKMARK [3][-]{subsubsection.4.3.2}{Sortowanie oraz usuniecie duplikat\363w w kodach}{subsection.4.3}% 29
+\BOOKMARK [1][-]{section.5}{Wizualizacja}{}% 30
+\BOOKMARK [2][-]{subsection.5.1}{OpenGL}{section.5}% 31
+\BOOKMARK [2][-]{subsection.5.2}{Renderowanie symulacji}{section.5}% 32
+\BOOKMARK [1][-]{section.6}{Podsumowanie}{}% 33

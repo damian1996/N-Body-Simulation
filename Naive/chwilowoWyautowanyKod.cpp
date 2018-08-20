@@ -1,109 +1,112 @@
-template <typename T> struct KernelArray {
-  T *arr;
-  int _size;
-  KernelArray(int N) { arr = (T *)malloc(N * sizeof(T)); }
-  KernelArray(thrust::device_vector<T> &dVec, int N) {
-    arr = (T *)malloc(N * sizeof(T));
-    arr = thrust::raw_pointer_cast(dVec.data());
-    _size = (int)N;
-  }
-  ~KernelArray() { free(arr); }
-};
-
-// Function to convert device_vector to structure
-
-template <typename T>
-KernelArray<T> *cTK(thrust::device_vector<T> &dVec, int N) {
-  KernelArray<T> *kArray = new KernelArray<T>(N);
-  // kArray->arr = thrust::raw_pointer_cast(&dVec[0]);
-  kArray->arr = thrust::raw_pointer_cast(dVec.data());
-  kArray->_size = (int)N;
-
-  return kArray;
+/*
+__device__
+int delta(int i, int j, unsigned long long int* mortonCodes, int N) {
+  if(i < 0 || i > N-1) return -1;
+  if(j < 0 || j > N-1) return -1;
+  unsigned long long a = mortonCodes[i];
+  unsigned long long b = mortonCodes[j];
+  return __clz(a^b)-(64-3*K);
 }
 
-const char *vertex_shader[] = {"#version 130\n"
-                               "in vec3 position;\n"
-                               "in vec3 color;\n"
-                               "in float weight;\n"
-                               "out vec3 vertex_color;\n"
-                               "void main() {\n"
-                               "    gl_Position = vec4(position,1.0);\n"
-                               "    vertex_color=color;\n"
-                               "}"};
+__global__
+void calculateRadixTree(unsigned long long int* mortonCodes, int* leftInternalChildren, 
+    int* rightInternalChildren, int* nodesCountFromEdges, int N) {
+  int thid = blockIdx.x*blockDim.x + threadIdx.x;
+  if(thid >= N) return;
+  int d = sgn(delta(thid, thid+1, mortonCodes, N) - delta(thid, thid-1, mortonCodes, N));
 
-const char *fragment_shader[] = {"#version 130\n"
-                                 "in vec3 vertex_color;\n"
-                                 "void main() {\n"
-                                 "    gl_FragColor = vec4(vertex_color, 1);\n"
-                                 "}"};
+  int delta_min = delta(thid, thid-d, mortonCodes, N);
+  int l_max = 2;
+  while(delta(thid, thid*l_max*d) > delta_min) l_max *= 2;
 
-glEnable(GL_DEBUG_OUTPUT);
-glDebugMessageCallback((GLDEBUGPROC)MessageCallback, 0);
-glEnable(GL_VERTEX_PROGRAM_POINT_SIZE);
-glGenBuffers(3, buffer);
+  int l = 0;
+  for(int t = l_max/2; t >= 1; t /= 2) {
+    if(delta(thid, thid+(l+t)*d) > delta_min) 
+      l += t;
+  }
+  int j = thid + l*d;
 
-...
-
-    glBindBuffer(GL_ARRAY_BUFFER, buffer[2]);
-glBufferData(GL_ARRAY_BUFFER, sizeof(float) * N, V_weight, GL_DYNAMIC_DRAW);
-glEnableVertexAttribArray(2);
-glVertexAttribPointer(2, 3, GL_FLOAT, GL_TRUE, 0, 0);
-
-...
-
-    glBindAttribLocation(program, 2, "weight");
-
-...
-
-    glBindBuffer(GL_ARRAY_BUFFER, buffer[2]);
-glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(float) * N, V_weight);
-
-/*
-void NaiveSimBridge(Render* painter, type& pos, type& velocities, type& weights,
-int N) {
-    // type = thrust::device_vector<float>
-
-    thrust::device_vector<float> posD = pos;
-    thrust::device_vector<float> veloD = velocities;
-    thrust::device_vector<float> weightsD = weights;
-
-    while(true) {
-        KernelArray<float>* d_positions = cTK<float>(posD, 3*N);
-        KernelArray<float>* d_velocities = cTK<float>(veloD, 3*N);
-        KernelArray<float>* d_weights = cTK<float>(weightsD, N);
-
-        //NaiveSim<<<(N+255)/256, 256>>>(cTK<float>(d_positions, 3*N),
-cTK<float>(d_velocities, 3*N), cTK<float>(d_weights, N));
-        NaiveSim<<<8, (N+7)/8>>>(d_positions, d_velocities, d_weights);
-        cudaDeviceSynchronize();
-        // potrzebuje wskazniczkow z powrotem
-
-        // wrap raw pointer with a device_ptr
-        thrust::device_ptr<float> dev_ptr1(d_positions->arr);
-        thrust::device_ptr<float> dev_ptr2(d_velocities->arr);
-        thrust::device_ptr<float> dev_ptr3(d_weights->arr);
-
-        // copy memory to a new device_vector (which automatically allocates
-memory)
-        thrust::device_vector<float> vec1(dev_ptr1, dev_ptr1 + 3*N);
-        thrust::device_vector<float> vec2(dev_ptr2, dev_ptr2 + 3*N);
-        thrust::device_vector<float> vec3(dev_ptr3, dev_ptr3 + N);
-
-        break;
-        //painter->sendData(positions);
-        //if(painter->draw()) break;
-    }
-
-    // free user-allocated memory
-    //cudaFree(raw_ptr);
-
-    cudaMallocManaged(&tx, sizeof(int*));
-    cudaMallocManaged(&ty, sizeof(int*));
-    *tx = x;
-    *ty = x;
-    NaiveSim<<<,1>>>(tx, ty);
-    cudaDeviceSynchronize();
-    x = *tx;
+  int delta_node = delta(i, j);
+  int s = 0;
+  int t = (l+1)/2;
+  int denom = 2;
+  while(1) {
+    if(delta(thid, thid+(s+t)*d) > delta_node)
+      s += t;
+    if(t == 1) break;
+    denom *= 2;
+    t = (l+denom-1)/denom;
+  }
+  int gamma = thid + s*d + min(d, 0);
+  // TODO: co jak gamma = 0
+  if(min(i, j) == gamma)
+    leftInternalChildren[thid] = -gamma;
+  else 
+    leftInternalChildren[thid] = gamma;
+  if(max(i, j) == gamma+1)
+    rightInternalChildren[thid] = -(gamma+1);
+  else
+    rightInternalChildren[thid] = gamma+1;
+  
+  parent_delta = delta_node;
+  left_child_delta = data();
+  right_child_delta = data();
 }
 */
+
+  /*
+  // 3. usuwamy duplikaty
+  auto iterators = thrust::unique_by_key(mortonCodes.begin(), mortonCodes.end(), sortedNodes.begin());
+
+  // 4. liczymy radix tree
+  int uniquePointsCount = thrust::distance(mortonCodes.begin(), iterators.first);
+  blocks = (uniquePointsCount+THREADS_PER_BLOCK-1)/THREADS_PER_BLOCK;
+  thrust::device_vector<int> leftInternalChildren(uniquePointsCount);
+  thrust::device_vector<int> rightInternalChildren(uniquePointsCount);
+  int* d_leftInternalChildren = thrust::raw_pointer_cast(leftInternalChildren.data());
+  int* d_rightInternalChildren = thrust::raw_pointer_cast(rightInternalChildren.data());
+  calculateRadixTree<<<blocks, THREADS_PER_BLOCK>>>(
+    d_mortonCodes,
+    d_leftInternalChildren,
+    d_rightInternalChildren,
+    uniquePointsCount
+  );
+
+  // 5. liczymy ilość node-ow z octree do zaalokowania
+  thrust::device_vector<int> nodesCountFromEdges(uniquePointsCount);
+  int* d_nodesCountFromEdges = thrust::raw_pointer_cast(nodesCountFromEdges.data());
+  calculateOctreeNodesCount<<<blocks, THREADS_PER_BLOCK>>>(
+    d_mortonCodes,
+    d_leftInternalChildren,
+    d_rightInternalChildren,
+    d_nodesCountFromEdges,
+    uniquePointsCount-1,
+  );
+
+  thrust::device_vector<int> inclusiveSum(uniquePointsCount);
+  thrust::device_vector<int> exclusiveSum(uniquePointsCount);
+
+  thrust::inclusive_scan(nodesCountFromEdges.begin(), nodesCountFromEdges.end(), inclusiveSum.begin());
+  // todo: can be done better - just substract the values
+  thrust::exclusive_scan(nodesCountFromEdges.begin(), nodesCountFromEdges.end(), exclusiveSum.begin());
+
+  int octreeInternalNodesCount = 1+inclusiveSum.back();
+  int octreeNodesCount = octreeInternalNodesCount+uniquePointsCount;
+  thrust::device_vector<OctreeNode> octree(octreeNodesCount);
+  OctreeNode* d_octree = thrust::raw_pointer_cast(octree.data());
+
+  // 6. laczymy octree nodes
+  blocks = (octreeInternalNodesCount+THREADS_PER_BLOCK-1)/THREADS_PER_BLOCK;
+  int* d_inclusiveSum = thrust::raw_pointer_cast(inclusiveSum.data());
+  int* d_exclusiveSum = thrust::raw_pointer_cast(exclusiveSum.data());
+  connectOctreeNodes<<<blocks, THREADS_PER_BLOCK>>>(
+    d_mortonCodes,
+    d_leftInternalChildren,
+    d_rightInternalChildren,
+    d_inclusiveSum,
+    d_exclusiveSum,
+    uniquePointsCount,
+    octreeInternalNodesCount,
+  );
+  // TODO: return the tree! xd
+  */

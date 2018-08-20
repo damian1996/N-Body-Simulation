@@ -1,3 +1,8 @@
+
+
+
+
+
 \bigskip
  sudo apt-get install texlive-full
 
@@ -12,6 +17,7 @@ Random citation embeddeed in text.s\\
 biber Praca\\
 \url{https://www.sharelatex.com/learn/Bibliography_management_with_biblatex}\\
 inkscape -D -z --file=drawing.svg --export-pdf=draw.pdf --export-latex
+inkscape -D -z --file=zcurve.svg --export-pdf=zcurve.pdf --export-latex
 
 \section{\LARGE Wizualizacja}
 
