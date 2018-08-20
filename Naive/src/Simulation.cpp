@@ -26,12 +26,13 @@ void Simulation::MakeSimulation() {
 
   int count = 0;
   float avgDt = 0.0;
-  while(!rend->draw(positions)) {
-      if(count > 10000) break;
+  //while(!rend->draw(positions)) {
+  while(1) {  
+      if(count >= 1000) break;
       curr_time = rend->getTime();
       //std::cout << curr_time - last_time << std::endl;
       avgDt += (curr_time - last_time);
-      step->compute(positions, 10*(curr_time - last_time));// * 10);
+      step->compute(positions, (curr_time - last_time));// * 10);
       last_time = curr_time;
       count++;
   }

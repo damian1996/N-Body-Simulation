@@ -1,7 +1,6 @@
 \documentclass[14pt,twoside,a4paper]{article}
 \usepackage{polski}
 \usepackage[utf8]{inputenc}
-\usepackage[english]{babel}
 \usepackage{amsmath}
 \usepackage{amsthm}
 \usepackage{amsfonts}
@@ -14,6 +13,7 @@
 \usepackage{geometry}
 \usepackage{graphicx}
 \usepackage{listings}
+\usepackage{calc}
 \usepackage{color}
 \usepackage{fontenc}
 \usepackage[document]{ragged2e}
@@ -318,12 +318,10 @@ Dalej mamy część, dla której równoleglimy nasz algorytm. Najpierw w liniach
 \bigskip
 Mając policzoną siłę oddziałującą na obiekt, przechodzimy do wyliczenia nowej pozycji dla obiektu. Jako, że ruch obiektu aproksymujemy poprzez przyjęcie że obiekt w pojedynczmy kroku porusza się ruchem jednostajnym przyśpieszonym, a następnie łączenie ze sobą kolejnych kroków symulacji, to możemy w tym celu wykorzystać wcześniej wprowadzone wzory.\\ Najpierw w linii 25, korzystając z prawa 2, wyliczamy wektor przyśpieszenia ciała. W linii 26 do aktualnej pozycji dodajemy wektor drogi, o którą przesuwamy ciało po obecnym kroku. I w końcu, linia 27 aktualizuje wektor prędkości.
 \bigskip
-\bigskip
 
 Wykorzystując architekturę CUDA, mogliśmy przyśpieszyć nasz algorytm. Jednakże, symulacja implementowana tym algorytmem ma jeszcze jeden duży problem. Gdy obiekty są bardzo blisko siebie, to znaczy odległość między nimi jest bliska zera, to wtedy siła, którą na siebie działają jest ogromna. Wtedy ciała wyraźnie się oddalają od siebie, co jest nienaturalne.
 W dwóćh następnych podrozdziałach podam dwie optymalizacje, które ograniczają skutki takich sytuacji.
 
-\bigskip
 \subsection{\Large Softening} 
 
 Pierwszą optymalizacją jest, tak zwany \textbf{softening}\cite[str.~21]{Aarseth}. Polega na modyfikacji wzoru wprowadzonego w Prawie 4, do następującej postaci:
@@ -531,8 +529,79 @@ void computeForceForBody(NodeBH* r, std::array<double, 3>& pos, int i)
 
 \section{\LARGE Zrównoleglenie algorytmu Barnesa Hut}
 
+Jednakże aby zaimplementować konstruowanie drzewa ósemkowego wielowątkowo, to musi zmienić nasze podejście. Obecny pomysł się nie sprawdzi, ponieważ poszczególne wierzchołki są doklejane sekwencyjnie jako dzieci do innych wierzchołków, przez co nie możemy tego zrealizować równolegle.
+Aby podjąć wyzwanie równoległej implementacji drzew ósemkowych, musimy przed rozpoczęciem konstruowania drzewa mieć informację o położeniu każdego wierzchołka w drzewie.
+
+\subsection{Kody Mortona}
+W tym celu zastosujemy \textbf{kody Mortona}.
+Porządkiem Mortona, nazywamy mapowanie punktu w przestrzeni do liniowej list liczby(w naszym przypadku mapujemy punkty w 3-wymiarowej przestrzeni do liczb całkowitych, a konkretniej interesowć nas będzie ich bitowa reprezentacja).
+Porządek Mortona jest definiowany przez \textbf{space-filling curve}, która jest w kształcie \textbf{Z}, więc czasami jest nazywana \textbf{Z-curve}. Krzywa ta ma ważną własność - jeśli elementy są blisko są blisko siebie w drzewie, to w tym porządku ta bliskość jest zachowana. W pracy traktujemy kod Mortona jako 64-bitową liczbę całkowitą, w której 20 bitów (łącznie 60 dla wszystkich trzech wymiarów) oznacza kolejne rozgałęzienia dla naszego węzła, czyli w których częściach kolejno ląduje, gdy umieszczamy go w coraz mniejszych sześcianach, aż do przyjętej głębokości równej 20.
+
+\begin{figure}[h]
+    \centering      
+    \def\svgscale{0.53}
+    \input{zcurve.pdf_tex}
+    \caption{Przykład Z-curve}
+    \label{fig:krzywa}
+\end{figure}
+
+
 \subsection{\Large Równoległa implementacja drzew ósemkowych}
-\bigskip
+Z wykorzystaniem powyżej zdefiniowanych kodów będziemy implementować algorytm wspomniany w pracy Tero Karrasa, z tym wyjątkiem, że będzie lekko zmodykifowany, gdyż nie będziemy korzystać z \textbf{binary radix tree} \cite{tero}.
+
+Zmodyfikowany algorytm (skrótowo) składa się z sześciu kroków :
+\begin{itemize}
+\item Obliczenie kodów Mortona dla każdego węzła. Realizujemy to poprzez kernel, który na podstawie przedziałów, w których zawierają się punkty w całym układzie dla każdego z wymiarów, wyznacza przez 20 poziomów coraz to dokładniejsze położenie poprzez liczbę bitową. 
+\item Sortujemy kody Mortona. W tym celu wykorzystujemy bibliotekę Thrust, a dokładniej funkcję \textbf{sort\_by\_key}. 
+\item Kody liczymy do głębokości 20, więc istnieje możliwość pojawienia się duplikatów, których tyczą się dwie kolejne części naszego algorytmu (zidentyfikowanei i usunięcie duplikatów). W naszej implementacji załatwiamy to kolejną funkcją z biblioteki thrust, to jest \textbf{unique}.
+\item Liczymy ile wierzchołków będzie miało nasze drzewo(znamy jedynie liczbę liści, potrzebujemy policzyć również liczbę węzłów wewnętrznych. Dodatkowo tworzymy wierzchołki.
+\item  Łączymy węzły według relacji (rodzic, dziecko). W tym celu musimy odpowiednio przyporządkować każdemu węzłowi jego węzeł nadrzędny.
+\end{itemize}
+
+\subsection{Implementacja}
+W tym rozdziale przedstawimy pseudokody implementacji kolejnych kroków algorytmu.
+\subsubsection{Kody Mortona}
+\lstset{backgroundcolor=\color{white}, basicstyle=\footnotesize\fontfamily{fvm}\selectfont, numbers=left, numbersep=8pt, keywordstyle=\color{blue},commentstyle = \color{mygreen}}              
+\begin{lstlisting}[language=C++, frame=single, framerule=2pt, caption=Krok 1]
+__global__
+void calculateMortonCodes(T* positions, unsigned long long* codes, int numberOfBodies, T* mins, T* maxs) {
+  float start[3] = {mins[0], mins[1], mins[2]};
+  float p[3] = {positions[3*thid], positions[3*thid+1], positions[3*thid+2]};
+  float middle[3] = {(maxs[0] - mins[0])/2, (maxs[1] - mins[1])/2, (maxs[2] - mins[2])/2};
+  unsigned long long code = 0;
+  for(int i = 0; i < K; ++i) {
+    for(int j = 0; j < 3; ++j) {
+      code <<= 1;
+      if(start[j] + middle[j] < p[j]) {
+        code |= 0x1;
+        start[j] += middle[j];
+      }
+      middle[j] /= 2;
+    }
+  }
+  codes[thid] = code;
+}
+\end{lstlisting}
+W przypadku liczenia kodów Mortona, potrzebujemy minimalnego oraz maksymalnego punktu w każdym z wymiarów. Dzięki temu jesteśmy w stanie wyznaczyć początek oraz środek przedziału dla obiektu na danej głębkości. Poprzez to możemy stwierdzić, w której połowie znajduje się nasz obiekt(czyli na danej głębokości przydzielić 0 lub 1).
+\subsubsection{Sortowanie oraz usunięcie duplikatów w kodach}
+
+\lstset{backgroundcolor=\color{white}, basicstyle=\footnotesize\fontfamily{fvm}\selectfont, numbers=left, numbersep=8pt, keywordstyle=\color{blue},commentstyle = \color{mygreen}}              
+\begin{lstlisting}[language=C++, frame=single, framerule=2pt, caption=Krok 2]
+thrust::device_vector<int> sortedNodes(numberOfBodies);
+int* d_sortedNodes = thrust::raw_pointer_cast(sortedNodes.data());
+fillNodes<<<blocks, THREADS_PER_BLOCK>>>(d_sortedNodes, numberOfBodies);
+
+thrust::sort_by_key(mortonCodes.begin(), mortonCodes.end(), sortedNodes.begin());  
+  
+iterators = thrust::unique_by_key(mortonCodes.begin(), mortonCodes.end(), sortedNodes.begin());
+\end{lstlisting}
+
+Rolą wektora sortedNodes jest zachowanie początkowej numeracji punktów, to znaczy sortujemy pary \textbf{(kodMortona, początkowyIndeks)}.
+Zmienna iterators dostaje parę iteratorów na posortowane wektory jako wynik z \textbf{thrust::unique\_by\_key}.
+
+\subsubsection{Zliczenie węzłów wewnętrznych drzewa ósemkowego}
+
+
 
 \section{\Large Wizualizacja}
 	
@@ -593,7 +662,7 @@ Z kolei funkcja \textbf{perspective}\cite{opengl} odpowiada za rzutowanie, a w a
 \newpage
 
 \nocite{*}
-\printbibliography
+\printbibliography%[title=\foreignlanguage{polski}{Bibliografia}]
 
 \end
 {document}

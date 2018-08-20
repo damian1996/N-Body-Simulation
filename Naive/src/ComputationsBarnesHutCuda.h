@@ -9,6 +9,8 @@ typedef thrust::host_vector<float> type;
 class ComputationsBarnesHut {
   thrust::device_vector<float> veloD;
   thrust::device_vector<float> weightsD;
+  float* d_positions;
+  int numberOfBodies;
 
 public:
   ComputationsBarnesHut(type velocities, type weights) {
@@ -16,6 +18,7 @@ public:
     weightsD = weights;
   }
   ~ComputationsBarnesHut() {}
+  void createTree(int numberOfBodies, type &pos);
   void BarnesHutBridge(type &pos, int N, float dt);
 };
 
