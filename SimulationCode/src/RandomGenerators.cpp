@@ -56,7 +56,7 @@ void RandomGenerators::initializeVelocities<thrust::host_vector<float>>(
 
 void RandomGenerators::initializeWeights(std::vector<float> &weights, unsigned numberOfBodies) {
   weights.resize(numberOfBodies);
-  int typeMass = 1; //getRandomType();
+  int typeMass = 3; //getRandomType();
   unsigned divi;
   printf("TYP %d\n", typeMass);
   switch (typeMass) {
@@ -67,7 +67,7 @@ void RandomGenerators::initializeWeights(std::vector<float> &weights, unsigned n
   case 1: // 1/10 duze masy, reszta stosunkowo male
     divi = static_cast<unsigned>(numberOfBodies/100);
     for (unsigned i = 0; i < divi; i++)
-      weights[i] = getRandomFloat(1000000.0f, 1010000.0f);
+      weights[i] = getRandomFloat(100000.0f, 101000.0f);
     for (unsigned i = divi; i < numberOfBodies; i++)
       weights[i] = getRandomFloat(10000.0f, 20000.0f);
     break;
@@ -79,6 +79,22 @@ void RandomGenerators::initializeWeights(std::vector<float> &weights, unsigned n
       weights[i] = getRandomFloat(40000.0f, 45000.0f);
     for (unsigned i = 5 * divi; i < numberOfBodies; i++)
       weights[i] = getRandomFloat(1000.0f, 2000.0f);
+    break;
+  case 3:
+    divi = static_cast<unsigned>(numberOfBodies/100);
+    if(divi==0) divi = 1u;
+    for (unsigned i = 0; i < divi; i++)
+      weights[i] = getRandomFloat(1000000.0f, 1010000.0f);
+    for (unsigned i = divi; (i < 5 * divi) && (i < numberOfBodies); i++)
+      weights[i] = getRandomFloat(80000.0f, 95000.0f);
+    for (unsigned i = 5 * divi; (i < 10 * divi) && (i < numberOfBodies); i++)
+      weights[i] = getRandomFloat(60000.0f, 79000.0f);
+    for (unsigned i = 10 * divi; (i < 15 * divi) && (i < numberOfBodies); i++)
+      weights[i] = getRandomFloat(40000.0f, 55000.0f);
+    for (unsigned i = 15 * divi; (i < 20 * divi) && (i < numberOfBodies); i++)
+      weights[i] = getRandomFloat(20000.0f, 30000.0f);
+    for (unsigned i = 20 * divi; i < numberOfBodies; i++)
+      weights[i] = getRandomFloat(1000.0f, 3000.0f);
     break;
   default: // same male
     for (unsigned i = 0; i < numberOfBodies; i++)

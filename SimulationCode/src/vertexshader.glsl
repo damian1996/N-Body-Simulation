@@ -9,7 +9,7 @@ uniform mat4 MVP;
 void main() {
   gl_Position = MVP * vec4(position, 1);
   if(mass > 100000.0) {
-    gl_PointSize = 30.0;
+    gl_PointSize = 13.0;
   } else {
     gl_PointSize = (mass/20000.0) + 3.0;
   }

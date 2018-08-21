@@ -9,7 +9,7 @@ int main() {
   while (1) {
     printf("1. Naiwny algorytm CPU\n2. Naiwny algorytm GPU\n3. Algorytm "
            "Barnes-Hut CPU\n4. Algorytm Barnes-Hut GPU\n");
-    scanf("%d", &programVersion);
+    int res = scanf("%d", &programVersion);
     if (programVersion > 4 || programVersion <= 0) {
       printf("Nie ma takiej opcji, sprobuj ponownie\n");
       continue;
@@ -17,12 +17,13 @@ int main() {
     break;
   }
   printf("Podaj liczbę jednostek do poddania symulacji\n");
-  scanf("%d", &numberOfBodies);
+  int res = scanf("%d", &numberOfBodies);
+  if(res == EOF) return 1;
   RandomGenerators *randomGenerator = new RandomGenerators();
   std::vector<float> masses(numberOfBodies);
   randomGenerator->initializeWeights(masses, numberOfBodies);
   Render *rend;// = new Render(masses, numberOfBodies);
-  Step *step;
+  Step *step = nullptr;
   Simulation *sim;
 
   switch (programVersion) {
