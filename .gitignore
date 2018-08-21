@@ -1,6 +1,6 @@
-Naive/out/main
-Naive/out/*.o
-Naive/out/
-Naive/build/
-Naive/.vscode/
-Naive.zip
+SimulationCode/out/main
+SimulationCode/out/*.o
+SimulationCode/out/
+SimulationCode/build/
+SimulationCode/.vscode/
+SimulationCode.zip
