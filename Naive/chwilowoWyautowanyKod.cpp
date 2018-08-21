@@ -1,3 +1,57 @@
+
+//int* d_exclusiveSum = thrust::raw_pointer_cast(exclusiveSum.data());
+  /*
+  // każdy wewnętrzny r-node ma przypisane jakieś (lub żadne) o-node
+  // dla każdego wewnętrznego r-node:
+  blocks = (N-1+THREADS_PER_BLOCK-1)/THREADS_PER_BLOCK;
+
+  getPrefixes<<<blocks, THREADS_PER_BLOCK>>>(
+    d_codes,
+    d_leftInternalChildren,
+    d_rightInternalChildren,
+    d_inclusiveSum,
+    d_exclusiveSum,
+    d_prefixes,
+    d_prefixesBitsCount,
+    N-1,
+  );
+
+  // TODO: sortujemy te prefixy
+  // najpierw po prefixach, potem po blankach (najpierw więcej potem mniej) i jeszcze jest klucz
+  thrust::zip_iterator<thrust::pair<
+    thrust::device_vector<long long int>::iterator,
+    thrust::device_vector<int>::iterator
+  >> zip_iter(thrust::make_pair(prefixes.begin(), prefixesBitsCount.begin()));
+  // TODO: czy na pewno sortedNodes?, nie tu trzeba nową tablice :v
+  thrust::sort_by_key(zip_iter.begin(), zip_iter.end(), sortedNodes.begin());
+  
+  // dla każdego wewnętrznego o-node szukamy jego rodzica
+  getParents<<<blocks, THREADS_PER_BLOCK>>>(
+    d_codes,
+    d_
+  );
+  
+  // dla każdego liścia o-node szukamy jego rodzica
+  */
+
+  // TODO: return the tree! xd
+
+/*
+    thrust::device_vector<float> centerOfMass(3*uniquePointsCount);
+    float* d_centerOfMass = thrust::raw_pointer_cast(centerOfMass.data());
+    thrust::fill(centerOfMass.begin(), centerOfMass.end(), 0.0);
+
+    thrust::device_vector<float> totalMasses(uniquePointsCount);
+    float* d_totalMasses = thrust::raw_pointer_cast(totalMasses.data());
+    thrust::fill(totalMasses.begin(), totalMasses.end(), 0.0);
+*/
+
+
+
+
+
+
+
 /*
 __device__
 int delta(int i, int j, unsigned long long int* mortonCodes, int N) {
