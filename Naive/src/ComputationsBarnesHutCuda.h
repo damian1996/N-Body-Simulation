@@ -18,7 +18,7 @@ public:
     weightsD = weights;
   }
   ~ComputationsBarnesHut() {}
-  void createTree(int numberOfBodies, type &pos);
+  void createTree(int numberOfBodies);
   void BarnesHutBridge(type &pos, int N, float dt);
 };
 

@@ -555,7 +555,7 @@ Tworzymy również wektor, którego zadaniem jest przechowywanie informacji o ro
 \end{itemize}
 
 \lstset{backgroundcolor=\color{white}, basicstyle=\footnotesize\fontfamily{fvm}\selectfont, numbers=left, numbersep=8pt, keywordstyle=\color{blue},commentstyle = \color{mygreen}}              
-\begin{lstlisting}[language=C++, frame=single, framerule=2pt, caption=Kroki 5-6]
+\begin{lstlisting}[language=C++, frame=single, framerule=2pt, caption=Przechowywanie węzłów drzewa]
 thrust::device_vector<OctreeNode> octree(uniquePointsCount);
 OctreeNode* d_octree = thrust::raw_pointer_cast(octree.data());
 	
@@ -584,12 +584,34 @@ void calculateDuplicates(unsigned long long* mortonCodes, int* result, int N) {
 }
 
 \end{lstlisting}
-
+\bigskip
 Po wyznaczeniu nowych wierzchołków na kolejnym poziomie, wstawiamy je do wektora \textbf{octree}, a następnie przesuwamy im indeks, aby miały indeksy zaczynające się od pierwszego numera po ostatnim węźle z poziomu niżej. Widzimy, że tym sposobem \textbf{root} drzewa będzie ostatnim węzłem w naszej tablicy.
 
+Kiedy stworzymy węzły na danym poziomie, to następnym zadaniem jest połączenie ich z niższym poziomem. Relizujemy to poprzez kernel \textbf{connectChildren}.
+\lstset{backgroundcolor=\color{white}, basicstyle=\footnotesize\fontfamily{fvm}\selectfont, numbers=left, numbersep=8pt, keywordstyle=\color{blue},commentstyle = \color{mygreen}}              
+\begin{lstlisting}[language=C++, frame=single, framerule=2pt, caption=Kernel connectChildren]
+__global__
+void connectChildren(unsigned long long int* mortonCodes, int* parentsNumbers, OctreeNode* octree, 
+    int N, int previousChildrenCount, int* sortedNodes, int level) {
+  unsigned long long childNumber = mortonCodes[thid]&0x7;
+  octree[parentsNumbers[thid]].children[childNumber] = thid+previousChildrenCount;
+  octree[thid+previousChildrenCount].position = level == 0 ? sortedNodes[thid] : -1;
+  octree[parentsNumbers[thid]].totalMass += octree[childNumber].totalMass;
+  octree[parentsNumbers[thid]].centersOfMass = updateCentersOfMass(parentsNumbers[thid], 
+  	childNumber);
+}
+\end{lstlisting}
 
-Całą pętle przedstawia poniższy pseudokod:
+Cele, które ten kernel realizuje, są następujące:
+\begin{itemize}
+\item ustawienie odpowiedniego dziecka (informacja z kodu Mortona),
+\item ustawienie pola position, to znaczy -1 gdy węzeł wewnętrzny, w przeciwnym przypadku identyfikator węzła,
+\item aktualizacja totalMass dla węzła,
+\item aktualizacja centersOfMass dla węzła. 
+\end{itemize}
 
+Całą pętlę realizującą kroki piąty oraz szósty, przedstawia poniższy pseudokod:
+\newpage
 \lstset{backgroundcolor=\color{white}, basicstyle=\footnotesize\fontfamily{fvm}\selectfont, numbers=left, numbersep=8pt, keywordstyle=\color{blue},commentstyle = \color{mygreen}}              
 \begin{lstlisting}[language=C++, frame=single, framerule=2pt, caption=Kroki 5-6]
 for(int i = 0; i < K; ++i) {
@@ -615,92 +637,80 @@ for(int i = 0; i < K; ++i) {
         auto it = thrust::unique(mortonCodes.begin(), mortonCodes.end());
         childrenCount = thrust::distance(mortonCodes.begin(), it);
         previousChildrenCount = allChildrenCount;
-        allChildrenCount += childrenCount; // ?? #damian
+        allChildrenCount += childrenCount;
     }
 \end{lstlisting}
 
+\section{\LARGE Liczenie sił oddziałujących na ciało}
 
+Drzewo zostało stworzone w celu szybszego liczenia siły jaka działa na ciało.\\
+Wersje jednowątkowa oraz wielowątkowa do liczenia siły różnią się jedynie tym, że ta druga robi to na osobnym wątku dla każdego ciała. Przedstawimy więc jedynie wielowątkowe podejście. \\
+Algorytm polega na przejściu drzewa od korzenia i na sprawdzaniu czy węzeł jest wewnętrzny czy zewnętrzny. Gdy węzeł jest liściem, to zwyczajnie liczymy siłę między naszym punktem a tym węzłem (jak w naiwnym algorytmie). Gdy węzeł jest wewnętrzny, to potrzebujemy następującej definicji \cite{Aarseth}:
 
-\lstset{backgroundcolor=\color{white}, basicstyle=\footnotesize\fontfamily{fvm}\selectfont, numbers=left, numbersep=8pt, keywordstyle=\color{blue},commentstyle = \color{mygreen}}              
-\begin{lstlisting}[language=C++, frame=single, framerule=2pt, caption=Kernel connectChildren]
-__global__
-void connectChildren(unsigned long long int* mortonCodes, int* parentsNumbers, OctreeNode* octree, 
-    int N, int previousChildrenCount, int* sortedNodes, int level) {
-  int thid = blockIdx.x*blockDim.x + threadIdx.x;
-  if(thid >= N) return;
-  // dziecko łączy się z parentsNumbers[thid] pod wskaźnikiem zależnym od bitów
-  unsigned long long int childNumber = mortonCodes[thid]&0x7; // 7 = 111 binarnie
-  octree[parentsNumbers[thid]].children[childNumber] = thid+previousChildrenCount;
-  octree[thid+previousChildrenCount].position = level == 0 ? sortedNodes[thid] : -1;
-  octree[parentsNumbers[thid]].totalMass += octree[childNumber].totalMass;
-  for(int i=0; i<3; i++) 
-      octree[parentsNumbers[thid]].centersOfMass[i] = ;
-}
-\end{lstlisting}
-
-\section{\LARGE Spacer po drzewie}
-
-Drzewo zostało stworzone w celu szybszego liczenia siły jaka działa na ciało.\\ Najprostszym podejściem byłoby przejście po drzewie, a kiedy napotkamy punkt w którymś z kwadrantów, to liczymy siłę z jaką oddziałuje na nasz obecny punkt. Jednakże w tym przypadku wciąż musielibyśmy przejść wszystkie węzły w drzewie, więc złożoność nie uległaby poprawie.\\
-\bigskip
-Z tego powodu wprowadzamy następującą definicję\cite{Aarseth} :
 \theoremstyle{definition}
 \begin{definition}{Ratio}
-Niech s będzie szerokością obszaru obejmowanego przez sześcian oraz niech d będzie odległością między środkiem masy obszaru a punktem, to jeśli $s/d < \Theta$, wtedy liczymy siłę między środkiem masy obszaru a punktem. W przeciwnym przypadku wywołujemy się rekurencyjnie na ośmiu podsześcianach.
+- niech s będzie szerokością obszaru obejmowanego przez sześcian oraz niech d będzie odległością między środkiem masy obszaru a punktem, to jeśli $s/d < \Theta$, wtedy liczymy siłę między środkiem masy obszaru a punktem. W przeciwnym przypadku wywołujemy się rekurencyjnie na ośmiu podsześcianach.
 \end{definition}
+
+Powyższa definicja wyjaśnia postępowanie dla wewnętrznego węzła. Dodatkowo musimy rostrzygać czy nasz punkt i przetwarzany węzeł nie są tym samym węzłem, aby nie liczyć siły między nimi.\\~\\~\\
+\bigskip
+\bigskip
 
 \lstset{backgroundcolor=\color{white}, basicstyle=\footnotesize\fontfamily{fvm}\selectfont, numbers=left, numbersep=8pt, keywordstyle=\color{blue},commentstyle = \color{mygreen}} 
 \begin{lstlisting}[language=C++, frame=single, framerule=2pt, caption=Liczenie siły oddziałującej na ciało w układzie]
-void computeForceForBody(NodeBH* r, std::array<double, 3>& pos, int i)
-{
-    if(r->isPoint() && !r->wasInitializedSubQuads())
+__global__
+void computeForces(OctreeNode* octree, float* forcesGlobal, float* velocities, float* weights, 
+	float* pos, int AllNodes, int N, float dt) 
+{	
+	float forces[3] = {0.0, 0.0, 0.0};
+	OctreeNode* node;
+    float p = {pos[3*thid], pos[3*thid + 1], pos[3*thid + 2]);
+    forces[thid] = 0.0;
+    unsigned long long int stack[64];
+    int top = -1;
+    stack[++top] = AllNodes-1;
+    while(top>=0) 
     {
-        if(r->getIndex() == i) return;
-		// węzeł zewnętrzny		
-    	for(int k=0; k<3; k++) 
-          forces[i*3+k] += forcesBetweenTwoNodes(r, pos);
-    }
-    else if(!r->isPoint() && r->wasInitialized())
-    {
-        if(r->pointIsInQuad(pos)) 
+    	node = octree[idx];
+        int idx = stack[top--];
+        if(noe->position == -1)
         {
-            for(auto* child : r->getQuads()) 
-            {
-                computeForceForBody(child, pos, i);
+            double d = dist(node->getCenterOfMass(), p);
+            double s = boundaries[1] - boundaries[0];
+            bool isFarAway = (s/d < theta);
+            if(isFarAway)
+            {	
+                for(int k=0; k<3; k++)
+                    forces[3*thid + k] += forcesBetween(node->getCenterOfMass(), p);
             }
-            return;
-        }
-
-        std::array<double, 6>& boundaries = r->getBoundaries();
-        double d = distanceBetweenTwoNodes(pos, 
-        	r->getSelectedCenterOfMass());
-        double s = boundaries[1] - boundaries[0];
-        bool isFarAway = (s/d < theta) ? true : false;
-        if(isFarAway)
-        {
-            for(int k=0; k<3; k++) 
-                forces[i*3+k] += forcesBetweenTwoNodes(pos,
-                    r->getSelectedCenterOfMass());
+            else
+            {
+                for(int i=0; i<numberOfChilds; i++) 
+                {
+                    stack[++top] = node->children[i];
+                }
+            }
         }
         else
         {
-            for(auto* child : r->getQuads())
-            {
-                computeForceForBody(child, pos, i);
-            }
-        }
+            if(thid == octree[idx].position) 
+                continue;
+            for(int k=0; k<3; k++)
+                forces[3*thid + k] += forcesBetween(node->getPoint(), p);
+        }	
     }
+    for(int k=0; k<3; k++) 
+    	forcesGlobal[3*thid+k] = forces[k];
+    UpdatePositionAndVelocity(forces, positions, velocities, weights, N, dt);
 }
 \end{lstlisting}
-
-\textbf{Tutaj dodać opis do algo, można zrobić potem, gdyż mało istotne. Dodatkowo dołożyć cytacje i poprawić bibliografie}
 
 \section{\LARGE Wizualizacja}
 	
 W celu wizualizacji symulacji wykorzystałem OpenGL3. 
 
 \subsection{\large OpenGL}
-OpenGL \cite{opengl} jest API, które jest przeznaczone głównie do tworzenia grafiki. 
-Wykorzystuje on kartę graficzną (GPU), więc tworzenie grafiki następuje szybciej niż innymi sposobami. Ten efekt nazywamy przyspieszeniem sprzętowym. OpenGL wykorzystywany jest często przez gry komputerowe i wygaszacze ekranu.
+OpenGL \cite{opengl} jest API, które jest przeznaczone głównie do tworzenia grafiki. OpenGL wykorzystuje kartę graficzną (GPU), więc tworzenie grafiki następuje szybciej niż innymi sposobami. Ten efekt nazywamy przyspieszeniem sprzętowym. OpenGL wykorzystywany jest często przez gry komputerowe i wygaszacze ekranu.
 
 \subsection{\large Renderowanie symulacji}
 

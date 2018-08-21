@@ -62,12 +62,12 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsubsection}{\numberline {4.3.3}\relax \fontsize {12}{14}\selectfont Zliczenie w\IeC {\k e}z\IeC {\l }\IeC {\'o}w wewn\IeC {\k e}trznych oraz \IeC {\l }\IeC {\k a}czenie w\IeC {\k e}z\IeC {\l }\IeC {\'o}w}{16}{subsubsection.4.3.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5}\relax \fontsize {17.28}{22}\selectfont Spacer po drzewie}{18}{section.5}
+\contentsline {section}{\numberline {5}\relax \fontsize {17.28}{22}\selectfont Liczenie si\IeC {\l } oddzia\IeC {\l }uj\IeC {\k a}cych na cia\IeC {\l }o}{18}{section.5}
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {6}\relax \fontsize {17.28}{22}\selectfont Wizualizacja}{19}{section.6}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {6.1}\relax \fontsize {12}{14}\selectfont OpenGL}{19}{subsection.6.1}
+\contentsline {subsection}{\numberline {6.1}\relax \fontsize {12}{14}\selectfont OpenGL}{20}{subsection.6.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {6.2}\relax \fontsize {12}{14}\selectfont Renderowanie symulacji}{19}{subsection.6.2}
+\contentsline {subsection}{\numberline {6.2}\relax \fontsize {12}{14}\selectfont Renderowanie symulacji}{20}{subsection.6.2}
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {7}\relax \fontsize {17.28}{22}\selectfont Podsumowanie}{21}{section.7}

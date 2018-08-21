@@ -82,14 +82,12 @@ void connectChildren(unsigned long long int* mortonCodes, int* parentsNumbers, O
   octree[thid+previousChildrenCount].position = level == 0 ? sortedNodes[thid] : -1;
   octree[parentsNumbers[thid]].totalMass += octree[childNumber].totalMass;
 
-  octree[parentsNumbers[thid]].centerX += cos*cos;
-  octree[parentsNumbers[thid]].centerY += cos*cos;
-  octree[parentsNumbers[thid]].centerZ += cos*cos;
+  /*for(int i=0; i<3; i++) 
+    octree[parentsNumbers[thid]].centersOfMass[i] += 
+        ((centerOfMass*totalMassParent + posChild*massChild) / (totalMassParent + massChild));*/
 }
 
-__device__ 
-void 
-
+/*
 __global__
 void computeForces(OctreeNode* octree, float* forces, float* velocities, float* weights, 
     float* pos, int AllNodes, int N, float dt) 
@@ -161,7 +159,7 @@ void computeForces(OctreeNode* octree, float* forces, float* velocities, float* 
         velocities[thid * 3 + j] += acceleration * dt;
     }
 }
-
+*/
 void ComputationsBarnesHut::createTree(int numberOfBodies) {
     int blocks = (numberOfBodies+THREADS_PER_BLOCK-1)/THREADS_PER_BLOCK;
     // 0. liczymy boundaries
@@ -261,13 +259,13 @@ void ComputationsBarnesHut::createTree(int numberOfBodies) {
     float *d_velocities = thrust::raw_pointer_cast(veloD.data());
     float *d_weights = thrust::raw_pointer_cast(weightsD.data());
 
-    computeForces<<<blocks, THREADS_PER_BLOCK>>>(d_octree,
+    /*computeForces<<<blocks, THREADS_PER_BLOCK>>>(d_octree,
         d_forces, 
         d_velocities, 
         d_weights, 
         d_positions, 
         allChildrenCount, 
-        N, dt);
+        N, dt);*/
 }
 
 void ComputationsBarnesHut::BarnesHutBridge(type &pos, int numberOfBodies, float dt) {
