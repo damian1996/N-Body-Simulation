@@ -27,7 +27,7 @@
 \BOOKMARK [3][-]{subsubsection.4.3.1}{Liczenie kod\363w Mortona}{subsection.4.3}% 27
 \BOOKMARK [3][-]{subsubsection.4.3.2}{Sortowanie oraz usuniecie duplikat\363w w kodach}{subsection.4.3}% 28
 \BOOKMARK [3][-]{subsubsection.4.3.3}{Zliczenie wez\233\363w wewnetrznych oraz \233aczenie wez\233\363w}{subsection.4.3}% 29
-\BOOKMARK [1][-]{section.5}{Spacer po drzewie}{}% 30
+\BOOKMARK [1][-]{section.5}{Liczenie si\233 oddzia\233ujacych na cia\233o}{}% 30
 \BOOKMARK [1][-]{section.6}{Wizualizacja}{}% 31
 \BOOKMARK [2][-]{subsection.6.1}{OpenGL}{section.6}% 32
 \BOOKMARK [2][-]{subsection.6.2}{Renderowanie symulacji}{section.6}% 33
