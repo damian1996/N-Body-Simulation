@@ -32,9 +32,9 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {2.4}\relax \fontsize {14.4}{18}\selectfont Softening}{9}{subsection.2.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.5}\relax \fontsize {14.4}{18}\selectfont Aproksymacja kroku}{9}{subsection.2.5}
+\contentsline {subsection}{\numberline {2.5}\relax \fontsize {14.4}{18}\selectfont Z\IeC {\l }o\IeC {\.z}ono\IeC {\'s}\IeC {\'c} zr\IeC {\'o}wnoleglonej naiwnej wersji algorytmu}{9}{subsection.2.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3}\relax \fontsize {17.28}{22}\selectfont Drugie podej\IeC {\'s}cie}{9}{section.3}
+\contentsline {section}{\numberline {3}\relax \fontsize {17.28}{22}\selectfont Drugie podej\IeC {\'s}cie}{10}{section.3}
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {3.1}\relax \fontsize {14.4}{18}\selectfont Drzewa \IeC {\'O}semkowe}{10}{subsection.3.1}
 \defcounter {refsection}{0}\relax 
@@ -42,30 +42,32 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {3.3}\relax \fontsize {14.4}{18}\selectfont Tworzenie drzewa}{11}{subsection.3.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {3.3.1}\relax \fontsize {12}{14}\selectfont Funkcja CreateTree}{12}{subsubsection.3.3.1}
+\contentsline {subsubsection}{\numberline {3.3.1}\relax \fontsize {12}{14}\selectfont Funkcja CreateTree}{11}{subsubsection.3.3.1}
 \defcounter {refsection}{0}\relax 
 \contentsline {subsubsection}{\numberline {3.3.2}\relax \fontsize {12}{14}\selectfont Funkcja InsertNode}{12}{subsubsection.3.3.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {3.3.3}\relax \fontsize {12}{14}\selectfont Z\IeC {\l }o\IeC {\.z}ono\IeC {\'s}\IeC {\'c} tworzenia drzewa}{13}{subsubsection.3.3.3}
+\contentsline {subsubsection}{\numberline {3.3.3}\relax \fontsize {12}{14}\selectfont Z\IeC {\l }o\IeC {\.z}ono\IeC {\'s}\IeC {\'c} tworzenia drzewa}{12}{subsubsection.3.3.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.4}\relax \fontsize {14.4}{18}\selectfont Spacer po drzewie}{13}{subsection.3.4}
+\contentsline {section}{\numberline {4}\relax \fontsize {17.28}{22}\selectfont Zr\IeC {\'o}wnoleglenie algorytmu Barnesa Hut}{13}{section.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4}\relax \fontsize {17.28}{22}\selectfont Zr\IeC {\'o}wnoleglenie algorytmu Barnesa Hut}{14}{section.4}
+\contentsline {subsection}{\numberline {4.1}\relax \fontsize {14.4}{18}\selectfont Kody Mortona}{13}{subsection.4.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.1}Kody Mortona}{15}{subsection.4.1}
+\contentsline {subsection}{\numberline {4.2}\relax \fontsize {14.4}{18}\selectfont R\IeC {\'o}wnoleg\IeC {\l }a implementacja drzew \IeC {\'o}semkowych}{14}{subsection.4.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.2}\relax \fontsize {14.4}{18}\selectfont R\IeC {\'o}wnoleg\IeC {\l }a implementacja drzew \IeC {\'o}semkowych}{15}{subsection.4.2}
+\contentsline {subsection}{\numberline {4.3}\relax \fontsize {14.4}{18}\selectfont Pseudokody poszczeg\IeC {\'o}lnych krok\IeC {\'o}w}{15}{subsection.4.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.3}Implementacja}{16}{subsection.4.3}
+\contentsline {subsubsection}{\numberline {4.3.1}\relax \fontsize {12}{14}\selectfont Liczenie kod\IeC {\'o}w Mortona}{15}{subsubsection.4.3.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {4.3.1}Kody Mortona}{16}{subsubsection.4.3.1}
+\contentsline {subsubsection}{\numberline {4.3.2}\relax \fontsize {12}{14}\selectfont Sortowanie oraz usuni\IeC {\k e}cie duplikat\IeC {\'o}w w kodach}{15}{subsubsection.4.3.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {4.3.2}Sortowanie oraz usuni\IeC {\k e}cie duplikat\IeC {\'o}w w kodach}{17}{subsubsection.4.3.2}
+\contentsline {subsubsection}{\numberline {4.3.3}\relax \fontsize {12}{14}\selectfont Zliczenie w\IeC {\k e}z\IeC {\l }\IeC {\'o}w wewn\IeC {\k e}trznych oraz \IeC {\l }\IeC {\k a}czenie w\IeC {\k e}z\IeC {\l }\IeC {\'o}w}{16}{subsubsection.4.3.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5}\relax \fontsize {14.4}{18}\selectfont Wizualizacja}{17}{section.5}
+\contentsline {section}{\numberline {5}\relax \fontsize {17.28}{22}\selectfont Spacer po drzewie}{18}{section.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.1}\relax \fontsize {12}{14}\selectfont OpenGL}{17}{subsection.5.1}
+\contentsline {section}{\numberline {6}\relax \fontsize {17.28}{22}\selectfont Wizualizacja}{19}{section.6}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.2}\relax \fontsize {12}{14}\selectfont Renderowanie symulacji}{17}{subsection.5.2}
+\contentsline {subsection}{\numberline {6.1}\relax \fontsize {12}{14}\selectfont OpenGL}{19}{subsection.6.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {6}\relax \fontsize {17.28}{22}\selectfont Podsumowanie}{19}{section.6}
+\contentsline {subsection}{\numberline {6.2}\relax \fontsize {12}{14}\selectfont Renderowanie symulacji}{19}{subsection.6.2}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {7}\relax \fontsize {17.28}{22}\selectfont Podsumowanie}{21}{section.7}

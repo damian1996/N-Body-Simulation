@@ -5,13 +5,19 @@
 
 const float G = 6.674 * (1e-11);
 const float EPS = 0.01f;
-
+const int numberOfChilds = 8;
+const float theta = 0.5;
 const int THREADS_PER_BLOCK = 1024;
 const int K = 20;
 
 struct OctreeNode {
+  // jak sprawdzac czy node ma dzieci czy nie?
   int children[8];
   int position;
+  float totalMass = 0;
+  float centerX = 0;
+  float centerY = 0;
+  float centerZ = 0;
 };
 
 template <typename T>
@@ -24,7 +30,6 @@ void getDimensions(T* positions, T* px, T* py, T* pz, int numberOfBodies) {
   pz[thid] = positions[3*thid+2];
 }
 
-// napisac to lepiej
 template <typename T>
 __global__
 void calculateMortonCodes(T* positions, unsigned long long* codes, int numberOfBodies, T* mins, T* maxs) {
@@ -67,75 +72,6 @@ void calculateDuplicates(unsigned long long int* mortonCodes, int* result, int N
 }
 
 __global__
-void computeForces(float* forces, float* velocities, float* weights, int N) {
-    // informacje czy jest punktem/czy ma dzieci (jeden z trzech stanow)
-    // pozycje, centerOfMass, mass, totalMass, 
-    unsigned long long int stack[64];
-    //stack[0] = root;
-
-    /*
-     if(r->isPoint() && !r->wasInitialized())
-    {
-        if(r->getIndex() == i) return; // ten sam Node
-
-        // Jesli node jest zewnetrzny, to policz sile ktora wywiera ten node na obecnie rozwazane cialo
-        double distX = r->getSelectedPosition(0) - pos[0];
-        double distY = r->getSelectedPosition(1) - pos[1];
-        double distZ = r->getSelectedPosition(2) - pos[2];
-        double dist = (distX * distX + distY * distY + distZ * distZ) + EPS * EPS;
-        dist = dist * sqrt(dist);
-        // jak sprawdzic czy to te same bodies? Musze zachowac i != j
-        float F = G * (r->getMass() * weights[i]);
-        forces[i * 3] += F * distX / dist; // force = G(m1*m2)/r^2
-        forces[i * 3 + 1] += F * distY / dist;
-        forces[i * 3 + 2] += F * distZ / dist;
-    }
-    else if(!r->isPoint() && r->wasInitialized())
-    {
-        if(r->isInQuad(pos[0], pos[1], pos[2]))
-        {
-            //rekurencja pomijajac ratio
-            for(auto* child : r->getQuads())
-            {
-                computeForceForBody(child, pos, i);
-            }
-            return;
-        }
-
-        std::array<double, 6>& boundaries = r->getBoundaries();
-
-        double d = distanceBetweenTwoNodes(pos[0], pos[1], pos[2],
-            r->getSelectedCenterOfMass(0),
-            r->getSelectedCenterOfMass(0),
-            r->getSelectedCenterOfMass(0));
-        double s = boundaries[1] - boundaries[0];
-
-        bool isFarAway = (s/d < theta);
-        if(isFarAway)
-        {
-            double distX = r->getSelectedCenterOfMass(0) - pos[0];
-            double distY = r->getSelectedCenterOfMass(1) - pos[1];
-            double distZ = r->getSelectedCenterOfMass(2)- pos[2];
-            double dist = (distX * distX + distY * distY + distZ * distZ) + EPS * EPS;
-            dist = dist * sqrt(dist);
-            // jak sprawdzic czy to te same bodies? Musze zachowac i != j
-            float F = G * (r->getTotalMass() * weights[i]);
-            forces[i * 3] += F * distX / dist; // force = G(m1*m2)/r^2
-            forces[i * 3 + 1] += F * distY / dist;
-            forces[i * 3 + 2] += F * distZ / dist;
-        }
-        else
-        {
-            for(auto* child : r->getQuads())
-            {
-                computeForceForBody(child, pos, i);
-            }
-        }
-    }
-    */
-}
-
-__global__
 void connectChildren(unsigned long long int* mortonCodes, int* parentsNumbers, OctreeNode* octree, 
     int N, int previousChildrenCount, int* sortedNodes, int level) {
   int thid = blockIdx.x*blockDim.x + threadIdx.x;
@@ -144,12 +80,92 @@ void connectChildren(unsigned long long int* mortonCodes, int* parentsNumbers, O
   unsigned long long int childNumber = mortonCodes[thid]&0x7; // 7 = 111 binarnie
   octree[parentsNumbers[thid]].children[childNumber] = thid+previousChildrenCount;
   octree[thid+previousChildrenCount].position = level == 0 ? sortedNodes[thid] : -1;
+  octree[parentsNumbers[thid]].totalMass += octree[childNumber].totalMass;
+
+  octree[parentsNumbers[thid]].centerX += cos*cos;
+  octree[parentsNumbers[thid]].centerY += cos*cos;
+  octree[parentsNumbers[thid]].centerZ += cos*cos;
 }
 
-void ComputationsBarnesHut::createTree(int numberOfBodies, type &pos) {
+__device__ 
+void 
+
+__global__
+void computeForces(OctreeNode* octree, float* forces, float* velocities, float* weights, 
+    float* pos, int AllNodes, int N, float dt) 
+{
+    // informacje czy jest punktem/czy ma dzieci (jeden z trzech stanow)
+    // pozycje, centerOfMass, mass, totalMass, 
+    int thid = blockIdx.x*blockDim.x + threadIdx.x;
+    if(thid >= N) return;
+
+    forces[thid] = 0.0;
+    unsigned long long int stack[64];
+    int top = -1;
+    //stack[0] = root;
+    stack[++top] = AllNodes-1;
+    while(top>=0) 
+    {
+        int idx = stack[top--];
+        if(octree[idx].position == -1)
+        {
+            // jakos wywalic i!=j
+
+            double d = sqrt(x - pos[3*thid] + y - pos[3*thid+1] + z - pos[3*thid+2] + EPS*EPS); 
+            double s = boundaries[1] - boundaries[0];
+            bool isFarAway = (s/d < theta);
+            if(isFarAway)
+            {
+                double distX = octree[idx].centerX - pos[0];
+                double distY = octree[idx].centerY - pos[1];
+                double distZ = octree[idx].centerZ - pos[2];
+                double dist = (distX * distX + distY * distY + distZ * distZ) + EPS * EPS;
+                dist = dist * sqrt(dist);
+                float F = G * (r->getTotalMass() * weights[i]);
+                forces[i * 3] += F * distX / dist;
+                forces[i * 3 + 1] += F * distY / dist;
+                forces[i * 3 + 2] += F * distZ / dist;
+            }
+            else
+            {
+                for(int i=0; i<numberOfChilds; i++) 
+                {
+                    stack[++top] = octree.children[i];
+                }
+            }
+        }
+        else 
+        {
+            if(thid == octree[idx].position) 
+                continue;
+            
+            // Jesli node jest zewnetrzny, to policz sile ktora wywiera ten node na obecnie rozwazane cialo
+            float distX = octree[idx].centerX - pos[3*thid];
+            float distY = octree[idx].centerY - pos[3*thid + 1];
+            float distZ = octree[idx].centerZ - pos[3*thid + 2];
+            float dist = (distX * distX + distY * distY + distZ * distZ) + EPS * EPS;
+            dist = dist * sqrt(dist);
+            // jak sprawdzic czy to te same bodies? Musze zachowac i != j
+            float F = G * (weights[octree[idx].position] * weights[thid]);
+            forces[thid * 3] += F * distX / dist; // force = G(m1*m2)/r^2
+            forces[thid * 3 + 1] += F * distY / dist;
+            forces[thid * 3 + 2] += F * distZ / dist;
+        }
+    }
+
+
+    for (int j = 0; j < 3; j++) {
+        float acceleration = forces[thid * 3 + j] / weights[thid];
+        positions[thid * 3 + j] +=
+            velocities[thid * 3 + j] * dt + acceleration * dt * dt / 2;
+        velocities[thid * 3 + j] += acceleration * dt;
+    }
+}
+
+void ComputationsBarnesHut::createTree(int numberOfBodies) {
     int blocks = (numberOfBodies+THREADS_PER_BLOCK-1)/THREADS_PER_BLOCK;
     // 0. liczymy boundaries
-
+    // ew. zaokraglic do najblizszej potegi 2 (najwiekszej dla kazdego z wymiarow)
     thrust::device_vector<float> px(numberOfBodies), py(numberOfBodies), pz(numberOfBodies);
     float *d_px = thrust::raw_pointer_cast(px.data());
     float *d_py = thrust::raw_pointer_cast(py.data());
@@ -181,7 +197,6 @@ void ComputationsBarnesHut::createTree(int numberOfBodies, type &pos) {
     // 2. sortujemy to
     thrust::sort_by_key(mortonCodes.begin(), mortonCodes.end(), sortedNodes.begin());  
 
-  
     // 3. usuwamy duplikaty
     auto iterators = thrust::unique_by_key(mortonCodes.begin(), mortonCodes.end(), sortedNodes.begin());
 
@@ -189,20 +204,10 @@ void ComputationsBarnesHut::createTree(int numberOfBodies, type &pos) {
     // uwaga: być może nie musimy tego tak naprawde liczyć tylko potem przy tworzeniu drzewa to się samo liczy o.o
     int uniquePointsCount = thrust::distance(mortonCodes.begin(), iterators.first);
     blocks = (uniquePointsCount+THREADS_PER_BLOCK-1)/THREADS_PER_BLOCK;
-    
-    // moje dodatki
-    thrust::device_vector<float> centerOfMass(3*uniquePointsCount);
-    float* d_centerOfMass = thrust::raw_pointer_cast(centerOfMass.data());
-    thrust::fill(centerOfMass.begin(), totalMasses.end(), 0.0);
-
-    thrust::device_vector<float> totalMasses(uniquePointsCount);
-    float* d_totalMasses = thrust::raw_pointer_cast(totalMasses.data());
-    thrust::fill(totalMasses.begin(), totalMasses.end(), 0.0);
-    // moje dodatki
 
     thrust::device_vector<OctreeNode> octree(uniquePointsCount);
     OctreeNode* d_octree = thrust::raw_pointer_cast(octree.data());
-
+	
     // 6. laczymy octree nodes
     thrust::device_vector<int> parentsNumbers(uniquePointsCount);
     int* d_parentsNumbers = thrust::raw_pointer_cast(parentsNumbers.data());
@@ -210,6 +215,8 @@ void ComputationsBarnesHut::createTree(int numberOfBodies, type &pos) {
     int allChildrenCount = uniquePointsCount;
     int previousChildrenCount = 0;
     
+    // dzieci laczymy bottom-up czy up-down? #damian
+
     for(int i = 0; i < K; ++i) {
         blocks = (childrenCount+THREADS_PER_BLOCK-1)/THREADS_PER_BLOCK;
         thrust::fill(parentsNumbers.begin(), parentsNumbers.end(), 0);
@@ -222,13 +229,13 @@ void ComputationsBarnesHut::createTree(int numberOfBodies, type &pos) {
         
         // zrób prefixsuma żeby je ponumerować
         thrust::inclusive_scan(parentsNumbers.begin(), parentsNumbers.end(), parentsNumbers.begin());
-        thrust::host_vector<int> parentsNumbersHost = parentsNumbers;
+        //thrust::host_vector<int> parentsNumbersHost = parentsNumbers;
 
         // dodaj nowe nody do octree
         octree.insert(octree.end(), parentsNumbers[childrenCount-1]+1, OctreeNode()); // co tu sie odbywa?
         d_octree = thrust::raw_pointer_cast(octree.data()); // dlaczego znowu raw_cast?
         
-        // czemu dodajemy tak duzo? o.o
+        // czemu dodajemy tak duzo? o.o #damian
         thrust::for_each(parentsNumbers.begin(), parentsNumbers.end(), thrust::placeholders::_1 += allChildrenCount);
         
         // połącz odpowiednio dzieci
@@ -247,57 +254,25 @@ void ComputationsBarnesHut::createTree(int numberOfBodies, type &pos) {
         auto it = thrust::unique(mortonCodes.begin(), mortonCodes.end());
         childrenCount = thrust::distance(mortonCodes.begin(), it);
         previousChildrenCount = allChildrenCount;
-        allChildrenCount += childrenCount; // ??
+        allChildrenCount += childrenCount; // ?? #damian
     }
 
-    // potrzebuje jeszcze center of mass(byc moze uda sie podpiac pod , mass, totalMass
+    // potrzebuje jeszcze center of mass(byc moze uda sie podpiac pod , mass, totalMass #damian
     float *d_velocities = thrust::raw_pointer_cast(veloD.data());
     float *d_weights = thrust::raw_pointer_cast(weightsD.data());
-    // tutaj liczenie sily i nowych pozycji
-    //computeForces(d_forces, d_weights, d_velocities, N);
+
+    computeForces<<<blocks, THREADS_PER_BLOCK>>>(d_octree,
+        d_forces, 
+        d_velocities, 
+        d_weights, 
+        d_positions, 
+        allChildrenCount, 
+        N, dt);
 }
 
 void ComputationsBarnesHut::BarnesHutBridge(type &pos, int numberOfBodies, float dt) {
-  thrust::device_vector<float> posD = pos;
-  d_positions = thrust::raw_pointer_cast(posD.data());
-  createTree(numberOfBodies, pos);
-  pos = posD;
+    thrust::device_vector<float> posD = pos;
+    d_positions = thrust::raw_pointer_cast(posD.data());
+    createTree(numberOfBodies);
+    pos = posD;
 }
-
-
-//int* d_exclusiveSum = thrust::raw_pointer_cast(exclusiveSum.data());
-  /*
-  // każdy wewnętrzny r-node ma przypisane jakieś (lub żadne) o-node
-  // dla każdego wewnętrznego r-node:
-  blocks = (N-1+THREADS_PER_BLOCK-1)/THREADS_PER_BLOCK;
-
-  getPrefixes<<<blocks, THREADS_PER_BLOCK>>>(
-    d_codes,
-    d_leftInternalChildren,
-    d_rightInternalChildren,
-    d_inclusiveSum,
-    d_exclusiveSum,
-    d_prefixes,
-    d_prefixesBitsCount,
-    N-1,
-  );
-
-  // TODO: sortujemy te prefixy
-  // najpierw po prefixach, potem po blankach (najpierw więcej potem mniej) i jeszcze jest klucz
-  thrust::zip_iterator<thrust::pair<
-    thrust::device_vector<long long int>::iterator,
-    thrust::device_vector<int>::iterator
-  >> zip_iter(thrust::make_pair(prefixes.begin(), prefixesBitsCount.begin()));
-  // TODO: czy na pewno sortedNodes?, nie tu trzeba nową tablice :v
-  thrust::sort_by_key(zip_iter.begin(), zip_iter.end(), sortedNodes.begin());
-  
-  // dla każdego wewnętrznego o-node szukamy jego rodzica
-  getParents<<<blocks, THREADS_PER_BLOCK>>>(
-    d_codes,
-    d_
-  );
-  
-  // dla każdego liścia o-node szukamy jego rodzica
-  */
-
-  // TODO: return the tree! xd

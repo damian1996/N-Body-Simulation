@@ -251,20 +251,6 @@
       \field{title}{CHAOS IN THE N-BODY PROBLEM OF STELLAR DYNAMICS}
       \field{year}{1991}
     \endentry
-    \entry{tutMat}{misc}{}
-      \name{author}{1}{}{%
-        {{hash=0d1b08c34858921bc7c662b228acb7ba}{%
-           family={???},
-           family_i={?\bibinitperiod}}}%
-      }
-      \strng{namehash}{0d1b08c34858921bc7c662b228acb7ba}
-      \strng{fullhash}{0d1b08c34858921bc7c662b228acb7ba}
-      \field{sortinit}{h}
-      \field{sortinithash}{82012198d5dfa657b8c4a168793268a6}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{title}{http://www.opengl-tutorial.org/beginners-tutorials/tutorial-3-matrices/}
-    \endentry
     \entry{barnhut}{article}{}
       \name{author}{1}{}{%
         {{hash=b4b2efb1ebff4322ef9b164bf6ffeb86}{%

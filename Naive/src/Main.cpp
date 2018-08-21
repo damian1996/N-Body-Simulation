@@ -8,7 +8,7 @@ int main() {
   printf("Wybierz tryb wykonywania programu\n");
   while (1) {
     printf("1. Naiwny algorytm CPU\n2. Naiwny algorytm GPU\n3. Algorytm "
-           "KD-drzewa CPU\n4. Algorytm Barnes-Hut GPU\n");
+           "Barnes-Hut CPU\n4. Algorytm Barnes-Hut GPU\n");
     scanf("%d", &programVersion);
     if (programVersion > 4 || programVersion <= 0) {
       printf("Nie ma takiej opcji, sprobuj ponownie\n");

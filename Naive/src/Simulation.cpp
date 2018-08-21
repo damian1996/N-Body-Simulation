@@ -26,9 +26,9 @@ void Simulation::MakeSimulation() {
 
   int count = 0;
   float avgDt = 0.0;
-  //while(!rend->draw(positions)) {
-  while(1) {  
-      if(count >= 1000) break;
+  int numberOfRounds = 1;
+  while(!rend->draw(positions)) {
+      if(count >= numberOfRounds) break;
       curr_time = rend->getTime();
       //std::cout << curr_time - last_time << std::endl;
       avgDt += (curr_time - last_time);
@@ -36,5 +36,5 @@ void Simulation::MakeSimulation() {
       last_time = curr_time;
       count++;
   }
-  std::cout << avgDt/1000 << std::endl;
+  std::cout << avgDt/numberOfRounds << std::endl;
 }
