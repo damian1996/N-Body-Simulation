@@ -5,7 +5,7 @@ BarnesHutStepCuda::BarnesHutStepCuda(std::vector<float>& masses, unsigned number
     weights.resize(numberOfBodies);
     forces.resize(3*numberOfBodies);
 
-    std::array<double, 6> boundariesForRoot = {-sizeFrame, sizeFrame, -sizeFrame, sizeFrame, -sizeFrame, sizeFrame};
+    //std::array<double, 6> boundariesForRoot = {-sizeFrame, sizeFrame, -sizeFrame, sizeFrame, -sizeFrame, sizeFrame};
     //root = new NodeBH(boundariesForRoot);
 
     weights = std::vector<double>(masses.begin(), masses.end());

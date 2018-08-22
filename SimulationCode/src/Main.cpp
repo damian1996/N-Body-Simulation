@@ -22,7 +22,7 @@ int main() {
   RandomGenerators *randomGenerator = new RandomGenerators();
   std::vector<float> masses(numberOfBodies);
   randomGenerator->initializeWeights(masses, numberOfBodies);
-  Render *rend;// = new Render(masses, numberOfBodies);
+  Render *rend = nullptr; // = new Render(masses, numberOfBodies);
   Step *step = nullptr;
   Simulation *sim;
 

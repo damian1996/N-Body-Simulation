@@ -11,13 +11,12 @@ const int THREADS_PER_BLOCK = 1024;
 const int K = 20;
 
 struct OctreeNode {
-  // jak sprawdzac czy node ma dzieci czy nie?
   int children[8];
   int position;
   float totalMass = 0;
-  float centerX = 0;
-  float centerY = 0;
-  float centerZ = 0;
+  float centerX = 0.0;
+  float centerY = 0.0;
+  float centerZ = 0.0;
 };
 
 template <typename T>
@@ -73,34 +72,39 @@ void calculateDuplicates(unsigned long long int* mortonCodes, int* result, int N
 
 __global__
 void connectChildren(unsigned long long int* mortonCodes, int* parentsNumbers, OctreeNode* octree, 
-    int N, int previousChildrenCount, int* sortedNodes, int level) {
+    int N, int previousChildrenCount, int* sortedNodes, float* positions, float* weights, int level) {
   int thid = blockIdx.x*blockDim.x + threadIdx.x;
   if(thid >= N) return;
   // dziecko łączy się z parentsNumbers[thid] pod wskaźnikiem zależnym od bitów
   unsigned long long int childNumber = mortonCodes[thid]&0x7; // 7 = 111 binarnie
   octree[parentsNumbers[thid]].children[childNumber] = thid+previousChildrenCount;
   octree[thid+previousChildrenCount].position = level == 0 ? sortedNodes[thid] : -1;
-  octree[parentsNumbers[thid]].totalMass += octree[childNumber].totalMass;
 
-  /*for(int i=0; i<3; i++) 
-    octree[parentsNumbers[thid]].centersOfMass[i] += 
-        ((centerOfMass*totalMassParent + posChild*massChild) / (totalMassParent + massChild));*/
+  if(!level) {
+      // setup leaves, will be bad by removing of duplicates
+      octree[sortedNodes[thid]].totalMass = weights[thid];
+      octree[sortedNodes[thid]].centerX = (weights[thid] * positions[3*thid]) / weights[thid];
+      octree[sortedNodes[thid]].centerY = (weights[thid] * positions[3*thid]) / weights[thid];
+      octree[sortedNodes[thid]].centerZ = (weights[thid] * positions[3*thid]) / weights[thid];
+  }
+  else {
+      octree[parentsNumbers[thid]].totalMass += octree[childNumber].totalMass;
+      octree[parentsNumbers[thid]].centerX += octree[childNumber].centerX;
+      octree[parentsNumbers[thid]].centerY += octree[childNumber].centerY;
+      octree[parentsNumbers[thid]].centerZ += octree[childNumber].centerZ;
+  }
 }
 
-/*
 __global__
 void computeForces(OctreeNode* octree, float* forces, float* velocities, float* weights, 
     float* pos, int AllNodes, int N, float dt) 
 {
-    // informacje czy jest punktem/czy ma dzieci (jeden z trzech stanow)
-    // pozycje, centerOfMass, mass, totalMass, 
     int thid = blockIdx.x*blockDim.x + threadIdx.x;
     if(thid >= N) return;
 
-    forces[thid] = 0.0;
+    float localForces[3] = {0.0, 0.0, 0.0}; 
     unsigned long long int stack[64];
     int top = -1;
-    //stack[0] = root;
     stack[++top] = AllNodes-1;
     while(top>=0) 
     {
@@ -159,7 +163,7 @@ void computeForces(OctreeNode* octree, float* forces, float* velocities, float* 
         velocities[thid * 3 + j] += acceleration * dt;
     }
 }
-*/
+
 void ComputationsBarnesHut::createTree(int numberOfBodies) {
     int blocks = (numberOfBodies+THREADS_PER_BLOCK-1)/THREADS_PER_BLOCK;
     // 0. liczymy boundaries
@@ -244,6 +248,8 @@ void ComputationsBarnesHut::createTree(int numberOfBodies) {
             childrenCount,
             previousChildrenCount,
             d_sortedNodes,
+            d_positions,
+            d_weights,
             i
         );
         
@@ -259,13 +265,13 @@ void ComputationsBarnesHut::createTree(int numberOfBodies) {
     float *d_velocities = thrust::raw_pointer_cast(veloD.data());
     float *d_weights = thrust::raw_pointer_cast(weightsD.data());
 
-    /*computeForces<<<blocks, THREADS_PER_BLOCK>>>(d_octree,
+    computeForces<<<blocks, THREADS_PER_BLOCK>>>(d_octree,
         d_forces, 
         d_velocities, 
         d_weights, 
         d_positions, 
         allChildrenCount, 
-        N, dt);*/
+        N, dt);
 }
 
 void ComputationsBarnesHut::BarnesHutBridge(type &pos, int numberOfBodies, float dt) {

@@ -10,12 +10,16 @@ class ComputationsBarnesHut {
   thrust::device_vector<float> veloD;
   thrust::device_vector<float> weightsD;
   float* d_positions;
+  float *d_velocities;
+  float *d_weights;
   int numberOfBodies;
 
 public:
   ComputationsBarnesHut(type velocities, type weights) {
     veloD = velocities;
     weightsD = weights;
+    d_velocities = thrust::raw_pointer_cast(veloD.data());
+    d_weights = thrust::raw_pointer_cast(weightsD.data());
   }
   ~ComputationsBarnesHut() {}
   void createTree(int numberOfBodies);

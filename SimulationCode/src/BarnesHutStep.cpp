@@ -68,7 +68,7 @@ void BarnesHutStep::createTree(tf3& positions) {
         int index = root->numberOfSubCube(pos[0], pos[1], pos[2]);
         if(index < 8)
         {
-            std::array<double, 6> bound = root->getChild(index)->getBoundaries();
+            //std::array<double, 6> bound = root->getChild(index)->getBoundaries();
             NodeBH* node = new NodeBH(weights[i], i, pos, root->getChild(index)->getBoundaries());
             insertNode(node, root->getChild(index));
             delete node;
