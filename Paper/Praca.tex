@@ -95,26 +95,25 @@ citestyle=numeric,
 
 \section{\LARGE Przedstawienie problemu symulacji N ciał}
 \bigskip
-Symulacja N ciał jest zagadnieniem z mechaniki klasycznej, które polega na wyznaczeniu toru ruchów wszystkich ciał danego układu o danych masach, prędkościach i położeniach początkowych w oparciu o prawa ruchu i założenie, że ciała oddziałują ze sobą zgodnie z prawem grawitacji Newtona. \\
+Symulacja N ciał jest zagadnieniem z mechaniki klasycznej, które polega na wyznaczeniu toru ruchów wszystkich ciał danego układu o danych masach, prędkościach i położeniach początkowych w oparciu o prawa ruchu i założenie, że ciała oddziałują ze sobą zgodnie z prawem grawitacji Newtona. \\ 
+Podstawowe zagadnienia do symulacji N ciał zostały przedstawione przez Isaaca Newtona w 1687 roku, który wprowadził prawa(później zostaną przedstawione dokładniej), które obowiązują przy próbach analitycznego rozwiązania problemu. \cite{Newton}.
 
 \subsection{\Large Szczególne przypadki}
-\bigskip
-Problem wyznaczenia dokładnego ruchu dowolnej liczby ciał jest trudny, więc można znaleźć wiele prac skupiająych się jedynie na ustalonej, małej liczbe ciał.
+Problem analitycznego wyznaczenia dokładnego ruchu dowolnej liczby ciał jest trudny, więc można znaleźć wiele prac skupiająych się jedynie na ustalonej, małej liczbe ciał.
 
 \subsubsection{\large Problem dwóch ciał}
-Problem dla dwóch ciał podlegających prawom klasycznej dynamiki Newtona i przyciągających się zgodnie z newtonowskim prawem powszechnego ciążenia został rozstrzygnięty przez J. Bernoulliego przy założeniu, że masa obiektu koncentruje się w jego środku. \cite[str.~1-49]{fund}
+Problem dla dwóch ciał podlegających prawom klasycznej dynamiki Newtona i przyciągających się zgodnie z newtonowskim prawem powszechnego ciążenia został analitycznie rozstrzygnięty przez J. Bernoulliego przy założeniu, że masa obiektu koncentruje się w jego środku. \cite[str.~1-49]{fund}
 
 Obydwa ciała poruszają się po krzywych stożkowych, których rodzaj zależy od całkowitej energii układu. Przykładowo, gdy energia jest mała, to ciała nie mogą się od siebie uwolnić, więc krążą wokół siebie po elipsach. (Figure \ref{fig:kulki})
 
 \subsubsection{\large Problem trzech ciał}
-Problem trzech ciał wciąż nie został rozwiązany w ogólności. Jednakże istnieją rozwiązania dla szczególnych przypadków, jak na przykład \cite{threebody1, threebody2}. Inną wariacją tego problemu jest system, w którym masa jednego z ciał jest zaniedbywalnie mała, jest to tak zwany ograniczony problem trzech ciał - przedstawiony przez J. L. Lagrange'a w XVIII wieku. Badał on układ Słońce-Ziemia-Księżyc. 
+Problem trzech ciał wciąż nie został rozwiązany analitycznie w ogólności. Jednakże istnieją rozwiązania dla uproszczonych wersji tego problemu, jak na przykład gdy masy obiektów są równe \cite{threebody1} lub w przypadku gdy w układzie mamy trzy równoległe względem siebie linie, a każde z ciał porusza się po jednej z prostych \cite{threebody2}, a także gdy masa jednego z ciał obecnych w systemi jest zaniedbywalnie mała(jest to tak zwany ograniczony problem trzech ciał - przedstawiony przez J. L. Lagrange'a w XVIII wieku). \cite{szebehely}
 
 
 \subsection{\Large Zastosowania}
-\bigskip
-Symulacje N ciał są szeroko wykorzystywanymi narzędziami w fizyce oraz astronomii. Problemem, w którym symulacje są użyteczne jest na przykład dynamika systemu z kilkoma ciałami jak układ Słońce-Ziemia-Księżyc \cite{SEMmisc}, co może pomóc w zrozumieniu działania olbrzymich systemów we wszechświecie. \cite{chaosMisc}
+Symulacje N ciał są szeroko wykorzystywanymi narzędziami w fizyce oraz astronomii. Problemem, w którym symulacje są użyteczne jest na przykład dynamika systemu z kilkoma ciałami jak układ Słońce-Ziemia-Księżyc \cite{SEMmisc} lub dynamika systemów gwiezdnych. \cite{chaosMisc}\\
 W kosmologii symulacje są wykorzystywane do studiowania procesów tworzenia nieliniowych struktur jak galaktyczne halo z wpływem ciemnej materii \cite{haloDensity}. 
-Z kolei, bezpośrednie symulacje N ciał są wykorzystywane na przykład do studiowania dynamicznej ewolucji klastrów gwiazd lub do symulacji dynamiki planetozymali. \cite{dirNBody}. Symulacje są wykorzystywane również w innych dziedzinach, chociażby w algorytmach rysowania grafu skierowanego siłą. \cite{visGraph} Powyższe przykłady pokazują jak różnorodny jest zakres zastosowań symulacji.
+Z kolei, bezpośrednie symulacje N ciał są wykorzystywane na przykład do studiowania dynamicznej ewolucji klastrów gwiazd lub do symulacji dynamiki planetozymali. \cite{dirNBody}. Zastosowania symulacji można zaobserwować również w innych dziedzinach, chociażby w algorytmach rysowania grafu skierowanego siłą. \cite{visGraph} Powyższe przykłady pokazują jak różnorodny jest zakres zastosowań symulacji.
 \newpage
 
 \begin{figure}
@@ -133,10 +132,8 @@ Repozytorium jest dostępne pod tym \href{https://github.com/damian1996/N-Body-S
 Całość została zaimplementowana w C++. Innymi technologiami wykorzystanymi w pracy są OpenGL, CUDA czy Thrust, których zastosowanie zostanie wspomniane później. \\
 Pełna instrukcja instalacji niezbędnego oprogramowania do uruchomienia symulacji jest zawarta w repozytorium (dla linuxa Ubuntu).
 
-\section{\LARGE Pierwsze podejście implementacyjne}
-\bigskip
+\section{\LARGE Teoretyczne podstawy symulacji N ciał}
 
-\subsection{\Large Sformułowanie problemu}
 W celu przedstawienia ogólnego sformułowania problemu potrzebujemy przytoczyć trzy prawa dynamiki sformułowane przez Isaaca Newtona: \cite[str.~3-4]{fund}
 
 \begin{theorem}
@@ -175,7 +172,16 @@ Potrzebujemy zdefiniować jeszcze jedno pojęcie, jakim jest \textbf{ruch jednos
 Konkretniej będziemy potrzebować wyprowadzonych wzorów na zmianę prędkości i pokonaną drogę przez obiekt w danym odcinku czasu.
 $$v_k = v_p + a\cdot t,$$ gdzie $v_k$ jest prędkością po wykonaniu kroku symulacji, $v_p$ jest prędkością początkową, $a$ oznacza wektora przyśpieszenia, a $t$ to czas kroku symulacji.\\
 Drugim wzorem jest:
-$$s = v_p\cdot t + \frac{a\cdot t^2}{2},$$ gdzie $s$ oznacza drogą przebytą w jednym kroku, a pozostałe oznaczenia są identyczne jak powyżej.
+$$s = v_p\cdot t + \frac{a\cdot t^2}{2},$$ gdzie $s$ oznacza drogą przebytą w jednym kroku, a pozostałe oznaczenia są identyczne jak powyżej.\\
+\newpage
+Tak zdefiniowana symulacja N ciał spotyka się z następującymi problemami:
+\begin{itemize}
+\item Kiedy ciała są bardzo bliskie siebie, wtedy zadziała na nie ogromna siła, która w rzeczywistości będzie działała na ciało przez krótki czas. To znaczy krok symulacji może trwać znacznie dłużej niż czas, przez który obiekty będą blisko siebie. Przez to na ciało zadziała o wiele za duża siła niż powinna.
+\item Ciało w pojedynczym kroku symulacji porusza się ruchem jednostajnie przyśpieszonym prostoliniowym, więc ruch w całej symulacji jest jedynie aproksymacją poprzez sklejeniem tych odcinków czasu.
+\end{itemize}
+
+\section{\LARGE Naiwny algorytm symulacji N ciał}
+\bigskip
 
 \subsection{\Large Jednowątkowa wersja naiwnego algorytmu}
 
@@ -289,8 +295,9 @@ NaiveSim(T *pos, T *velo, T *weigh, int numberOfBodies, double dt)
   double pos[3] = {pos[thid*3], pos[thid*3+1], pos[thid*3+2]};
   double weighI = weigh[thid];
   double force[3] = {0.0, 0.0, 0.0};
-
-  for (int j = 0; j < numberOfBodies; j++) {
+  
+  for j in {0..numberOfBodies-1}
+  {
     if (j != thid) {
       double d[3];
       for(int k=0; k<3; k++) 
@@ -302,7 +309,8 @@ NaiveSim(T *pos, T *velo, T *weigh, int numberOfBodies, double dt)
         force[k] += F * d[k] / dist;	
     }
   }
-  for(int k=0; k<3; k++) {
+  for k in {0..2}
+  {
     float acc = force[k] / weighI;
     pos[thid*3+k] += velo[thid*3+k]*dt + acc*dt*dt/2;
     velo[thid*3+k] += acc*dt;
@@ -330,10 +338,8 @@ gdzie wprowadzony $\epsilon$ ma za zadanie nie dopuścić do bardzo małych odle
 \subsection{\Large Złożoność zrównoleglonej naiwnej wersji algorytmu}
 Równoległa wersja naiwnego algorytmu wciąż wykonuje pracę rzędu $\mathcal{O}(N^{2})$, jednakże dzięki temu, że dla każdego obiektu siły na niego działające oraz nową pozycję liczymy na osobnym wątku, to czas działania algorytmu to $\mathcal{O}(N)$, przy założeniu, że mamy do dyspozycji $N$ procesorów.
 
-\section{\LARGE Drugie podejście}
-Zrównoleglony naiwny algorytm jest szybszy niż wersja jednowątkowa, jednakże wciąż jest zbyt wolny do symulacji układów z bardzo dużą liczbą ciał. W tym celu zaimplementujemy drugi algorytm, zwany algorytmem Barnesa Hut. \cite[str.~446-449]{barnhut}, \cite{barneshut} \bigskip
-
-\bigskip
+\section{\LARGE Symulacja N ciał algorytmem Barnes Hut}
+Zrównoleglony naiwny algorytm jest szybszy niż wersja jednowątkowa, jednakże wciąż jest zbyt wolny do symulacji układów z bardzo dużą liczbą ciał. W tym celu zaimplementujemy drugi algorytm, zwany algorytmem Barnesa Hut. \cite[str.~446-449]{barnhut}, \cite{barneshut}
 
 \subsection{\Large Drzewa Ósemkowe}
 
@@ -392,7 +398,7 @@ Początkowo w linii 2 tworzy następniki dla korzenia drzewa. Następnie w pętl
 \lstset{backgroundcolor=\color{white}, basicstyle=\footnotesize\fontfamily{fvm}\selectfont, numbers=left, numbersep=8pt, keywordstyle=\color{blue},commentstyle = \color{mygreen}}\begin{lstlisting}[language=C++, frame=single, framerule=2pt, caption=Pseudokod algorytmu tworzenia drzewa ósemkowego]
 void CreateTree(vector<double>& positions) {
     root->addQuads(root->getBoundaries());
-    for(unsigned i=0; i<numberOfBodies; i++)
+    for i in {0..numberOfBodies-1}
     {	
     	auto pos = copy(positions[i*3], ..., positions[i*3+2]);	        
         root->addPointToCenterOfMass(weights[i], pos);
@@ -460,7 +466,7 @@ void InsertNode(NodeBH* node, NodeBH* quad)
 }
 \end{lstlisting}
 
-\section{\LARGE Zrównoleglenie algorytmu Barnesa Hut}
+\section{\LARGE Zrównoleglenie algorytmu Barnes Hut}
 
 W celu przyśpieszenia algorytmu poprzez wielowątkową implementaję, musimy zmienić nasze podejście w tworzeniu drzewa. Obecny pomysł się nie sprawdzi, ponieważ poszczególne wierzchołki są doklejane sekwencyjnie jako dzieci do innych wierzchołków, przez co nie możemy tego zrealizować równolegle.
 Aby podjąć wyzwanie równoległej implementacji drzew ósemkowych, musimy przed rozpoczęciem konstruowania drzewa mieć informację o położeniu każdego wierzchołka w drzewie.
@@ -501,8 +507,10 @@ void calculateMortonCodes(T* pos, long long* codes, int numberOfBodies, T* mins,
   float start[3] = {mins[0], mins[1], mins[2]};
   float middle[3] = {(maxs[0] - mins[0])/2, (maxs[1] - mins[1])/2, (maxs[2] - mins[2])/2};
   unsigned long long code = 0;
-  for(int i = 0; i < K; ++i) {
-    for(int j = 0; j < 3; ++j) {
+  for i in {0..K-1} 
+  {
+  	for j in {0..2}
+    {
       code <<= 1;
       if(start[j] + middle[j] < pos[3*thid + j]) {
         code |= 0x1;
@@ -662,8 +670,8 @@ __global__
 void computeForces(OctreeNode* octree, float* forcesGlobal, float* velocities, float* weights, 
 	float* pos, int AllNodes, int N, float dt) 
 {	
-	float forces[3] = {0.0, 0.0, 0.0};
-	OctreeNode* node;
+    float forces[3] = {0.0, 0.0, 0.0};
+    OctreeNode* node;
     float p = {pos[3*thid], pos[3*thid + 1], pos[3*thid + 2]);
     forces[thid] = 0.0;
     unsigned long long int stack[64];
@@ -680,12 +688,12 @@ void computeForces(OctreeNode* octree, float* forcesGlobal, float* velocities, f
             bool isFarAway = (s/d < theta);
             if(isFarAway)
             {	
-                for(int k=0; k<3; k++)
+                for k in {0..2}
                     forces[3*thid + k] += forcesBetween(node->getCenterOfMass(), p);
             }
             else
             {
-                for(int i=0; i<numberOfChilds; i++) 
+                for i in {0..numberOfChilds-1}
                 {
                     stack[++top] = node->children[i];
                 }
@@ -695,11 +703,11 @@ void computeForces(OctreeNode* octree, float* forcesGlobal, float* velocities, f
         {
             if(thid == octree[idx].position) 
                 continue;
-            for(int k=0; k<3; k++)
+            for k in {0..2}
                 forces[3*thid + k] += forcesBetween(node->getPoint(), p);
         }	
     }
-    for(int k=0; k<3; k++) 
+    for k in {0..2}
     	forcesGlobal[3*thid+k] = forces[k];
     UpdatePositionAndVelocity(forces, positions, velocities, weights, N, dt);
 }

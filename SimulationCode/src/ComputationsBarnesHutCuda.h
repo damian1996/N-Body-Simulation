@@ -22,7 +22,7 @@ public:
     d_weights = thrust::raw_pointer_cast(weightsD.data());
   }
   ~ComputationsBarnesHut() {}
-  void createTree(int numberOfBodies);
+  void createTree(int numberOfBodies, float dt);
   void BarnesHutBridge(type &pos, int N, float dt);
 };
 
