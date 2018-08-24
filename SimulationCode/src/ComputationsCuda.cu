@@ -50,6 +50,7 @@ bool Computations::testingMomemntum(int numberOfBodies) {
           momentum[k] += (weightsD[i] * veloD[i*3 + k]);
       }
   }
+  std::cout << momentum[0] << " " << momentum[1] << " " << momentum[2] << std::endl;
   if(!firstStep) {
     firstStep = true;
     for(int k=0; k<3; k++) oldMomentum[k] = momentum[k];
@@ -67,6 +68,6 @@ void Computations::NaiveSimBridgeThrust(type &pos, int numberOfBodies, float dt)
   thrust::device_vector<float> posD = pos;
   float *d_positions = thrust::raw_pointer_cast(posD.data());
   NaiveSim<<<(numberOfBodies+1023)/1024, 1024>>>(d_positions, d_velocities, d_weights, numberOfBodies, dt);
-  //testingMomemntum(numberOfBodies);
+  testingMomemntum(numberOfBodies);
   pos = posD;
 }

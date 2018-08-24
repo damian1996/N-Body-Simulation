@@ -25,6 +25,7 @@ public:
   ~ComputationsBarnesHut() {}
   void createTree(int numberOfBodies, float dt);
   void BarnesHutBridge(type &pos, int N, float dt);
+  bool testingMomemntum(int N);
 };
 
 #endif

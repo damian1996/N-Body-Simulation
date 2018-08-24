@@ -25,6 +25,7 @@ bool StepNaive::testingMomemntum() {
         momentumY += (weights[i] * velocities[i * 3 + 1]);
         momentumZ += (weights[i] * velocities[i * 3 + 2]);
     }
+    std::cout << momentumX << " " << momentumY << " " << momentumZ << std::endl;
     if(!firstStep) {
       firstStep = true;
       oldMomentumX = momentumX;
@@ -43,6 +44,7 @@ bool StepNaive::testingMomemntum() {
 }
 
 void StepNaive::compute(tf3 &positions, float dt) {
+  testingMomemntum();
   //assert(testingMomemntum());
   float EPS = 0.01;
   std::fill(forces.begin(), forces.end(), 0.0);

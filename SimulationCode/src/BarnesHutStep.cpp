@@ -113,7 +113,7 @@ void BarnesHutStep::testingMomemntum() {
         momentumY += (weights[i] * velocities[i * 3 + 1]);
         momentumZ += (weights[i] * velocities[i * 3 + 2]);
     }
-    //std::cout << "ZZP => " << momentumX << " " << momentumY << " " << momentumZ << std::endl;
+    std::cout << "ZZP => " << momentumX << " " << momentumY << " " << momentumZ << std::endl;
 }
 
 void BarnesHutStep::computeForceForBody(NodeBH* r, std::array<double, 3>& pos, int i)

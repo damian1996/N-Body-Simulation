@@ -267,7 +267,7 @@ void ComputationsBarnesHut::createTree(int numberOfBodies, float dt) {
     int previousChildrenCount = 0;
     
     for(int i = 0; i < K; ++i) {
-        printf("Aha... %d %d\n", i, allChildrenCount);
+        //printf("Aha... %d %d\n", i, allChildrenCount);
         blocks = (childrenCount+THREADS_PER_BLOCK-1)/THREADS_PER_BLOCK;
         thrust::fill(parentsNumbers.begin(), parentsNumbers.end(), 0);
         // policz tablice takich samych
@@ -308,7 +308,7 @@ void ComputationsBarnesHut::createTree(int numberOfBodies, float dt) {
         thrust::host_vector<int> tmpCodes = mortonCodes;
         //float* testCodes = thrust::raw_pointer_cast(veloD.data());
         if(!std::is_sorted(tmpCodes.begin(), tmpCodes.end())) {
-            printf("No nie jest posortowany :/ \n");
+            //printf("No nie jest posortowany :/ \n");
             thrust::sort(mortonCodes.begin(), mortonCodes.end());
         }
         
@@ -322,7 +322,7 @@ void ComputationsBarnesHut::createTree(int numberOfBodies, float dt) {
     float *d_velocities = thrust::raw_pointer_cast(veloD.data());
     float *d_weights = thrust::raw_pointer_cast(weightsD.data());
     
-    /*
+    
     computeForces<<<blocks, THREADS_PER_BLOCK>>>(d_octree,
         d_velocities, 
         d_weights, 
@@ -330,12 +330,33 @@ void ComputationsBarnesHut::createTree(int numberOfBodies, float dt) {
         d_mins, d_maxs,
         allChildrenCount, 
         numberOfBodies, dt); 
-    */
 }
+
+bool ComputationsBarnesHut::testingMomemntum(int numberOfBodies) {
+    float momentum[3] = {0.0f, 0.0f, 0.0f};
+    for (unsigned i = 0; i < numberOfBodies; i++) {
+        for(int k = 0; k < 3; k++) {
+            momentum[k] += (weightsD[i] * veloD[i*3 + k]);
+        }
+    }
+    std::cout << momentum[0] << " " << momentum[1] << " " << momentum[2] << std::endl;
+    /*if(!firstStep) {
+      firstStep = true;
+      for(int k=0; k<3; k++) oldMomentum[k] = momentum[k];
+    }
+    for(int k=0; k<3; k++)
+      if(fabs(oldMomentum[k] - momentum[k]) > 1.0)
+         return false;
+  
+    for(int k=0; k<3; k++) oldMomentum[k] = momentum[k];
+    for(int k=0; k<3; k++) std::cout << momentum[k] << " \n"[k == 2];*/
+    return true;
+  }
 
 void ComputationsBarnesHut::BarnesHutBridge(type &pos, int numberOfBodies, float dt) {
     thrust::device_vector<float> posD = pos;
     d_positions = thrust::raw_pointer_cast(posD.data());
     createTree(numberOfBodies, dt);
+    testingMomemntum(numberOfBodies);
     pos = posD;
 }
