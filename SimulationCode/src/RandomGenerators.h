@@ -12,13 +12,13 @@ class RandomGenerators {
   std::mt19937 gen2;
 public:
   RandomGenerators();
-  float getRandomFloat(float a, float b);
+  double getRandomFloat(double a, double b);
   int getRandomColor();
   int getRandomType();
   template <typename T>
   void initializeVelocities(T &velocities, unsigned numberOfBodies);
 
-  void initializeWeights(std::vector<float>& weights, unsigned numberOfBodies);
+  void initializeWeights(std::vector<double>& weights, unsigned numberOfBodies);
 };
 
 #endif

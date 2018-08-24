@@ -1,6 +1,6 @@
 #include "BarnesHutStepCuda.h"
 
-BarnesHutStepCuda::BarnesHutStepCuda(std::vector<float>& masses, unsigned numberOfBodies) {
+BarnesHutStepCuda::BarnesHutStepCuda(std::vector<double>& masses, unsigned numberOfBodies) {
     this->numberOfBodies = numberOfBodies;
     weights.resize(numberOfBodies);
     forces.resize(3*numberOfBodies);
@@ -21,6 +21,6 @@ BarnesHutStepCuda::~BarnesHutStepCuda() {
     delete randomGenerator;
 }
 
-void BarnesHutStepCuda::compute(tf3 &positions, float dt) {
+void BarnesHutStepCuda::compute(tf3 &positions, double dt) {
   c->BarnesHutBridge(positions, numberOfBodies, dt);
 }

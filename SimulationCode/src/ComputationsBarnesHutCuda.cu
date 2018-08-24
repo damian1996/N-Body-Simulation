@@ -3,10 +3,10 @@
 #include <bitset>
 #include <string>
 
-const float G = 6.674 * (1e-11);
-const float EPS = 0.01f;
+const double G = 6.674 * (1e-11);
+const double EPS = 0.01f;
 const int numberOfChilds = 8;
-const float theta = 0.5;
+const double theta = 0.5;
 const int THREADS_PER_BLOCK = 1024;
 const int K = 20;
 
@@ -14,11 +14,11 @@ const int K = 20;
 struct OctreeNode {
   int children[8] = {-1, -1, -1, -1, -1, -1, -1, -1};
   int position = -1;
-  float totalMass = 0;
-  float centerX = 0.0;
-  float centerY = 0.0;
-  float centerZ = 0.0;
-  //float boundaries[6];
+  double totalMass = 0;
+  double centerX = 0.0;
+  double centerY = 0.0;
+  double centerZ = 0.0;
+  //double boundaries[6];
 };
 
 template <typename T>
@@ -36,9 +36,9 @@ __global__
 void calculateMortonCodes(T* positions, unsigned long long* codes, int numberOfBodies, T* mins, T* maxs) {
   int thid = blockIdx.x*blockDim.x + threadIdx.x;
   if(thid >= numberOfBodies) return;
-  float t[3] = {mins[0], mins[1], mins[2]};
-  float p[3] = {positions[3*thid], positions[3*thid+1], positions[3*thid+2]};
-  float b[3] = {(maxs[0] - mins[0])/2, (maxs[1] - mins[1])/2, (maxs[2] - mins[2])/2};
+  double t[3] = {mins[0], mins[1], mins[2]};
+  double p[3] = {positions[3*thid], positions[3*thid+1], positions[3*thid+2]};
+  double b[3] = {(maxs[0] - mins[0])/2, (maxs[1] - mins[1])/2, (maxs[2] - mins[2])/2};
   unsigned long long code = 0;
   for(int i = 0; i < K; ++i) {
     for(int j = 0; j < 3; ++j) {
@@ -74,7 +74,7 @@ void calculateDuplicates(unsigned long long int* mortonCodes, int* result, int N
 
 __global__
 void connectChildren(unsigned long long int* mortonCodes, int* parentsNumbers, OctreeNode* octree, 
-    int N, int previousChildrenCount, int* sortedNodes, float* positions, float* weights, int level) {
+    int N, int previousChildrenCount, int* sortedNodes, double* positions, double* weights, int level) {
   int thid = blockIdx.x*blockDim.x + threadIdx.x;
   if(thid >= N) return;
   // dziecko łączy się z parentsNumbers[thid] pod wskaźnikiem zależnym od bitów
@@ -99,18 +99,18 @@ void connectChildren(unsigned long long int* mortonCodes, int* parentsNumbers, O
 }
 
 __global__
-void computeForces(OctreeNode* octree, float* velocities, float* weights, 
-    float* pos, float* mins, float* maxs, int AllNodes, int N, float dt) 
+void computeForces(OctreeNode* octree, double* velocities, double* weights, 
+    double* pos, double* mins, double* maxs, int AllNodes, int N, double dt) 
 {
     int thid = blockIdx.x*blockDim.x + threadIdx.x;
     if(thid >= N) return;
 
     int multipliers[8][3] = {{0, 0, 0}, {1, 0, 0}, {0, 1, 0}, {1, 1, 0}, {0, 0, 1}, {1, 0, 1}, {0, 1, 1}, {1, 1, 1}};
-    float forces[3] = {0.0, 0.0, 0.0}; 
+    double forces[3] = {0.0, 0.0, 0.0}; 
     // stos par (element, kolejny child elementu)
     unsigned int stack[40]; // maybe long long?
     unsigned int child[40];
-    float b[6*40];
+    double b[6*40];
     int top = -1;
     stack[++top] = AllNodes - 1;
     child[top] = 0;
@@ -147,7 +147,7 @@ void computeForces(OctreeNode* octree, float* velocities, float* weights,
                 double distZ = octree[idx].centerZ - pos[2];
                 double dist = (distX * distX + distY * distY + distZ * distZ) + EPS * EPS;
                 dist = dist * sqrt(dist);
-                float F = G * (octree[idx].totalMass * weights[thid]);
+                double F = G * (octree[idx].totalMass * weights[thid]);
                 forces[0] += F * distX / dist;
                 forces[1] += F * distY / dist;
                 forces[2] += F * distZ / dist;
@@ -193,12 +193,12 @@ void computeForces(OctreeNode* octree, float* velocities, float* weights,
             if(thid == octree[idx].position) // tutaj duplikaty msuza byc zachowane ://
                 continue;
             
-            float distX = pos[3*idx] - pos[3*thid];
-            float distY = pos[3*idx + 1] - pos[3*thid + 1];
-            float distZ = pos[3*idx + 2] - pos[3*thid + 2];
-            float dist = (distX * distX + distY * distY + distZ * distZ) + EPS * EPS;
+            double distX = pos[3*idx] - pos[3*thid];
+            double distY = pos[3*idx + 1] - pos[3*thid + 1];
+            double distZ = pos[3*idx + 2] - pos[3*thid + 2];
+            double dist = (distX * distX + distY * distY + distZ * distZ) + EPS * EPS;
             dist = dist * sqrt(dist);
-            float F = G * (weights[octree[idx].position] * weights[thid]);
+            double F = G * (weights[octree[idx].position] * weights[thid]);
             forces[0] += F * distX / dist; // force = G(m1*m2)/r^2
             forces[1] += F * distY / dist;
             forces[2] += F * distZ / dist;
@@ -206,34 +206,34 @@ void computeForces(OctreeNode* octree, float* velocities, float* weights,
     }
     
     for (int j = 0; j < 3; j++) {
-        float acceleration = forces[j] / weights[thid];
+        double acceleration = forces[j] / weights[thid];
         pos[thid * 3 + j] +=
             velocities[thid * 3 + j] * dt + acceleration * dt * dt / 2;
         velocities[thid * 3 + j] += acceleration * dt;
     }
 }
 
-void ComputationsBarnesHut::createTree(int numberOfBodies, float dt) {
+void ComputationsBarnesHut::createTree(int numberOfBodies, double dt) {
     int blocks = (numberOfBodies+THREADS_PER_BLOCK-1)/THREADS_PER_BLOCK;
     // 0. liczymy boundaries
     // ew. zaokraglic do najblizszej potegi 2 (najwiekszej dla kazdego z wymiarow)
-    thrust::device_vector<float> px(numberOfBodies), py(numberOfBodies), pz(numberOfBodies);
-    float *d_px = thrust::raw_pointer_cast(px.data());
-    float *d_py = thrust::raw_pointer_cast(py.data());
-    float *d_pz = thrust::raw_pointer_cast(pz.data());
+    thrust::device_vector<double> px(numberOfBodies), py(numberOfBodies), pz(numberOfBodies);
+    double *d_px = thrust::raw_pointer_cast(px.data());
+    double *d_py = thrust::raw_pointer_cast(py.data());
+    double *d_pz = thrust::raw_pointer_cast(pz.data());
     
     getDimensions<<<blocks, THREADS_PER_BLOCK>>>(d_positions, d_px, d_py, d_pz, numberOfBodies);
     
     auto itx = thrust::minmax_element(px.begin(), px.end());
     auto ity = thrust::minmax_element(py.begin(), py.end());
     auto itz = thrust::minmax_element(pz.begin(), pz.end());
-    float mins[3] = {*itx.first, *ity.first, *itz.first};
-    float maxs[3] = {*itx.second, *ity.second, *itz.second};
+    double mins[3] = {*itx.first, *ity.first, *itz.first};
+    double maxs[3] = {*itx.second, *ity.second, *itz.second};
     
-    thrust::device_vector<float> minsDeviceVector(mins, mins+3);
-    thrust::device_vector<float> maxsDeviceVector(maxs, maxs+3);
-    float* d_mins = thrust::raw_pointer_cast(minsDeviceVector.data());
-    float* d_maxs = thrust::raw_pointer_cast(maxsDeviceVector.data());
+    thrust::device_vector<double> minsDeviceVector(mins, mins+3);
+    thrust::device_vector<double> maxsDeviceVector(maxs, maxs+3);
+    double* d_mins = thrust::raw_pointer_cast(minsDeviceVector.data());
+    double* d_maxs = thrust::raw_pointer_cast(maxsDeviceVector.data());
     
     // 1. liczymy kody mortona
     thrust::device_vector<unsigned long long> mortonCodes(numberOfBodies);
@@ -306,7 +306,7 @@ void ComputationsBarnesHut::createTree(int numberOfBodies, float dt) {
         thrust::for_each(mortonCodes.begin(), mortonCodes.end(), thrust::placeholders::_1 >>= 3);
         
         thrust::host_vector<int> tmpCodes = mortonCodes;
-        //float* testCodes = thrust::raw_pointer_cast(veloD.data());
+        //double* testCodes = thrust::raw_pointer_cast(veloD.data());
         if(!std::is_sorted(tmpCodes.begin(), tmpCodes.end())) {
             //printf("No nie jest posortowany :/ \n");
             thrust::sort(mortonCodes.begin(), mortonCodes.end());
@@ -319,8 +319,8 @@ void ComputationsBarnesHut::createTree(int numberOfBodies, float dt) {
         allChildrenCount += childrenCount;
     }
     //printf("Ze co? %d\n", allChildrenCount);
-    float *d_velocities = thrust::raw_pointer_cast(veloD.data());
-    float *d_weights = thrust::raw_pointer_cast(weightsD.data());
+    double *d_velocities = thrust::raw_pointer_cast(veloD.data());
+    double *d_weights = thrust::raw_pointer_cast(weightsD.data());
     
     
     computeForces<<<blocks, THREADS_PER_BLOCK>>>(d_octree,
@@ -333,7 +333,7 @@ void ComputationsBarnesHut::createTree(int numberOfBodies, float dt) {
 }
 
 bool ComputationsBarnesHut::testingMomemntum(int numberOfBodies) {
-    float momentum[3] = {0.0f, 0.0f, 0.0f};
+    double momentum[3] = {0.0f, 0.0f, 0.0f};
     for (unsigned i = 0; i < numberOfBodies; i++) {
         for(int k = 0; k < 3; k++) {
             momentum[k] += (weightsD[i] * veloD[i*3 + k]);
@@ -353,8 +353,8 @@ bool ComputationsBarnesHut::testingMomemntum(int numberOfBodies) {
     return true;
   }
 
-void ComputationsBarnesHut::BarnesHutBridge(type &pos, int numberOfBodies, float dt) {
-    thrust::device_vector<float> posD = pos;
+void ComputationsBarnesHut::BarnesHutBridge(type &pos, int numberOfBodies, double dt) {
+    thrust::device_vector<double> posD = pos;
     d_positions = thrust::raw_pointer_cast(posD.data());
     createTree(numberOfBodies, dt);
     testingMomemntum(numberOfBodies);

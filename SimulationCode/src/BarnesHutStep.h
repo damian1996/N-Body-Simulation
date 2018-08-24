@@ -14,7 +14,7 @@
 
 class BarnesHutStep : public Step {
 public:
-    BarnesHutStep(std::vector<float>& masses, unsigned numberOfBodies);
+    BarnesHutStep(std::vector<double>& masses, unsigned numberOfBodies);
     ~BarnesHutStep();
     void initializingRoot();
     void insertNode(NodeBH* node, NodeBH* quad);
@@ -25,7 +25,7 @@ public:
     double distanceBetweenTwoNodes(double x1, double y1, double z1, double x2, double y2, double z2);
     void testingMomemntum();
     void computeForceForBody(NodeBH* r, std::array<double, 3>& pos, int i);
-    void compute(tf3 &positions, float dt);
+    void compute(tf3 &positions, double dt);
 
 private:
     NodeBH* root;
