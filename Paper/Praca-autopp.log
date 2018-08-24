@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=latex 2018.8.7)  24 AUG 2018 20:25
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=latex 2018.8.7)  24 AUG 2018 20:37
 entering extended mode
  %&-line parsing enabled.
 **\let \APPmakepictures \empty \input  Praca.tex
@@ -2042,12 +2042,15 @@ Overfull \hbox (6.0pt too wide) in paragraph at lines 727--727
  []
 
 
+LaTeX Warning: Citation 'tutMat' on page 22 undefined on input line 756.
+
+
 LaTeX Warning: Citation 'opengl' on page 22 undefined on input line 759.
 
 
-Overfull \hbox (2.29483pt too wide) in paragraph at lines 759--759
+Overfull \hbox (5.1568pt too wide) in paragraph at lines 759--759
 []\T1/fve/m/sc/10 Bardziej szcze-gó-ªo-wo, naj-pierw usta-wia-my ka-me-r¦, do c
-ze-go sªu-»y funk-cja \T1/fve/b/n/10 lo-okAt\T1/fve/m/sc/10 [[]], 
+ze-go sªu-»y funk-cja \T1/fve/b/n/10 lo-okAt \T1/fve/m/sc/10 [[]], 
  []
 
 

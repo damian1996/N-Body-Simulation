@@ -251,6 +251,29 @@
       \field{title}{CHAOS IN THE N-BODY PROBLEM OF STELLAR DYNAMICS}
       \field{year}{1991}
     \endentry
+    \entry{tutMat}{manual}{}
+      \name{author}{1}{}{%
+        {{hash=3a6b488cad4f9b802bbf807136395192}{%
+           family={Hocevar},
+           family_i={H\bibinitperiod},
+           given={Sam},
+           given_i={S\bibinitperiod}}}%
+      }
+      \strng{namehash}{3a6b488cad4f9b802bbf807136395192}
+      \strng{fullhash}{3a6b488cad4f9b802bbf807136395192}
+      \field{sortinit}{H}
+      \field{sortinithash}{82012198d5dfa657b8c4a168793268a6}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{edition}{version 2}
+      \field{title}{Tutorial 3 : Matrices}
+      \field{urlday}{01}
+      \field{urlmonth}{12}
+      \field{urlyear}{2004}
+      \verb{url}
+      \verb http://www.opengl-tutorial.org/beginners-tutorials/tutorial-3-matrices/
+      \endverb
+    \endentry
     \entry{vonHoerner}{article}{}
       \name{author}{1}{}{%
         {{hash=c25554bbfd4180a9bb58d3b5d9430079}{%
