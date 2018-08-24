@@ -15,7 +15,7 @@ class Simulation {
   Render *rend;
   Step *step;
   unsigned numberOfBodies;
-  thrust::host_vector<float> positions;
+  thrust::host_vector<double> positions;
   RandomGenerators *randomGenerator;
 
 public:

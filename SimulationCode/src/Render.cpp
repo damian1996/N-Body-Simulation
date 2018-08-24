@@ -8,7 +8,7 @@ bool Render::is_mouse_pressed = false;
 double Render::mouse_position_x = 0;
 double Render::mouse_position_y = 0;
 
-Render::Render(std::vector<float> masses, unsigned numberOfBodies, float cubeSize) : numberOfBodies(numberOfBodies), cubeSize(cubeSize) {
+Render::Render(std::vector<double> masses, unsigned numberOfBodies, float cubeSize) : numberOfBodies(numberOfBodies), cubeSize(cubeSize) {
     positionsToRender = new float[3*numberOfBodies];
     colorsToRender = new char[3*numberOfBodies];
     massesToRender = new float[numberOfBodies];
@@ -311,7 +311,7 @@ void Render::render() {
     glDrawArrays(GL_LINES, 0, 24);
 }
 
-bool Render::draw(thrust::host_vector<float>& positions) {
+bool Render::draw(thrust::host_vector<double>& positions) {
     for(unsigned i=0; i<numberOfBodies; i++) {
       for(int j=0; j<3; j++) {
         positionsToRender[i*3+j] = positions[i*3+j];

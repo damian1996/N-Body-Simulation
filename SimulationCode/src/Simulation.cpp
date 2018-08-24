@@ -6,7 +6,7 @@ Simulation::Simulation(Render *rend, Step *step, unsigned numberOfBodies)
   positions.reserve(3 * numberOfBodies);
   for (unsigned i = 0; i < numberOfBodies; i++) {
     for (int j = 0; j < 3; j++) {
-       float randPos = randomGenerator->getRandomFloat(-1.0f, 1.0f);
+       double randPos = randomGenerator->getRandomFloat(-1.0f, 1.0f);
        positions.push_back(randPos);
     }
   }
@@ -21,11 +21,11 @@ Simulation::~Simulation() {
 
 void Simulation::MakeSimulation() {
   rend->setupOpenGL();
-  float last_time = rend->getTime();
-  float curr_time;
+  double last_time = rend->getTime();
+  double curr_time;
 
   int count = 0;
-  float avgDt = 0.0;
+  double avgDt = 0.0;
   int numberOfRounds = 10000;
   while(!rend->draw(positions)) {
       if(count >= numberOfRounds) break;

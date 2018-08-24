@@ -5,14 +5,14 @@
 #include <thrust/host_vector.h>
 #include <algorithm>
 
-typedef thrust::host_vector<float> type;
+typedef thrust::host_vector<double> type;
 
 class ComputationsBarnesHut {
-  thrust::device_vector<float> veloD;
-  thrust::device_vector<float> weightsD;
-  float* d_positions;
-  float *d_velocities;
-  float *d_weights;
+  thrust::device_vector<double> veloD;
+  thrust::device_vector<double> weightsD;
+  double* d_positions;
+  double *d_velocities;
+  double *d_weights;
   int numberOfBodies;
 
 public:
@@ -23,8 +23,8 @@ public:
     d_weights = thrust::raw_pointer_cast(weightsD.data());
   }
   ~ComputationsBarnesHut() {}
-  void createTree(int numberOfBodies, float dt);
-  void BarnesHutBridge(type &pos, int N, float dt);
+  void createTree(int numberOfBodies, double dt);
+  void BarnesHutBridge(type &pos, int N, double dt);
   bool testingMomemntum(int N);
 };
 

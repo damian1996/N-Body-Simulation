@@ -4,13 +4,13 @@
 #include <thrust/device_vector.h>
 #include <thrust/host_vector.h>
 
-typedef thrust::host_vector<float> type;
+typedef thrust::host_vector<double> type;
 
 class Computations {
-  thrust::device_vector<float> veloD;
-  thrust::device_vector<float> weightsD;
-  float *d_velocities;// = thrust::raw_pointer_cast(veloD.data());
-  float *d_weights;// = thrust::raw_pointer_cast(weightsD.data());
+  thrust::device_vector<double> veloD;
+  thrust::device_vector<double> weightsD;
+  double *d_velocities;// = thrust::raw_pointer_cast(veloD.data());
+  double *d_weights;// = thrust::raw_pointer_cast(weightsD.data());
   bool firstStep;
   bool oldMomentum[3];
 
@@ -23,7 +23,7 @@ public:
     firstStep = false;
   }
   ~Computations() {}
-  void NaiveSimBridgeThrust(type &pos, int N, float dt);
+  void NaiveSimBridgeThrust(type &pos, int N, double dt);
   bool testingMomemntum(int N);
 };
 

@@ -1,6 +1,6 @@
 #include "BarnesHutStep.h"
 
-BarnesHutStep::BarnesHutStep(std::vector<float>& masses, unsigned numberOfBodies) {
+BarnesHutStep::BarnesHutStep(std::vector<double>& masses, unsigned numberOfBodies) {
     this->numberOfBodies = numberOfBodies;
     weights.resize(numberOfBodies);
     forces.resize(3*numberOfBodies);
@@ -107,7 +107,7 @@ double BarnesHutStep::distanceBetweenTwoNodes(double x1, double y1, double z1, d
 }
 
 void BarnesHutStep::testingMomemntum() {
-    float momentumX = 0.0f, momentumY = 0.0f, momentumZ = 0.0f;
+    double momentumX = 0.0f, momentumY = 0.0f, momentumZ = 0.0f;
     for (unsigned i = 0; i < numberOfBodies; i++) {
         momentumX += (weights[i] * velocities[i * 3]);
         momentumY += (weights[i] * velocities[i * 3 + 1]);
@@ -129,7 +129,7 @@ void BarnesHutStep::computeForceForBody(NodeBH* r, std::array<double, 3>& pos, i
         double dist = (distX * distX + distY * distY + distZ * distZ) + EPS * EPS;
         dist = dist * sqrt(dist);
         // jak sprawdzic czy to te same bodies? Musze zachowac i != j
-        float F = G * (r->getMass() * weights[i]);
+        double F = G * (r->getMass() * weights[i]);
         forces[i * 3] += F * distX / dist; // force = G(m1*m2)/r^2
         forces[i * 3 + 1] += F * distY / dist;
         forces[i * 3 + 2] += F * distZ / dist;
@@ -163,7 +163,7 @@ void BarnesHutStep::computeForceForBody(NodeBH* r, std::array<double, 3>& pos, i
             double dist = (distX * distX + distY * distY + distZ * distZ) + EPS * EPS;
             dist = dist * sqrt(dist);
             // jak sprawdzic czy to te same bodies? Musze zachowac i != j
-            float F = G * (r->getTotalMass() * weights[i]);
+            double F = G * (r->getTotalMass() * weights[i]);
             forces[i * 3] += F * distX / dist; // force = G(m1*m2)/r^2
             forces[i * 3 + 1] += F * distY / dist;
             forces[i * 3 + 2] += F * distZ / dist;
@@ -178,7 +178,7 @@ void BarnesHutStep::computeForceForBody(NodeBH* r, std::array<double, 3>& pos, i
     }
 }
 
-void BarnesHutStep::compute(tf3 &positions, float dt)
+void BarnesHutStep::compute(tf3 &positions, double dt)
 {
     initializingRoot();
     createTree(positions);
@@ -195,7 +195,7 @@ void BarnesHutStep::compute(tf3 &positions, float dt)
 
     for (unsigned i = 0; i < numberOfBodies; i++) {
         for (int j = 0; j < 3; j++) {
-                float acceleration = forces[i * 3 + j] / weights[i];
+                double acceleration = forces[i * 3 + j] / weights[i];
                 positions[i * 3 + j] +=
                     velocities[i * 3 + j] * dt + acceleration * dt * dt / 2;
                 velocities[i * 3 + j] += acceleration * dt;

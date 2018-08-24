@@ -14,9 +14,9 @@
 
 class BarnesHutStepCuda : public Step {
 public:
-    BarnesHutStepCuda(std::vector<float>& masses, unsigned numberOfBodies);
+    BarnesHutStepCuda(std::vector<double>& masses, unsigned numberOfBodies);
     ~BarnesHutStepCuda();
-    void compute(tf3 &positions, float dt);
+    void compute(tf3 &positions, double dt);
 
 private:
     //NodeBH* root;
