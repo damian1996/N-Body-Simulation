@@ -753,11 +753,11 @@ void Render()
 \end{lstlisting}
 \bigskip
 
-Render polega głównie na wykorzystaniu macierzy Model-View-Projection (MVP). 
+Render polega głównie na wykorzystaniu macierzy Model-View-Projection (MVP) \cite{tutMat}. 
 W linii 19 wymnażamy wszystkie macierze ze sobą (odpowiedzialnego za każdy z kroków MVP), uzyskując wyrenderowaną pozycję naszych obiektów).\\
 
-Bardziej szczegółowo, najpierw ustawiamy kamerę, do czego służy funkcja \textbf{lookAt}\cite{opengl}, która jako pierwszy argument przyjmuje współrzędne kamery, następnie punkt na który patrzymy, a w ostatnim parametrze ustawiamy, że patrzymy z góry do dołu.\\
-Z kolei funkcja \textbf{perspective}\cite{opengl} odpowiada za rzutowanie, a w argumentach przyjmuje:
+Bardziej szczegółowo, najpierw ustawiamy kamerę, do czego służy funkcja \textbf{lookAt} \cite{opengl}, która jako pierwszy argument przyjmuje współrzędne kamery, następnie punkt na który patrzymy, a w ostatnim parametrze ustawiamy, że patrzymy z góry do dołu.\\
+Z kolei funkcja \textbf{perspective} \cite{opengl} odpowiada za rzutowanie, a w argumentach przyjmuje:
 \begin{itemize}
 \item kąt z jakiego patrzymy na punkt podany w radianach
 \item \textbf{aspect rato}, czyli proporcje pomiędzy szerokością i wysokością obrazu
