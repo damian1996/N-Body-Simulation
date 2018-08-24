@@ -251,6 +251,29 @@
       \field{title}{CHAOS IN THE N-BODY PROBLEM OF STELLAR DYNAMICS}
       \field{year}{1991}
     \endentry
+    \entry{vonHoerner}{article}{}
+      \name{author}{1}{}{%
+        {{hash=c25554bbfd4180a9bb58d3b5d9430079}{%
+           prefix={von},
+           prefix_i={v\bibinitperiod},
+           family={Hoerner},
+           family_i={H\bibinitperiod},
+           given={S.},
+           given_i={S\bibinitperiod}}}%
+      }
+      \strng{namehash}{c25554bbfd4180a9bb58d3b5d9430079}
+      \strng{fullhash}{c25554bbfd4180a9bb58d3b5d9430079}
+      \field{sortinit}{H}
+      \field{sortinithash}{82012198d5dfa657b8c4a168793268a6}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Z. Astrohys.}
+      \field{title}{Die numerische Integration des n-Körper-Problemes für Sternhaufen. I}
+      \field{volume}{50}
+      \field{year}{1960}
+      \field{pages}{184\bibrangedash 214}
+      \range{pages}{31}
+    \endentry
     \entry{barnhut}{article}{}
       \name{author}{1}{}{%
         {{hash=b4b2efb1ebff4322ef9b164bf6ffeb86}{%
@@ -369,6 +392,23 @@
       \field{pages}{129\bibrangedash 147}
       \range{pages}{19}
     \endentry
+    \entry{Principia}{book}{}
+      \name{author}{1}{}{%
+        {{hash=7a621e01239c1fe6557cf9c9d2f85bd3}{%
+           family={Newton},
+           family_i={N\bibinitperiod},
+           given={Isaac},
+           given_i={I\bibinitperiod}}}%
+      }
+      \strng{namehash}{7a621e01239c1fe6557cf9c9d2f85bd3}
+      \strng{fullhash}{7a621e01239c1fe6557cf9c9d2f85bd3}
+      \field{sortinit}{N}
+      \field{sortinithash}{925374ca63e7594de7fafdb83e64d41d}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Philosophiae Naturalis Principia Mathematica}
+      \field{year}{1687}
+    \endentry
     \entry{fund}{inbook}{}
       \name{author}{1}{}{%
         {{hash=a2626036b795a6385df4ae0ad444c829}{%
@@ -393,6 +433,27 @@
       \field{year}{1971}
       \field{pages}{1\bibrangedash 49}
       \range{pages}{49}
+    \endentry
+    \entry{szebehely}{article}{}
+      \name{author}{1}{}{%
+        {{hash=7db4ebc3580e2e70a2cbde68a4a68b3a}{%
+           family={V.Szebehely},
+           family_i={V\bibinitperiod},
+           given={C.\bibnamedelimi F.\bibnamedelimi Peters},
+           given_i={C\bibinitperiod\bibinitdelim F\bibinitperiod\bibinitdelim P\bibinitperiod}}}%
+      }
+      \strng{namehash}{7db4ebc3580e2e70a2cbde68a4a68b3a}
+      \strng{fullhash}{7db4ebc3580e2e70a2cbde68a4a68b3a}
+      \field{sortinit}{V}
+      \field{sortinithash}{d18f5ce25ce0b5ca7f924e3f6c04870e}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{The Astronomical Journal}
+      \field{title}{A New Periodic Solution of the Problem of Three Bodies}
+      \field{volume}{72}
+      \field{year}{1967}
+      \field{pages}{1187\bibrangedash 1190}
+      \range{pages}{4}
     \endentry
   \endsortlist
 \endrefsection
