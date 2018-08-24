@@ -26,7 +26,7 @@ void Simulation::MakeSimulation() {
 
   int count = 0;
   float avgDt = 0.0;
-  int numberOfRounds = 1000;
+  int numberOfRounds = 1;
   while(!rend->draw(positions)) {
       if(count >= numberOfRounds) break;
       curr_time = rend->getTime();

@@ -14,8 +14,8 @@ CUOBJS := $(subst src,build,$(CUOBJS))
 TARGET := $(OUTDIR)/main
 
 # Options
-#NVCCOPTIONS =-O3 -m64 -arch=sm_35 -std=c++14 -g
-NVCCOPTIONS =-O3 -m64 -std=c++14 -g
+NVCCOPTIONS =-O3 -m64 -arch=sm_35 -std=c++14 -g
+#NVCCOPTIONS =-O3 -m64 -std=c++14 -g
 CXXOPTIONS =-O3 -m64 -std=c++14 -g -Wall -I /usr/local/cuda/include/
 
 # Common flags

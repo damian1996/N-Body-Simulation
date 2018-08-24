@@ -768,6 +768,58 @@ Z kolei funkcja \textbf{perspective}\cite{opengl} odpowiada za rzutowanie, a w a
 
 \section{\LARGE Podsumowanie}
 
+W pracy zaimplementowałem cztery algorytmy:
+\begin{itemize}
+\item Jednowątkowy naiwny algorytm (złożoność $\mathcal{O}(N^{2})$)
+\item Wielowątkowy naiwny algorytm (złożoność $\mathcal{O}(N) $ przy $N$ procesorach, wykonana praca $\mathcal{O}(N^{2})$
+\item Jednowątkowy algorytm Barnes Hut (złożoność $\mathcal{O}(N\cdot \log(N))$
+\item Wielowątkowy algorytm Barnes Hut (złożoność $\mathcal{O}(\log(N))$ przy $N$ procesorach, wykonana praca $\mathcal{O}(N\cdot \log(N))$
+\end{itemize}
+
+Poniżej przedstawiam wykres przedstawiający czas wykonywania się poszczególnych algorytmów przy jednakowych danych wejściowych oraz przez identyczną liczbę kroków. W testach algorytmy były odpalane przez $100000$ kroków.
+
+\begin{figure}[h]
+\begin{tikzpicture}
+\begin{axis}[
+    title={Porównanie czasu działania algorytmów},
+    xlabel={Rozmiar kernela},
+    ylabel={Czas (ms)},
+    xmin=0, xmax=128,
+    ymin=0, ymax=1500,
+    legend pos=north west,
+    ymajorgrids=true,
+    grid style=dashed,
+]
+ 
+\addplot[
+    color=blue,
+    mark=square,
+    ]
+    coordinates {
+    (1,161.25)(3,207.22)(5,238.25)(7,345.54)(9,425.62)(11,469.78)(13,648.63)(15,786.14)(17,909.76)(19,1046.35)(21,1192.08)(23,1402.21)(25,1620.54)(27,1864.30)(29,2090.17)(31,2388.40)
+    };
+\addplot[
+    color=red,
+    mark=square,
+    ]
+    coordinates {
+    (1, 168.2)(3, 170.0)(5, 179.5)(7, 247.0)(9, 263.5)(11, 233.9)(13, 218.7)(15, 234.0)(17, 252.5)(19, 298.3)(21, 298.5)(23, 326.6)(25, 356.8)(27, 397.7)(29, 440.5)(31, 473.1)(33, 529.1)(35, 550.0)(37, 624.0)(39, 645.6)(41, 686.7)(43, 748.7)(45, 805.1)(47, 852.9)(49, 917.5)(51, 983.1)(53, 1045.1)(55, 1106.3)(57, 1206.3)(59, 1255.6)(61, 1341.2)(63, 1409.4)
+    
+    };
+\addplot[
+    color=green,
+    mark=square,
+    ]
+    coordinates {
+    	(1, 208.3)(3, 209.2)(5, 221.7)(7, 200.6)(9, 198.4)(11, 199.1)(13, 239.2)(15, 240.1)(17, 199.0)(19, 255.5)(21, 213.7)(23, 200.3)(25, 235.2)(27, 233.1)(29, 202.1)(31, 203.8)(33, 205.0)(35, 211.1)(37, 235.6)(39, 221.2)(41, 231.9)(43, 258.1)(45, 238.7)(47, 231.8)(49, 240.3)(51, 234.0)(53, 276.5)(55, 276.5)(57, 227.0)(59, 235.0)(61, 265.1)(63, 227.8)(65, 280.7)(67, 249.1)(69, 240.7)(71, 236.3)(73, 256.4)(75, 257.1)(77, 242.7)(79, 292.0)(81, 258.2)(83, 250.4)(85, 248.1)(87, 302.7)(89, 278.7)(91, 294.4)(93, 262.8)(95, 305.1)(97, 295.0)(99, 314.4)(101, 289.2)(103, 309.0)(105, 293.3)(107, 265.5)(109, 322.2)(111, 295.1)(113, 294.8)(115, 269.9)(117, 291.9)(119, 329.9)(121, 311.2)(123, 315.8)(125, 279.2)(127, 335.9)
+    };
+\legend{Naiwna implementacja, Zoptymalizowana konwolucja, Separable convolution}
+\end{axis}
+\end{tikzpicture}
+\caption{Porównanie czasu działania algorytmów}
+\end{figure}
+
+Z tego co możemy wywnioskować, to że czas wykonywania się obu implementacji algorytmu Barnes Hut maleje, gdy liczba kroków wzrasta. Dzieje się to z powodu, że gdy obiekty zmienią pozycję względem tych początkowych, to część z nich oddala się względem innych obiektów i przez to często grupka obiektów jest traktowana jako jeden obiekt i nie musimy liczyć siły z każdym z osobna, a za to liczymy siłę tylko raz z środkiem masy tej grupki ciał. Z tego co widzimy, to zdecydowanie przyśpiesza algorytm względem naiwnych implementacji.
 \newpage
 
 \nocite{*}

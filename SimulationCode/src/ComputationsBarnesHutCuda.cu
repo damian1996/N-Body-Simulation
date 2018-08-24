@@ -127,7 +127,7 @@ void computeForces(OctreeNode* octree, float* velocities, float* weights,
         if(idx == -1) 
             continue;
         
-        printf("%d %d\n", idx, nextChild);
+       // printf("%d %d\n", idx, nextChild);
         if(octree[idx].position == -1)
         {
             //printf("%d %d\n", idx, nextChild);
@@ -204,13 +204,13 @@ void computeForces(OctreeNode* octree, float* velocities, float* weights,
             forces[2] += F * distZ / dist;
         }
     }
-    /*
+    
     for (int j = 0; j < 3; j++) {
         float acceleration = forces[j] / weights[thid];
         pos[thid * 3 + j] +=
             velocities[thid * 3 + j] * dt + acceleration * dt * dt / 2;
         velocities[thid * 3 + j] += acceleration * dt;
-    }*/
+    }
 }
 
 void ComputationsBarnesHut::createTree(int numberOfBodies, float dt) {
@@ -253,7 +253,7 @@ void ComputationsBarnesHut::createTree(int numberOfBodies, float dt) {
     // 5. liczymy ilość node-ow z octree do zaalokowania
     // uwaga: być może nie musimy tego tak naprawde liczyć tylko potem przy tworzeniu drzewa to się samo liczy o.o
     int uniquePointsCount = thrust::distance(mortonCodes.begin(), iterators.first);
-    printf("UNIQUE POINTS COUNT %d\n", uniquePointsCount);
+    // printf("UNIQUE POINTS COUNT %d\n", uniquePointsCount);
     blocks = (uniquePointsCount+THREADS_PER_BLOCK-1)/THREADS_PER_BLOCK;
 
     thrust::device_vector<OctreeNode> octree(uniquePointsCount);
@@ -280,14 +280,14 @@ void ComputationsBarnesHut::createTree(int numberOfBodies, float dt) {
         // zrób prefixsuma żeby je ponumerować
         thrust::inclusive_scan(parentsNumbers.begin(), parentsNumbers.end(), parentsNumbers.begin());
         //thrust::host_vector<int> parentsNumbersHost = parentsNumbers;
-        printf("Punkt kontrolny 111\n");
+        //printf("Punkt kontrolny 111\n");
         // dodaj nowe nody do octree
         octree.insert(octree.end(), parentsNumbers[childrenCount-1]+1, OctreeNode()); // co tu sie odbywa?
         d_octree = thrust::raw_pointer_cast(octree.data()); // dlaczego znowu raw_cast?
         
         thrust::for_each(parentsNumbers.begin(), parentsNumbers.end(), thrust::placeholders::_1 += allChildrenCount);
 
-        printf("Punkt kontrolny 222\n");
+       // printf("Punkt kontrolny 222\n");
         // połącz odpowiednio dzieci
         connectChildren<<<blocks, THREADS_PER_BLOCK>>>(
             d_codes,
@@ -300,19 +300,28 @@ void ComputationsBarnesHut::createTree(int numberOfBodies, float dt) {
             d_weights,
             i
         );
-        printf("Punkt kontrolny 333\n");
+       // printf("Punkt kontrolny 333\n");
 
         // teraz tamte co się powtarzają są dziećmi, zuniquj je
         thrust::for_each(mortonCodes.begin(), mortonCodes.end(), thrust::placeholders::_1 >>= 3);
+        
+        thrust::host_vector<int> tmpCodes = mortonCodes;
+        //float* testCodes = thrust::raw_pointer_cast(veloD.data());
+        if(!std::is_sorted(tmpCodes.begin(), tmpCodes.end())) {
+            printf("No nie jest posortowany :/ \n");
+            thrust::sort(mortonCodes.begin(), mortonCodes.end());
+        }
+        
         auto it = thrust::unique(mortonCodes.begin(), mortonCodes.end());
         childrenCount = thrust::distance(mortonCodes.begin(), it);
-        std::printf("After unique...%d\n", childrenCount);
+        //std::printf("After unique...%d\n", childrenCount);
         previousChildrenCount = allChildrenCount;
         allChildrenCount += childrenCount;
     }
-    printf("Ze co? %d\n", allChildrenCount);
+    //printf("Ze co? %d\n", allChildrenCount);
     float *d_velocities = thrust::raw_pointer_cast(veloD.data());
     float *d_weights = thrust::raw_pointer_cast(weightsD.data());
+    
     /*
     computeForces<<<blocks, THREADS_PER_BLOCK>>>(d_octree,
         d_velocities, 
@@ -320,7 +329,8 @@ void ComputationsBarnesHut::createTree(int numberOfBodies, float dt) {
         d_positions, 
         d_mins, d_maxs,
         allChildrenCount, 
-        numberOfBodies, dt); */
+        numberOfBodies, dt); 
+    */
 }
 
 void ComputationsBarnesHut::BarnesHutBridge(type &pos, int numberOfBodies, float dt) {

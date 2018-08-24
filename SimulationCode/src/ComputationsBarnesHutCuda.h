@@ -3,6 +3,7 @@
 
 #include <thrust/device_vector.h>
 #include <thrust/host_vector.h>
+#include <algorithm>
 
 typedef thrust::host_vector<float> type;
 
