@@ -25,12 +25,10 @@ void BarnesHutStep::initializingRoot() {
 
 void BarnesHutStep::insertNode(NodeBH* node, NodeBH* quad) {
     if(!quad->isPoint() && !quad->wasInitialized()) {
-      // jesli pusty node to dodajemy
       quad->setAttributes(node->getMass(), node->getIndex(), node->getX(), node->getY(), node->getZ());
       return;
     }
     if(quad->isPoint() && !quad->wasInitialized()) {
-      // jesli external to pasowaloby wyodrebnic nowy i stary node do dwoch nowych branchy
         quad->setPoint(false);
         quad->pushPointFromQuadLower();
         std::array<double, 3> pos({node->getX(), node->getY(), node->getZ()});
@@ -44,7 +42,6 @@ void BarnesHutStep::insertNode(NodeBH* node, NodeBH* quad) {
         return;
     }
     if(!quad->isPoint() && quad->wasInitialized()) {
-      // jesli jest internal to updejt masy i rekurencyjnie dalej
         std::array<double, 3> pos({node->getX(), node->getY(), node->getZ()});
         quad->updateCenterOfMass(node->getMass(), pos);
 
@@ -68,7 +65,6 @@ void BarnesHutStep::createTree(tf3& positions) {
         int index = root->numberOfSubCube(pos[0], pos[1], pos[2]);
         if(index < 8)
         {
-            //std::array<double, 6> bound = root->getChild(index)->getBoundaries();
             NodeBH* node = new NodeBH(weights[i], i, pos, root->getChild(index)->getBoundaries());
             insertNode(node, root->getChild(index));
             delete node;
@@ -122,13 +118,11 @@ void BarnesHutStep::computeForceForBody(NodeBH* r, std::array<double, 3>& pos, i
     {
         if(r->getIndex() == i) return; // ten sam Node
 
-        // Jesli node jest zewnetrzny, to policz sile ktora wywiera ten node na obecnie rozwazane cialo
         double distX = r->getSelectedPosition(0) - pos[0];
         double distY = r->getSelectedPosition(1) - pos[1];
         double distZ = r->getSelectedPosition(2) - pos[2];
         double dist = (distX * distX + distY * distY + distZ * distZ) + EPS * EPS;
         dist = dist * sqrt(dist);
-        // jak sprawdzic czy to te same bodies? Musze zachowac i != j
         double F = G * (r->getMass() * weights[i]);
         forces[i * 3] += F * distX / dist; // force = G(m1*m2)/r^2
         forces[i * 3 + 1] += F * distY / dist;
@@ -138,7 +132,6 @@ void BarnesHutStep::computeForceForBody(NodeBH* r, std::array<double, 3>& pos, i
     {
         if(r->isInQuad(pos[0], pos[1], pos[2]))
         {
-            //rekurencja pomijajac ratio
             for(auto* child : r->getQuads())
             {
                 computeForceForBody(child, pos, i);
@@ -162,7 +155,6 @@ void BarnesHutStep::computeForceForBody(NodeBH* r, std::array<double, 3>& pos, i
             double distZ = r->getSelectedCenterOfMass(2)- pos[2];
             double dist = (distX * distX + distY * distY + distZ * distZ) + EPS * EPS;
             dist = dist * sqrt(dist);
-            // jak sprawdzic czy to te same bodies? Musze zachowac i != j
             double F = G * (r->getTotalMass() * weights[i]);
             forces[i * 3] += F * distX / dist; // force = G(m1*m2)/r^2
             forces[i * 3 + 1] += F * distY / dist;
@@ -191,7 +183,7 @@ void BarnesHutStep::compute(tf3 &positions, double dt)
         std::array<double, 3> arr({positions[i*3], positions[i*3 + 1], positions[i*3 + 2]});
         computeForceForBody(root, arr, i);
     }
-    testingMomemntum();
+    //testingMomemntum();
 
     for (unsigned i = 0; i < numberOfBodies; i++) {
         for (int j = 0; j < 3; j++) {

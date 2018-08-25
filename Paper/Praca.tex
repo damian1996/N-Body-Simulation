@@ -479,11 +479,10 @@ Porządek Mortona jest definiowany przez \textbf{space-filling curve}, która je
 \begin{figure}[h]
     \centering      
     \def\svgscale{0.53}
-    \input{zcurve.pdf_tex}
+    \input{zcurve2.pdf_tex}
     \caption{Przykład Z-curve}
     \label{fig:krzywa}
 \end{figure}
-
 
 \subsection{\Large Równoległa implementacja drzew ósemkowych}
 Z wykorzystaniem powyżej zdefiniowanych kodów będziemy implementować algorytm wspomniany w pracy Tero Karrasa \cite{tero}, z tym wyjątkiem, że będzie lekko zmodykifowany, gdyż nie będziemy korzystać z wprowadzonych tam \textbf{binary radix tree}.
@@ -509,10 +508,11 @@ void calculateMortonCodes(T* pos, long long* codes, int numberOfBodies, T* mins,
   unsigned long long code = 0;
   for i in {0..K-1} 
   {
-  	for j in {0..2}
+    for j in {0..2}
     {
       code <<= 1;
-      if(start[j] + middle[j] < pos[3*thid + j]) {
+      if(start[j] + middle[j] < pos[3*thid + j]) 
+      {
         code |= 0x1;
         start[j] += middle[j];
       }
@@ -532,30 +532,32 @@ int* d_sortedNodes = thrust::raw_pointer_cast(sortedNodes.data());
 fillNodes<<<blocks, THREADS_PER_BLOCK>>>(d_sortedNodes, numberOfBodies);
 
 thrust::sort_by_key(mortonCodes.begin(), mortonCodes.end(), sortedNodes.begin());  
-  
-iterators = thrust::unique_by_key(mortonCodes.begin(), mortonCodes.end(), sortedNodes.begin());
+
+auto iterators = thrust::unique_by_key(mortonCodes.begin(), mortonCodes.end(), sortedNodes.begin());
+mortonCodes.erase(iterators.first, mortonCodes.end());
+sortedNodes.erase(iterators.second, sortedNodes.end());
 \end{lstlisting}
 
 Rolą wektora sortedNodes jest zachowanie początkowej numeracji punktów, to znaczy sortujemy pary \textbf{(kodMortona, początkowyIndeks)}.
-Zmienna iterators dostaje parę iteratorów na posortowane wektory jako wynik z \textbf{thrust::unique\_by\_key}.
+Zmienna iterators dostaje parę iteratorów na posortowane wektory jako wynik z \textbf{thrust::unique\_by\_key}. Ostatecznie musimy użyć \textbf{erase} do usunięcia znalezionych duplikatów.
 
 \subsubsection{\large Zliczenie węzłów wewnętrznych oraz łączenie węzłów}
 
-Dwie ostatnie części budowania drzewa opiszemy w jednym podrozdziale.
+Dwie ostatnie części algoorytmu budowania drzewa opiszemy w jednym podrozdziale.
 Zacznijmy od przedstawienia struktury odpowiedzialnej za węzły w naszym drzewie:
 
 \lstset{backgroundcolor=\color{white}, basicstyle=\footnotesize\fontfamily{fvm}\selectfont, numbers=left, numbersep=8pt, keywordstyle=\color{blue},commentstyle = \color{mygreen}}              
 \begin{lstlisting}[language=C++, frame=single, framerule=2pt, caption=Struktura OctreeNode]
 struct OctreeNode {
-  int children[8];
-  int position;
-  float totalMass;
-  float centersOfMass[3];
+  int children[8] = {-1, -1, -1, -1, -1, -1, -1, -1};
+  int position = -1;
+  float totalMass = 0.0;
+  float centersOfMass[3] = {0.0, 0.0, 0.0};
 };
 \end{lstlisting}
-W powyższej strukturze przechowujemy indeksy następników w globalnej tablicy węzłów, a także standardowo całkowitą masę poddrzewa oraz środek masy. Dodatkowo mamy pole position, które przyjmuje -1, gdy węzeł jest wewnętrzny oraz indeks węzła(wejściowy), gdy węzeł jest liściem.
-Jak widzimy niżej, początkowo tworzymy \textbf{device\_vector} dla węzłów o liczbie elementów, którą wyznacza liczba punktów z wejścia, które mają unikalne kody Mortona. \\
-Tworzymy również wektor, którego zadaniem jest przechowywanie informacji o rodzicu każdego z wezłów (informacja ta będzie niezbędna przy łączeniu wierzchołków) na każdym z poziomów (jak wspomnieliśmy nasze drzewo ma 20 poziomów). Poniższy fragment kodu zawiera również trzy istotne zmienne:
+W powyższej strukturze przechowujemy indeksy następników w globalnej tablicy węzłów, a także standardowo całkowitą masę poddrzewa oraz środek masy. Dodatkowo mamy pole position, które przyjmuje -1, gdy węzeł jest wewnętrzny oraz indeks węzła(na tablicę globalną), gdy węzeł jest liściem.
+Jak widzimy niżej, początkowo tworzymy \textbf{device\_vector octree} dla węzłów o liczbie elementów, którą wyznacza liczba punktów z wejścia, które mają unikalne kody Mortona. \\
+Tworzymy również wektor \textbf{parentsNumbers}, którego zadaniem jest przechowywanie informacji o rodzicu każdego z wezłów (informacja ta będzie niezbędna przy łączeniu wierzchołków) na każdym z poziomów (jak wspomnieliśmy nasze drzewo ma głębokość 20). Poniższy fragment kodu zawiera również trzy istotne zmienne:
 \begin{itemize}
 \item \textbf{childrenCount} - zlicza liczbę nowych węzłów na każdym z poziomów drzewa
 \item \textbf{previousChildrenCount} - przechowuje liczbę węzłów z poprzedniego poziomu
@@ -569,14 +571,15 @@ OctreeNode* d_octree = thrust::raw_pointer_cast(octree.data());
 	
 thrust::device_vector<int> parentsNumbers(uniquePointsCount);
 int* d_parentsNumbers = thrust::raw_pointer_cast(parentsNumbers.data());
+
 int childrenCount = uniquePointsCount;
 int allChildrenCount = uniquePointsCount;
 int previousChildrenCount = 0;
 \end{lstlisting}
 
-Kluczowym punktem tych dwóch części jest poniższa pętla. Iteruje się ona $K=20$ razy, zaczynając od dzieci drzewa(podejście \textbf{bottom-up}), oznacza to także, że zaczyna od węzłów ograniczających najmniejszy obszar, czyli ograniczającego nasze punkty najdokładniej.\\
-W każdej z iteracji chcemy wyznaczyć rodziców dla węzłów. \\W tym celu pomocny jest kernel \textbf{calculateDuplicates} w połączeniu z \textbf{thrust::inclusive\_scan}, które pozwalają wyznaczyć duplikaty wśród rodziców(czyli węzły, które są poprzednikami dla więcej niż kilku węzłów na niższym poziomie). 
-Kernel ustawia w wektorze $1$, jeśli rodzice dwóch kolejnych węzłów są różni (wystarczy sprawdzić dwa kolejne, gdyż dzięki sortowaniu dzieci jednego węzła są obok siebie), a następnie $scan$ robi sumę prefiksową tej tablicy, aby wyznaczyć te, które są takie same(mają przypisane takie same liczby po $scanie$).
+Kluczowym punktem tych dwóch części jest poniższa pętla. Iteruje się ona $K=20$ razy, zaczynając od dzieci drzewa (podejście \textbf{bottom-up}), oznacza to także, że zaczyna od węzłów ograniczających najmniejszy obszar, czyli obszaru ograniczającego nasze punkty najdokładniej.\\
+W każdej z iteracji chcemy wyznaczyć rodziców dla węzłów. \\W tym celu pomocny jest kernel \textbf{calculateDuplicates} w połączeniu z \textbf{thrust::inclusive\_scan}, które pozwalają wyznaczyć duplikaty wśród rodziców(czyli węzły na wyższym poziomie, które mają identyczne kody Mortona, więc mają takie same następniki).
+Kernel ustawia wartość $1$ w danej komórce wektora, jeśli rodzice dwóch kolejnych węzłów są różni (wystarczy sprawdzić dwa kolejne, gdyż dzięki sortowaniu dzieci każdego z węzłów są obok siebie), a następnie \textbf{inclusive\_scan} robi sumę prefiksową tej tablicy, aby wyznaczyć te, które są takie same(mają przypisane takie same liczby po obliczeniu sum prefiksowych).
 
 \lstset{backgroundcolor=\color{white}, basicstyle=\footnotesize\fontfamily{fvm}\selectfont, numbers=left, numbersep=8pt, keywordstyle=\color{blue},commentstyle = \color{mygreen}}              
 \begin{lstlisting}[language=C++, frame=single, framerule=2pt, caption=Kernel calculateDuplicates]
@@ -593,66 +596,91 @@ void calculateDuplicates(unsigned long long* mortonCodes, int* result, int N) {
 
 \end{lstlisting}
 \bigskip
-Po wyznaczeniu nowych wierzchołków na kolejnym poziomie, wstawiamy je do wektora \textbf{octree}, a następnie przesuwamy im indeks, aby miały indeksy zaczynające się od pierwszego numera po ostatnim węźle z poziomu niżej. Widzimy, że tym sposobem \textbf{root} drzewa będzie ostatnim węzłem w naszej tablicy.
+Po wyznaczeniu nowych wierzchołków na kolejnym poziomie, wstawiamy je do wektora \textbf{octree}, a następnie przesuwamy im indeks, aby miały indeksy zaczynające się od pierwszego wolnego indeksu (po ostatnim węźle z niższego poziomu). Widzimy, że tym sposobem \textbf{root} drzewa będzie ostatnim węzłem w naszej tablicy.
 
-Kiedy stworzymy węzły na danym poziomie, to następnym zadaniem jest połączenie ich z niższym poziomem. Relizujemy to poprzez kernel \textbf{connectChildren}.
+Kiedy stworzymy węzły na danym poziomie, to następnym zadaniem jest połączenie ich z węzłami będącymi na niższym poziomem. Relizujemy to poprzez kernel \textbf{connectChildren}.
 \lstset{backgroundcolor=\color{white}, basicstyle=\footnotesize\fontfamily{fvm}\selectfont, numbers=left, numbersep=8pt, keywordstyle=\color{blue},commentstyle = \color{mygreen}}              
 \begin{lstlisting}[language=C++, frame=single, framerule=2pt, caption=Kernel connectChildren]
 __global__
 void connectChildren(unsigned long long int* mortonCodes, int* parentsNumbers, OctreeNode* octree, 
-    int N, int previousChildrenCount, int* sortedNodes, int level) {
-  unsigned long long childNumber = mortonCodes[thid]&0x7;
-  octree[parentsNumbers[thid]].children[childNumber] = thid+previousChildrenCount;
-  octree[thid+previousChildrenCount].position = level == 0 ? sortedNodes[thid] : -1;
-  octree[parentsNumbers[thid]].totalMass += octree[childNumber].totalMass;
-  octree[parentsNumbers[thid]].centersOfMass = updateCentersOfMass(parentsNumbers[thid], 
-  	childNumber);
+    int N, int previousChildrenCount, int* sortedNodes, double* pos, double* wei, int level) 
+{
+    unsigned long long int childNumber = mortonCodes[thid]&0x7; 
+    octree[parentsNumbers[thid]].children[childNumber] = thid+previousChildrenCount;
+    octree[parentsNumbers[thid]].position = -1;
+    octree[thid+previousChildrenCount].position = level == 0 ? sortedNodes[thid] : -1;
+    int childId = sortedNodes[thid];
+    if(level == 0) {
+        octree[thid].totalMass = wei[childId];
+        for k in {0..2} 
+        {
+            octree[thid].centersOfMass[k] = (wei[childId] * pos[3*childId + k]) / wei[childId];
+        }
+    }
+    int pthid = parentsNumbers[thid];
+    atomicAdd(&octree[pthid].totalMass, octree[thid+previousChildrenCount].totalMass);
+    for k in {0..2}:
+    {
+    	atomicAdd(&octree[pthid].centersOfMass[k], 
+    		octree[thid+previousChildrenCount].centersOfMass[k]);
+    }
 }
 \end{lstlisting}
 
 Cele, które ten kernel realizuje, są następujące:
 \begin{itemize}
-\item ustawienie odpowiedniego dziecka (informacja z kodu Mortona),
+\item ustawienie odpowiedniego dziecka dla rodzica(informacja z kodu Mortona),
 \item ustawienie pola position, to znaczy -1 gdy węzeł wewnętrzny, w przeciwnym przypadku identyfikator węzła,
-\item aktualizacja totalMass dla węzła,
-\item aktualizacja centersOfMass dla węzła. 
+\item aktualizacja totalMass oraz centersOfMass dla węzła,
+\item dodatkowo, gdy funkcja przetwarza liście drzewa, to ustawia im początkowe wartości dla totalMass oraz centersOfMass.
 \end{itemize}
 
 Całą pętlę realizującą kroki piąty oraz szósty, przedstawia poniższy pseudokod:
-\newpage
+
 \lstset{backgroundcolor=\color{white}, basicstyle=\footnotesize\fontfamily{fvm}\selectfont, numbers=left, numbersep=8pt, keywordstyle=\color{blue},commentstyle = \color{mygreen}}              
 \begin{lstlisting}[language=C++, frame=single, framerule=2pt, caption=Kroki 5-6]
 for(int i = 0; i < K; ++i) {
-        blocks = (childrenCount+THREADS_PER_BLOCK-1)/THREADS_PER_BLOCK;
-        thrust::fill(parentsNumbers.begin(), parentsNumbers.end(), 0);
-        calculateDuplicates<<<blocks, THREADS_PER_BLOCK>>>(
-            d_codes, d_parentsNumbers, childrenCount);
+    blocks = (childrenCount+THREADS_PER_BLOCK-1)/THREADS_PER_BLOCK;
+    thrust::fill(parentsNumbers.begin(), parentsNumbers.end(), 0);
+    calculateDuplicates<<<blocks, THREADS_PER_BLOCK>>>(
+        d_codes,
+        d_parentsNumbers,
+        childrenCount
+    );
         
-        thrust::inclusive_scan(parentsNumbers.begin(), parentsNumbers.end(), parentsNumbers.begin());
+    thrust::inclusive_scan(parentsNumbers.begin(), parentsNumbers.end(), parentsNumbers.begin());
+    octree.insert(octree.end(), parentsNumbers[childrenCount-1]+1, OctreeNode());
+    d_octree = thrust::raw_pointer_cast(octree.data());
+        
+    thrust::for_each(parentsNumbers.begin(), parentsNumbers.end(),
+    	thrust::placeholders::_1 += allChildrenCount);
+        
+    connectChildren<<<blocks, THREADS_PER_BLOCK>>>(
+        d_codes,
+        d_parentsNumbers,
+        d_octree,
+        childrenCount,
+        previousChildrenCount,
+        d_sortedNodes,
+        d_positions,
+        d_weights,
+        i
+    );
 
-        octree.insert(octree.end(), parentsNumbers[childrenCount-1]+1, OctreeNode());
-        d_octree = thrust::raw_pointer_cast(octree.data()); 
-        
-        thrust::for_each(parentsNumbers.begin(), parentsNumbers.end(), 
-        	thrust::placeholders::_1 += allChildrenCount);
-        
-        connectChildren<<<blocks, THREADS_PER_BLOCK>>>(
-            d_codes, d_parentsNumbers, d_octree, childrenCount, 
-            previousChildrenCount, d_sortedNodes, i
-        );
-        
-        thrust::for_each(mortonCodes.begin(), mortonCodes.end(), thrust::placeholders::_1 >>= 3);
-        auto it = thrust::unique(mortonCodes.begin(), mortonCodes.end());
-        childrenCount = thrust::distance(mortonCodes.begin(), it);
-        previousChildrenCount = allChildrenCount;
-        allChildrenCount += childrenCount;
-    }
+    thrust::for_each(mortonCodes.begin(), mortonCodes.end(), thrust::placeholders::_1 >>= 3);        
+    auto it = thrust::unique(mortonCodes.begin(), mortonCodes.end());
+    mortonCodes.erase(it, mortonCodes.end());
+    d_codes = thrust::raw_pointer_cast(mortonCodes.data()); 
+    childrenCount = thrust::distance(mortonCodes.begin(), it);
+    previousChildrenCount = allChildrenCount;
+    allChildrenCount += childrenCount;
+}
 \end{lstlisting}
 
 \section{\LARGE Liczenie sił oddziałujących na ciało}
 
 Drzewo zostało stworzone w celu szybszego liczenia siły jaka działa na ciało.\\
-Wersje jednowątkowa oraz wielowątkowa do liczenia siły różnią się jedynie tym, że ta druga robi to na osobnym wątku dla każdego ciała. Przedstawimy więc jedynie wielowątkowe podejście. \\
+Wersje jednowątkowa oraz wielowątkowa algorytmu liczenia siły różnią się jedynie tym, że ta druga robi to na osobnym wątku dla każdego ciała, a także została zaimplementowa iteracyjnie. Przedstawimy więc jedynie wielowątkowe podejście. \\
 Algorytm polega na przejściu drzewa od korzenia i na sprawdzaniu czy węzeł jest wewnętrzny czy zewnętrzny. Gdy węzeł jest liściem, to zwyczajnie liczymy siłę między naszym punktem a tym węzłem (jak w naiwnym algorytmie). Gdy węzeł jest wewnętrzny, to potrzebujemy następującej definicji \cite{Aarseth}:
 
 \theoremstyle{definition}
@@ -661,54 +689,48 @@ Algorytm polega na przejściu drzewa od korzenia i na sprawdzaniu czy węzeł je
 \end{definition}
 
 Powyższa definicja wyjaśnia postępowanie dla wewnętrznego węzła. Dodatkowo musimy rostrzygać czy nasz punkt i przetwarzany węzeł nie są tym samym węzłem, aby nie liczyć siły między nimi.\\~\\~\\
-\bigskip
-\bigskip
 
 \lstset{backgroundcolor=\color{white}, basicstyle=\footnotesize\fontfamily{fvm}\selectfont, numbers=left, numbersep=8pt, keywordstyle=\color{blue},commentstyle = \color{mygreen}} 
 \begin{lstlisting}[language=C++, frame=single, framerule=2pt, caption=Liczenie siły oddziałującej na ciało w układzie]
 __global__
-void computeForces(OctreeNode* octree, float* forcesGlobal, float* velocities, float* weights, 
-	float* pos, int AllNodes, int N, float dt) 
+void computeForces(OctreeNode* octree, double* velocities, double* weights, 
+    double* pos, double* mins, double* maxs, int AllNodes, int N, double dt) 
 {	
     float forces[3] = {0.0, 0.0, 0.0};
-    OctreeNode* node;
     float p = {pos[3*thid], pos[3*thid + 1], pos[3*thid + 2]);
-    forces[thid] = 0.0;
-    unsigned long long int stack[64];
+    unsigned int stack[20], child[20];
+    double b[6*20];
     int top = -1;
-    stack[++top] = AllNodes-1;
+    stack[++top] = AllNodes - 1, child[top] = 0;
+    for i in {0..2}
+        b[top*6 + 2*i] = mins[i], b[top*6 + 2*i + 1] = maxs[i];
+
     while(top>=0) 
     {
-    	node = octree[idx];
-        int idx = stack[top--];
-        if(noe->position == -1)
-        {
-            double d = dist(node->getCenterOfMass(), p);
-            double s = boundaries[1] - boundaries[0];
+    	int prevTop = top, nextChild = child[top], idx = stack[top--];
+        if(idx == -1) continue;
+        
+        if(octree[idx].position == -1) {
+            double d = distanceBetween(octree[idx].centerOfMass(), p);
+        	double s = b[6*prevTop + 1] - b[6*prevTop];
             bool isFarAway = (s/d < theta);
-            if(isFarAway)
-            {	
-                for k in {0..2}
-                    forces[3*thid + k] += forcesBetween(node->getCenterOfMass(), p);
+            if(isFarAway) {
+            	forces += computeForcesBetween(octree[idx].centerOfMass, p);
             }
-            else
-            {
-                for i in {0..numberOfChilds-1}
-                {
-                    stack[++top] = node->children[i];
-                }
+            else {
+                if(nextChild==numberOfChilds) continue;
+                stack[++top] = idx, child[top] = nextChild + 1;
+                for j in {0..5}
+                    stack[6*top + j] = stack[6*prevTop + j];
+                stack[++top] = octree[idx].children[nextChild], child[top] = 0;
+                b[6*top..6*top+5] = computeBoundariesFirstChild(prevTop);
             }
+        } 
+        else {
+       	    if(thid == octree[idx].position) continue;
+        	forces += computeForcesBetween(octree[idx].getPoint(), p);	
         }
-        else
-        {
-            if(thid == octree[idx].position) 
-                continue;
-            for k in {0..2}
-                forces[3*thid + k] += forcesBetween(node->getPoint(), p);
-        }	
-    }
-    for k in {0..2}
-    	forcesGlobal[3*thid+k] = forces[k];
+    }    
     UpdatePositionAndVelocity(forces, positions, velocities, weights, N, dt);
 }
 \end{lstlisting}

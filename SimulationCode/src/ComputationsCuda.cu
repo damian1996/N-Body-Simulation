@@ -68,6 +68,6 @@ void Computations::NaiveSimBridgeThrust(type &pos, int numberOfBodies, double dt
   thrust::device_vector<double> posD = pos;
   double *d_positions = thrust::raw_pointer_cast(posD.data());
   NaiveSim<<<(numberOfBodies+1023)/1024, 1024>>>(d_positions, d_velocities, d_weights, numberOfBodies, dt);
-  testingMomemntum(numberOfBodies);
+  //testingMomemntum(numberOfBodies);
   pos = posD;
 }
