@@ -735,6 +735,8 @@ void computeForces(OctreeNode* octree, double* velocities, double* weights,
 }
 \end{lstlisting}
 
+W powyższej iteracyjnej implementacji algorytmu liczenia siły korzystamy z dwóch tablic, które będzie nam symulować stos. Gdy przetwarzamy jeden wierzchołek i okazało się, że musimy w rekurencyjnej wersji wywoływalibyśmy się rekurencyjnie na mniejszym obszarze, tutaj wrzucimy na stos dwie pary. Pierwszą będzie \textbf{(idObecnegoWęzła, nrDziecka+1)}, czyli po przetworzeniu całego poddrzewa dziecka o  nrDziecka, przejdziemy do przetwarzania kolejnego dziecka. Druga para to \textbf{(idDziecka, 0)}, czyli wrzucamy na stos pierwszego dziecko obecnego węzła (czyli węzeł na którym będziemy wywoływać się rekurencyjnie). Dodatkowo przechowujemy analogiczny stos dla granic ograniczających obszar węzła, które są wyliczane na bieżąco.
+
 \section{\LARGE Wizualizacja}
 	
 W celu wizualizacji symulacji wykorzystałem OpenGL3. 

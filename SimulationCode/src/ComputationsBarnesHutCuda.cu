@@ -124,6 +124,38 @@ void computeForces(OctreeNode* octree, double* velocities, double* weights,
         
         if(octree[idx].position == -1)
         {
+            int tmp = 6*prevTop;
+            
+            bool res = true;
+            if(!(pos[thid*3] >= b[tmp] && pos[thid*3] <= b[tmp + 1]) && res) res = false;
+            if(!(pos[thid*3 + 2] >= b[tmp] && pos[thid*3 + 1] <= b[tmp + 3]) && res) res = false;
+            if(!(pos[thid*3 + 4] >= b[tmp] && pos[thid*3 + 2] <= b[tmp + 5]) && res) res = false;
+
+            if(res)
+            {
+                if(nextChild==numberOfChilds) {
+                    continue;
+                }
+                stack[++top] = idx;
+                child[top] = nextChild + 1;
+                for(int j=0; j<6; j++)
+                    stack[6*top + j] = stack[6*prevTop + j];
+                
+                stack[++top] = octree[idx].children[nextChild];
+                child[top] = 0;
+                for(int i=0; i<3; i++) {
+                    if(multipliers[nextChild][i]) {
+                        b[top*6 + 2*i] = b[prevTop*6 + 2*i];
+                        b[top*6 + 2*i + 1] = b[prevTop*6 + 2*i] + (b[prevTop*6 + 2*i + 1] - b[prevTop*6 + 2*i])/2;
+                    } else {
+                        b[top*6 + 2*i] = b[prevTop*6 + 2*i] + (b[prevTop*6 + 2*i + 1] - b[prevTop*6 + 2*i])/2;
+                        b[top*6 + 2*i + 1] = b[prevTop*6 + 2*i + 1];
+                    }
+                }
+                continue;
+            }
+
+
             double distX = octree[idx].centerX - p[0];
             double distY = octree[idx].centerY - p[1];
             double distZ = octree[idx].centerZ - p[2];
@@ -180,8 +212,8 @@ void computeForces(OctreeNode* octree, double* velocities, double* weights,
             forces[2] += F * distZ / dist;
         }
     }
-    if(thid >= 8 && thid <=10)
-    printf("%d : %f %f %f\n", thid, forces[0], forces[1], forces[2]);
+    //if(thid >= 8 && thid <=10)
+    //printf("%d : %f %f %f\n", thid, forces[0], forces[1], forces[2]);
     
     // sortedNodes[thid] zamiast thid?
     for (int j = 0; j < 3; j++) {
@@ -312,6 +344,6 @@ void ComputationsBarnesHut::BarnesHutBridge(type &pos, int numberOfBodies, doubl
     thrust::device_vector<double> posD = pos;
     d_positions = thrust::raw_pointer_cast(posD.data());
     createTree(numberOfBodies, dt);
-    //testingMomemntum(numberOfBodies);
+    testingMomemntum(numberOfBodies);
     pos = posD;
 }

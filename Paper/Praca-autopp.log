@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=latex 2018.8.7)  25 AUG 2018 11:26
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=latex 2018.8.7)  25 AUG 2018 12:28
 entering extended mode
  %&-line parsing enabled.
 **\let \APPmakepictures \empty \input  Praca.tex
@@ -2031,41 +2031,47 @@ Overfull \hbox (6.0pt too wide) in paragraph at lines 694--694
  []
 
 
-LaTeX Warning: Citation 'opengl' on page 21 undefined on input line 743.
+Overfull \hbox (2.26782pt too wide) in paragraph at lines 738--739
+\T1/fve/m/sc/10 rze, tu-taj wrzu-ci-my na stos dwie pa-ry. Pierw-sz¡ b¦-dzie \T
+1/fve/b/n/10 (idO-bec-ne-go-No-de, nrDziec-ka+1)\T1/fve/m/sc/10 , 
+ []
 
 
-Overfull \hbox (6.0pt too wide) in paragraph at lines 749--749
+LaTeX Warning: Citation 'opengl' on page 21 undefined on input line 745.
+
+
+Overfull \hbox (6.0pt too wide) in paragraph at lines 751--751
 [][][][][][][]  
  []
 
 
-LaTeX Warning: Citation 'tutMat' on page 21 undefined on input line 778.
+LaTeX Warning: Citation 'tutMat' on page 22 undefined on input line 780.
 
 
-LaTeX Warning: Citation 'opengl' on page 21 undefined on input line 781.
+LaTeX Warning: Citation 'opengl' on page 22 undefined on input line 783.
 
 
-Overfull \hbox (5.1568pt too wide) in paragraph at lines 781--781
+Overfull \hbox (5.1568pt too wide) in paragraph at lines 783--783
 []\T1/fve/m/sc/10 Bardziej szcze-gó-ªo-wo, naj-pierw usta-wia-my ka-me-r¦, do c
 ze-go sªu-»y funk-cja \T1/fve/b/n/10 lo-okAt \T1/fve/m/sc/10 [[]], 
  []
 
 
-LaTeX Warning: Citation 'opengl' on page 21 undefined on input line 782.
+LaTeX Warning: Citation 'opengl' on page 22 undefined on input line 784.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 
-LaTeX Warning: Empty bibliography on input line 848.
+LaTeX Warning: Empty bibliography on input line 850.
 
 
 Package pst-pdf Warning: Picture container needs cropping..
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 851.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 851.
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 851.
-Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 851.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 853.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 853.
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 853.
+Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 853.
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
@@ -2080,7 +2086,7 @@ Package biblatex Warning: Please (re)run Biber on the file:
 Package logreq Info: Writing requests to 'Praca-autopp.run.xml'.
 \openout1 = `Praca-autopp.run.xml'.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 851.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 853.
  ) 
 Here is how much of TeX's memory you used:
  38314 strings out of 493030
