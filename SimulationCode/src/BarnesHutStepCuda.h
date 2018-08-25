@@ -19,7 +19,6 @@ public:
     void compute(tf3 &positions, float dt);
 
 private:
-    //NodeBH* root;
     ComputationsBarnesHut *c;
     std::vector<float> weights;
     std::vector<float> forces;

@@ -1,7 +1,6 @@
 #include "NodeBH.h"
 #include <cstdio>
 
-/* Constructor to creating complete node, which is ready to be quadrant. */
 NodeBH::NodeBH(float mass, long long id, std::array<float, 3>& pos, std::array<float, 6>& boundaries) :
       mass(mass), totalMass(0), hasPoint(true), childrenExists(false), id(id)
 {
@@ -25,13 +24,9 @@ bool NodeBH::isInQuad(float x, float y, float z) {
     return true;
 }
 
-/* Constructor to creating empty node, which is ready to be quadrant. */
 void NodeBH::addQuads(std::array<float, 6>& b)
 {
     childrenExists = true;
-    
-
-
     std::array<float, 6> boundariesForQuad = {b[0], b[0] + (b[1]-b[0])/2, b[2], b[2] + (b[3]-b[2])/2, b[4], b[4] + (b[5] - b[4])/2};
     quads[0] = new NodeBH(boundariesForQuad);
 
@@ -68,7 +63,6 @@ int NodeBH::numberOfSubCube(float x, float y, float z) {
     if(x >= (boundaries[0] + (boundaries[1] - boundaries[0])/2)) result += 1;
     return result;
 }
-
 
 void NodeBH::setAttributes(float mass, long long id, float x, float y, float z) {
     hasPoint = true;

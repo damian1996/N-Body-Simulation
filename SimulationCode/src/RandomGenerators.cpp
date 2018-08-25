@@ -26,27 +26,11 @@ template <>
 void RandomGenerators::initializeVelocities<std::vector<float>>(
     std::vector<float> &velocities, unsigned numberOfBodies) {
   velocities.resize(3 * numberOfBodies);
-
   for (unsigned i = 0; i < numberOfBodies; i++)
     for (int j = 0; j < 3; j++)
       velocities[i * 3 + j] = getRandomFloat(-0.01, 0.01);
-      //velocities[i * 3 + j] = getRandomFloat(-0.01f, 0.01f);
 }
 
-/*
-template <>
-void RandomGenerators::initializeVelocities<std::vector<float>>(
-    std::vector<float> &velocities, unsigned numberOfBodies) {
-  velocities.resize(3 * numberOfBodies);
-
-  for (unsigned i = 0; i < numberOfBodies; i++)
-    for (int j = 0; j < 3; j++)
-      velocities[i * 3 + j] = getRandomFloat(-0.01, 0.01);
-      //velocities[i * 3 + j] = getRandomFloat(-0.01, 0.01);
-}
-*/
-
-// zderzenie plastyczne / sprezyste
 template <>
 void RandomGenerators::initializeVelocities<thrust::host_vector<float>>(
     thrust::host_vector<float> &velocities, unsigned numberOfBodies) {
@@ -58,22 +42,22 @@ void RandomGenerators::initializeVelocities<thrust::host_vector<float>>(
 
 void RandomGenerators::initializeWeights(std::vector<float> &weights, unsigned numberOfBodies) {
   weights.resize(numberOfBodies);
-  int typeMass = 3; //getRandomType();
+  int typeMass = 3;
   unsigned divi;
   printf("TYP %d\n", typeMass);
   switch (typeMass) {
-  case 0: // full random
+  case 0: 
     for (unsigned i = 0; i < numberOfBodies; i++)
-      weights[i] = getRandomFloat(1000.0f, 100000.0f); // 10^10
+      weights[i] = getRandomFloat(1000.0f, 100000.0f); 
     break;
-  case 1: // 1/10 duze masy, reszta stosunkowo male
+  case 1: 
     divi = static_cast<unsigned>(numberOfBodies/100);
     for (unsigned i = 0; i < divi; i++)
       weights[i] = getRandomFloat(100000.0f, 101000.0f);
     for (unsigned i = divi; i < numberOfBodies; i++)
       weights[i] = getRandomFloat(10000.0f, 20000.0f);
     break;
-  case 2: // 1/20 male, 2/10 duze, 5/15 male
+  case 2:
     divi = static_cast<unsigned>(numberOfBodies/20);
     for (unsigned i = 0; i < divi; i++)
       weights[i] = getRandomFloat(1000000.0f, 1010000.0f);
@@ -98,10 +82,9 @@ void RandomGenerators::initializeWeights(std::vector<float> &weights, unsigned n
     for (unsigned i = 20 * divi; i < numberOfBodies; i++)
       weights[i] = getRandomFloat(1000.0f, 3000.0f);
     break;
-  default: // same male
+  default:
     for (unsigned i = 0; i < numberOfBodies; i++)
-      weights[i] = getRandomFloat(1000.0f, 1100.0f); // 10^10
+      weights[i] = getRandomFloat(1000.0f, 1100.0f); 
     break;
   }
 }
-// zderzenie plastyczne / sprezyste

@@ -116,15 +116,14 @@ void BarnesHutStep::computeForceForBody(NodeBH* r, std::array<float, 3>& pos, in
 {
     if(r->isPoint() && !r->wasInitialized())
     {
-        if(r->getIndex() == i) return; // ten sam Node
-
+        if(r->getIndex() == i) return; 
         float distX = r->getSelectedPosition(0) - pos[0];
         float distY = r->getSelectedPosition(1) - pos[1];
         float distZ = r->getSelectedPosition(2) - pos[2];
         float dist = (distX * distX + distY * distY + distZ * distZ) + EPS * EPS;
         dist = dist * sqrt(dist);
         float F = G * (r->getMass() * weights[i]);
-        forces[i * 3] += F * distX / dist; // force = G(m1*m2)/r^2
+        forces[i * 3] += F * distX / dist; 
         forces[i * 3 + 1] += F * distY / dist;
         forces[i * 3 + 2] += F * distZ / dist;
     }
@@ -156,7 +155,7 @@ void BarnesHutStep::computeForceForBody(NodeBH* r, std::array<float, 3>& pos, in
             float dist = (distX * distX + distY * distY + distZ * distZ) + EPS * EPS;
             dist = dist * sqrt(dist);
             float F = G * (r->getTotalMass() * weights[i]);
-            forces[i * 3] += F * distX / dist; // force = G(m1*m2)/r^2
+            forces[i * 3] += F * distX / dist; 
             forces[i * 3 + 1] += F * distY / dist;
             forces[i * 3 + 2] += F * distZ / dist;
         }
@@ -174,8 +173,6 @@ void BarnesHutStep::compute(tf3 &positions, float dt)
 {
     initializingRoot();
     createTree(positions);
-    //std::string indent = "★";
-    //DFS_BH(root, indent);
     std::fill(forces.begin(), forces.end(), 0.0);
 
     for(unsigned i=0; i<numberOfBodies; i++)

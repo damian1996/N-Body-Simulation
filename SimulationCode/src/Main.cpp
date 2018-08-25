@@ -2,8 +2,6 @@
 using namespace std;
 
 int main() {
-  // dodac wczytanie N przez usera, poki co roboczo 100
-
   int programVersion, numberOfBodies;
   printf("Wybierz tryb wykonywania programu\n");
   while (1) {
@@ -22,7 +20,7 @@ int main() {
   RandomGenerators *randomGenerator = new RandomGenerators();
   std::vector<float> masses(numberOfBodies);
   randomGenerator->initializeWeights(masses, numberOfBodies);
-  Render *rend = nullptr; // = new Render(masses, numberOfBodies);
+  Render *rend = nullptr; 
   Step *step = nullptr;
   Simulation *sim;
 
@@ -56,14 +54,3 @@ int main() {
   delete randomGenerator;
   return 0;
 }
-
-// https://pl.wikipedia.orandomGenerator/wiki/Wstrzykiwanie_zale%C5%BCno%C5%9Bci
-// https://arxiv.orandomGenerator/pdf/0806.3950.pdf
-
-// file:///home/damian/Desktop/praca%20licencjacka/materialy/Gravitational%20N-Body%20Simulatio%20-%20Aarseth,%20Sverre%20J._5510.pdf
-// file:///home/damian/Desktop/praca%20licencjacka/materialy/nBody_nVidia.pdf
-// file:///home/damian/Desktop/praca%20licencjacka/materialy/Gravitational%20N-Body%20Simulatio%20-%20Aarseth,%20Sverre%20J._5510.pdf
-// https://www.sciencedirect.com/science/article/pii/0021999173901605
-// https://github.com/adityavkk/N-Body-Simulations/blob/master/Barnes-Hut/src/Bodies.hs
-// https://link.springer.com/chapter/10.1007%2F978-1-4613-9600-0_7
-// https://www.maths.tcd.ie/~btyrrel/nbody.pdf

@@ -125,8 +125,6 @@ void computeForces(OctreeNode* octree, float* velocities, float* weights,
             float distZ = octree[idx].centerZ - p[2];
             float dist = distX*distX + distY*distY + distZ*distZ + EPS*EPS;
             dist = dist * sqrt(dist);
-            //float s = max(max(b[6*prevTop+1] - b[6*prevTop], b[6*prevTop+3] - b[6*prevTop+2]), b[6*prevTop+5] - b[6*prevTop+4]);
-            //float s = ((b[6*prevTop + 1] - b[6*prevTop]) + (b[6*prevTop + 3] - b[6*prevTop + 2]) + (b[6*prevTop + 5] - b[6*prevTop + 4]))/3;
             float s = bound/(1<<prevTop);
             bool isFarAway = (s/dist < theta);
             
@@ -159,7 +157,6 @@ void computeForces(OctreeNode* octree, float* velocities, float* weights,
             if(thid == p) 
                 continue;
             
-            // sortedNodes[3*idx] zamiast 3*idx?
             float distX = pos[3*p] - pos[3*thid];
             float distY = pos[3*p + 1] - pos[3*thid + 1];
             float distZ = pos[3*p + 2] - pos[3*thid + 2];
@@ -195,8 +192,6 @@ void computeCenterOfMasses(OctreeNode* octree, int N) {
 
 void ComputationsBarnesHut::createTree(int numberOfBodies, float dt) {
     int blocks = (numberOfBodies+THREADS_PER_BLOCK-1)/THREADS_PER_BLOCK;
-    // 0. liczymy boundaries
-    // ew. zaokraglic do najblizszej potegi 2 (najwiekszej dla kazdego z wymiarow)
     thrust::device_vector<float> px(numberOfBodies), py(numberOfBodies), pz(numberOfBodies);
     float *d_px = thrust::raw_pointer_cast(px.data());
     float *d_py = thrust::raw_pointer_cast(py.data());
@@ -215,7 +210,6 @@ void ComputationsBarnesHut::createTree(int numberOfBodies, float dt) {
     float* d_mins = thrust::raw_pointer_cast(minsDeviceVector.data());
     float* d_maxs = thrust::raw_pointer_cast(maxsDeviceVector.data());
     
-    // 1. liczymy kody mortona
     thrust::device_vector<unsigned long long> mortonCodes(numberOfBodies);
     unsigned long long* d_codes = thrust::raw_pointer_cast(mortonCodes.data());
     calculateMortonCodes<<<blocks, THREADS_PER_BLOCK>>>(d_positions, d_codes, numberOfBodies, d_mins, d_maxs); 
@@ -224,24 +218,14 @@ void ComputationsBarnesHut::createTree(int numberOfBodies, float dt) {
     int* d_sortedNodes = thrust::raw_pointer_cast(sortedNodes.data());
     fillNodes<<<blocks, THREADS_PER_BLOCK>>>(d_sortedNodes, numberOfBodies);
 
-    // 2. sortujemy to
     thrust::sort_by_key(mortonCodes.begin(), mortonCodes.end(), sortedNodes.begin());  
 
-    // 3. usuwamy duplikaty
-    //auto iterators = thrust::unique_by_key(mortonCodes.begin(), mortonCodes.end(), sortedNodes.begin());
-    //mortonCodes.erase(iterators.first, mortonCodes.end());
-    //sortedNodes.erase(iterators.second, sortedNodes.end());
-
-    // 5. liczymy ilość node-ow z octree do zaalokowania
-    // uwaga: być może nie musimy tego tak naprawde liczyć tylko potem przy tworzeniu drzewa to się samo liczy o.o
-    int uniquePointsCount = mortonCodes.size(); //thrust::distance(mortonCodes.begin(), iterators.first);
-    // printf("UNIQUE POINTS COUNT %d\n", uniquePointsCount);
+    int uniquePointsCount = mortonCodes.size(); 
     blocks = (uniquePointsCount+THREADS_PER_BLOCK-1)/THREADS_PER_BLOCK;
 
     thrust::device_vector<OctreeNode> octree(uniquePointsCount);
     OctreeNode* d_octree = thrust::raw_pointer_cast(octree.data());
-	
-    // 6. laczymy octree nodes
+
     thrust::device_vector<int> parentsNumbers(uniquePointsCount);
     int* d_parentsNumbers = thrust::raw_pointer_cast(parentsNumbers.data());
     int childrenCount = uniquePointsCount;
@@ -249,7 +233,6 @@ void ComputationsBarnesHut::createTree(int numberOfBodies, float dt) {
     int previousAllChildrenCount = 0;
     
     for(int i = 0; i < K; ++i) {
-        //printf("Aha... %d %d\n", i, allChildrenCount);
         blocks = (childrenCount+THREADS_PER_BLOCK-1)/THREADS_PER_BLOCK;
         thrust::fill(parentsNumbers.begin(), parentsNumbers.end(), 0);
         calculateDuplicates<<<blocks, THREADS_PER_BLOCK>>>(
@@ -259,8 +242,8 @@ void ComputationsBarnesHut::createTree(int numberOfBodies, float dt) {
         );
         
         thrust::inclusive_scan(parentsNumbers.begin(), parentsNumbers.end(), parentsNumbers.begin());
-        octree.insert(octree.end(), parentsNumbers[childrenCount-1]+1, OctreeNode()); // co tu sie odbywa?
-        d_octree = thrust::raw_pointer_cast(octree.data()); // dlaczego znowu raw_cast?
+        octree.insert(octree.end(), parentsNumbers[childrenCount-1]+1, OctreeNode());
+        d_octree = thrust::raw_pointer_cast(octree.data());
         
         thrust::for_each(parentsNumbers.begin(), parentsNumbers.end(), thrust::placeholders::_1 += allChildrenCount);
         

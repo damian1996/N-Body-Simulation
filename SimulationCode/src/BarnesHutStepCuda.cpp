@@ -4,15 +4,9 @@ BarnesHutStepCuda::BarnesHutStepCuda(std::vector<float>& masses, unsigned number
     this->numberOfBodies = numberOfBodies;
     weights.resize(numberOfBodies);
     forces.resize(3*numberOfBodies);
-
-    //std::array<float, 6> boundariesForRoot = {-sizeFrame, sizeFrame, -sizeFrame, sizeFrame, -sizeFrame, sizeFrame};
-    //root = new NodeBH(boundariesForRoot);
-
     weights = std::vector<float>(masses.begin(), masses.end());
-
     randomGenerator = new RandomGenerators();
     randomGenerator->initializeVelocities<std::vector<float>>(velocities, numberOfBodies);
-
     c = new ComputationsBarnesHut(velocities, weights);
 }
 

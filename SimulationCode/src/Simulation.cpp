@@ -30,12 +30,10 @@ void Simulation::MakeSimulation() {
   while(1) {//!rend->draw(positions)) {
       if(count >= numberOfRounds) break;
       curr_time = rend->getTime();
-      //std::cout << curr_time - last_time << std::endl;
       avgDt += (curr_time - last_time);
       step->compute(positions, (curr_time - last_time)*3);
       last_time = curr_time;
       count++;
-      //std::cout << count << std::endl;
   }
   std::cout << avgDt/numberOfRounds << std::endl;
 }

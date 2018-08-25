@@ -45,7 +45,6 @@ bool StepNaive::testingMomemntum() {
 
 void StepNaive::compute(tf3 &positions, float dt) {
   //testingMomemntum();
-  //assert(testingMomemntum());
   float EPS = 0.01;
   std::fill(forces.begin(), forces.end(), 0.0);
   for (unsigned i = 0; i < numberOfBodies; i++) {
@@ -57,7 +56,7 @@ void StepNaive::compute(tf3 &positions, float dt) {
       dist = dist * sqrt(dist);
       if (i != j) {
         float F = G * (weights[i] * weights[j]);
-        forces[i * 3] += F * distX / dist; // force = G(m1*m2)/r^2
+        forces[i * 3] += F * distX / dist;
         forces[i * 3 + 1] += F * distY / dist;
         forces[i * 3 + 2] += F * distZ / dist;
       }

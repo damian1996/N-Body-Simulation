@@ -176,7 +176,6 @@ void Render::createAndBindBuffer() {
     glDepthFunc(GL_LESS);
     glEnable (GL_BLEND);
     glBlendFunc (GL_ONE, GL_ONE);
-    //glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glEnable(GL_VERTEX_PROGRAM_POINT_SIZE);
 
     glGenVertexArrays(1, &vao);
@@ -192,7 +191,6 @@ void Render::createAndBindBuffer() {
     glBufferData(GL_ARRAY_BUFFER, sizeof(char)*3*numberOfBodies, colorsToRender, GL_DYNAMIC_DRAW);
     glEnableVertexAttribArray(1);
     glVertexAttribPointer(1, 3, GL_UNSIGNED_BYTE, GL_TRUE, 0, 0);
-    //glPointSize(4.0);
 
     glBindBuffer(GL_ARRAY_BUFFER, buffer[2]);
     glBufferData(GL_ARRAY_BUFFER, sizeof(float)*numberOfBodies, massesToRender, GL_DYNAMIC_DRAW);
@@ -208,7 +206,6 @@ void Render::createAndBindBuffer() {
     glEnableVertexAttribArray(0);
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
 }
-// "    gl_PointSize = gl_Normal.z*((weight+100.0)/70.0);"
 
 void Render::createAndCompileShaders() {
     shVertex = load_shader("./src/vertexshader.glsl", GL_VERTEX_SHADER);
