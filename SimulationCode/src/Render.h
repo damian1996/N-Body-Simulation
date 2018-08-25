@@ -16,11 +16,11 @@
 #include "gl.h"
 #include "RandomGenerators.h"
 
-typedef thrust::host_vector<double > tf3;
+typedef thrust::host_vector<float > tf3;
 
 class Render {
 public:
-    Render(std::vector<double> masses, unsigned numberOfBodies, float cubeSize);
+    Render(std::vector<float> masses, unsigned numberOfBodies, float cubeSize);
     ~Render();
     void createAndBindBuffer();
     void createAndCompileShaders();
@@ -45,7 +45,7 @@ public:
 
     void render();
 
-    bool draw(thrust::host_vector<double>& positions);
+    bool draw(thrust::host_vector<float>& positions);
     GLuint load_shader(const char* path, int shader_type);
     float getTime();
 private:

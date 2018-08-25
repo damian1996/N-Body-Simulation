@@ -7,15 +7,15 @@
 #include <iterator>
 
 class StepNaive : public Step {
-  std::vector<double> forces;
-  std::vector<double> velocities;
-  std::vector<double> weights;
+  std::vector<float> forces;
+  std::vector<float> velocities;
+  std::vector<float> weights;
   bool firstStep;
 public:
-  StepNaive(std::vector<double> &masses, unsigned numberOfBodies);
+  StepNaive(std::vector<float> &masses, unsigned numberOfBodies);
   ~StepNaive();
   bool testingMomemntum();
-  void compute(tf3 &positions, double dt);
+  void compute(tf3 &positions, float dt);
 };
 
 #endif

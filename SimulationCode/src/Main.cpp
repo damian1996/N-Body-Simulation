@@ -20,7 +20,7 @@ int main() {
   int res = scanf("%d", &numberOfBodies);
   if(res == EOF) return 1;
   RandomGenerators *randomGenerator = new RandomGenerators();
-  std::vector<double> masses(numberOfBodies);
+  std::vector<float> masses(numberOfBodies);
   randomGenerator->initializeWeights(masses, numberOfBodies);
   Render *rend = nullptr; // = new Render(masses, numberOfBodies);
   Step *step = nullptr;

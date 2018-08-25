@@ -9,8 +9,8 @@
 class NodeBH {
 public:
     NodeBH() = delete;
-    NodeBH(double mass, long long id, std::array<double, 3>& pos, std::array<double, 6>& boundaries);
-    NodeBH(std::array<double, 6>& board) {
+    NodeBH(float mass, long long id, std::array<float, 3>& pos, std::array<float, 6>& boundaries);
+    NodeBH(std::array<float, 6>& board) {
         for(int i=0; i<6; i++) {
           boundaries[i] = board[i];
         }
@@ -23,7 +23,7 @@ public:
     ~NodeBH() {
 
     }
-    std::array<double, 6>& getBoundaries() {
+    std::array<float, 6>& getBoundaries() {
         return boundaries;
     }
     bool wasInitialized() {
@@ -32,25 +32,25 @@ public:
     int getNumberOfQuads() {
         return quads.size();
     }
-    double getX() {
+    float getX() {
         return pos[0];
     }
-    double getY() {
+    float getY() {
         return pos[1];
     }
-    double getZ() {
+    float getZ() {
         return pos[2];
     }
-    double getMass() {
+    float getMass() {
         return mass;
     }
-    double getTotalMass() {
+    float getTotalMass() {
         return totalMass;
     }
-    double getSelectedCenterOfMass(int i) {
+    float getSelectedCenterOfMass(int i) {
         return centerOfMass[i];
     }
-    double getSelectedPosition(int i) {
+    float getSelectedPosition(int i) {
         return pos[i];
     }
     void setPoint(bool val) {
@@ -74,24 +74,24 @@ public:
     std::array<NodeBH*, 8>& getQuads() {
         return quads;
     }
-    bool isInQuad(double x, double y, double z);
-    void addQuads(std::array<double, 6>& b);
-    int numberOfSubCube(double x, double y, double z);
+    bool isInQuad(float x, float y, float z);
+    void addQuads(std::array<float, 6>& b);
+    int numberOfSubCube(float x, float y, float z);
     void pushPointFromQuadLower();
-    void setAttributes(double mass, long long id, double x, double y, double z);
-    void updateCenterOfMass(double mass, std::array<double, 3>& pos);
+    void setAttributes(float mass, long long id, float x, float y, float z);
+    void updateCenterOfMass(float mass, std::array<float, 3>& pos);
 
 private:
-    double mass;
-    double totalMass;
+    float mass;
+    float totalMass;
     bool hasPoint;
     bool childrenExists;
     std::string indent;
     long long id;
-    std::array<double, 6> boundaries;
-    std::array<double, 3> pos;
-    std::array<double, 3> centerOfMass;
-    std::array<double, 3> numerator;
+    std::array<float, 6> boundaries;
+    std::array<float, 3> pos;
+    std::array<float, 3> centerOfMass;
+    std::array<float, 3> numerator;
     std::array<NodeBH*, 8> quads;
 };
 

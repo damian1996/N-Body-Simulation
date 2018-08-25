@@ -1,17 +1,17 @@
 #include "BarnesHutStep.h"
 
-BarnesHutStep::BarnesHutStep(std::vector<double>& masses, unsigned numberOfBodies) {
+BarnesHutStep::BarnesHutStep(std::vector<float>& masses, unsigned numberOfBodies) {
     this->numberOfBodies = numberOfBodies;
     weights.resize(numberOfBodies);
     forces.resize(3*numberOfBodies);
 
-    std::array<double, 6> boundariesForRoot = {-sizeFrame, sizeFrame, -sizeFrame, sizeFrame, -sizeFrame, sizeFrame};
+    std::array<float, 6> boundariesForRoot = {-sizeFrame, sizeFrame, -sizeFrame, sizeFrame, -sizeFrame, sizeFrame};
     root = new NodeBH(boundariesForRoot);
 
-    weights = std::vector<double>(masses.begin(), masses.end());
+    weights = std::vector<float>(masses.begin(), masses.end());
 
     randomGenerator = new RandomGenerators();
-    randomGenerator->initializeVelocities<std::vector<double>>(velocities, numberOfBodies);
+    randomGenerator->initializeVelocities<std::vector<float>>(velocities, numberOfBodies);
 }
 
 BarnesHutStep::~BarnesHutStep() {
@@ -19,7 +19,7 @@ BarnesHutStep::~BarnesHutStep() {
 }
 
 void BarnesHutStep::initializingRoot() {
-    std::array<double, 6> boundariesForRoot = {-sizeFrame, sizeFrame, -sizeFrame, sizeFrame, -sizeFrame, sizeFrame};
+    std::array<float, 6> boundariesForRoot = {-sizeFrame, sizeFrame, -sizeFrame, sizeFrame, -sizeFrame, sizeFrame};
     root = new NodeBH(boundariesForRoot);
 }
 
@@ -31,7 +31,7 @@ void BarnesHutStep::insertNode(NodeBH* node, NodeBH* quad) {
     if(quad->isPoint() && !quad->wasInitialized()) {
         quad->setPoint(false);
         quad->pushPointFromQuadLower();
-        std::array<double, 3> pos({node->getX(), node->getY(), node->getZ()});
+        std::array<float, 3> pos({node->getX(), node->getY(), node->getZ()});
         quad->updateCenterOfMass(node->getMass(), pos);
 
         int index = quad->numberOfSubCube(pos[0], pos[1], pos[2]);
@@ -42,7 +42,7 @@ void BarnesHutStep::insertNode(NodeBH* node, NodeBH* quad) {
         return;
     }
     if(!quad->isPoint() && quad->wasInitialized()) {
-        std::array<double, 3> pos({node->getX(), node->getY(), node->getZ()});
+        std::array<float, 3> pos({node->getX(), node->getY(), node->getZ()});
         quad->updateCenterOfMass(node->getMass(), pos);
 
         int index = quad->numberOfSubCube(pos[0], pos[1], pos[2]);
@@ -58,7 +58,7 @@ void BarnesHutStep::createTree(tf3& positions) {
 
     for(unsigned i=0; i<numberOfBodies; i++)
     {
-        std::array<double, 3> pos;
+        std::array<float, 3> pos;
         for(int jj=0; jj<3; jj++) pos[jj] = positions[i*3 + jj];
         root->updateCenterOfMass(weights[i], pos);
 
@@ -91,19 +91,19 @@ void BarnesHutStep::cleanUpTreePostOrder(NodeBH* r) {
     delete r;
 }
 
-double BarnesHutStep::dist(double one, double two) {
+float BarnesHutStep::dist(float one, float two) {
     return fabs(two - one);
 }
 
-double BarnesHutStep::distanceBetweenTwoNodes(double x1, double y1, double z1, double x2, double y2, double z2) {
-    double x = x2 - x1;
-    double y = y2 - y1;
-    double z = z2 - z1;
+float BarnesHutStep::distanceBetweenTwoNodes(float x1, float y1, float z1, float x2, float y2, float z2) {
+    float x = x2 - x1;
+    float y = y2 - y1;
+    float z = z2 - z1;
     return sqrt(x*x + y*y + z*z);
 }
 
 void BarnesHutStep::testingMomemntum() {
-    double momentumX = 0.0f, momentumY = 0.0f, momentumZ = 0.0f;
+    float momentumX = 0.0f, momentumY = 0.0f, momentumZ = 0.0f;
     for (unsigned i = 0; i < numberOfBodies; i++) {
         momentumX += (weights[i] * velocities[i * 3]);
         momentumY += (weights[i] * velocities[i * 3 + 1]);
@@ -112,18 +112,18 @@ void BarnesHutStep::testingMomemntum() {
     std::cout << "ZZP => " << momentumX << " " << momentumY << " " << momentumZ << std::endl;
 }
 
-void BarnesHutStep::computeForceForBody(NodeBH* r, std::array<double, 3>& pos, int i)
+void BarnesHutStep::computeForceForBody(NodeBH* r, std::array<float, 3>& pos, int i)
 {
     if(r->isPoint() && !r->wasInitialized())
     {
         if(r->getIndex() == i) return; // ten sam Node
 
-        double distX = r->getSelectedPosition(0) - pos[0];
-        double distY = r->getSelectedPosition(1) - pos[1];
-        double distZ = r->getSelectedPosition(2) - pos[2];
-        double dist = (distX * distX + distY * distY + distZ * distZ) + EPS * EPS;
+        float distX = r->getSelectedPosition(0) - pos[0];
+        float distY = r->getSelectedPosition(1) - pos[1];
+        float distZ = r->getSelectedPosition(2) - pos[2];
+        float dist = (distX * distX + distY * distY + distZ * distZ) + EPS * EPS;
         dist = dist * sqrt(dist);
-        double F = G * (r->getMass() * weights[i]);
+        float F = G * (r->getMass() * weights[i]);
         forces[i * 3] += F * distX / dist; // force = G(m1*m2)/r^2
         forces[i * 3 + 1] += F * distY / dist;
         forces[i * 3 + 2] += F * distZ / dist;
@@ -139,23 +139,23 @@ void BarnesHutStep::computeForceForBody(NodeBH* r, std::array<double, 3>& pos, i
             return;
         }
 
-        std::array<double, 6>& boundaries = r->getBoundaries();
+        std::array<float, 6>& boundaries = r->getBoundaries();
 
-        double d = distanceBetweenTwoNodes(pos[0], pos[1], pos[2],
+        float d = distanceBetweenTwoNodes(pos[0], pos[1], pos[2],
             r->getSelectedCenterOfMass(0),
             r->getSelectedCenterOfMass(0),
             r->getSelectedCenterOfMass(0));
-        double s = boundaries[1] - boundaries[0];
+        float s = boundaries[1] - boundaries[0];
 
         bool isFarAway = (s/d < theta);
         if(isFarAway)
         {
-            double distX = r->getSelectedCenterOfMass(0) - pos[0];
-            double distY = r->getSelectedCenterOfMass(1) - pos[1];
-            double distZ = r->getSelectedCenterOfMass(2)- pos[2];
-            double dist = (distX * distX + distY * distY + distZ * distZ) + EPS * EPS;
+            float distX = r->getSelectedCenterOfMass(0) - pos[0];
+            float distY = r->getSelectedCenterOfMass(1) - pos[1];
+            float distZ = r->getSelectedCenterOfMass(2)- pos[2];
+            float dist = (distX * distX + distY * distY + distZ * distZ) + EPS * EPS;
             dist = dist * sqrt(dist);
-            double F = G * (r->getTotalMass() * weights[i]);
+            float F = G * (r->getTotalMass() * weights[i]);
             forces[i * 3] += F * distX / dist; // force = G(m1*m2)/r^2
             forces[i * 3 + 1] += F * distY / dist;
             forces[i * 3 + 2] += F * distZ / dist;
@@ -170,7 +170,7 @@ void BarnesHutStep::computeForceForBody(NodeBH* r, std::array<double, 3>& pos, i
     }
 }
 
-void BarnesHutStep::compute(tf3 &positions, double dt)
+void BarnesHutStep::compute(tf3 &positions, float dt)
 {
     initializingRoot();
     createTree(positions);
@@ -180,14 +180,14 @@ void BarnesHutStep::compute(tf3 &positions, double dt)
 
     for(unsigned i=0; i<numberOfBodies; i++)
     {
-        std::array<double, 3> arr({positions[i*3], positions[i*3 + 1], positions[i*3 + 2]});
+        std::array<float, 3> arr({positions[i*3], positions[i*3 + 1], positions[i*3 + 2]});
         computeForceForBody(root, arr, i);
     }
     //testingMomemntum();
 
     for (unsigned i = 0; i < numberOfBodies; i++) {
         for (int j = 0; j < 3; j++) {
-                double acceleration = forces[i * 3 + j] / weights[i];
+                float acceleration = forces[i * 3 + j] / weights[i];
                 positions[i * 3 + j] +=
                     velocities[i * 3 + j] * dt + acceleration * dt * dt / 2;
                 velocities[i * 3 + j] += acceleration * dt;

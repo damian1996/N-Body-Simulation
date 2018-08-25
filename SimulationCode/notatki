@@ -10,7 +10,7 @@ octree[idx] do zmiennej lokalnej?
 
 [NIE SA] sprawdzic sily dzialajace na cialo, czy nie sa bliskie zeru...
 
-[FIXED] double distX = octree[idx].centerX - pos[0]; // 0? 1? 2? bug jak nic
+[FIXED] float distX = octree[idx].centerX - pos[0]; // 0? 1? 2? bug jak nic
 
 [FIXED] czy trzeba liczyc ponownie dista? imho nie ...
 

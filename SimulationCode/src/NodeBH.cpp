@@ -2,7 +2,7 @@
 #include <cstdio>
 
 /* Constructor to creating complete node, which is ready to be quadrant. */
-NodeBH::NodeBH(double mass, long long id, std::array<double, 3>& pos, std::array<double, 6>& boundaries) :
+NodeBH::NodeBH(float mass, long long id, std::array<float, 3>& pos, std::array<float, 6>& boundaries) :
       mass(mass), totalMass(0), hasPoint(true), childrenExists(false), id(id)
 {
     std::copy(std::begin(pos), std::end(pos), std::begin(this->pos));
@@ -18,7 +18,7 @@ NodeBH::NodeBH(double mass, long long id, std::array<double, 3>& pos, std::array
     }
 }
 
-bool NodeBH::isInQuad(double x, double y, double z) {
+bool NodeBH::isInQuad(float x, float y, float z) {
     if(!(x>=boundaries[0] && x<=boundaries[1])) return false;
     if(!(y>=boundaries[2] && y<=boundaries[3])) return false;
     if(!(z>=boundaries[4] && z<=boundaries[5])) return false;
@@ -26,13 +26,13 @@ bool NodeBH::isInQuad(double x, double y, double z) {
 }
 
 /* Constructor to creating empty node, which is ready to be quadrant. */
-void NodeBH::addQuads(std::array<double, 6>& b)
+void NodeBH::addQuads(std::array<float, 6>& b)
 {
     childrenExists = true;
     
 
 
-    std::array<double, 6> boundariesForQuad = {b[0], b[0] + (b[1]-b[0])/2, b[2], b[2] + (b[3]-b[2])/2, b[4], b[4] + (b[5] - b[4])/2};
+    std::array<float, 6> boundariesForQuad = {b[0], b[0] + (b[1]-b[0])/2, b[2], b[2] + (b[3]-b[2])/2, b[4], b[4] + (b[5] - b[4])/2};
     quads[0] = new NodeBH(boundariesForQuad);
 
     boundariesForQuad = {b[0] + (b[1]-b[0])/2, b[1], b[2], b[2] + (b[3]-b[2])/2, b[4], b[4] + (b[5] - b[4])/2};
@@ -57,7 +57,7 @@ void NodeBH::addQuads(std::array<double, 6>& b)
     quads[7] = new NodeBH(boundariesForQuad);
 }
 
-int NodeBH::numberOfSubCube(double x, double y, double z) {
+int NodeBH::numberOfSubCube(float x, float y, float z) {
     int result = 0;
     if(x<boundaries[0] || x>boundaries[1]) return 8;
     if(y<boundaries[2] || y>boundaries[3]) return 8;
@@ -70,7 +70,7 @@ int NodeBH::numberOfSubCube(double x, double y, double z) {
 }
 
 
-void NodeBH::setAttributes(double mass, long long id, double x, double y, double z) {
+void NodeBH::setAttributes(float mass, long long id, float x, float y, float z) {
     hasPoint = true;
     this->mass = mass;
     this->id = id;
@@ -85,7 +85,7 @@ void NodeBH::setAttributes(double mass, long long id, double x, double y, double
     }
 }
 
-void NodeBH::updateCenterOfMass(double mass, std::array<double, 3>& pos) {
+void NodeBH::updateCenterOfMass(float mass, std::array<float, 3>& pos) {
     totalMass += mass;
     for(int i=0; i<3; i++)
     {

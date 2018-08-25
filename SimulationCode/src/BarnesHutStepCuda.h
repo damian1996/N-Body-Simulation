@@ -14,19 +14,19 @@
 
 class BarnesHutStepCuda : public Step {
 public:
-    BarnesHutStepCuda(std::vector<double>& masses, unsigned numberOfBodies);
+    BarnesHutStepCuda(std::vector<float>& masses, unsigned numberOfBodies);
     ~BarnesHutStepCuda();
-    void compute(tf3 &positions, double dt);
+    void compute(tf3 &positions, float dt);
 
 private:
     //NodeBH* root;
     ComputationsBarnesHut *c;
-    std::vector<double> weights;
-    std::vector<double> forces;
-    std::vector<double> velocities;
-    double sizeFrame = 8.0;
-    const double theta = 1;
-    const double EPS = 0.01;
+    std::vector<float> weights;
+    std::vector<float> forces;
+    std::vector<float> velocities;
+    float sizeFrame = 8.0;
+    const float theta = 1;
+    const float EPS = 0.01;
 };
 
 #endif

@@ -2,7 +2,7 @@
 
 RandomGenerators::RandomGenerators() : gen1(rd1()), gen2(rd2()) {}
 
-double RandomGenerators::getRandomFloat(double a, double b) {
+float RandomGenerators::getRandomFloat(float a, float b) {
   std::uniform_real_distribution<> disfloat(a, b);
   return disfloat(gen1);
 }
@@ -23,8 +23,8 @@ template <typename T>
 void RandomGenerators::initializeVelocities(T &velocities, unsigned N) {}
 
 template <>
-void RandomGenerators::initializeVelocities<std::vector<double>>(
-    std::vector<double> &velocities, unsigned numberOfBodies) {
+void RandomGenerators::initializeVelocities<std::vector<float>>(
+    std::vector<float> &velocities, unsigned numberOfBodies) {
   velocities.resize(3 * numberOfBodies);
 
   for (unsigned i = 0; i < numberOfBodies; i++)
@@ -35,8 +35,8 @@ void RandomGenerators::initializeVelocities<std::vector<double>>(
 
 /*
 template <>
-void RandomGenerators::initializeVelocities<std::vector<double>>(
-    std::vector<double> &velocities, unsigned numberOfBodies) {
+void RandomGenerators::initializeVelocities<std::vector<float>>(
+    std::vector<float> &velocities, unsigned numberOfBodies) {
   velocities.resize(3 * numberOfBodies);
 
   for (unsigned i = 0; i < numberOfBodies; i++)
@@ -48,15 +48,15 @@ void RandomGenerators::initializeVelocities<std::vector<double>>(
 
 // zderzenie plastyczne / sprezyste
 template <>
-void RandomGenerators::initializeVelocities<thrust::host_vector<double>>(
-    thrust::host_vector<double> &velocities, unsigned numberOfBodies) {
+void RandomGenerators::initializeVelocities<thrust::host_vector<float>>(
+    thrust::host_vector<float> &velocities, unsigned numberOfBodies) {
   velocities.resize(3 * numberOfBodies);
   for (unsigned i = 0; i < numberOfBodies; i++)
     for (int j = 0; j < 3; j++)
       velocities[i * 3 + j] = getRandomFloat(-0.01f, 0.01f);
 }
 
-void RandomGenerators::initializeWeights(std::vector<double> &weights, unsigned numberOfBodies) {
+void RandomGenerators::initializeWeights(std::vector<float> &weights, unsigned numberOfBodies) {
   weights.resize(numberOfBodies);
   int typeMass = 3; //getRandomType();
   unsigned divi;

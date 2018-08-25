@@ -14,27 +14,27 @@
 
 class BarnesHutStep : public Step {
 public:
-    BarnesHutStep(std::vector<double>& masses, unsigned numberOfBodies);
+    BarnesHutStep(std::vector<float>& masses, unsigned numberOfBodies);
     ~BarnesHutStep();
     void initializingRoot();
     void insertNode(NodeBH* node, NodeBH* quad);
     void createTree(tf3 &positions);
     void DFS_BH(NodeBH* r, std::string indent);
     void cleanUpTreePostOrder(NodeBH* r);
-    double dist(double one, double two);
-    double distanceBetweenTwoNodes(double x1, double y1, double z1, double x2, double y2, double z2);
+    float dist(float one, float two);
+    float distanceBetweenTwoNodes(float x1, float y1, float z1, float x2, float y2, float z2);
     void testingMomemntum();
-    void computeForceForBody(NodeBH* r, std::array<double, 3>& pos, int i);
-    void compute(tf3 &positions, double dt);
+    void computeForceForBody(NodeBH* r, std::array<float, 3>& pos, int i);
+    void compute(tf3 &positions, float dt);
 
 private:
     NodeBH* root;
-    std::vector<double> weights;
-    std::vector<double> forces;
-    std::vector<double> velocities;
-    double sizeFrame = 8.0; // ZWIEKSZYC (DO 32.0)
-    const double theta = 0.5;
-    const double EPS = 0.01;
+    std::vector<float> weights;
+    std::vector<float> forces;
+    std::vector<float> velocities;
+    float sizeFrame = 8.0; // ZWIEKSZYC (DO 32.0)
+    const float theta = 0.5;
+    const float EPS = 0.01;
 };
 
 #endif
