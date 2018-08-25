@@ -1,6 +1,10 @@
 malym bugiem jest to... ze jak liczymy s/d klasycznie.. to zamiast s wystarczy wziac np. boundaries dla jednego z wymiarow.. tutaj boundaries dla kazdego z wymiarow sa rozne... 
 
-dodatkowo case Angeli w liczeniu sily, gdy wezel wewnetrzny!!! (isInQuad)
+dodac wyrownanie min i max w paperze
+
+kolor linkow
+
+[ADDED] dodatkowo case Angeli w liczeniu sily, gdy wezel wewnetrzny!!! (isInQuad)
 
 octree[idx] do zmiennej lokalnej?
 
@@ -32,6 +36,7 @@ biber Praca\\
 inkscape -D -z --file=drawing.svg --export-pdf=draw.pdf --export-latex
 inkscape -D -z --file=zcurve.svg --export-pdf=zcurve.pdf --export-latex
 
+inkscape -D -z --file=zcurve3.svg --export-pdf=zcurve3.pdf --export-latex
 
 PROFILER
 1) upewnij się że kompilujesz z opcją -g

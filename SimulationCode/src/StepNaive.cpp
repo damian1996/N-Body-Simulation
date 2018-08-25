@@ -44,7 +44,7 @@ bool StepNaive::testingMomemntum() {
 }
 
 void StepNaive::compute(tf3 &positions, double dt) {
-  testingMomemntum();
+  //testingMomemntum();
   //assert(testingMomemntum());
   double EPS = 0.01;
   std::fill(forces.begin(), forces.end(), 0.0);
