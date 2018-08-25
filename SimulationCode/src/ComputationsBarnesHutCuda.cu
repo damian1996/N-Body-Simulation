@@ -5,9 +5,8 @@
 
 const double G = 6.674 * (1e-11);
 const double EPS = 0.01f;
-const int numberOfChildren = 8;
 const double theta = 0.5;
-const int THREADS_PER_BLOCK = 1024;
+const int THREADS_PER_BLOCK = 512;
 const int K = 15;
 
 struct OctreeNode {
@@ -123,17 +122,15 @@ void computeForces(OctreeNode* octree, double* velocities, double* weights,
             continue;
         
         if(octree[idx].position == -1)
-        {
-            
-            int tmp = 6*prevTop;
+        {            
             bool res = true;
-            if(!(pos[thid*3] >= b[tmp] && pos[thid*3] <= b[tmp + 1]) && res) res = false;
-            if(!(pos[thid*3 + 1] >= b[tmp + 2] && pos[thid*3 + 1] <= b[tmp + 3]) && res) res = false;
-            if(!(pos[thid*3 + 2] >= b[tmp + 4] && pos[thid*3 + 2] <= b[tmp + 5]) && res) res = false;
+            if(!(pos[thid*3] >= b[6*prevTop] && pos[thid*3] <= b[6*prevTop + 1]) && res) res = false;
+            if(!(pos[thid*3 + 1] >= b[6*prevTop + 2] && pos[thid*3 + 1] <= b[6*prevTop + 3]) && res) res = false;
+            if(!(pos[thid*3 + 2] >= b[6*prevTop + 4] && pos[thid*3 + 2] <= b[6*prevTop + 5]) && res) res = false;
 
             if(res)
             {
-                if(nextChild==numberOfChildren) {
+                if(nextChild==8) {
                     continue;
                 }
                 stack[++top] = idx;
@@ -153,10 +150,11 @@ void computeForces(OctreeNode* octree, double* velocities, double* weights,
                 continue;
             }
             
-            
-            double distX = octree[idx].centerX/octree[idx].totalMass - p[0];
-            double distY = octree[idx].centerY/octree[idx].totalMass - p[1];
-            double distZ = octree[idx].centerZ/octree[idx].totalMass - p[2];
+            double TotalMass = octree[idx].totalMass;
+
+            double distX = octree[idx].centerX/TotalMass - p[0];
+            double distY = octree[idx].centerY/TotalMass - p[1];
+            double distZ = octree[idx].centerZ/TotalMass - p[2];
             double dist = distX*distX + distY*distY + distZ*distZ + EPS*EPS;
             dist = dist * sqrt(dist);
             //double s = max(max(b[6*prevTop+1] - b[6*prevTop], b[6*prevTop+3] - b[6*prevTop+2]), b[6*prevTop+5] - b[6*prevTop+4]);
@@ -173,7 +171,7 @@ void computeForces(OctreeNode* octree, double* velocities, double* weights,
             }
             else
             { 
-                if(nextChild==numberOfChildren) {
+                if(nextChild==8) {
                     continue;
                 }
                 stack[++top] = idx;
