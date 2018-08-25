@@ -149,12 +149,10 @@ void computeForces(OctreeNode* octree, double* velocities, double* weights,
                 }
                 continue;
             }
-            
-            double TotalMass = octree[idx].totalMass;
 
-            double distX = octree[idx].centerX/TotalMass - p[0];
-            double distY = octree[idx].centerY/TotalMass - p[1];
-            double distZ = octree[idx].centerZ/TotalMass - p[2];
+            double distX = octree[idx].centerX - p[0];
+            double distY = octree[idx].centerY - p[1];
+            double distZ = octree[idx].centerZ - p[2];
             double dist = distX*distX + distY*distY + distZ*distZ + EPS*EPS;
             dist = dist * sqrt(dist);
             //double s = max(max(b[6*prevTop+1] - b[6*prevTop], b[6*prevTop+3] - b[6*prevTop+2]), b[6*prevTop+5] - b[6*prevTop+4]);
@@ -220,6 +218,17 @@ void computeForces(OctreeNode* octree, double* velocities, double* weights,
             velocities[thid * 3 + j] * dt + acceleration * dt * dt / 2;
         velocities[thid * 3 + j] += acceleration * dt;
     } 
+}
+
+__global__
+void computeCenterOfMasses(OctreeNode* octree, int N) {
+    int thid = blockIdx.x*blockDim.x + threadIdx.x;
+    if(thid >= N) return;
+
+    int totalMass = octree[thid].totalMass;
+    octree[thid].centerX /= totalMass;
+    octree[thid].centerY /= totalMass;
+    octree[thid].centerZ /= totalMass;
 }
 
 void ComputationsBarnesHut::createTree(int numberOfBodies, double dt) {
@@ -314,6 +323,11 @@ void ComputationsBarnesHut::createTree(int numberOfBodies, double dt) {
         allChildrenCount += childrenCount;
     }
     blocks = (uniquePointsCount+THREADS_PER_BLOCK-1)/THREADS_PER_BLOCK;
+
+    computeCenterOfMasses<<<blocks, THREADS_PER_BLOCK>>>(
+        d_octree,
+        uniquePointsCount
+    );
 
     double *d_velocities = thrust::raw_pointer_cast(veloD.data());
     double *d_weights = thrust::raw_pointer_cast(weightsD.data());

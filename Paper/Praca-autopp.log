@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=latex 2018.8.7)  25 AUG 2018 12:28
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=latex 2018.8.7)  25 AUG 2018 14:10
 entering extended mode
  %&-line parsing enabled.
 **\let \APPmakepictures \empty \input  Praca.tex
@@ -1939,10 +1939,7 @@ Overfull \hbox (6.0pt too wide) in paragraph at lines 432--432
 [][][][][][][]  
  []
 
-(./zcurve2.pdf_tex)
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
+(./zcurve3.pdf_tex)
 
 LaTeX Warning: Citation 'tero' on page 15 undefined on input line 488.
 
@@ -2017,7 +2014,7 @@ Overfull \hbox (0.78703pt too wide) in paragraph at lines 651--652
  []
 
 
-LaTeX Warning: Citation 'Aarseth' on page 19 undefined on input line 684.
+LaTeX Warning: Citation 'Aarseth' on page 20 undefined on input line 684.
 
 
 Overfull \hbox (4.56282pt too wide) in paragraph at lines 684--685
@@ -2031,9 +2028,9 @@ Overfull \hbox (6.0pt too wide) in paragraph at lines 694--694
  []
 
 
-Overfull \hbox (2.26782pt too wide) in paragraph at lines 738--739
+Overfull \hbox (5.52577pt too wide) in paragraph at lines 738--739
 \T1/fve/m/sc/10 rze, tu-taj wrzu-ci-my na stos dwie pa-ry. Pierw-sz¡ b¦-dzie \T
-1/fve/b/n/10 (idO-bec-ne-go-No-de, nrDziec-ka+1)\T1/fve/m/sc/10 , 
+1/fve/b/n/10 (idO-bec-ne-go-W¦-zªa, nrDziec-ka+1)\T1/fve/m/sc/10 , 
  []
 
 
@@ -2058,9 +2055,6 @@ ze-go sªu-»y funk-cja \T1/fve/b/n/10 lo-okAt \T1/fve/m/sc/10 [[]],
 
 
 LaTeX Warning: Citation 'opengl' on page 22 undefined on input line 784.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
 
 
 LaTeX Warning: Empty bibliography on input line 850.
@@ -2091,7 +2085,7 @@ Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 853.
 Here is how much of TeX's memory you used:
  38314 strings out of 493030
  827052 string characters out of 6136261
- 1327050 words of memory out of 5000000
+ 1326052 words of memory out of 5000000
  41183 multiletter control sequences out of 15000+600000
  36884 words of font info for 56 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
