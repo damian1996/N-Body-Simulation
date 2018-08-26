@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=latex 2018.8.7)  25 AUG 2018 14:10
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=latex 2018.8.7)  26 AUG 2018 05:34
 entering extended mode
  %&-line parsing enabled.
 **\let \APPmakepictures \empty \input  Praca.tex
@@ -1769,11 +1769,17 @@ LaTeX Font Info:    Font shape `T1/fve/b/n' will be
 (Font)              scaled to size 12.9599pt on input line 92.
 LaTeX Font Info:    Font shape `T1/fve/b/n' will be
 (Font)              scaled to size 15.55188pt on input line 96.
-
-LaTeX Warning: Citation 'Newton' on page 3 undefined on input line 99.
-
 LaTeX Font Info:    Font shape `T1/fve/b/n' will be
 (Font)              scaled to size 8.99994pt on input line 99.
+
+LaTeX Warning: Citation 'Principia' on page 3 undefined on input line 99.
+
+
+LaTeX Warning: Citation 'holmberg' on page 3 undefined on input line 99.
+
+
+LaTeX Warning: Citation 'vonHoerner' on page 3 undefined on input line 99.
+
 LaTeX Font Info:    Font shape `T1/fve/b/n' will be
 (Font)              scaled to size 10.79993pt on input line 101.
 
@@ -1792,90 +1798,90 @@ LaTeX Warning: Citation 'threebody2' on page 3 undefined on input line 110.
 LaTeX Warning: Citation 'szebehely' on page 3 undefined on input line 110.
 
 
-LaTeX Warning: Citation 'SEMmisc' on page 3 undefined on input line 114.
+LaTeX Warning: Citation 'SEMmisc' on page 3 undefined on input line 113.
 
 
-LaTeX Warning: Citation 'chaosMisc' on page 3 undefined on input line 114.
+LaTeX Warning: Citation 'chaosMisc' on page 3 undefined on input line 113.
 
 
-LaTeX Warning: Citation 'haloDensity' on page 3 undefined on input line 115.
+LaTeX Warning: Citation 'haloDensity' on page 3 undefined on input line 114.
 
 
-LaTeX Warning: Citation 'dirNBody' on page 3 undefined on input line 116.
+LaTeX Warning: Citation 'dirNBody' on page 3 undefined on input line 115.
 
 
-LaTeX Warning: Citation 'visGraph' on page 3 undefined on input line 116.
+LaTeX Warning: Citation 'visGraph' on page 3 undefined on input line 115.
 
 (./kulki.pdf_tex)
 
-LaTeX Warning: Citation 'fund' on page 5 undefined on input line 137.
+LaTeX Warning: Citation 'fund' on page 4 undefined on input line 135.
 
 LaTeX Font Info:    Font shape `T1/fve/m/it' in size <10> not available
-(Font)              Font shape `T1/fve/m/sl' tried instead on input line 139.
+(Font)              Font shape `T1/fve/m/sl' tried instead on input line 137.
 LaTeX Font Info:    Font shape `T1/fve/m/sl' will be
-(Font)              scaled to size 8.99994pt on input line 139.
+(Font)              scaled to size 8.99994pt on input line 137.
 
-LaTeX Warning: Citation 'fund' on page 6 undefined on input line 154.
+LaTeX Warning: Citation 'fund' on page 5 undefined on input line 152.
 
-LaTeX Font Info:    Try loading font information for TS1+fve on input line 179.
+LaTeX Font Info:    Try loading font information for TS1+fve on input line 178.
 
 (/usr/share/texlive/texmf-dist/tex/latex/bera/ts1fve.fd
 File: ts1fve.fd 2004/09/07 scalable font definitions for TS1/fve.
 )
 LaTeX Font Info:    Font shape `TS1/fve/m/n' will be
-(Font)              scaled to size 8.99994pt on input line 179.
+(Font)              scaled to size 8.99994pt on input line 178.
 
-Overfull \hbox (6.0pt too wide) in paragraph at lines 212--212
+Overfull \hbox (6.0pt too wide) in paragraph at lines 211--211
 [][][][][][][]  
  []
 
 LaTeX Font Info:    Font shape `T1/fve/m/n' will be
-(Font)              scaled to size 7.19995pt on input line 212.
-LaTeX Font Info:    Try loading font information for T1+fvm on input line 212.
+(Font)              scaled to size 7.19995pt on input line 211.
+LaTeX Font Info:    Try loading font information for T1+fvm on input line 211.
 (/usr/share/texlive/texmf-dist/tex/latex/bera/t1fvm.fd
 File: t1fvm.fd 2004/09/07 scalable font definitions for T1/fvm.
 )
 LaTeX Font Info:    Font shape `T1/fvm/m/n' will be
-(Font)              scaled to size 7.19995pt on input line 212.
+(Font)              scaled to size 7.19995pt on input line 211.
 \c@twr=\count396
 
-LaTeX Warning: Citation 'Cuda' on page 8 undefined on input line 248.
-
-
-LaTeX Warning: Citation 'Cuda' on page 8 undefined on input line 248.
-
-
-Overfull \hbox (0.27885pt too wide) in paragraph at lines 248--248
-[]\T1/fve/m/sc/10 W¡tki na CU-DA s¡ po-gru-po-wa-ne w blo-ki. W com-pu-te com-p
-a-bi-li-ty 3.0 ka»-dy blok mo-»e mie¢ 
+Overfull \hbox (0.16173pt too wide) in paragraph at lines 245--246
+\T1/fve/m/sc/10 wy-ko-ny-wa¢ za-rów-no se-kwen-cyj-ne i wie-lo-w¡t-ko-wo. Wy-ko
+-rzy-sta-ªem CU-D† w wer-sji v9.2.148 
  []
 
 
-LaTeX Warning: Citation 'Cuda' on page 8 undefined on input line 253.
+LaTeX Warning: Citation 'Cuda' on page 7 undefined on input line 247.
 
 
-LaTeX Warning: Citation 'thrust' on page 8 undefined on input line 258.
+LaTeX Warning: Citation 'Cuda' on page 7 undefined on input line 247.
 
 
-LaTeX Warning: Citation 'thrust' on page 8 undefined on input line 263.
+LaTeX Warning: Citation 'Cuda' on page 7 undefined on input line 252.
 
 
-LaTeX Warning: Citation 'thrust' on page 8 undefined on input line 263.
+LaTeX Warning: Citation 'thrust' on page 7 undefined on input line 257.
 
 
-Overfull \hbox (35.14455pt too wide) in paragraph at lines 262--263
+LaTeX Warning: Citation 'thrust' on page 7 undefined on input line 262.
+
+
+LaTeX Warning: Citation 'thrust' on page 7 undefined on input line 262.
+
+
+Overfull \hbox (35.14455pt too wide) in paragraph at lines 261--262
 \T1/fve/m/sc/10 W im-ple-men-ta-cji wy-ko-rzy-stu-je dwie sza-blo-no-we struk-t
 u-ry z bi-blio-te-ki Thrust. \T1/fve/b/n/10 host_vector\T1/fve/m/sc/10 [[]] 
  []
 
 
-Overfull \hbox (5.03084pt too wide) in paragraph at lines 266--266
+Overfull \hbox (5.03084pt too wide) in paragraph at lines 265--265
 []\T1/fve/m/sc/10 Funkcja Na-ive-Sim-Brid-ge, przed-sta-wio-na w li-stin-gu 2, 
 przyj-mu-je ja-ko ar-gu-ment \T1/fve/b/n/10 host_vector 
  []
 
 
-LaTeX Warning: Citation 'runtimeApi' on page 9 undefined on input line 266.
+LaTeX Warning: Citation 'runtimeApi' on page 8 undefined on input line 265.
 
 (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2015/06/04 1.6 listings language file
@@ -1884,95 +1890,92 @@ File: lstlang1.sty 2015/06/04 1.6 listings language file
 ) (/usr/share/texlive/texmf-dist/tex/latex/listings/lstmisc.sty
 File: lstmisc.sty 2015/06/04 1.6 (Carsten Heinz)
 )
-Overfull \hbox (6.0pt too wide) in paragraph at lines 272--272
+Overfull \hbox (6.0pt too wide) in paragraph at lines 268--268
 [][][][][][][]  
  []
 
 
-Overfull \hbox (6.0pt too wide) in paragraph at lines 287--287
+Overfull \hbox (6.0pt too wide) in paragraph at lines 285--285
 [][][][][][][]  
  []
 
 
-Overfull \hbox (2.24097pt too wide) in paragraph at lines 325--325
-\T1/fve/m/sc/10 ±niej wy-li-czo-ne-mu thid(threadId) po-przez ka»-dy in-ny obie
-kt w sy-mu-la-cji. Po-st¦-pu-je-my zgod- 
- []
+LaTeX Warning: Citation 'Aarseth' on page 9 undefined on input line 324.
 
 
-LaTeX Warning: Citation 'Aarseth' on page 10 undefined on input line 334.
-
-
-Overfull \hbox (0.26094pt too wide) in paragraph at lines 339--340
+Overfull \hbox (0.26094pt too wide) in paragraph at lines 329--330
 \T1/fve/m/sc/10 Równolegªa wer-sja na-iw-ne-go al-go-ryt-mu wci¡» wy-ko-nu-je p
 ra-c¦ rz¦-du $\OMS/plsy/m/n/10 O\OT4/cmr/m/n/10 (\OML/plm/m/it/10 N[]\OT4/cmr/m
 /n/10 )$\T1/fve/m/sc/10 , jed-nak-»e dzi¦- 
  []
 
 
-Overfull \hbox (0.62085pt too wide) in paragraph at lines 339--340
+Overfull \hbox (0.62085pt too wide) in paragraph at lines 329--330
 \T1/fve/m/sc/10 ki te-mu, »e dla ka»-de-go obiek-tu si-ªy na nie-go dzia-ªa-j¡-
 ce oraz no-w¡ po-zy-cj¦ li-czy-my na osob- 
  []
 
 
-LaTeX Warning: Citation 'barnhut' on page 11 undefined on input line 342.
+LaTeX Warning: Citation 'barnhut' on page 10 undefined on input line 332.
 
 
-LaTeX Warning: Citation 'barneshut' on page 11 undefined on input line 342.
-
-
-LaTeX Warning: Citation 'octree' on page 11 undefined on input line 346.
+LaTeX Warning: Citation 'octree' on page 10 undefined on input line 335.
 
 (./tree.pdf_tex)
-Overfull \hbox (6.0pt too wide) in paragraph at lines 372--372
+Overfull \hbox (6.0pt too wide) in paragraph at lines 361--361
 [][][][][][][]  
  []
 
 
-Overfull \hbox (6.0pt too wide) in paragraph at lines 398--398
+Overfull \hbox (6.0pt too wide) in paragraph at lines 386--386
 [][][][][][][]  
  []
 
 
-Overfull \hbox (6.0pt too wide) in paragraph at lines 432--432
+Overfull \hbox (6.0pt too wide) in paragraph at lines 415--415
 [][][][][][][]  
  []
 
 (./zcurve3.pdf_tex)
 
-LaTeX Warning: Citation 'tero' on page 15 undefined on input line 488.
+LaTeX Warning: Citation 'tero' on page 14 undefined on input line 471.
 
 
-Overfull \hbox (5.21088pt too wide) in paragraph at lines 488--489
+Overfull \hbox (5.21088pt too wide) in paragraph at lines 471--472
 \T1/fve/m/sc/10 Z wy-ko-rzy-sta-niem po-wy-»ej zde-fi-nio-wa-nych ko-dów b¦-dzi
 e-my im-ple-men-to-wa¢ al-go-rytm wspo- 
  []
 
 
-Overfull \hbox (7.34204pt too wide) in paragraph at lines 495--496
-\T1/fve/m/sc/10 trze-bu-je-my po-li-czy¢ rów-nie» licz-b¦ w¦-zªów we-wn¦trz-nyc
-h. Do-dat-ko-wo two-rzy-my wierz- 
- []
-
-
-Overfull \hbox (6.0pt too wide) in paragraph at lines 503--503
+Overfull \hbox (6.0pt too wide) in paragraph at lines 486--486
 [][][][][][][]  
  []
 
 
-Overfull \hbox (6.0pt too wide) in paragraph at lines 529--529
+Overfull \hbox (6.0pt too wide) in paragraph at lines 512--512
 [][][][][][][]  
  []
 
 
-Overfull \hbox (13.74706pt too wide) in paragraph at lines 536--537
+Overfull \hbox (13.74706pt too wide) in paragraph at lines 519--520
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
 
-Overfull \hbox (6.0pt too wide) in paragraph at lines 550--550
+Overfull \hbox (6.0pt too wide) in paragraph at lines 533--533
 [][][][][][][]  
+ []
+
+
+Overfull \hbox (6.0pt too wide) in paragraph at lines 551--551
+[][][][][][][]  
+ []
+
+
+Overfull \hbox (16.48773pt too wide) in paragraph at lines 564--566
+[]\T1/fve/m/sc/10 W tym ce-lu po-moc-ny jest ker-nel \T1/fve/b/n/10 cal-cu-la-t
+e-Du-pli-ca-tes \T1/fve/m/sc/10 w po-ª¡-cze-niu z \T1/fve/b/n/10 thrust::inclus
+ive_scan\T1/fve/m/sc/10 , 
  []
 
 
@@ -1981,26 +1984,23 @@ Overfull \hbox (6.0pt too wide) in paragraph at lines 568--568
  []
 
 
-Overfull \hbox (16.48773pt too wide) in paragraph at lines 581--583
-[]\T1/fve/m/sc/10 W tym ce-lu po-moc-ny jest ker-nel \T1/fve/b/n/10 cal-cu-la-t
-e-Du-pli-ca-tes \T1/fve/m/sc/10 w po-ª¡-cze-niu z \T1/fve/b/n/10 thrust::inclus
-ive_scan\T1/fve/m/sc/10 , 
- []
-
-
-Overfull \hbox (6.0pt too wide) in paragraph at lines 585--585
+Overfull \hbox (6.0pt too wide) in paragraph at lines 589--589
 [][][][][][][]  
  []
 
 
-Overfull \hbox (6.0pt too wide) in paragraph at lines 603--603
-[][][][][][][]  
- []
-
-
-Overfull \hbox (5.10704pt too wide) in paragraph at lines 605--606
+Overfull \hbox (5.10704pt too wide) in paragraph at lines 591--592
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
 ][][][][][] 
+ []
+
+
+LaTeX Warning: Citation 'Aarseth' on page 18 undefined on input line 630.
+
+
+Overfull \hbox (4.56282pt too wide) in paragraph at lines 630--631
+[]\T1/fve/m/sc/10 Algorytm po-le-ga na przej-±ciu drze-wa od ko-rze-nia i na sp
+raw-dza-niu czy w¦-zeª jest we-wn¦trz- 
  []
 
 
@@ -2014,58 +2014,55 @@ Overfull \hbox (0.78703pt too wide) in paragraph at lines 651--652
  []
 
 
-LaTeX Warning: Citation 'Aarseth' on page 20 undefined on input line 684.
-
-
-Overfull \hbox (4.56282pt too wide) in paragraph at lines 684--685
-[]\T1/fve/m/sc/10 Algorytm po-le-ga na przej-±ciu drze-wa od ko-rze-nia i na sp
-raw-dza-niu czy w¦-zeª jest we-wn¦trz- 
- []
-
-
-Overfull \hbox (6.0pt too wide) in paragraph at lines 694--694
-[][][][][][][]  
- []
-
-
-Overfull \hbox (5.52577pt too wide) in paragraph at lines 738--739
+Overfull \hbox (5.52577pt too wide) in paragraph at lines 680--680
 \T1/fve/m/sc/10 rze, tu-taj wrzu-ci-my na stos dwie pa-ry. Pierw-sz¡ b¦-dzie \T
 1/fve/b/n/10 (idO-bec-ne-go-W¦-zªa, nrDziec-ka+1)\T1/fve/m/sc/10 , 
  []
 
 
-LaTeX Warning: Citation 'opengl' on page 21 undefined on input line 745.
-
-
-Overfull \hbox (6.0pt too wide) in paragraph at lines 751--751
+Overfull \hbox (6.0pt too wide) in paragraph at lines 684--684
 [][][][][][][]  
  []
 
 
-LaTeX Warning: Citation 'tutMat' on page 22 undefined on input line 780.
+LaTeX Warning: Citation 'opengl' on page 20 undefined on input line 728.
 
 
-LaTeX Warning: Citation 'opengl' on page 22 undefined on input line 783.
+Underfull \vbox (badness 1728) has occurred while \output is active []
 
 
-Overfull \hbox (5.1568pt too wide) in paragraph at lines 783--783
+Overfull \hbox (6.0pt too wide) in paragraph at lines 734--734
+[][][][][][][]  
+ []
+
+
+LaTeX Warning: Citation 'tutMat' on page 21 undefined on input line 763.
+
+
+LaTeX Warning: Citation 'opengl' on page 21 undefined on input line 766.
+
+
+Overfull \hbox (5.1568pt too wide) in paragraph at lines 766--766
 []\T1/fve/m/sc/10 Bardziej szcze-gó-ªo-wo, naj-pierw usta-wia-my ka-me-r¦, do c
 ze-go sªu-»y funk-cja \T1/fve/b/n/10 lo-okAt \T1/fve/m/sc/10 [[]], 
  []
 
 
-LaTeX Warning: Citation 'opengl' on page 22 undefined on input line 784.
+LaTeX Warning: Citation 'opengl' on page 21 undefined on input line 767.
 
 
-LaTeX Warning: Empty bibliography on input line 850.
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+LaTeX Warning: Empty bibliography on input line 866.
 
 
 Package pst-pdf Warning: Picture container needs cropping..
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 853.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 853.
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 853.
-Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 853.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 869.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 869.
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 869.
+Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 869.
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
@@ -2080,15 +2077,15 @@ Package biblatex Warning: Please (re)run Biber on the file:
 Package logreq Info: Writing requests to 'Praca-autopp.run.xml'.
 \openout1 = `Praca-autopp.run.xml'.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 853.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 869.
  ) 
 Here is how much of TeX's memory you used:
- 38314 strings out of 493030
- 827052 string characters out of 6136261
- 1326052 words of memory out of 5000000
- 41183 multiletter control sequences out of 15000+600000
+ 38220 strings out of 493030
+ 825256 string characters out of 6136261
+ 1322051 words of memory out of 5000000
+ 41089 multiletter control sequences out of 15000+600000
  36884 words of font info for 56 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 54i,16n,99p,975b,2220s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 54i,16n,99p,1071b,2220s stack positions out of 5000i,500n,10000p,200000b,80000s
 
 No pages of output.

@@ -1,41 +1,90 @@
-malym bugiem jest to... ze jak liczymy s/d klasycznie.. to zamiast s wystarczy wziac np. boundaries dla jednego z wymiarow.. tutaj boundaries dla kazdego z wymiarow sa rozne... 
+(100,0.00826626)(1000,0.0145179)(3000,0.0219876)(5000,0.0501732)(7000,0.0480744)(9000,0.0454484(11000,0.0442917)
 
-dodac wyrownanie min i max w paperze
+(100,0.00826626)(3000,0.021987)(7000,0.0480744)(11000,0.0442917)(15000,0.0429789)(19000,0.0436969)(23000,0.0452354)(27000,0.049968)(31000,0.0521729)(35000,0.0498652)(39000,0.0540352)(43000,0.0584782)(47000,0.053342)(51000,0.0531557)(55000,0.0546283)(59000,0.0703022)(63000,0.0551174)(67000,0.0989813)(71000,0.0693708)(75000,0.0669189)(79000,0.104832)(83000,0.0702073)(87000,0.12837)(91000,0.087911)(95000,0.0727809)(99000,0.0826717)
 
-kolor linkow
+(100,0.00826626)(1000,0.0145179)(3000,0.0219876)(5000,0.0501732)(7000,0.0480744)(9000,0.0454484(11000,0.0442917)(13000,0.0421267)(15000,0.0429789)(17000,0.0511684)(19000,0.0436969)(21000,0.0445312)(23000,0.0452354)(25000,0.0453264)(27000,0.049968)(29000,0.047501)(31000,0.0521729)(33000,0.0483408)(35000,0.0498652)(37000,0.0513726)(39000,0.0540352)(41000,0.0534255)(43000,0.0584782)(45000,0.056337)(47000,0.053342)(49000,0.0504997)(51000,0.0531557)(53000,0.0583203)(55000,0.0546283)(57000,0.0532342)(59000,0.0703022)(61000,0.054763)(63000,0.0551174)(65000,0.0766021)(67000,0.0989813)(69000,0.0857285)(71000,0.0693708)(73000,0.0610821)(75000,0.0669189)(77000,0.10345)(79000,0.104832)(81000,0.0791419)(83000,0.0702073)(85000,0.0853074)(87000,0.12837)(89000,0.118374)(91000,0.087911)(93000,0.0833733)(95000,0.0727809)(97000,0.0687188)(99000,0.0826717)(101000,0.0929585)
 
-[ADDED] dodatkowo case Angeli w liczeniu sily, gdy wezel wewnetrzny!!! (isInQuad)
 
-octree[idx] do zmiennej lokalnej?
+(100,0.000147255)(3000,0.00286826)
+(5000,0.00483034)(7000,0.00709195)
+(9000,0.00980842)(11000,0.0131749)
+(15000,0.0205186)(19000,0.0315434)
+(23000,0.0387652)(27000,0.0480237)
+(31000,0.0580048)(33000,0.0851563)
+(35000,0.0945012)(37000,0.103412)
+(45000,0.142862)(53000,0.178091)
+(57000,0.195938)(59000,0.206165)
+(63000,0.228704)(65000,0.239777)
+(67000,0.300484)(71000,0.328274)
+(75000,0.360973)(79000,0.391146)
+(81000,0.406964)(85000,0.439855)
+(89000,0.48233)
 
-[NIE SA] sprawdzic sily dzialajace na cialo, czy nie sa bliskie zeru...
+(100,0.000147255)
+(1000,0.00100808)
+(3000,0.00286826)
+(5000,0.00483034)
+(7000,0.00709195)
+(9000,0.00980842)
+(11000,0.0131749)
+(13000,0.0167023)
+(15000,0.0205186)
+(17000,0.0281992)
+(19000,0.0315434)
+(21000,0.0350184)
+(23000,0.0387652)
+(25000,0.0429775)
+(27000,0.0480237)
+(29000,0.0527792)
+(31000,0.0580048)
+(33000,0.0851563)
+(35000,0.0945012)
+(37000,0.103412)
+(39000,0.110675)
+(41000,0.120121)
+(43000,0.136063)
+(45000,0.142862)
+(47000,0.151272)
+(49000,0.159093)
+(51000,0.168716)
+(53000,0.178091)
+(55000,0.185694)
+(57000,0.195938)
+(59000,0.206165)
+(61000,0.21761)
+(63000,0.228704)
+(65000,0.239777)
+(67000,0.300484)
+(69000,0.313557)
+(71000,0.328274)
+(73000,0.345043)
+(75000,0.360973)
+(77000,0.376232)
+(79000,0.391146)
+(81000,0.406964)
+(83000,0.423311)
+(85000,0.439855)
+(87000,0.466543)
+(89000,0.48233)
 
-[FIXED] float distX = octree[idx].centerX - pos[0]; // 0? 1? 2? bug jak nic
-
-[FIXED] czy trzeba liczyc ponownie dista? imho nie ...
+odkomentowac draw
+wywalic pozostalosci po shared
 
 L1nuX<3^^
 z1123868@miracle.tcs.uj.edu.pl
 
-\bigskip
 sudo apt-get install texlive-full
 
-\subsection{\Large Implementacja}
-
-$http://www.deltami.edu.pl/temat/fizyka/mechanika/2015/11/26/Problem_dwoch_cial/$
-\bigskip
-apt-get install texlive-lang-polish\\
-Random citation embeddeed in text.s\\
-sudo apt-get install texlive-full
- sudo apt-get install texlive-bibtex-extra biber
 apt-get install texlive-lang-polish
- sudo apt-get install texlive-bibtex-extra
- sudo apt-get install texlive-bibtex-extra biber
-biber Praca\\
-\url{https://www.sharelatex.com/learn/Bibliography_management_with_biblatex}\\
+Random citation embeddeed in text.s
+sudo apt-get install texlive-full
+sudo apt-get install texlive-bibtex-extra biber
+apt-get install texlive-lang-polish
+sudo apt-get install texlive-bibtex-extra
+sudo apt-get install texlive-bibtex-extra biber
+biber Pracas
 inkscape -D -z --file=drawing.svg --export-pdf=draw.pdf --export-latex
 inkscape -D -z --file=zcurve.svg --export-pdf=zcurve.pdf --export-latex
-
 inkscape -D -z --file=zcurve3.svg --export-pdf=zcurve3.pdf --export-latex
 
 PROFILER
@@ -43,23 +92,6 @@ PROFILER
 2) valgrind --tool=callgrind
 3) kcachegrind <wygenerowany plik>
 /usr/local/cuda-9.2/bin/nvprof ./out/main
-
-
-Masa słońca jest definiowana następująco\\
-\begin{center}
-M\textsubscript{\(\odot\)} = 1.9884\(\cdot 10^{30}\)\\
-\end{center}
-Symulowane gwiazdy mają wagi z zakresu \([0.5, 10]\) M\textsubscript{\(\odot\)}.\\
-- jednostką odległości jest parsek, czyli odległość, dla której paralaksa roczna położenia Ziemi widzianej prostopadle do płaszczyzny orbity wynosi 1 sekundę łuku. W przeliczeniu na metry i po zaokrągleniu jest to
-\begin{center}
-\(1\) pc \(\approx\) \(3,2616\) roku świetlnego \(\approx\) \(3,086\cdot 10^{16}\) m\\
-\end{center}
-
-W astronomii stała grawitacji jest wyrażana jako
-\begin{center}
-$$G = 4,3\cdot 10^{-3} \frac{pc}{M_{\odot}} \frac{km^2}{s^2}$$
-\end{center}
-
 
 ENUMS QUICK TUTORIAL
 /* Color r = Color::blue;
@@ -72,12 +104,8 @@ switch(r)
 // int n = r; // error: no scoped enum to int conversion
 int n = static_cast<int>(r); // OK, n = 21 */
 
-
-
-
 sudo apt-get update
 sudo apt-get install libthrust-dev
-
 
 CXXOPTIONS = -m64 -std=c++14 -g -Wall -I /usr/local/cuda/include/
 

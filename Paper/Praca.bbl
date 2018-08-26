@@ -290,12 +290,33 @@
       \field{sortinithash}{82012198d5dfa657b8c4a168793268a6}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{journaltitle}{Z. Astrohys.}
+      \field{journaltitle}{Zeitschrift fur Astrophysik}
       \field{title}{Die numerische Integration des n-Körper-Problemes für Sternhaufen. I}
       \field{volume}{50}
       \field{year}{1960}
       \field{pages}{184\bibrangedash 214}
       \range{pages}{31}
+    \endentry
+    \entry{holmberg}{article}{}
+      \name{author}{1}{}{%
+        {{hash=1c863ccd6d20cab37c5bf301bea34669}{%
+           family={Holmberg},
+           family_i={H\bibinitperiod},
+           given={Erik},
+           given_i={E\bibinitperiod}}}%
+      }
+      \strng{namehash}{1c863ccd6d20cab37c5bf301bea34669}
+      \strng{fullhash}{1c863ccd6d20cab37c5bf301bea34669}
+      \field{sortinit}{H}
+      \field{sortinithash}{82012198d5dfa657b8c4a168793268a6}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Astrophysical Journal}
+      \field{title}{On the Clustering Tendencies among the Nebulae.}
+      \field{volume}{94}
+      \field{year}{1941}
+      \field{pages}{385}
+      \range{pages}{1}
     \endentry
     \entry{barnhut}{article}{}
       \name{author}{1}{}{%
@@ -348,51 +369,6 @@
       \field{labeltitlesource}{title}
       \field{title}{Maximizing Parallelism in the Construction of BVHs, Octrees, and k-d Trees}
       \field{year}{2012}
-    \endentry
-    \entry{fastNbody}{inbook}{}
-      \name{author}{1}{}{%
-        {{hash=c80df4a88bc38a808f57006ebf998123}{%
-           family={Lars\bibnamedelima Nyland},
-           family_i={L\bibinitperiod\bibinitdelim N\bibinitperiod},
-           suffix={Mark\bibnamedelima Harris},
-           suffix_i={M\bibinitperiod\bibinitdelim H\bibinitperiod},
-           given={Jan\bibnamedelima Prins},
-           given_i={J\bibinitperiod\bibinitdelim P\bibinitperiod}}}%
-      }
-      \strng{namehash}{c80df4a88bc38a808f57006ebf998123}
-      \strng{fullhash}{c80df4a88bc38a808f57006ebf998123}
-      \field{sortinit}{L}
-      \field{sortinithash}{872351f18d0f736066eda0bf18bfa4f7}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{chapter}{Fast N-Body Simulation with CUDA. Chapter 31}
-      \field{title}{GPU Gems 3}
-      \field{year}{2007}
-      \field{pages}{677\bibrangedash 694}
-      \range{pages}{18}
-    \endentry
-    \entry{barneshut}{inbook}{}
-      \name{author}{1}{}{%
-        {{hash=57679aa3518cad7be072b48f9028f053}{%
-           family={Martin\bibnamedelima Burtscher},
-           family_i={M\bibinitperiod\bibinitdelim B\bibinitperiod},
-           given={Keshav\bibnamedelima Pingali},
-           given_i={K\bibinitperiod\bibinitdelim P\bibinitperiod}}}%
-      }
-      \list{publisher}{1}{%
-        {NVIDIA Corporation, Wen-mei W. Hwu}%
-      }
-      \strng{namehash}{57679aa3518cad7be072b48f9028f053}
-      \strng{fullhash}{57679aa3518cad7be072b48f9028f053}
-      \field{sortinit}{M}
-      \field{sortinithash}{2684bec41e9697b92699b46491061da2}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{chapter}{An Efficient CUDA Implementation of the Tree-Based Barnes HUT N-Body Algorithm. Chapter 6}
-      \field{title}{GPU Computing Gems Emerald Edition}
-      \field{year}{2011}
-      \field{pages}{75\bibrangedash 92}
-      \range{pages}{18}
     \endentry
     \entry{octree}{article}{}
       \name{author}{1}{}{%
