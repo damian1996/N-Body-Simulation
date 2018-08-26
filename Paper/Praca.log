@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.8.7)  26 AUG 2018 12:08
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.8.7)  26 AUG 2018 13:11
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -1984,15 +1984,9 @@ LaTeX Font Info:    Font shape `T1/fvm/m/n' will be
 (Font)              scaled to size 7.19995pt on input line 211.
 \c@twr=\count399
  [6]
-Overfull \hbox (0.16173pt too wide) in paragraph at lines 245--246
-\T1/fve/m/sc/10 wy-ko-ny-wa¢ za-rów-no se-kwen-cyj-ne i wie-lo-w¡t-ko-wo. Wy-ko
--rzy-sta-ªem CU-D† w wer-sji v9.2.148 
- []
-
-
 Overfull \hbox (9.65675pt too wide) in paragraph at lines 261--262
 \T1/fve/m/sc/10 W im-ple-men-ta-cji wy-ko-rzy-stu-je dwie sza-blo-no-we struk-t
-u-ry z bi-blio-te-ki Thrust. \T1/fve/b/n/10 host_vector\T1/fve/m/sc/10 [[][]9[]
+u-ry z bi-blio-te-ki Thrust. \T1/fve/b/n/10 host_vector\T1/fve/m/sc/10 [[][]5[]
 []] 
  []
 
@@ -2061,13 +2055,7 @@ File: zcurve3.pdf Graphic file (type pdf)
 <use zcurve3.pdf, page 1>
 Package pdftex.def Info: zcurve3.pdf, page1 used on input line 52.
 (pdftex.def)             Requested size: 212.06091pt x 210.06497pt.
-)
-Overfull \hbox (5.21088pt too wide) in paragraph at lines 471--472
-\T1/fve/m/sc/10 Z wy-ko-rzy-sta-niem po-wy-»ej zde-fi-nio-wa-nych ko-dów b¦-dzi
-e-my im-ple-men-to-wa¢ al-go-rytm wspo- 
- []
-
-[14 <./zcurve3.pdf>]
+) [14 <./zcurve3.pdf>]
 Overfull \hbox (6.0pt too wide) in paragraph at lines 486--486
 [][][][][][][]  
  []
@@ -2212,7 +2200,7 @@ e/texlive/texmf-dist/fonts/type1/public/pl/plr5.pfb></usr/share/texlive/texmf-d
 ist/fonts/type1/public/pl/plr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/p
 ublic/pl/plsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/pl/plsy7.
 pfb>
-Output written on Praca.pdf (24 pages, 200570 bytes).
+Output written on Praca.pdf (24 pages, 200375 bytes).
 PDF statistics:
  852 PDF objects out of 1000 (max. 8388607)
  781 compressed objects within 8 object streams

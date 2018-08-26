@@ -457,7 +457,7 @@ Aby podjąć wyzwanie równoległej implementacji drzew ósemkowych, musimy prze
 \subsection{\Large Kody Mortona}
 W tym celu zastosujemy \textbf{kody Mortona}.
 Kodami Mortona, nazywamy mapowanie punktu w przestrzeni do listy liczb(w naszym przypadku mapujemy punkty w 3-wymiarowej przestrzeni do liczb całkowitych, a konkretniej interesowć nas będzie ich bitowa reprezentacja).
-Porządek Mortona jest definiowany przez \textbf{space-filling curve}, która jest w kształcie \textbf{Z}, więc czasami jest nazywana \textbf{Z-curve}. Krzywa ta ma ważną własność - jeśli elementy są blisko siebie w drzewie, to w tym porządku ta bliskość jest zachowana w ułożeniu w pamięci. W pracy traktujemy kod Mortona jako 64-bitową liczbę całkowitą, w której 20 bitów (łącznie 60 dla wszystkich trzech wymiarów) oznacza kolejne rozgałęzienia dla naszego węzła, czyli jedną z dwóch części, w których punkt kolejno ląduje, gdy umieszczamy go w coraz mniejszych sześcianach, aż do przyjętej głębokości równej 20.
+Porządek Mortona jest definiowany przez \textbf{space-filling curve}, która jest w kształcie \textbf{Z}, więc czasami jest nazywana \textbf{Z-curve}. Krzywa ta ma ważną własność - jeśli elementy są blisko siebie w drzewie, to w tym porządku ta bliskość jest zachowana w ułożeniu w pamięci. W pracy traktujemy kod Mortona jako 64-bitową liczbę całkowitą, w której 15 bitów (łącznie 45 dla wszystkich trzech wymiarów) oznacza kolejne rozgałęzienia dla naszego węzła, czyli jedną z dwóch części, w których punkt kolejno ląduje, gdy umieszczamy go w coraz mniejszych sześcianach, aż do przyjętej głębokości równej 15.
 
 \begin{figure}[h]
     \centering      
@@ -468,13 +468,13 @@ Porządek Mortona jest definiowany przez \textbf{space-filling curve}, która je
 \end{figure}
 
 \subsection{\Large Równoległa implementacja drzew ósemkowych}
-Z wykorzystaniem powyżej zdefiniowanych kodów będziemy implementować algorytm wspomniany w pracy Tero Karrasa \cite{tero}, z tym wyjątkiem, że nasz algorytm będzie lekko zmodykifowany, gdyż nie będziemy korzystać z wprowadzonych tam \textbf{binary radix tree}.
+Z wykorzystaniem powyżej zdefiniowanych kodów zaimplementujemy algorytm inspirowany algorytmem równoległego tworzenia drzewa ósemkowego wspomnianym w pracy Tero Karrasa \cite{tero}.
 
 Zmodyfikowany algorytm (skrótowo) składa się z sześciu kroków :
 \begin{itemize}
-\item Obliczenie kodów Mortona dla każdego węzła. Realizujemy to poprzez kernel, który na podstawie przedziałów, w których zawierają się punkty w całym układzie dla każdego z wymiarów (znajdujemy dolną i górną granicę w każdym z wymiarów), wyznacza przez 20 poziomów coraz to dokładniejsze położenie poprzez ustawianie kolejnych bitów w liczbie binarnej. 
+\item Obliczenie kodów Mortona dla każdego węzła. Realizujemy to poprzez kernel, który na podstawie przedziałów, w których zawierają się punkty w całym układzie dla każdego z wymiarów (znajdujemy dolną i górną granicę w każdym z wymiarów), wyznacza przez 15 poziomów coraz to dokładniejsze położenie poprzez ustawianie kolejnych bitów w liczbie binarnej. 
 \item Sortujemy kody Mortona. W tym celu wykorzystujemy bibliotekę Thrust, a dokładniej funkcję \textbf{sort\_by\_key}. 
-\item Kody liczymy do głębokości 20, więc istnieje możliwość pojawienia się duplikatów, których tyczą się dwie kolejne części naszego algorytmu (zidentyfikowanie i usunięcie duplikatów). W naszej implementacji załatwiamy to kolejną funkcją z biblioteki thrust, to jest \textbf{unique\_by\_key}.
+\item Kody liczymy do głębokości 15, więc istnieje możliwość pojawienia się duplikatów, których tyczą się dwie kolejne części naszego algorytmu (zidentyfikowanie i usunięcie duplikatów). W naszej implementacji załatwiamy to kolejną funkcją z biblioteki thrust, to jest \textbf{unique\_by\_key}.
 \item Liczymy ile wierzchołków będzie miało nasze drzewo (znamy jedynie liczbę liści, potrzebujemy policzyć również liczbę węzłów wewnętrznych). Dodatkowo tworzymy wierzchołki.
 \item  Łączymy węzły według relacji (rodzic, dziecko). W tym celu musimy odpowiednio przyporządkować każdemu węzłowi jego węzeł nadrzędny.
 \end{itemize}
@@ -540,7 +540,7 @@ struct OctreeNode {
 \end{lstlisting}
 W powyższej strukturze przechowujemy indeksy następników w globalnej tablicy węzłów, a także standardowo całkowitą masę poddrzewa oraz środek masy. Dodatkowo mamy pole position, które przyjmuje -1, gdy węzeł jest wewnętrzny oraz indeks węzła(na tablicę globalną), gdy węzeł jest liściem.
 Jak widzimy niżej, początkowo tworzymy \textbf{device\_vector octree} dla węzłów o liczbie elementów, którą wyznacza liczba punktów z wejścia, które mają unikalne kody Mortona. \\
-Tworzymy również wektor \textbf{parentsNumbers}, którego zadaniem jest przechowywanie informacji o rodzicu każdego z wezłów (informacja ta będzie niezbędna przy łączeniu wierzchołków) na każdym z poziomów (jak wspomnieliśmy nasze drzewo ma głębokość 20). Poniższy fragment kodu zawiera również trzy istotne zmienne:
+Tworzymy również wektor \textbf{parentsNumbers}, którego zadaniem jest przechowywanie informacji o rodzicu każdego z wezłów (informacja ta będzie niezbędna przy łączeniu wierzchołków) na każdym z poziomów (jak wspomnieliśmy nasze drzewo ma głębokość 15). Poniższy fragment kodu zawiera również trzy istotne zmienne:
 \begin{itemize}
 \item \textbf{childrenCount} - zlicza liczbę nowych węzłów na każdym z poziomów drzewa,
 \item \textbf{previousChildrenCount} - przechowuje liczbę węzłów z poprzedniego poziomu,
@@ -560,7 +560,7 @@ int allChildrenCount = uniquePointsCount;
 int previousChildrenCount = 0;
 \end{lstlisting}
 
-Kluczowym punktem tych dwóch części jest poniższa pętla. Iteruje się ona $K=20$ razy, zaczynając od dzieci drzewa (podejście \textbf{bottom-up}), oznacza to także, że zaczyna od węzłów ograniczających najmniejszy obszar, czyli obszaru ograniczającego nasze punkty najdokładniej.\\
+Kluczowym punktem tych dwóch części jest poniższa pętla. Iteruje się ona $K=15$ razy, zaczynając od dzieci drzewa (podejście \textbf{bottom-up}), oznacza to także, że zaczyna od węzłów ograniczających najmniejszy obszar, czyli obszaru ograniczającego nasze punkty najdokładniej.\\
 W każdej z iteracji chcemy wyznaczyć rodziców dla węzłów. \\W tym celu pomocny jest kernel \textbf{calculateDuplicates} w połączeniu z \textbf{thrust::inclusive\_scan}, które pozwalają wyznaczyć duplikaty wśród rodziców(czyli węzły na wyższym poziomie, które mają identyczne kody Mortona, więc mają takie same następniki).
 Kernel ustawia wartość $1$ w danej komórce wektora, jeśli rodzice dwóch kolejnych węzłów są różni (wystarczy sprawdzić dwa kolejne, gdyż dzięki sortowaniu dzieci każdego z węzłów są obok siebie), a następnie \textbf{inclusive\_scan} robi sumę prefiksową tej tablicy, aby wyznaczyć te, które są takie same(mają przypisane takie same liczby po obliczeniu sum prefiksowych).
 
@@ -631,10 +631,10 @@ Algorytm polega na przejściu drzewa od korzenia i na sprawdzaniu czy węzeł je
 
 \theoremstyle{definition}
 \begin{definition}{Ratio}
-- niech s będzie szerokością obszaru obejmowanego przez sześcian oraz niech d będzie odległością między środkiem masy obszaru a punktem, to jeśli $s/d < \Theta$, wtedy liczymy siłę między środkiem masy obszaru a punktem. W przeciwnym przypadku wywołujemy się rekurencyjnie na ośmiu podsześcianach.
+- niech s będzie szerokością obszaru obejmowanego przez sześcian oraz niech d będzie odległością między środkiem masy obszaru a punktem, to jeśli $s/d < \theta$, gdzie przyjęliśmy, że $\theta = 2.0$, to liczymy siłę między środkiem masy obszaru a punktem. W przeciwnym przypadku wywołujemy się rekurencyjnie na ośmiu podsześcianach. Ogólnie, im $\theta$ jest większa, to obliczenia są mniej dokładne, czyli więcej poddrzew traktujemy jako jeden węzeł.
 \end{definition}
 
-Powyższa definicja wyjaśnia postępowanie dla wewnętrznego węzła. Dodatkowo musimy rostrzygać czy nasz punkt i przetwarzany węzeł nie są tym samym węzłem, aby nie liczyć siły między nimi.\\~\\~\\
+Dodatkowo musimy rostrzygać czy nasz punkt i przetwarzany węzeł nie są tym samym węzłem, aby nie liczyć siły między nimi.\\~\\~\\
 
 
 \lstset{backgroundcolor=\color{white}, basicstyle=\footnotesize\fontfamily{fvm}\selectfont, numbers=left, numbersep=8pt, keywordstyle=\color{blue},commentstyle = \color{mygreen}}              
@@ -688,7 +688,7 @@ void computeForces(OctreeNode* octree, double* velocities, double* weights,
 {	
     float forces[3] = {0.0, 0.0, 0.0};
     float p = {pos[3*thid], pos[3*thid + 1], pos[3*thid + 2]);
-    unsigned int stack[20], child[20];
+    unsigned int stack[16], child[16];
     float widthCube = maxs[0]-mins[0];
     int top = -1;
     stack[++top] = AllNodes - 1, child[top] = 0;
@@ -725,7 +725,7 @@ void computeForces(OctreeNode* octree, double* velocities, double* weights,
 W celu wizualizacji symulacji wykorzystałem OpenGL3. 
 
 \subsection{\large OpenGL}
-OpenGL \cite{opengl} jest API, które jest przeznaczone głównie do tworzenia grafiki. OpenGL wykorzystuje kartę graficzną (GPU), więc tworzenie grafiki następuje szybciej niż innymi sposobami. Ten efekt nazywamy przyspieszeniem sprzętowym. OpenGL wykorzystywany jest często przez gry komputerowe i wygaszacze ekranu.
+OpenGL \cite{opengl} jest API, które jest przeznaczone głównie do tworzenia grafiki. OpenGL zazwyczaj wykorzystuje kartę graficzną (GPU), więc tworzenie grafiki następuje szybciej niż innymi sposobami. Ten efekt nazywamy przyspieszeniem sprzętowym. OpenGL wykorzystywany jest często przez gry komputerowe i wygaszacze ekranu.
 
 \subsection{\large Renderowanie symulacji}
 

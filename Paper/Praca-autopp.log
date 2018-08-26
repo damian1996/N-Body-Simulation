@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=latex 2018.8.7)  26 AUG 2018 12:08
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=latex 2018.8.7)  26 AUG 2018 13:11
 entering extended mode
  %&-line parsing enabled.
 **\let \APPmakepictures \empty \input  Praca.tex
@@ -1845,12 +1845,6 @@ LaTeX Font Info:    Font shape `T1/fvm/m/n' will be
 (Font)              scaled to size 7.19995pt on input line 211.
 \c@twr=\count396
 
-Overfull \hbox (0.16173pt too wide) in paragraph at lines 245--246
-\T1/fve/m/sc/10 wy-ko-ny-wa¢ za-rów-no se-kwen-cyj-ne i wie-lo-w¡t-ko-wo. Wy-ko
--rzy-sta-ªem CU-D† w wer-sji v9.2.148 
- []
-
-
 LaTeX Warning: Citation 'Cuda' on page 7 undefined on input line 247.
 
 
@@ -1939,12 +1933,6 @@ Overfull \hbox (6.0pt too wide) in paragraph at lines 415--415
 (./zcurve3.pdf_tex)
 
 LaTeX Warning: Citation 'tero' on page 14 undefined on input line 471.
-
-
-Overfull \hbox (5.21088pt too wide) in paragraph at lines 471--472
-\T1/fve/m/sc/10 Z wy-ko-rzy-sta-niem po-wy-»ej zde-fi-nio-wa-nych ko-dów b¦-dzi
-e-my im-ple-men-to-wa¢ al-go-rytm wspo- 
- []
 
 
 Overfull \hbox (6.0pt too wide) in paragraph at lines 486--486

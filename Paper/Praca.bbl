@@ -106,6 +106,29 @@
       \verb http://docs.nvidia.com/cuda/cuda-runtime-api/index.html
       \endverb
     \endentry
+    \entry{thrust}{manual}{}
+      \name{author}{1}{}{%
+        {{hash=61a23953300b78e83f381e02ca45c5e4}{%
+           family={Corporation},
+           family_i={C\bibinitperiod},
+           given={NVIDIA},
+           given_i={N\bibinitperiod}}}%
+      }
+      \strng{namehash}{61a23953300b78e83f381e02ca45c5e4}
+      \strng{fullhash}{61a23953300b78e83f381e02ca45c5e4}
+      \field{sortinit}{C}
+      \field{sortinithash}{59f25d509f3381b07695554a9f35ecb2}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{edition}{v9.2.148, 2018}
+      \field{title}{THRUST}
+      \field{urlday}{01}
+      \field{urlmonth}{08}
+      \field{urlyear}{2018}
+      \verb{url}
+      \verb https://docs.nvidia.com/cuda/thrust/index.html
+      \endverb
+    \endentry
     \entry{dirNBody}{misc}{}
       \name{author}{2}{}{%
         {{hash=d701820cd316f8391094da8e15df4005}{%
@@ -188,27 +211,6 @@
       \field{year}{2003}
       \field{pages}{2141\bibrangedash 2155}
       \range{pages}{15}
-    \endentry
-    \entry{thrust}{manual}{}
-      \name{author}{1}{}{%
-        {{hash=c2f0039b9a0105fc0d3a9c22ea24b1c0}{%
-           family={GOOGLE},
-           family_i={G\bibinitperiod}}}%
-      }
-      \strng{namehash}{c2f0039b9a0105fc0d3a9c22ea24b1c0}
-      \strng{fullhash}{c2f0039b9a0105fc0d3a9c22ea24b1c0}
-      \field{sortinit}{G}
-      \field{sortinithash}{1c854ef9177a91bf894e66485bdbd3ed}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{edition}{v9.2.148, 2018}
-      \field{title}{THRUST}
-      \field{urlday}{01}
-      \field{urlmonth}{08}
-      \field{urlyear}{2018}
-      \verb{url}
-      \verb https://docs.nvidia.com/cuda/thrust/index.html
-      \endverb
     \endentry
     \entry{opengl}{manual}{}
       \name{author}{1}{}{%
