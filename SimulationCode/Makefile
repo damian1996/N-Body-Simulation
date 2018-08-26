@@ -1,4 +1,4 @@
-CUDA_INSTALL_PATH ?= /usr/local/cuda-9.2/bin
+CUDA_INSTALL_PATH ?= /usr/local/cuda/bin
 CXX := /usr/bin/g++
 LDFLAGS=-lglfw -lGL
 NVCC  := $(CUDA_INSTALL_PATH)/nvcc

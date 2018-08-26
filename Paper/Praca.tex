@@ -96,7 +96,7 @@ citestyle=numeric,
 \section{\LARGE Przedstawienie problemu symulacji N ciał}
 \bigskip
 Symulacja N ciał jest zagadnieniem z mechaniki klasycznej, które polega na wyznaczeniu toru ruchów wszystkich ciał danego układu o danych masach, prędkościach i położeniach początkowych w oparciu o prawa ruchu i założenie, że ciała oddziałują ze sobą zgodnie z prawem grawitacji Newtona. \\ 
-Podstawowe zagadnienia do symulacji N ciał zostały przedstawione przez \textbf{Isaaca Newtona} w 1687 roku, który wprowadził prawa(później zostaną przedstawione dokładniej), które obowiązują przy próbach analitycznego rozwiązania problemu. \cite{Principia}. Początki symulacji można datować na rok 1941, kiedy to \textbf{Erik Holmberg}, prowadził eksperymenty z galaktykami, które 385modelował jako okręgi, w których punkty koncetrowały się wokół wspólnego środka. Co ciekawe, w swoich eksperymentach reprezentował punkty w galaktyce poprzez żarówki. \cite{holmberg} Z kolei pierwsze obliczenia dla symulacji N ciał na komputerze zostały wykonane przez \textbf{Sebastian von Hoernera} w 1960 roku. \cite{vonHoerner}
+Podstawowe zagadnienia do symulacji N ciał zostały przedstawione przez \textbf{Isaaca Newtona} w 1687 roku, który wprowadził prawa(później zostaną przedstawione dokładniej), które obowiązują przy próbach analitycznego rozwiązania problemu. \cite{Principia}. Początki symulacji można datować na rok 1941, kiedy to \textbf{Erik Holmberg}, prowadził eksperymenty z galaktykami, które modelował jako okręgi, w których punkty koncetrowały się wokół wspólnego środka. Co ciekawe, w swoich eksperymentach reprezentował punkty w galaktyce poprzez żarówki. \cite{holmberg} Z kolei pierwsze obliczenia dla symulacji N ciał na komputerze zostały wykonane przez \textbf{Sebastiana von Hoernera} w 1960 roku. \cite{vonHoerner}
 
 \subsection{\Large Szczególne przypadki}
 Problem analitycznego wyznaczenia dokładnego ruchu dowolnej liczby ciał jest trudny, więc można znaleźć wiele prac skupiająych się jedynie na ustalonej, małej liczbe ciał.
@@ -793,12 +793,15 @@ Poniżej widać wykres przedstawiający czas wykonywania się poszczególnych al
 \begin{axis}[
     title={Porównanie czasu działania algorytmów},
     xlabel={Liczba ciał},
-    ylabel={Czas (ms)},
+    ylabel={Średni czas kroku(s)},
     xmin=0, xmax=100000,
     ymin=0, ymax=0.6,
     legend pos=north west,
     ymajorgrids=true,
     grid style=dashed,
+    scaled x ticks=false,
+    width=0.8\textwidth,
+    xtick distance=20000,
 ]
 \addplot[
     color=red,
@@ -818,7 +821,7 @@ Poniżej widać wykres przedstawiający czas wykonywania się poszczególnych al
 (45000,0.142862)(53000,0.178091)(57000,0.195938)(59000,0.206165)
 (63000,0.228704)(65000,0.239777)(67000,0.300484)(71000,0.328274)
 (75000,0.360973)(79000,0.391146)(81000,0.406964)(85000,0.439855)
-(89000,0.48233)
+(89000,0.48233)(93000,0.511687)(99000,0.55421)
     };
 \legend{Wielowątkowy iteracyjny Barens Hut, Wielowątkowy naiwny algorytm}
 \end{axis}
@@ -827,35 +830,37 @@ Poniżej widać wykres przedstawiający czas wykonywania się poszczególnych al
 \end{figure}
 
 Z tego widzimy, że osiągnęliśmy zamierzony efekt, czyli dla coraz większej liczby ciał, równoległa implementacja algorytmu Barnes Hut jest o wiele szybsza niż wielowątkowy algorytm liczący dla każdego ciała siłę działającą na niego przez każde inne ciało. \\
-Dodatkowo spójrzmy na drugi wykres. Mamy ustaloną liczbę obiektów ($1000$), ale tym razem zmienna jest liczba tur. Możemy zaobserwować, że im więcej tur, tym algorytm Barnes Hut spisuje się lepiej, gdyż część obiektów oddala się względem innych obiektów i przez to często grupka obiektów jest traktowana jako jeden obiekt i nie musimy liczyć siły z każdym ciałem z osobna, a za to liczymy siłę tylko raz z środkiem masy tej grupki ciał.\\
-
+Zachodzi również zależność, że im więcej tur, tym algorytm Barnes Hut spisuje się lepiej, gdyż część obiektów oddala się względem innych obiektów i przez to często grupka obiektów jest traktowana jako jeden obiekt i nie musimy liczyć siły z każdym ciałem z osobna, a za to liczymy siłę tylko raz z środkiem masy tej grupki ciał.\\
+Widzimy to na drugim wykresie, gdzie mamy ustalone, że ciał w symulacji jest $1000$, a zmienna jest liczba symulowanych kroków.
 \begin{figure}[h]
 \begin{tikzpicture}
 \begin{axis}[
     title={Porównanie czasu działania algorytmów},
-    xlabel={Liczba ciał},
-    ylabel={Czas (ms)},
-    xmin=0, xmax=100000,
-    ymin=0, ymax=1.0,
+    xlabel={Liczba kroków w symulacji},
+    ylabel={Średni czas kroku(s)},
+    xmin=0, xmax=9200,
+    ymin=0, ymax=0.04,
     legend pos=north west,
     ymajorgrids=true,
     grid style=dashed,
+    scaled x ticks=false,
+    scaled y ticks=false,
+    width=0.8\textwidth,
+    xtick distance=2000,
+    ytick distance=0.01,
 ]
 \addplot[
     color=red,
     mark=square,
     ]
     coordinates {
-    (100,0.00826626)(3000,0.021987)(7000,0.0480744)(11000,0.0442917)(15000,0.0429789)(19000,0.0436969)(23000,0.0452354)(27000,0.049968)(31000,0.0521729)(35000,0.0498652)(39000,0.0540352)(43000,0.0584782)(47000,0.053342)(51000,0.0531557)(55000,0.0546283)(59000,0.0703022)(63000,0.0551174)(67000,0.0989813)(71000,0.0693708)(75000,0.0669189)(79000,0.104832)(83000,0.0702073)(85000,0.0853074)(91000,0.087911)(95000,0.0727809)(99000,0.0826717)
+    (100,0.0149154)(600,0.0154447)(1100,0.0236453)(1600,0.0316999)
+(2100,0.0194703)(2600,0.0168979)(3100,0.0156088)(3600,0.0145503)
+(4100,0.0135125)(4600,0.013297)(5100,0.0130355)(5600,0.0126095)
+(6100,0.0127521)(6600,0.0122871)(7100,0.0117973)(7600,0.0113905)
+(8100,0.0114501)(8600,0.0115139)(9100,0.0113336)
     };
-\addplot[
-    color=blue,
-    mark=square,
-    ]
-    coordinates {
-    (100,0.00826626)(3000,0.021987)(7000,0.0480744)(11000,0.0442917)(15000,0.0429789)(19000,0.0436969)(23000,0.0452354)(27000,0.049968)(31000,0.0521729)(35000,0.0498652)(39000,0.0540352)(43000,0.0584782)(47000,0.053342)(51000,0.0531557)(55000,0.0546283)(59000,0.0703022)(63000,0.0551174)(67000,0.0989813)(71000,0.0693708)(75000,0.0669189)(79000,0.104832)(83000,0.0702073)(87000,0.12837)(91000,0.087911)(95000,0.0727809)(99000,0.0826717)
-    };
-\legend{Wielowątkowy iteracyjny Barens Hut, Wielowątkowy naiwny algorytm}
+\legend{Wielowątkowy Barens Hut}
 \end{axis}
 \end{tikzpicture}
 \caption{Porównanie czasu działania algorytmów}

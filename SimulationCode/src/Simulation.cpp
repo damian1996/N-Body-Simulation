@@ -31,7 +31,7 @@ void Simulation::MakeSimulation() {
       if(count >= numberOfRounds) break;
       curr_time = rend->getTime();
       avgDt += (curr_time - last_time);
-      step->compute(positions, (curr_time - last_time)*3);
+      step->compute(positions, (curr_time - last_time));
       last_time = curr_time;
       count++;
   }

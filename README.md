@@ -26,4 +26,5 @@
    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;` cd Naive `\
    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;` make clean && make `\
    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;` ./out/main `\
-   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**and have fun with it!**
+
+**In the main interface are four versions of simulation to choose. Each algorithm will have 3D visualization of the simulation in which it is possible to scroll and to zoom.** 

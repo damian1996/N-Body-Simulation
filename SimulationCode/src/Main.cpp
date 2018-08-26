@@ -36,12 +36,12 @@ int main() {
       break;
     }
     case 3: {
-      rend = new Render(masses, numberOfBodies, 8.0);
+      rend = new Render(masses, numberOfBodies, 4.0);
       step = new BarnesHutStep(masses, numberOfBodies);
       break;
     }
     case 4: {
-      rend = new Render(masses, numberOfBodies, -1);
+      rend = new Render(masses, numberOfBodies, 4.0);
       step = new BarnesHutStepCuda(masses, numberOfBodies);
       break;
     }
