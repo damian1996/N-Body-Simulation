@@ -243,7 +243,7 @@ Jednakże ten algorytm jest zbyt wolny dla dużej liczby ciał. W tym podrozdzia
 
 \subsubsection{\large Architektura CUDA}
 W tym celu wykorzystamy architekturę CUDA. 
-Jest to uniwersalna architektura kart graficznych (które dzisiejszych czasach poza zastosowaniem w renderowaniu grafiki, są również często używane do masywnych obliczeń nawet na tysiącach wątków jednocześnie), umożliwiająca wykorzystanie ich mocy obliczeniowej w wielu problemach, które mogą się wykonywać zarówno sekwencyjne i wielowątkowo. Wykorzystałem CUDĘ w wersji v9.2.148 z compute capability 3.0 i wyżej. \\~\\
+Jest to uniwersalna architektura kart graficznych (które dzisiejszych czasach poza zastosowaniem w renderowaniu grafiki, są również często używane do masywnych obliczeń nawet na tysiącach wątków jednocześnie), umożliwiająca wykorzystanie ich mocy obliczeniowej w wielu problemach, które mogą się wykonywać zarówno sekwencyjne i wielowątkowo. Wykorzystałem CUDA w wersji v9.2.148 z compute capability 3.0 i wyżej. \\~\\
 Wątki na CUDA są pogrupowane w bloki. W compute capability 3.0 każdy blok może mieć do 1024 wątków. Z kolei bloki są ułożone w gridzie, który może być nawet trójwymiarowy. W wymiarze X może być aż $2^{31}-1$ wątków, w dwóch pozostałych $65535$. \cite[str.~238-242]{Cuda} Dodatkowo wątki są grupowane w mniejsze grupy niż bloki, zwane warpami, które liczą po 32 wątki. Wątki w jednym warpie są uruchamiane jednocześnie i zarządzane przez warp scheduler \cite[str.~70]{Cuda} \\
 \bigskip
 Warto, także wspomnieć o podziale pamięci w programach pisanych w tej architekturze. \\Możemy wyróżnić trzy rodzaje pamięci :
