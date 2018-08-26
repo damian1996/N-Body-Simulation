@@ -1,11 +1,13 @@
 #include "ComputationsBarnesHutCuda.h"
 #include <thrust/sort.h>
+#include <thrust/extrema.h>
+#include <thrust/unique.h>
 #include <bitset>
 #include <string>
 
 const float G = 6.674 * (1e-11);
 const float EPS = 0.01f;
-const float theta = 2;
+const float theta = 2.0;
 const int THREADS_PER_BLOCK = 1024;
 const int K = 15;
 

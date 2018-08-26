@@ -33,7 +33,7 @@ private:
     std::vector<float> forces;
     std::vector<float> velocities;
     float sizeFrame = 8.0; 
-    const float theta = 0.5;
+    const float theta = 2.0;
     const float EPS = 0.01;
 };
 

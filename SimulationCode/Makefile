@@ -1,4 +1,4 @@
-CUDA_INSTALL_PATH ?= /usr/local/cuda-9.2/bin
+CUDA_INSTALL_PATH ?= /usr/local/cuda/bin
 CXX := /usr/bin/g++
 LDFLAGS=-lglfw -lGL
 NVCC  := $(CUDA_INSTALL_PATH)/nvcc
@@ -14,9 +14,9 @@ CUOBJS := $(subst src,build,$(CUOBJS))
 TARGET := $(OUTDIR)/main
 
 # Options
-NVCCOPTIONS =-O3 -m64 -arch=sm_35 -std=c++14 -g
+NVCCOPTIONS =-O3 -m64 -arch=sm_35 -std=c++11 -g
 #NVCCOPTIONS =-O3 -m64 -std=c++14 -g
-CXXOPTIONS =-O3 -m64 -std=c++14 -g -Wall -I /usr/local/cuda/include/
+CXXOPTIONS =-O3 -m64 -std=c++11 -g -Wall -I /usr/local/cuda/include/
 
 # Common flags
 NVCCFLAGS += $(NVCCOPTIONS)

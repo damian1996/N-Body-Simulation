@@ -8,20 +8,18 @@
 #include <vector>
 
 #include "RandomGenerators.h"
-#include "Render.h"
 #include "Step.h"
 
 class Simulation {
-  Render *rend;
   Step *step;
   unsigned numberOfBodies;
   thrust::host_vector<float> positions;
   RandomGenerators *randomGenerator;
 
 public:
-  Simulation(Render *rend, Step *step, unsigned numberOfBodies);
+  Simulation(Step *step, unsigned numberOfBodies);
   ~Simulation();
-  void MakeSimulation();
+  void MakeSimulation(int rounds);
 };
 
 #endif

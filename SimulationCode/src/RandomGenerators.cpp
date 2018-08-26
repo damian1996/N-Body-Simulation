@@ -44,7 +44,7 @@ void RandomGenerators::initializeWeights(std::vector<float> &weights, unsigned n
   weights.resize(numberOfBodies);
   int typeMass = 3;
   unsigned divi;
-  printf("TYP %d\n", typeMass);
+  //printf("TYP %d\n", typeMass);
   switch (typeMass) {
   case 0: 
     for (unsigned i = 0; i < numberOfBodies; i++)
