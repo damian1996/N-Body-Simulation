@@ -51,6 +51,5 @@
   \begin{picture}(1,0.53742668)%
     \put(0,0){\includegraphics[width=\unitlength,page=1]{tree1.pdf}}%
     \put(0.13884416,-0.01883591){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{}}}%
-    \put(0,0){\includegraphics[width=\unitlength,page=2]{tree1.pdf}}%
   \end{picture}%
 \endgroup%
