@@ -242,7 +242,6 @@ W implementacji wykorzystuję dwie szablonowe struktury z biblioteki Thrust.
 
 Funkcja NaiveSimBridge, przedstawiona w listingu 2, przyjmuje jako argument \textbf{host\_vector} z pozycjami wszystkich elementów symulacji, a następnie kopiuje go do \textbf{device\_vector} dla odowiedzialnego za transport pozycji ciał do pamięci urządzenia. \\Następnie w liniach 3-5 konwertuje \textbf{device\_vector} dla pozycji, prędkości i masy do raw pointerów. Wykorzystywane są w 6 linii, w której wywołujemy kernel NaiveSim. W potrójnych nawiasach specyfikujemy liczbę bloków oraz liczbę wątków w każdym bloku (jest to składnia z CUDA Runtime API \cite{runtimeApi}). 
 W linii 7 kopiuje nowe pozycje z urządzenia do hosta. 
-\bigskip
 \lstset{backgroundcolor=\color{white}, basicstyle=\footnotesize\fontfamily{fvm}\selectfont, numbers=left, numbersep=8pt, keywordstyle=\color{blue},commentstyle = \color{mygreen}}\begin{lstlisting}[language=C++, frame=single, framerule=2pt, caption=Bridge pomiędzy główną pętlą a kernelem]
 void NaiveSimBridge(host_vector &pos, int numberOfBodies, float dt) {
   thrust::device_vector<float> posD = pos;
@@ -254,10 +253,8 @@ void NaiveSimBridge(host_vector &pos, int numberOfBodies, float dt) {
 \end{lstlisting}
 \bigskip
 Kernelem nazywamy funkcję, którą możemy uruchomić dla wielu wątków w pamięci urządzenia. W tym przypadku kernel NaiveSim, ukazany w listingu 3, jest odpowiedzialny za wyznaczenie nowej pozycji dla każdego ciała. \\
-\bigskip
 W sygnaturze kernela widzimy, że przyjmuje trzy raw\_pointery do odpowiednio pozycji, prędkości oraz mas. A poza tym dostaje również  odcinek czasu, w którym wykonywany jest dany krok oraz całkowitą liczbę ciał w symulacji. W 6 linii wyznaczamy indeks obiektu, dla którego będziemy prowadzić obliczenia. Jako że korzystamy tylko z jednowymiarowego schematu bloków, to wystarczy wymnożyć identyfikator bloku z rozmiarem pojedynczego bloku oraz dodać identyfikator wątku w bloku. (W każdym kolejnym kernelu $thid$ będzie liczony tak samo).
 W linii 7 mamy zabezpiecznie na wypadek gdyby obiekt o takim indeksie nie istniał, gdyż czasami liczba wywołanych wątków jest większa niz rzeczywista liczba obiektów. \\
-\bigskip
 Dalej mamy część, dla której równoleglimy nasz algorytm. Najpierw w liniach 12-23 mamy pętlę, w której liczymy siłę działającą na obiekt o identyfikatorze, który jest równy wcześniej wyliczonemu $thid$ poprzez każdy inny obiekt w symulacji. Postępujemy zgodnie ze wzorem z Prawa 4. W liniach 15-16 wyliczamy wektory odległości między naszym obiektem a każdym innym. W następnych dwóch liniach wyliczamy odległość między tymi dwoma obiektami i podnosimy ją do potęgi trzeciej, tak jak we wzorze. Z kolei w ostatnich liniach tej pętli podstawiamy wszystkie wartości do wzoru, aby obliczyć siłę działającą na ciało. \\
 \bigskip
 \lstset{backgroundcolor=\color{white}, basicstyle=\footnotesize\fontfamily{fvm}\selectfont, numbers=left, numbersep=8pt, keywordstyle=\color{blue},commentstyle = \color{mygreen}}\begin{lstlisting}[language=C++, frame=single, framerule=2pt, caption=Kernel NaiveSim]
@@ -311,26 +308,29 @@ Zrównoleglony naiwny algorytm jest szybszy niż wersja jednowątkowa, jednakże
 
 \subsection{\Large Drzewa Ósemkowe}
 Algorytm jest oparty na drzewach, a dokładniej drzewach ósemkowych \cite{octree}.
-Struktura drzewa ósemkowego jest następująca(rys. Rysunek 1):
+Drzewo ósemkowego przedstawiamy następująco(rys. Rysunek 1):
 \begin{itemize}
   \item cała przestrzeń trójwymiarowa jest przedstawiana przez sześcian, który jest reprezentowany przez korzeń drzewa
-  \item korzeń drzewa ma ośmioro następników, z których każdy reprezentuje jeden z ośmiu podsześcianów, na które dzielimy duży sześcian reprezentowany przez korzeń.
+  \item korzeń drzewa ma ośmioro następników, z których każdy reprezentuje jeden z ośmiu podsześcianów, na które dzielimy duży sześcian reprezentowany przez korzeń
   \item drzewo składa się z węzłów wewnętrznych oraz liści
   \item jedynie liście drzewa zawierają punkty z symulacji
   \item drzewo ma ustaloną głębkość K
 \end{itemize}
-
+\bigskip
 \begin{figure}
     \centering
     \def\svgwidth{\columnwidth}
     \input{tree1.pdf_tex}
-    \caption{Przykład drzewa ósemkowego (dla uproszczenia rysunku bez ustalonej głębokości) z czterema węzłami o następujących współrzędnych: (-0.5, -0.5, 0.5), (0.5, 0.5, 0.5), (-0.4, 0.4, -0.7), (-0.7, 0.6, -0.4) dla przestrzeni ograniczonej sześcianem o środku w punkcie (0, 0, 0) oraz boku równym 2
-    }
+    \caption{Przykład drzewa ósemkowego (dla uproszczenia rysunku bez ustalonej głębokości) z czterema węzłami o następujących współrzędnych: (-0.5, -0.5, 0.5), (0.5, 0.5, 0.5), (-0.4, 0.4, -0.7), (-0.7, 0.6, -0.4) dla przestrzeni ograniczonej sześcianem o środku w punkcie (0, 0, 0) oraz boku równym 2.}
 \end{figure}
 \subsection{\Large Kody Mortona}
 Zanim pokażemy strukturę węzła w naszej implementacji drzewa ósemkowego, przytoczymy czym są kody Mortona, które będą niezbędnym narzędziem do ustalenia położenia węzłów w drzewie o ustalonej głębkości.\\
+\bigskip
 Kodami Mortona, nazywamy mapowanie punktu w przestrzeni do listy liczb(w naszym przypadku mapujemy punkty w 3-wymiarowej przestrzeni do liczb całkowitych, a konkretniej interesowć nas będzie ich bitowa reprezentacja).
 Porządek Mortona jest definiowany przez \textbf{krzywą wypełniającą powierzchnie (ang. space-filling curve)}, która jest w kształcie litery $Z$, więc czasami jest nazywana \textbf{Z-krzywą}. Krzywa ta ma ważną własność - jeśli elementy są blisko siebie w drzewie, to w tym porządku ta bliskość jest zachowana w ułożeniu w pamięci. W pracy traktujemy kod Mortona jako 64-bitową liczbę całkowitą, w której $15$ bitów (łącznie $45$ dla wszystkich trzech wymiarów) oznacza kolejne rozgałęzienia dla naszego węzła, czyli jedną z dwóch części, w których punkt kolejno ląduje, gdy umieszczamy go w coraz mniejszych sześcianach, aż do przyjętej głębokości równej $15$ (czyli $K = 15$).
+\bigskip
+\subsection{\Large Struktura węzła w drzewie ósemkowym}
+Przedstawia się ona następująco: \\~\\
 
 \begin{figure}[h]
     \centering      
@@ -340,8 +340,6 @@ Porządek Mortona jest definiowany przez \textbf{krzywą wypełniającą powierz
     \label{fig:krzywa}
 \end{figure}
 
-\subsection{\Large Struktura węzła w drzewie ósemkowym}
-Przedstawia się ona następująco: 
 \lstset{backgroundcolor=\color{white}, basicstyle=\footnotesize\fontfamily{fvm}\selectfont, numbers=left, numbersep=8pt, keywordstyle=\color{blue},commentstyle = \color{mygreen}}              
 \begin{lstlisting}[language=C++, frame=single, framerule=2pt, caption=Struktura OctreeNode]
 struct OctreeNode {
@@ -352,6 +350,7 @@ struct OctreeNode {
   float centersOfMass[3] = {0.0, 0.0, 0.0};
 };
 \end{lstlisting}
+
 
 W powyższej strukturze przechowujemy indeksy następników w globalnej tablicy węzłów.Mamy również pole position, które przyjmuje -1, gdy węzeł jest wewnętrzny oraz indeks węzła(na tablicę globalną), gdy węzeł jest liściem. Wektor $duplicates$ przechowuje w węźle indeksy wszystkich punktów o takim samym kodzie Mortona (czyli liści będzie tyle samo co unikatowych kodów Mortona stworzonych na bazie punktów wejściowych). Dodatkowo struktura węzła zawiera całkowitą masę poddrzewa oraz środek masy.\\
 
@@ -435,8 +434,9 @@ void calculateFirstAndLast(int* first, int* last, unsigned long long* codes, int
     }
 }
 \end{lstlisting}
-
+\bigskip
 Gdy już to policzymy to możemy stworzyć początkowe drzewo ósemkowe składające się tylko z liści.
+\bigskip
 \lstset{backgroundcolor=\color{white}, basicstyle=\footnotesize\fontfamily{fvm}\selectfont, numbers=left, numbersep=8pt, keywordstyle=\color{blue},commentstyle = \color{mygreen}}              
 \begin{lstlisting}[language=C++, frame=single, framerule=2pt, caption=Stworzenie wektora octree]
 thrust::device_vector<OctreeNode> octree(numberOfBodies);
@@ -444,7 +444,7 @@ OctreeNode* d_octree = thrust::raw_pointer_cast(uniquePointsCount);
 
 AssignDuplicatesToNode<<<blocks, THREADS_PER_BLOCK>>>(octree, groups, first, last);
 \end{lstlisting}
-Po stworzeniu wektora reprezentującego drzewo przypisujemy każdemu węzłowi indeksy wszystkich punktów, które mają $i$-ty kod Mortona, czyli należą do $i$-tej grupy (kernel $AssignDuplicatesToNode$ wstawia je do wektora $duplicates$ odpowiedniego węzła z $octree$).
+Po stworzeniu wektora reprezentującego drzewo przypisujemy każdemu węzłowi indeksy wszystkich punktów, które mają $i$-ty kod Mortona, czyli należą do $i$-tej grupy (kernel \\$AssignDuplicatesToNode$ wstawia je do wektora $duplicates$ odpowiedniego węzła z $octree$).
 \subsubsection{\large Zliczanie węzłów wewnętrznych oraz łączenie węzłów}
 
 W następnym kroku tworzymy wektor \textbf{parentsNumbers}, którego zadaniem jest przechowywanie informacji o rodzicu każdego z wezłów (informacja ta będzie niezbędna przy łączeniu wierzchołków) na każdym z poziomów (jak wspomnieliśmy nasze drzewo ma głębokość $K$). Poniższy fragment kodu zawiera również trzy istotne zmienne:
@@ -463,11 +463,15 @@ int childrenCount = uniquePointsCount;
 int allChildrenCount = uniquePointsCount;
 int previousChildrenCount = 0;
 \end{lstlisting}
-
+\bigskip
 Kluczowym punktem tych dwóch części jest poniższa pętla. Iteruje się ona $K=15$ razy, zaczynając od dzieci drzewa (podejście \textbf{bottom-up}), oznacza to także, że zaczyna od węzłów ograniczających najmniejszy obszar, czyli obszaru ograniczającego nasze punkty najdokładniej.\\
-W każdej z iteracji chcemy wyznaczyć rodziców dla węzłów. \\W tym celu pomocny jest kernel \textbf{calculateDuplicates} w połączeniu z \textbf{thrust::inclusive\_scan}, które pozwalają wyznaczyć duplikaty wśród rodziców(czyli węzły na wyższym poziomie, które mają identyczne kody Mortona, więc mają takie same następniki).
+\bigskip
+W każdej z iteracji chcemy wyznaczyć rodziców dla węzłów. W tym celu pomocny jest kernel \textbf{calculateDuplicates} w połączeniu z \textbf{thrust::inclusive\_scan}, które pozwalają wyznaczyć duplikaty wśród rodziców(czyli węzły na wyższym poziomie, które mają identyczne kody Mortona, więc mają takie same następniki).
 Kernel ustawia wartość $1$ w danej komórce wektora, jeśli rodzice dwóch kolejnych węzłów są różni (wystarczy sprawdzić dwa kolejne, gdyż dzięki sortowaniu dzieci każdego z węzłów są obok siebie), a następnie \textbf{inclusive\_scan} robi sumę prefiksową tej tablicy, aby wyznaczyć te, które są takie same(mają przypisane takie same liczby po obliczeniu sum prefiksowych).
 \bigskip
+\bigskip
+\bigskip
+
 \lstset{backgroundcolor=\color{white}, basicstyle=\footnotesize\fontfamily{fvm}\selectfont, numbers=left, numbersep=8pt, keywordstyle=\color{blue},commentstyle = \color{mygreen}}              
 \begin{lstlisting}[language=C++, frame=single, framerule=2pt, caption=Kernel calculateDuplicates]
 __global__
@@ -624,7 +628,6 @@ void computeForces(OctreeNode* octree, double* velocities, double* weights,
 }
 \end{lstlisting}
 
-\subsection{Złożoność algorytmu obliczania siły}
 Złożoność obliczeniowa algorytmu obliczania siły przy równomiernym rozkładzie punktów wynosi $\mathcal{O}(log_{N})$ i zostało to pokazane w pracy wprowadzającej algorytm Barnesa-Huta \cite{barnhut}.
 
 \section{\LARGE Wizualizacja}
