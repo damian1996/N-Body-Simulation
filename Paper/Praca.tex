@@ -10,6 +10,7 @@
 %\usepackage{algorithm}
 %\usepackage[noend]{algpseudocode}
 \usepackage{caption}
+\usepackage{esvect}
 \usepackage{geometry}
 \usepackage{graphicx}
 \usepackage{listings}
@@ -99,61 +100,49 @@ Symulacja N ciał jest zagadnieniem z mechaniki klasycznej, które polega na wyz
 Podstawowe zagadnienia do symulacji N ciał zostały przedstawione przez \textbf{Isaaca Newtona} w 1687 roku, który wprowadził prawa(później zostaną przedstawione dokładniej), które obowiązują przy próbach analitycznego rozwiązania problemu. \cite{Principia}. Początki symulacji można datować na rok 1941, kiedy to \textbf{Erik Holmberg}, prowadził eksperymenty z galaktykami, które modelował jako okręgi, w których punkty koncetrowały się wokół wspólnego środka. Co ciekawe, w swoich eksperymentach reprezentował punkty w galaktyce poprzez żarówki. \cite{holmberg} Z kolei pierwsze obliczenia dla symulacji N ciał na komputerze zostały wykonane przez \textbf{Sebastiana von Hoernera} w 1960 roku. \cite{vonHoerner}
 
 \subsection{\Large Szczególne przypadki}
-Problem analitycznego wyznaczenia dokładnego ruchu dowolnej liczby ciał jest trudny, więc można znaleźć wiele prac skupiająych się jedynie na ustalonej, małej liczbe ciał.
+Problem analitycznego wyznaczenia dokładnego ruchu dowolnej liczby ciał jest trudny, więc można znaleźć wiele prac skupiająych się jedynie na ustalonej, małej liczbie ciał.
 
 \subsubsection{\large Problem dwóch ciał}
 Problem dla dwóch ciał podlegających prawom klasycznej dynamiki Newtona i przyciągających się zgodnie z newtonowskim prawem powszechnego ciążenia został analitycznie rozstrzygnięty przez J. Bernoulliego przy założeniu, że masa obiektu koncentruje się w jego środku. \cite[str.~1-49]{fund}
 
-Obydwa ciała poruszają się po krzywych stożkowych, których rodzaj zależy od całkowitej energii układu. Przykładowo, gdy energia jest mała, to ciała nie mogą się od siebie uwolnić, więc krążą wokół siebie po elipsach. (Figure \ref{fig:kulki})
+Obydwa ciała poruszają się po krzywych stożkowych, których rodzaj zależy od całkowitej energii układu. Przykładowo, gdy energia jest mała, to ciała nie mogą się od siebie uwolnić, więc krążą wokół siebie po elipsach.
 
 \subsubsection{\large Problem trzech ciał}
-Problem trzech ciał wciąż nie został rozwiązany analitycznie w ogólności. Jednakże istnieją rozwiązania dla uproszczonych wersji tego problemu, jak na przykład gdy masy obiektów są równe \cite{threebody1} lub w przypadku gdy w układzie mamy trzy równoległe względem siebie linie, a każde z ciał porusza się po jednej z prostych \cite{threebody2}, a także gdy masa jednego z ciał obecnych w systemi jest zaniedbywalnie mała(jest to tak zwany ograniczony problem trzech ciał - przedstawiony przez J. L. Lagrange'a w XVIII wieku). \cite{szebehely}
+Problem trzech ciał wciąż nie został rozwiązany analitycznie w ogólności. Jednakże istnieją rozwiązania dla uproszczonych wersji tego problemu, jak na przykład gdy masy obiektów są równe \cite{threebody1} lub w przypadku gdy w układzie mamy trzy równoległe względem siebie linie, a każde z ciał porusza się po jednej z prostych \cite{threebody2}, a także gdy masa jednego z ciał obecnych w systemi jest zaniedbywalnie mała(jest to tak zwany ograniczony problem trzech ciał - przedstawiony przez J. L. Lagrange'a w XVIII wieku) \cite{szebehely}.
 
 \subsection{\Large Zastosowania}
-Symulacje N ciał są szeroko wykorzystywanymi narzędziami w fizyce oraz astronomii. Problemem, w którym symulacje są użyteczne jest na przykład dynamika systemu z kilkoma ciałami jak układ Słońce-Ziemia-Księżyc \cite{SEMmisc} lub dynamika systemów gwiezdnych. \cite{chaosMisc}\\
+Symulacje N ciał są szeroko wykorzystywanymi narzędziami w fizyce oraz astronomii. Problemem, w którym symulacje są użyteczne jest na przykład dynamika systemu z kilkoma ciałami jak układ Słońce-Ziemia-Księżyc \cite{SEMmisc} lub dynamika systemów gwiezdnych \cite{chaosMisc}.\\
 W kosmologii symulacje są wykorzystywane do studiowania procesów tworzenia nieliniowych struktur jak galaktyczne halo z wpływem ciemnej materii \cite{haloDensity}. 
-Z kolei, bezpośrednie symulacje N ciał są wykorzystywane na przykład do studiowania dynamicznej ewolucji klastrów gwiazd lub do symulacji dynamiki planetozymali. \cite{dirNBody}. Zastosowania symulacji można zaobserwować również w innych dziedzinach, chociażby w algorytmach rysowania grafu skierowanego siłą. \cite{visGraph} Powyższe przykłady pokazują jak różnorodny jest zakres zastosowań symulacji.
-
-\begin{figure}
-    \centering
-    \def\svgwidth{\columnwidth}
-    \input{kulki.pdf_tex}
-    \caption{Symulacja dwóch ciał poruszających się po elipsach}
-    \label{fig:kulki}
-\end{figure}
-
+Z kolei, bezpośrednie symulacje N ciał są wykorzystywane na przykład do studiowania dynamicznej ewolucji klastrów gwiazd lub do symulacji dynamiki planetozymali. \cite{dirNBody}. Zastosowania symulacji można zaobserwować również w innych dziedzinach, chociażby w algorytmach rysowania grafu skierowanego metodą siłową (ang. force-directed graph drawing) \cite{visGraph}. Powyższe przykłady pokazują jak różnorodny jest zakres zastosowań symulacji.
 
 \subsection{\Large Implementacja i wykorzystane technologie}
-W pierwszej części mojej pracy przedstawię równoległą implementację naiwnego algorytmu symulacji N ciał. W każdym kroku algorytm bezpośrednio wyznacza siły oddziałujące wzajemnie pomiędzy każdymi dwoma ciałami w systemie, przez co oblicza całkowitą siłę oddziałującą na każde ciało w jednym kroku symulacji. W drugiej części zaimplementuję wielowątkowo algorytm Barnes Hut'a, który korzysta z drzew ósemkowych.
+W pierwszej części mojej pracy przedstawię równoległą implementację naiwnego algorytmu symulacji N ciał. W każdym kroku algorytm bezpośrednio wyznacza siły oddziałujące wzajemnie pomiędzy każdymi dwoma ciałami w systemie, przez co oblicza całkowitą siłę oddziałującą na każde ciało w jednym kroku symulacji. W drugiej części zaimplementuję wielowątkowo algorytm Barnesa-Huta, który korzysta z drzew ósemkowych.
 
-Repozytorium z całym kodem projektu jest dostępne pod tym \href{https://github.com/damian1996/N-Body-Simulation}{linkiem}.
+Repozytorium z całym kodem projektu jest dostępne pod tym \href{https://github.com/damian1996/N-Body-Simulation}{adresem}.
 Całość została zaimplementowana w C++. Innymi technologiami wykorzystanymi w pracy są OpenGL, CUDA czy Thrust, których zastosowanie zostanie wspomniane później. \\
 Pełna instrukcja instalacji niezbędnego oprogramowania do uruchomienia symulacji jest zawarta w repozytorium (dla linuxa Ubuntu).
 
 \section{\LARGE Teoretyczne podstawy symulacji N ciał}
 
-W celu przedstawienia ogólnego sformułowania problemu potrzebujemy przytoczyć trzy prawa dynamiki sformułowane przez Isaaca Newtona: \cite[str.~3-4]{fund}
+W celu przedstawienia ogólnego sformułowania problemu potrzebujemy przytoczyć trzy prawa dynamiki sformułowane przez Isaaca Newtona \cite[str.~83-84]{Principia} :
 
 \begin{theorem}
-Każde ciało pozostaje w stanie spoczynku lub ruchu jednostajnego w linii prostej, chyba że jest zmuszone zmienić ten stan przez zewnętrzne oddziaływanie z innymi ciałami, czyli każde ciało jest w układzie inercjalnym.
+W inercjalnym układzie odniesienia, jeśli na ciało nie działa żadna siła lub siły działające równoważą się, to ciało pozostaje w spoczynku lub porusza się ruchem jednostajnym prostoliniowym.
 \end{theorem}
 
 \begin{theorem}
-Szybkość zmiany pędu jest proporcjonalna do siły wywieranej i znajduje się w tym samym kierunku co siła.
+W inercjalnym układzie odniesienia jeśli siły działające na ciało nie równoważą się (czyli wypadkowa sił ${\vec{F}}_{w}$ jest różna od zera), to ciało porusza się z przyspieszeniem wprost proporcjonalnym do siły wypadkowej, a odwrotnie proporcjonalnym do masy ciała.
 \end{theorem}
-Co oznacza, że w inercjalnym układzie odniesienia zachodzi równość $F=ma$, gdzie $F$ jest wektorem sum sił działających na obiekt, $m$ to masa obiektu, $a$ to jego przyśpieszenie.
+Co oznacza, że w inercjalnym układzie odniesienia zachodzi równość $F=ma$, gdzie $F$ jest sumą sił działających na obiekt, $m$ to masa obiektu, $a$ to jego przyśpieszenie.
 
 \begin{theorem}
-Każdej akcji towarzyszy reakcja równa co do wartości i kierunku, lecz przeciwnie zwrócona.
+Oddziaływania ciał są zawsze wzajemne. W inercjalnym układzie odniesienia siły wzajemnego oddziaływania dwóch ciał mają takie same wartości, taki sam kierunek, przeciwne zwroty i różne punkty przyłożenia (każda działa na inne ciało).
 \end{theorem} 
-Co oznacza, że jeśli ciało A działa na ciało B siłą F (akcja), to ciało B działa na ciało A siłą (reakcja) o takiej samej wartości i kierunku, lecz o przeciwnym zwrocie.\\~\\
 
-
-Niezbędne jest również przytoczenie prawa powszechnego ciążenia Newtona \cite[str.~4-5]{fund}
+Niezbędne jest również przytoczenie prawa powszechnego ciążenia Newtona \cite[str.956]{fund}
 \begin{theorem}
-Każdy obiekt przyciąga każdy inny obiekt z siłą, która jest wprost proporcjonalna do iloczynu ich mas i odwrotnie proporcjonalna do kwadratu odległości między ich środkami.
+Między dowolną parą ciał posiadających masy pojawia się siła przyciągająca, która działa na linii łączącej ich środki, a jej wartość rośnie z iloczynem ich mas i maleje z kwadratem odległości.
 \end{theorem}
-Czyli między dowolną parą ciał posiadających masy pojawia się siła przyciągająca, która działa na linii łączącej ich środki, a jej wartość rośnie z iloczynem ich mas i maleje z kwadratem odległości.\\~\\
 
 Aplikując to prawo do symulacji N ciał, uzyskujemy że na $i$-te ciało działa siła $F_i$ zdefiniowana następująco:\\
 $$F_i = -G\cdot m_i \sum_{j=1, j\neq i}^N \frac{m_j(r_i - r_j)}{|r_i - r_j|^3},$$gdzie $m_i$ to masa ciała na które oddziałują inne ciała, $m_j$ to masa ciała oddziałującego na $i$-te ciało, $r_i - r_j$ to różnica wektorów pozycji dwóch ciał, $|r_i - r_j|$ to dystans między ciałami, a $G$ to stała grawitacji i wynosi
@@ -166,9 +155,8 @@ Z wykorzystaniem powyższych praw możemy podać następującą definicję
 $\mi$
 Dla N ciał mających ustalone masy oraz początkowe położenie i prędkość, ruch każdego obiektu jest symulowany z wykorzystaniem prawa powszechnego ciążenia oraz poprzez wyznaczenie przyspieszenia obiektu korzystając z drugiego prawa dynamiki Newtona.\\
 \bigskip
-Potrzebujemy zdefiniować jeszcze jedno pojęcie, jakim jest \textbf{ruch jednostajnie przyśpieszony prostoliniowy}.
-Konkretniej będziemy potrzebować wyprowadzonych wzorów na zmianę prędkości i pokonaną drogę przez obiekt w danym odcinku czasu.
-$$v_k = v_p + a\cdot t,$$ gdzie $v_k$ jest prędkością po wykonaniu kroku symulacji, $v_p$ jest prędkością początkową, $a$ oznacza wektora przyśpieszenia, a $t$ to czas kroku symulacji.\\
+Będziemy potrzebować wzorów na zmianę prędkości i pokonaną drogę przez obiekt w danym odcinku czasu w ruchu jednostajnie przyśpieszonym prostoliniowym.
+$$v_k = v_p + a\cdot t,$$ gdzie $v_k$ jest prędkością po wykonaniu kroku symulacji, $v_p$ jest prędkością początkową, $a$ oznacza przyśpieszenia, a $t$ to czas kroku symulacji.\\
 Drugim wzorem jest:
 $$s = v_p\cdot t + \frac{a\cdot t^2}{2},$$ gdzie $s$ oznacza drogą przebytą w jednym kroku, a pozostałe oznaczenia są identyczne jak powyżej.\\
 
@@ -221,21 +209,10 @@ while(true):
 
 \bigskip
 
-W liniach 3-6 tego algorytmu liczymy bezpośrednio siłę z jaką dwa ciała oddziałują na siebie dla każdej możliwej pary ciał. Jest to najbardziej kosztowna operacja w tym algorytmie, której złożoność to $\mathcal{O}(N^{2})$. W linii 7 uaktualniamy pozycję każdego ciała uwzględniając całkowitą siłę, która na nie działa. Siła ta wynika z powyżęj przytoczonego wzoru. 
-\bigskip
-\newtheorem{twr}{Twierdzenie}
-\begin{twr}
-Jednowątkowy naiwny algorytm dla symulacji N ciał złożoność obliczeniową $\mathcal{O}(N^{2})$.
-\end{twr}
+W liniach 3-6 tego algorytmu liczymy bezpośrednio siłę z jaką dwa ciała oddziałują na siebie dla każdej możliwej pary ciał. Jest to najbardziej kosztowna operacja w tym algorytmie, której złożoność to $\mathcal{O}(N^{2})$. W linii 7 uaktualniamy pozycję każdego ciała uwzględniając całkowitą siłę, która na nie działa. Siła ta wynika z powyżęj przytoczonego wzoru. \\
 
-\begin{myproof}
+Nietrudno spostrzec że pojedyncza iteracja jednowątkowego naiwnego algorytu symulacji N ciał ma złożoność obliczeniową $\mathcal{O}(N^{2})$.
 
-\tab Dla każdego z $N$ obiektów musimy policzyć siłę oddziałującą nań z każdym innym obiektem, więc musimy $N\cdot (N-1)$ razy policzyć wartość wzoru wynikającego z prawa $4$. Z tego wynika, że złożoność tej podoperacji $\mathcal{O}(N^{2})$. 
-Następnie dla każdego obiektu musimy wyznaczyć jego przyśpieszenie oraz nową pozycję i prędkość, co jesteśmy w stanie zrobić w czasie $\mathcal{O}(N)$.
-Poprzez zsumowanie złożoności obu podoperacji, widzimy że złożoność obliczeniowa jednego kroku symulacji naiwnego algorytmu wynosi $\mathcal{O}(N^{2})$.
-\end{myproof}
-
-\bigskip
 
 \subsection{\Large Zrównoleglenie naiwnego algorytmu}
 
@@ -243,13 +220,13 @@ Jednakże ten algorytm jest zbyt wolny dla dużej liczby ciał. W tym podrozdzia
 
 \subsubsection{\large Architektura CUDA}
 W tym celu wykorzystamy architekturę CUDA. 
-Jest to uniwersalna architektura kart graficznych (które dzisiejszych czasach poza zastosowaniem w renderowaniu grafiki, są również często używane do masywnych obliczeń nawet na tysiącach wątków jednocześnie), umożliwiająca wykorzystanie ich mocy obliczeniowej w wielu problemach, które mogą się wykonywać zarówno sekwencyjne i wielowątkowo. Wykorzystałem CUDA w wersji v9.2.148 z compute capability 3.0 i wyżej. \\~\\
-Wątki na CUDA są pogrupowane w bloki. W compute capability 3.0 każdy blok może mieć do 1024 wątków. Z kolei bloki są ułożone w gridzie, który może być nawet trójwymiarowy. W wymiarze X może być aż $2^{31}-1$ wątków, w dwóch pozostałych $65535$. \cite[str.~238-242]{Cuda} Dodatkowo wątki są grupowane w mniejsze grupy niż bloki, zwane warpami, które liczą po 32 wątki. Wątki w jednym warpie są uruchamiane jednocześnie i zarządzane przez warp scheduler \cite[str.~70]{Cuda} \\
+Jest to uniwersalna architektura kart graficznych (które dzisiejszych czasach poza zastosowaniem w renderowaniu grafiki, są również często używane do masywnych obliczeń nawet na tysiącach wątków jednocześnie), umożliwiająca wykorzystanie ich mocy obliczeniowej w wielu problemach, które mogą się wykonywać zarówno sekwencyjne jak i wielowątkowo. Wykorzystałem CUDA w wersji v9.2.148 z compute capability 3.0 i wyżej. \\~\\
+Wątki na CUDA są pogrupowane w bloki. W compute capability 3.0 każdy blok może mieć do 1024 wątków. Z kolei bloki są ułożone w gridzie, który może być nawet trójwymiarowy. W wymiarze X może być aż $2^{31}-1$ wątków, w dwóch pozostałych $65535$ \cite[str.~238-242]{Cuda}. Dodatkowo wątki są grupowane w mniejsze grupy niż bloki, zwane warpami, które liczą po 32 wątki. Wątki w jednym warpie są uruchamiane jednocześnie i zarządzane przez warp scheduler \cite[str.~70]{Cuda}.\\
 \bigskip
 Warto, także wspomnieć o podziale pamięci w programach pisanych w tej architekturze. \\Możemy wyróżnić trzy rodzaje pamięci :
 \begin{itemize}
   \item lokalna - osobna dla każdego wątku, czyli wątki mogą mieć zmienne lokalne na swój użytek,
-  \item współdzielona - pamięć dzielona przez wszystkie wątki w bloku(ale jest jej tylko 48kb \cite[str.~238-242]{Cuda}),
+  \item współdzielona - pamięć dzielona przez wszystkie wątki w bloku(ale jest jej tylko 48kB \cite[str.~238-242]{Cuda}),
   \item globalna - najwolniejsza ze wszystkich rodzajów pamięci, ale wspólna dla wszystkich bloków.
 \end{itemize}
 
@@ -258,12 +235,12 @@ Thrust jest szablonową biblioteką dla CUDA bazująca na bibliotece STL z C++. 
 
 
 \subsubsection{\large Implementacja wielowątkowa}
-W implementacji wykorzystuje dwie szablonowe struktury z biblioteki Thrust.
-\textbf{host\_vector}\cite{thrust} jest odpowiednikiem \textbf{std::vector}. Rezyduje w pamięci hosta powiązanego z równoległym devicem. \textbf{device\_vector}\cite{thrust} różni się tym, że jest przechowywany w pamięci device'a. Implementacje podzielimy na dwie funkcje.\\
+W implementacji wykorzystuję dwie szablonowe struktury z biblioteki Thrust.
+\textbf{host\_vector}\cite{thrust} jest odpowiednikiem \textbf{std::vector}. Rezyduje w pamięci hosta powiązanego z równoległym urządzeniem (ang. device). \textbf{device\_vector}\cite{thrust} różni się tym, że jest przechowywany w pamięci urządzenia. Implementacje podzielimy na dwie funkcje.\\
 \bigskip
 
-Funkcja NaiveSimBridge, przedstawiona w listingu 2, przyjmuje jako argument \textbf{host\_vector} z pozycjami wszystkich elementów symulacji, a następnie kopiuje go do \textbf{device\_vector} dla odowiedzialnego za transport pozycji ciał do pamięci device'a. \\Następnie w liniach 3-5 konwertuje \textbf{device\_vector} dla pozycji, prędkości i masy do raw pointerów. Wykorzystywane są w 6 linii, w której wywołujemy kernel NaiveSim. W potrójnych nawiasach specyfikujemy liczbę bloków oraz liczbę wątków w każdym bloku (jest to składnia z CUDA Runtime API \cite{runtimeApi}). 
-W linii 7 kopiuje nowe pozycje z device'a do hosta. 
+Funkcja NaiveSimBridge, przedstawiona w listingu 2, przyjmuje jako argument \textbf{host\_vector} z pozycjami wszystkich elementów symulacji, a następnie kopiuje go do \textbf{device\_vector} dla odowiedzialnego za transport pozycji ciał do pamięci urządzenia. \\Następnie w liniach 3-5 konwertuje \textbf{device\_vector} dla pozycji, prędkości i masy do raw pointerów. Wykorzystywane są w 6 linii, w której wywołujemy kernel NaiveSim. W potrójnych nawiasach specyfikujemy liczbę bloków oraz liczbę wątków w każdym bloku (jest to składnia z CUDA Runtime API \cite{runtimeApi}). 
+W linii 7 kopiuje nowe pozycje z urządzenia do hosta. 
 \bigskip
 \lstset{backgroundcolor=\color{white}, basicstyle=\footnotesize\fontfamily{fvm}\selectfont, numbers=left, numbersep=8pt, keywordstyle=\color{blue},commentstyle = \color{mygreen}}\begin{lstlisting}[language=C++, frame=single, framerule=2pt, caption=Bridge pomiędzy główną pętlą a kernelem]
 void NaiveSimBridge(host_vector &pos, int numberOfBodies, float dt) {
@@ -275,7 +252,7 @@ void NaiveSimBridge(host_vector &pos, int numberOfBodies, float dt) {
 }
 \end{lstlisting}
 \bigskip
-Kernelem nazywamy funkcję, którą możemy uruchomić dla wielu wątków w pamięci device'a. W tym przypadku kernel NaiveSim, ukazany w listingu 3, jest odpowiedzialny za wyznaczenie nowej pozycji dla każdego ciała. \\
+Kernelem nazywamy funkcję, którą możemy uruchomić dla wielu wątków w pamięci urządzenia. W tym przypadku kernel NaiveSim, ukazany w listingu 3, jest odpowiedzialny za wyznaczenie nowej pozycji dla każdego ciała. \\
 \bigskip
 W sygnaturze kernela widzimy, że przyjmuje trzy raw\_pointery do odpowiednio pozycji, prędkości oraz mas. A poza tym dostaje również  odcinek czasu, w którym wykonywany jest dany krok oraz całkowitą liczbę ciał w symulacji. W 6 linii wyznaczamy indeks obiektu, dla którego będziemy prowadzić obliczenia. Jako że korzystamy tylko z jednowymiarowego schematu bloków, to wystarczy wymnożyć identyfikator bloku z rozmiarem pojedynczego bloku oraz dodać identyfikator wątku w bloku. (W każdym kolejnym kernelu $thid$ będzie liczony tak samo).
 W linii 7 mamy zabezpiecznie na wypadek gdyby obiekt o takim indeksie nie istniał, gdyż czasami liczba wywołanych wątków jest większa niz rzeczywista liczba obiektów. \\
@@ -318,7 +295,7 @@ NaiveSim(T *pos, T *velo, T *weigh, int numberOfBodies, double dt)
 
 
 Mając policzoną siłę oddziałującą na obiekt, przechodzimy do wyliczenia nowej pozycji dla obiektu. Jako, że ruch obiektu aproksymujemy poprzez przyjęcie, że obiekt w pojedynczym kroku porusza się ruchem jednostajnym przyśpieszonym, a następnie łączymy ze sobą kolejne kroki symulacji, to możemy w tym celu wykorzystać wcześniej wprowadzone wzory.\\ Najpierw w linii 25, korzystając z prawa 2, wyliczamy wektor przyśpieszenia ciała. W linii 26 do aktualnej pozycji dodajemy wektor drogi, o którą przesuwamy ciało po obecnym kroku. I w końcu, linia 27 aktualizuje wektor prędkości.\\
-Wykorzystując architekturę CUDA, mogliśmy przyśpieszyć nasz algorytm. Jednakże, symulacja implementowana tym algorytmem ma jeszcze jeden duży problem. Tak jak wspomnieliśmy wcześniej, gdy obiekty są bardzo blisko siebie, to znaczy odległość między nimi jest bliska zera, to wtedy siła, którą na siebie działają jest ogromna. Wtedy działa ona na nie przez dłuższy czas niż w rzeczywistości, co jest nienaturalne.
+Wykorzystując architekturę CUDA, mogliśmy przyśpieszyć nasz algorytm. Jednakże, symulacja implementowana tym algorytmem ma jeszcze jeden duży problem. Tak jak wspomnieliśmy wcześniej, gdy obiekty są bardzo blisko siebie, to znaczy odległość między nimi jest bliska zeru, to wtedy siła, którą na siebie działają jest ogromna. Wtedy w naszej symulacji pojawiają się błędy, gdyż czas pojedynczej iteracji symulacji może być znacznie większy niż czas w rzeczywistości, przez który ciała są blisko siebie. 
 \subsection{\Large Softening} 
 
 Optymalizacją dla tego problemu jest, tak zwany \textbf{softening}\cite[str.~21]{Aarseth}. Polega na modyfikacji wzoru wprowadzonego w Prawie 4, do następującej postaci:
@@ -328,136 +305,31 @@ gdzie wprowadzony $\epsilon$ ma za zadanie nie dopuścić do bardzo małych odle
 \subsection{\Large Złożoność zrównoleglonej naiwnej wersji algorytmu}
 Równoległa wersja naiwnego algorytmu wciąż wykonuje pracę rzędu $\mathcal{O}(N^{2})$, jednakże dzięki temu, że dla każdego obiektu siły na niego działające oraz nową pozycję liczymy na osobnym wątku, to czas działania algorytmu to $\mathcal{O}(N)$, przy założeniu, że mamy do dyspozycji $N$ procesorów.
 
-\section{\LARGE Symulacja N ciał algorytmem Barnes Hut}
-Zrównoleglony naiwny algorytm jest szybszy niż wersja jednowątkowa, jednakże wciąż jest zbyt wolny do symulacji układów z bardzo dużą liczbą ciał. W tym celu zaimplementujemy drugi algorytm, zwany algorytmem Barnesa Hut. \cite[str.~446-449]{barnhut}
+\section{\LARGE Równoległy algorytm Barnesa-Huta}
+Zrównoleglony naiwny algorytm jest szybszy niż wersja jednowątkowa, jednakże wciąż jest zbyt wolny do symulacji układów z bardzo dużą liczbą ciał. W tym celu zaimplementujemy drugi algorytm, zwany algorytmem Barnesa-Huta \cite[str.~446-449]{barnhut}. Składa się on z dwóch części : tworzenia drzewa ósemkowego (ang. octree) oraz obliczania sił działających na ciało z wykorzystaniem stworzonych drzew.
 
 \subsection{\Large Drzewa Ósemkowe}
 Algorytm jest oparty na drzewach, a dokładniej drzewach ósemkowych \cite{octree}.
-Struktura drzewa ósemkowego jest następująca(rys. Figure 2):
+Struktura drzewa ósemkowego jest następująca(rys. Rysunek 1):
 \begin{itemize}
-  \item w naszym przypadku cała przestrzeń trójwymiarowa jest przedstawiana przez sześcian, który jest reprezentowany przez korzeń drzewa
-  \item w klasycznej definicji korzeń drzewa ma ośmioro następników, z których każdy reprezentuje jeden z 8 podsześcianów, na które dzielimy duży sześcian reprezentowany przez korzeń.
-  \item każdy z kolejnych wierzchołków w drzewie może mieć 0 następników(gdy nie zawiera żadnego punktu) lub 8 następników.
+  \item cała przestrzeń trójwymiarowa jest przedstawiana przez sześcian, który jest reprezentowany przez korzeń drzewa
+  \item korzeń drzewa ma ośmioro następników, z których każdy reprezentuje jeden z ośmiu podsześcianów, na które dzielimy duży sześcian reprezentowany przez korzeń.
+  \item drzewo składa się z węzłów wewnętrznych oraz liści
+  \item jedynie liście drzewa zawierają punkty z symulacji
+  \item drzewo ma ustaloną głębkość K
 \end{itemize}
 
 \begin{figure}
     \centering
     \def\svgwidth{\columnwidth}
     \input{tree.pdf_tex}
-    \caption{Przykład drzewa ósemkowego z czterema węzłami}
+    \caption{Przykład drzewa ósemkowego (dla uproszczenia rysunku bez ustalonej głębokości) z czterema węzłami o następujących współrzędnych: (-0.5, -0.5, 0.5), (0.5, 0.5, 0.5), (-0.4, 0.4, -0.7), (-0.7, 0.6, -0.4) dla przestrzeni ograniczonej sześcianem o środku w punkcie (0, 0, 0) oraz boku równym 2
+    }
 \end{figure}
-
-\subsection{\Large Algorytm Barnes Hut z pseudokodem}
-Algorytm Barnes-Hut możemy podzielić na dwie części:
-\begin{itemize}
-  \item pierwszą z nich jest stworzenie drzewa ósemkowego, które będzie reprezenotwało przestrzeń, w której obecne będą wszystkie obiekty poddawane symulacji
-  \item druga część opiera się na przejściu drzewa dla każdego z obiektów i policzenie siły działającej na niego
-\end{itemize}
-W podstawowej wersji algorytmu obie te części możemy zaimplementować rekurencyjnie.
-
-\subsection{\Large Rekurencyjne tworzenie drzewa}
-Poniżej pokażemy pseudokod jednowątkowego tworzenia drzewa ósemkowego. Najpierw przedstawmy strukturę węzła w naszym drzewie. Jest ona ukazana w poniższym listingu.
-
-\lstset{backgroundcolor=\color{white}, basicstyle=\footnotesize\fontfamily{fvm}\selectfont, numbers=left, numbersep=8pt, keywordstyle=\color{blue},commentstyle = \color{mygreen}}\begin{lstlisting}[language=C++, frame=single, framerule=2pt, caption=Struktura węzła w drzewie ósemkowym]
-struct NodeBH {
-    double mass;
-    double totalMass;
-    bool hasPoint;
-    bool childrenExists;
-    double boundaries[6];
-    double pos[3];
-    double centerOfMass[3];
-    NodeBH* quads[8];
-};
-\end{lstlisting}
-
-Żeby nie tworzyć dwóch osobnych struktur dla węzłów wewnętrznych i zewnętrznych połączyliśmy wszystko w jedną strukturę. Przez to nasza struktura musi zawierać masę ciała oraz jego położenie w przestrzeni(tablica $pos$). Dodatkowo posiada także pola, które mówią o tym czy jest węzłem wewnętrznym czy zewnętrznym oraz czy posiada punkt(czy jest pusty), a także tablicę z granicami sześcianu, czyli jak duży fragment przestrzeni jest ograniczony przez węzeł.\\
-\bigskip
-Jednakże najważniejszymi polami tej struktury są tablica kwadrantów, czyli ośmiu mniejszych węzłów następników na które dzielimy naszą przestrzeń. A także środek masy oraz całkowita masa punktów w przestrzeni określanej przez ten węzeł. \\
-\textbf{Środek masy (barycentrum) ciała}  jest punktem w przestrzeni, który zachowuje się tak, jak gdyby w nim skupiona była cała masa układu ciał. Jest zadany następującym wzorem:
-$$ x_{srm} = \frac{\sum_{j=1}^N m_j\cdot x_j}{\sum_{j=1}^N m_j},$$ gdzie $m_j$ oznacza masę $j$-tego ciała, $x_j$ oznacza jego $x$-ową współrzędną (dla dwóch pozostałych wzory są analogiczne). \\
-
-\subsubsection{\large Funkcja CreateTree}
-Poniższy listing przedstawia główną funkcję, która odpowiada za stworzenie drzewa ósemkowego dla naszego algorytmu.\\ 
-\bigskip
-Funkcja ta przyjmuje jako argument tablice z pozycjami wszystkich obiektów. 
-Początkowo w linii 2 tworzy następniki dla korzenia drzewa. Następnie w pętli uaktualnia środek masy korzeniowi (linia 6), a potem sprawdza czy punkt nie wyszedł poza całą przestrzeń naszego algorytmu (linia 8). W przypadku, gdy nie wyszedł, wyszukujemy, do którego z następników możemy wstawić nasz punkt (linia 9), a następnie po stworzeniu węzła dla nowego punktu, wstawiamy go do drzewa w linii 11.
-
-\lstset{backgroundcolor=\color{white}, basicstyle=\footnotesize\fontfamily{fvm}\selectfont, numbers=left, numbersep=8pt, keywordstyle=\color{blue},commentstyle = \color{mygreen}}\begin{lstlisting}[language=C++, frame=single, framerule=2pt, caption=Pseudokod algorytmu tworzenia drzewa ósemkowego]
-void CreateTree(vector<double>& positions) {
-    root->addQuads(root->getBoundaries());
-    for i in {0..numberOfBodies-1}
-    {	
-    	auto pos = copy(positions[i*3], ..., positions[i*3+2]);	        
-        root->addPointToCenterOfMass(weights[i], pos);
-        if(root->pointIsInSpace(pos)) 
-        {
-            int index = root->getIndexOfSubCube(pos);
-            NodeBH* node = new NodeBH(weights[i], pos);
-            InsertNode(node, root->getSubQuad(index));
-        }
-    }
-}
-\end{lstlisting}
-
-\subsubsection{\large Funkcja InsertNode}
-
-W powyższej funkcji wywołujemy funkcję \textbf{InsertNode} dla każdego węzła wstawianego do drzewa. \\
-\bigskip
-Funkcja ta przyjmuje jako argumenty węzeł $node$, który chcemy wstawić do podprzestrzeni reprezentowanej przez drugi argument, czyli węzeł $quad$.\\ W funkcji tej obsługujemy trzy następujące przypadki:
-\begin{itemize}
-\item Gdy węzeł jest pusty, wtedy po prostu wstawiamy nowy węzeł w to miejsce. (linie 3-7)
-\item Jeśli natknęliśmy się na zewnętrzny wierzchołek drzewa, to musimy zamienić go na węzeł wewnętrzny, stworzyć dla niego osiem następników, a następnie przepchnąć punkt, który do tej pory zawierał do jednego z nich. W dalszej części tego przypadku, musimy wstawić nowy wierzchołek do tej podprzestrzeni, co robimy uaktualniająć środek masy dla korzenia poddrzewa oraz wstawiająć węzeł rekurencyjnie do odpowiedniego poddrzewa. (linie 8-21)
-\item Ostatni przypadek obejmuje wewnętrzne węzły, dla których musimy uaktualnić masę o nowy wierzchołek, a potem wstawić go rekurencyjnie do odpowiedniego następnika. (linie 22-33)
-\end{itemize}
-
-\lstset{backgroundcolor=\color{white}, basicstyle=\footnotesize\fontfamily{fvm}\selectfont, numbers=left, numbersep=8pt, keywordstyle=\color{blue},commentstyle = \color{mygreen}}
-\begin{lstlisting}[language=C++, frame=single, framerule=2pt, caption=Wstawianie pojedynczego węzła do drzewa]
-void InsertNode(NodeBH* node, NodeBH* quad) 
-{
-    if(!quad->isPoint() and !quad->wasInitializedSubQuads()) 
-    {
-        // pusty węzeł
-        quad.insertHere(node);
-    }
-    else if(quad->isPoint() and !quad->wasInitializedSubQuads()
-    {
-        // zewnętrzny węzeł
-        quad->setPoint(false);
-        quad->pushPointFromHereLower();
-        quad->addPointToCenterOfMass(node->getMass(), 
-            node->getPositions());
-        if(quad->pointIsInQuad(node->getPositions());
-        {
-            int index = int index = quad->getIndexOfSubCube(
-                node->getPositions());
-            InsertNode(node, quad->getSubQuad(index));
-        }
-    }
-    else if(!quad->isPoint() && quad->wasInitializedSubQuads())
-    {
-        // wewnętrzny węzeł
-        quad->updateCenterOfMass(node->getMass(), 
-            node->getPositions());
-        if(quad->pointIsInQuad(node->getPositions());
-        {
-            int index = int index = quad->getIndexOfSubCube(
-                node->getPositions());
-            InsertNode(node, quad->getSubQuad(index));
-        }
-    }
-}
-\end{lstlisting}
-
-\section{\LARGE Zrównoleglenie algorytmu Barnes Hut}
-
-W celu przyśpieszenia algorytmu poprzez wielowątkową implementaję, musimy zmienić nasze podejście w tworzeniu drzewa. Obecny pomysł się nie sprawdzi, ponieważ poszczególne wierzchołki są doklejane sekwencyjnie jako dzieci do innych wierzchołków, przez co nie możemy tego zrealizować równolegle.
-Aby podjąć wyzwanie równoległej implementacji drzew ósemkowych, musimy przed rozpoczęciem konstruowania drzewa mieć informację o położeniu każdego wierzchołka w drzewie.
-
 \subsection{\Large Kody Mortona}
-W tym celu zastosujemy \textbf{kody Mortona}.
+Zanim pokażemy strukturę węzła w naszej implementacji drzewa ósemkowego, przytoczymy czym są kody Mortona, które będą niezbędnym narzędziem do ustalenia położenia węzłów w drzewie o ustalonej głębkości.\\
 Kodami Mortona, nazywamy mapowanie punktu w przestrzeni do listy liczb(w naszym przypadku mapujemy punkty w 3-wymiarowej przestrzeni do liczb całkowitych, a konkretniej interesowć nas będzie ich bitowa reprezentacja).
-Porządek Mortona jest definiowany przez \textbf{space-filling curve}, która jest w kształcie \textbf{Z}, więc czasami jest nazywana \textbf{Z-curve}. Krzywa ta ma ważną własność - jeśli elementy są blisko siebie w drzewie, to w tym porządku ta bliskość jest zachowana w ułożeniu w pamięci. W pracy traktujemy kod Mortona jako 64-bitową liczbę całkowitą, w której 15 bitów (łącznie 45 dla wszystkich trzech wymiarów) oznacza kolejne rozgałęzienia dla naszego węzła, czyli jedną z dwóch części, w których punkt kolejno ląduje, gdy umieszczamy go w coraz mniejszych sześcianach, aż do przyjętej głębokości równej 15.
+Porządek Mortona jest definiowany przez \textbf{krzywą wypełniającą powierzchnie (ang. space-filling curve)}, która jest w kształcie litery $Z$, więc czasami jest nazywana \textbf{Z-krzywą}. Krzywa ta ma ważną własność - jeśli elementy są blisko siebie w drzewie, to w tym porządku ta bliskość jest zachowana w ułożeniu w pamięci. W pracy traktujemy kod Mortona jako 64-bitową liczbę całkowitą, w której $15$ bitów (łącznie $45$ dla wszystkich trzech wymiarów) oznacza kolejne rozgałęzienia dla naszego węzła, czyli jedną z dwóch części, w których punkt kolejno ląduje, gdy umieszczamy go w coraz mniejszych sześcianach, aż do przyjętej głębokości równej $15$ (czyli $K = 15$).
 
 \begin{figure}[h]
     \centering      
@@ -467,25 +339,43 @@ Porządek Mortona jest definiowany przez \textbf{space-filling curve}, która je
     \label{fig:krzywa}
 \end{figure}
 
-\subsection{\Large Równoległa implementacja drzew ósemkowych}
-Z wykorzystaniem powyżej zdefiniowanych kodów zaimplementujemy algorytm inspirowany algorytmem równoległego tworzenia drzewa ósemkowego wspomnianym w pracy Tero Karrasa \cite{tero}.
+\subsection{\Large Struktura węzła w drzewie ósemkowym}
+Przedstawia się ona następująco: 
+\lstset{backgroundcolor=\color{white}, basicstyle=\footnotesize\fontfamily{fvm}\selectfont, numbers=left, numbersep=8pt, keywordstyle=\color{blue},commentstyle = \color{mygreen}}              
+\begin{lstlisting}[language=C++, frame=single, framerule=2pt, caption=Struktura OctreeNode]
+struct OctreeNode {
+  int children[8] = {-1, -1, -1, -1, -1, -1, -1, -1};
+  int position = -1;
+  std::vector<int> duplicates;
+  float totalMass = 0.0;
+  float centersOfMass[3] = {0.0, 0.0, 0.0};
+};
+\end{lstlisting}
 
-Zmodyfikowany algorytm (skrótowo) składa się z sześciu kroków :
+W powyższej strukturze przechowujemy indeksy następników w globalnej tablicy węzłów.Mamy również pole position, które przyjmuje -1, gdy węzeł jest wewnętrzny oraz indeks węzła(na tablicę globalną), gdy węzeł jest liściem. Wektor $duplicates$ przechowuje w węźle indeksy wszystkich punktów o takim samym kodzie Mortona (czyli liści będzie tyle samo co unikatowych kodów Mortona stworzonych na bazie punktów wejściowych). Dodatkowo struktura węzła zawiera całkowitą masę poddrzewa oraz środek masy.\\
+
+\textbf{Środek masy (barycentrum) ciała}  jest punktem w przestrzeni, który zachowuje się tak, jak gdyby w nim skupiona była cała masa układu ciał. Jest zadany następującym wzorem:
+$$ x_{srm} = \frac{\sum_{j=1}^N m_j\cdot x_j}{\sum_{j=1}^N m_j},$$ gdzie $m_j$ oznacza masę $j$-tego ciała, $x_j$ oznacza jego $x$-ową współrzędną (dla dwóch pozostałych wzory są analogiczne). \\
+
+
+\subsection{\Large Równoległa implementacja drzew ósemkowych}
+Z wykorzystaniem powyżej zdefiniowanych kodów zaimplementujemy algorytm inspirowany algorytmem równoległego tworzenia drzewa ósemkowego wspomnianym w pracy Tero Karras'a \cite{tero}.
+
+Zmodyfikowany algorytm (skrótowo) składa się z pięciu kroków :
 \begin{itemize}
-\item Obliczenie kodów Mortona dla każdego węzła. Realizujemy to poprzez kernel, który na podstawie przedziałów, w których zawierają się punkty w całym układzie dla każdego z wymiarów (znajdujemy dolną i górną granicę w każdym z wymiarów), wyznacza przez 15 poziomów coraz to dokładniejsze położenie poprzez ustawianie kolejnych bitów w liczbie binarnej. 
+\item Obliczenie kodów Mortona dla każdego węzła. Realizujemy to poprzez kernel, który na podstawie przedziałów, w których zawierają się punkty w całym układzie dla każdego z wymiarów (znajdujemy dolną i górną granicę w każdym z wymiarów), wyznacza przez K poziomów coraz to dokładniejsze położenie poprzez ustawianie kolejnych bitów w liczbie binarnej. 
 \item Sortujemy kody Mortona. W tym celu wykorzystujemy bibliotekę Thrust, a dokładniej funkcję \textbf{sort\_by\_key}. 
-\item Kody liczymy do głębokości 15, więc istnieje możliwość pojawienia się duplikatów, których tyczą się dwie kolejne części naszego algorytmu (zidentyfikowanie i usunięcie duplikatów). W naszej implementacji załatwiamy to kolejną funkcją z biblioteki thrust, to jest \textbf{unique\_by\_key}.
-\item Liczymy ile wierzchołków będzie miało nasze drzewo (znamy jedynie liczbę liści, potrzebujemy policzyć również liczbę węzłów wewnętrznych). Dodatkowo tworzymy wierzchołki.
+\item Kody liczymy do głębokości K, więc istnieje możliwość pojawienia się duplikatów, które musimy zachować. 
+\item Liczymy ile wierzchołków będzie miało nasze drzewo (znamy jedynie liczbę liści, potrzebujemy policzyć również liczbę węzłów wewnętrznych). Dodatkowo tworzymy wszystkie wierzchołki w drzewie.
 \item  Łączymy węzły według relacji (rodzic, dziecko). W tym celu musimy odpowiednio przyporządkować każdemu węzłowi jego węzeł nadrzędny.
 \end{itemize}
 
 \subsection{\Large Pseudokody poszczególnych kroków}
-W tym rozdziale przedstawimy pseudokody do kolejnych kroków algorytmu.
-\subsubsection{\large Liczenie kodów Mortona}
+\subsubsection{\large Obliczanie kodów Mortona}
 \lstset{backgroundcolor=\color{white}, basicstyle=\footnotesize\fontfamily{fvm}\selectfont, numbers=left, numbersep=8pt, keywordstyle=\color{blue},commentstyle = \color{mygreen}}              
 \begin{lstlisting}[language=C++, frame=single, framerule=2pt, caption=Krok 1]
 __global__
-void calculateMortonCodes(T* pos, long long* codes, int numberOfBodies, T* mins, T* maxs) {
+void calculateMortonCodes(T* pos, unsigned long long* codes, int numberOfBodies, T* mins, T* maxs) {
   float start[3] = {mins[0], mins[1], mins[2]};
   float middle[3] = {(maxs[0] - mins[0])/2, (maxs[1] - mins[1])/2, (maxs[2] - mins[2])/2};
   unsigned long long code = 0;
@@ -505,42 +395,58 @@ void calculateMortonCodes(T* pos, long long* codes, int numberOfBodies, T* mins,
   codes[thid] = code;
 }
 \end{lstlisting}
-W przypadku liczenia kodów Mortona, potrzebujemy minimalnego oraz maksymalnego punktu w każdym z wymiarów. Dzięki temu jesteśmy w stanie wyznaczyć początek oraz środek przedziału dla obiektu na danej głębkości. Poprzez to możemy stwierdzić, w której połowie znajduje się nasz obiekt(czyli na danej głębokości przydzielić 0 lub 1).
-\subsubsection{\large Sortowanie oraz usuwanie duplikatów w kodach}
+W przypadku obliczania kodów Mortona, potrzebujemy minimalnego oraz maksymalnego punktu w każdym z wymiarów (szukamy ich z pomocą funkcji minmax\_element() z biblioteki Thrust). Dzięki temu jesteśmy w stanie wyznaczyć początek oraz środek przedziału dla obiektu na danej głębkości. Poprzez to możemy stwierdzić, w której połowie znajduje się nasz obiekt(czyli na danej głębokości przydzielić mu 0 lub 1).
 
+\subsubsection{\large Sortowanie kodów}
 \lstset{backgroundcolor=\color{white}, basicstyle=\footnotesize\fontfamily{fvm}\selectfont, numbers=left, numbersep=8pt, keywordstyle=\color{blue},commentstyle = \color{mygreen}}              
-\begin{lstlisting}[language=C++, frame=single, framerule=2pt, caption=Kroki 2-4]
+\begin{lstlisting}[language=C++, frame=single, framerule=2pt, caption=Krok 2]
 thrust::device_vector<int> sortedNodes(numberOfBodies);
 int* d_sortedNodes = thrust::raw_pointer_cast(sortedNodes.data());
 fillNodes<<<blocks, THREADS_PER_BLOCK>>>(d_sortedNodes, numberOfBodies);
 
 thrust::sort_by_key(mortonCodes.begin(), mortonCodes.end(), sortedNodes.begin());  
-
-auto iterators = thrust::unique_by_key(mortonCodes.begin(), mortonCodes.end(), sortedNodes.begin());
-mortonCodes.erase(iterators.first, mortonCodes.end());
-sortedNodes.erase(iterators.second, sortedNodes.end());
 \end{lstlisting}
 \bigskip
-Rolą wektora sortedNodes jest zachowanie początkowej numeracji punktów, to znaczy sortujemy pary \textbf{(kodMortona, początkowyIndeks)}.
-Zmienna iterators dostaje parę iteratorów na posortowane wektory jako wynik z \textbf{thrust::unique\_by\_key}. Ostatecznie musimy użyć \textbf{erase} do usunięcia znalezionych duplikatów.
+Rolą wektora sortedNodes jest zachowanie początkowej numeracji punktów (początkowe indeksy wpisujemy do wektora sortedNodes poprzez kernel fillNodes w czasie stałym), to znaczy sortujemy pary \textbf{(kodMortona, początkowyIndeks)}.
 
-\subsubsection{\large Zliczenie węzłów wewnętrznych oraz łączenie węzłów}
-
-Dwie ostatnie części algoorytmu budowania drzewa opiszemy w jednym podrozdziale.
-Zacznijmy od przedstawienia struktury odpowiedzialnej za węzły w naszym drzewie:
+\subsubsection{\large Obsługa zduplikowanych kodów Mortona}
 
 \lstset{backgroundcolor=\color{white}, basicstyle=\footnotesize\fontfamily{fvm}\selectfont, numbers=left, numbersep=8pt, keywordstyle=\color{blue},commentstyle = \color{mygreen}}              
-\begin{lstlisting}[language=C++, frame=single, framerule=2pt, caption=Struktura OctreeNode]
-struct OctreeNode {
-  int children[8] = {-1, -1, -1, -1, -1, -1, -1, -1};
-  int position = -1;
-  float totalMass = 0.0;
-  float centersOfMass[3] = {0.0, 0.0, 0.0};
-};
+\begin{lstlisting}[language=C++, frame=single, framerule=2pt, caption=Krok 3]
+thrust::device_vector<int> groups(numberOfBodies);
+int* d_groups = thrust::raw_pointer_cast(groups.data());
+computeDifferences<<<blocks, THREADS_PER_BLOCK>>>(d_codes, d_groups);
+thrust::inclusive_scan(groups.begin(), groups.end(), groups.begin());
+thrust::device_vector<int> first(numberOfBodies);
+thrust::device_vector<int> last(numberOfBodies);
+int* d_first = thrust::raw_pointer_cast(first.data());
+int* d_last = thrust::raw_pointer_cast(last.data());
 \end{lstlisting}
-W powyższej strukturze przechowujemy indeksy następników w globalnej tablicy węzłów, a także standardowo całkowitą masę poddrzewa oraz środek masy. Dodatkowo mamy pole position, które przyjmuje -1, gdy węzeł jest wewnętrzny oraz indeks węzła(na tablicę globalną), gdy węzeł jest liściem.
-Jak widzimy niżej, początkowo tworzymy \textbf{device\_vector octree} dla węzłów o liczbie elementów, którą wyznacza liczba punktów z wejścia, które mają unikalne kody Mortona. \\
-Tworzymy również wektor \textbf{parentsNumbers}, którego zadaniem jest przechowywanie informacji o rodzicu każdego z wezłów (informacja ta będzie niezbędna przy łączeniu wierzchołków) na każdym z poziomów (jak wspomnieliśmy nasze drzewo ma głębokość 15). Poniższy fragment kodu zawiera również trzy istotne zmienne:
+\bigskip
+Wektor groups będzie przechowywał informację o indeksie grupy węzłów o tym samym kodzie Mortona. Obliczamy to poprzez połączenie kernela $computeDifferences$, który dla danej komórki $i$ stawia $1$ gdy $mortonCodes[i-1] \ne mortonCodes[i]$ , $0$ w przeciwnym przypadku (pierwsza komórka jest inicjowana na $0$). 
+A następnie liczymy sumy prefiksowe na wektorze $groups$ w celu wyznaczenia indeksu każdej z grup. Następnie uruchmiamy, kernel $CalculateFirstAndLast$, który służy do wyznaczenia początku oraz końca przedziału w tablicy globalnej punktów dla każdego kodu Mortona (czyli dla każdej grupy). Kernel przedstawia się następująco:
+\lstset{backgroundcolor=\color{white}, basicstyle=\footnotesize\fontfamily{fvm}\selectfont, numbers=left, numbersep=8pt, keywordstyle=\color{blue},commentstyle = \color{mygreen}}              
+\begin{lstlisting}[language=C++, frame=single, framerule=2pt, caption=Kernel calculateFirstAndLast]
+__global__
+void calculateFirstAndLast(int* first, int* last, unsigned long long* codes, int numberOfBodies) {
+    if (mortonCodes[thid-1] != mortonCodes[thid]) {
+        last[group[thid-1]] = thid-1, first[group[thid]] = thid;
+    }
+}
+\end{lstlisting}
+
+Gdy już to policzymy to możemy stworzyć początkowe drzewo ósemkowe składające się tylko z liści.
+\lstset{backgroundcolor=\color{white}, basicstyle=\footnotesize\fontfamily{fvm}\selectfont, numbers=left, numbersep=8pt, keywordstyle=\color{blue},commentstyle = \color{mygreen}}              
+\begin{lstlisting}[language=C++, frame=single, framerule=2pt, caption=Stworzenie wektora octree]
+thrust::device_vector<OctreeNode> octree(numberOfBodies);
+OctreeNode* d_octree = thrust::raw_pointer_cast(uniquePointsCount);
+
+AssignDuplicatesToNode<<<blocks, THREADS_PER_BLOCK>>>(octree, groups, first, last);
+\end{lstlisting}
+Po stworzeniu wektora reprezentującego drzewo przypisujemy każdemu węzłowi indeksy wszystkich punktów, które mają $i$-ty kod Mortona, czyli należą do $i$-tej grupy (kernel $AssignDuplicatesToNode$ wstawia je do wektora $duplicates$ odpowiedniego węzła z $octree$).
+\subsubsection{\large Zliczanie węzłów wewnętrznych oraz łączenie węzłów}
+
+W następnym kroku tworzymy wektor \textbf{parentsNumbers}, którego zadaniem jest przechowywanie informacji o rodzicu każdego z wezłów (informacja ta będzie niezbędna przy łączeniu wierzchołków) na każdym z poziomów (jak wspomnieliśmy nasze drzewo ma głębokość $K$). Poniższy fragment kodu zawiera również trzy istotne zmienne:
 \begin{itemize}
 \item \textbf{childrenCount} - zlicza liczbę nowych węzłów na każdym z poziomów drzewa,
 \item \textbf{previousChildrenCount} - przechowuje liczbę węzłów z poprzedniego poziomu,
@@ -549,9 +455,6 @@ Tworzymy również wektor \textbf{parentsNumbers}, którego zadaniem jest przech
 
 \lstset{backgroundcolor=\color{white}, basicstyle=\footnotesize\fontfamily{fvm}\selectfont, numbers=left, numbersep=8pt, keywordstyle=\color{blue},commentstyle = \color{mygreen}}              
 \begin{lstlisting}[language=C++, frame=single, framerule=2pt, caption=Przechowywanie węzłów drzewa]
-thrust::device_vector<OctreeNode> octree(uniquePointsCount);
-OctreeNode* d_octree = thrust::raw_pointer_cast(octree.data());
-	
 thrust::device_vector<int> parentsNumbers(uniquePointsCount);
 int* d_parentsNumbers = thrust::raw_pointer_cast(parentsNumbers.data());
 
@@ -563,7 +466,7 @@ int previousChildrenCount = 0;
 Kluczowym punktem tych dwóch części jest poniższa pętla. Iteruje się ona $K=15$ razy, zaczynając od dzieci drzewa (podejście \textbf{bottom-up}), oznacza to także, że zaczyna od węzłów ograniczających najmniejszy obszar, czyli obszaru ograniczającego nasze punkty najdokładniej.\\
 W każdej z iteracji chcemy wyznaczyć rodziców dla węzłów. \\W tym celu pomocny jest kernel \textbf{calculateDuplicates} w połączeniu z \textbf{thrust::inclusive\_scan}, które pozwalają wyznaczyć duplikaty wśród rodziców(czyli węzły na wyższym poziomie, które mają identyczne kody Mortona, więc mają takie same następniki).
 Kernel ustawia wartość $1$ w danej komórce wektora, jeśli rodzice dwóch kolejnych węzłów są różni (wystarczy sprawdzić dwa kolejne, gdyż dzięki sortowaniu dzieci każdego z węzłów są obok siebie), a następnie \textbf{inclusive\_scan} robi sumę prefiksową tej tablicy, aby wyznaczyć te, które są takie same(mają przypisane takie same liczby po obliczeniu sum prefiksowych).
-
+\bigskip
 \lstset{backgroundcolor=\color{white}, basicstyle=\footnotesize\fontfamily{fvm}\selectfont, numbers=left, numbersep=8pt, keywordstyle=\color{blue},commentstyle = \color{mygreen}}              
 \begin{lstlisting}[language=C++, frame=single, framerule=2pt, caption=Kernel calculateDuplicates]
 __global__
@@ -622,23 +525,8 @@ Cele, które ten kernel realizuje, są następujące:
 \end{itemize}
 
 Całą pętlę realizującą kroki piąty oraz szósty, przedstawia pseudokod w listingu 13.
-
-\section{\LARGE Liczenie sił oddziałujących na ciało}
-
-Drzewo zostało stworzone w celu szybszego liczenia siły jaka działa na ciało.\\
-Wersje jednowątkowa oraz wielowątkowa algorytmu liczenia siły różnią się jedynie tym, że ta druga robi to na osobnym wątku dla każdego ciała, a także została zaimplementowa iteracyjnie. Przedstawimy więc jedynie wielowątkowe podejście. \\
-Algorytm polega na przejściu drzewa od korzenia i na sprawdzaniu czy węzeł jest wewnętrzny czy zewnętrzny. Gdy węzeł jest liściem, to zwyczajnie liczymy siłę między naszym punktem a tym węzłem (jak w naiwnym algorytmie). Gdy węzeł jest wewnętrzny, to potrzebujemy następującej definicji \cite{Aarseth}:
-
-\theoremstyle{definition}
-\begin{definition}{Ratio}
-- niech s będzie szerokością obszaru obejmowanego przez sześcian oraz niech d będzie odległością między środkiem masy obszaru a punktem, to jeśli $s/d < \theta$, gdzie przyjęliśmy, że $\theta = 2.0$, to liczymy siłę między środkiem masy obszaru a punktem. W przeciwnym przypadku wywołujemy się rekurencyjnie na ośmiu podsześcianach. Ogólnie, im $\theta$ jest większa, to obliczenia są mniej dokładne, czyli więcej poddrzew traktujemy jako jeden węzeł.
-\end{definition}
-
-Dodatkowo musimy rostrzygać czy nasz punkt i przetwarzany węzeł nie są tym samym węzłem, aby nie liczyć siły między nimi.\\~\\~\\
-
-
 \lstset{backgroundcolor=\color{white}, basicstyle=\footnotesize\fontfamily{fvm}\selectfont, numbers=left, numbersep=8pt, keywordstyle=\color{blue},commentstyle = \color{mygreen}}              
-\begin{lstlisting}[language=C++, frame=single, framerule=2pt, caption=Kroki 5-6]
+\begin{lstlisting}[language=C++, frame=single, framerule=2pt, caption=Kroki 4-5]
 for(int i = 0; i < K; ++i) {
     blocks = (childrenCount+THREADS_PER_BLOCK-1)/THREADS_PER_BLOCK;
     thrust::fill(parentsNumbers.begin(), parentsNumbers.end(), 0);
@@ -676,12 +564,26 @@ for(int i = 0; i < K; ++i) {
     allChildrenCount += childrenCount;
 }
 \end{lstlisting}
-\bigskip
-W poniższej iteracyjnej implementacji algorytmu liczenia siły korzystamy z dwóch tablic, które będzie nam symulować stos. Gdy przetwarzamy jeden wierzchołek i okazało się, że musimy w rekurencyjnej wersji wywoływalibyśmy się rekurencyjnie na mniejszym obszarze, tutaj wrzucimy na stos dwie pary. Pierwszą będzie \textbf{(idObecnegoWęzła, nrDziecka+1)}, czyli po przetworzeniu całego poddrzewa dziecka o  nrDziecka, przejdziemy do przetwarzania kolejnego dziecka. Druga para to \textbf{(idDziecka, 0)}, czyli wrzucamy na stos pierwszego dziecko obecnego węzła (to znaczy węzeł na którym będziemy wywoływać się rekurencyjnie).\\ Z kolei w celu przechowywania granic wyznaczających obszar, który ogranicza dany węzeł trzymamy jedynie tablice z minimalnymi i maksymalnymi punktami w każdym z wymiarów dla korzenia. Następnie, gdy jesteśmy na poziomie $i$, to dzielimy długość boku sześcianu korzenia przez $2^{i}$, co pozwala nam uzyskać bok węzła na poziomie $i$.
+\subsection{\Large Złożoność budowania drzewa}
+Przyjrzyjmy się kolejnym operacjom w naszym algorytmie. Krok pierwszy wykonujemy w czasie stałym. Następnie sortowanie z biblioteki thrust, które wykonuje sie poprzez równoległy radixsort, czyli ma złożoność obliczeniową $\mathcal{O}(log_{N})$. Krok trzeci również wykonuje się logarytmicznie, a jego operacją dominującą jest thrust::inclusive\_scan. Ostatnia część jest bardziej wymagająca czasowo, gdyż ma złożoność obliczeniową $\mathcal{O}(K\cdot log_{N})$.
+Czyli widzimy, żę jest operacją dominującą całego algorymu. Z tego wynika, że złożoność algorytmu budowania drzewa, to $\mathcal{O}(K\cdot log_{N})$, gdzie w naszej symulacji $K=15$.
+\section{\LARGE Obliczanie sił oddziałujących na ciało}
 
+Drzewo zostało stworzone w celu szybszego obliczania siły jaka działa na ciało.\\
+Wersje jednowątkowa oraz wielowątkowa algorytmu obliczania siły różnią się jedynie tym, że ta druga robi to na osobnym wątku dla każdego ciała. Dodatkowowo zaimplementowałem ją iteracyjnie.\\
 \bigskip
+Algorytm polega na przejściu drzewa od korzenia i na sprawdzaniu czy węzeł jest wewnętrzny czy zewnętrzny. Gdy węzeł jest liściem, to liczymy siłę między naszym punktem a wszystkim punktami z wektora $duplicates$ (może być ich więcej niż jeden przez duplikaty w kodach Mortona). Każdą z sił oddziałujących na punkt liczymy identycznie jak w naiwnym algorytmie. Gdy węzeł jest wewnętrzny, to postępujemy następująco:\\
+\bigskip
+Niech s będzie szerokością obszaru obejmowanego przez sześcian oraz niech d będzie odległością między środkiem masy obszaru a punktem. Jeśli $s/d < \theta$, gdzie przyjęliśmy, że $\theta = 2.0$, to liczymy siłę między środkiem masy obszaru a punktem. W przeciwnym przypadku wywołujemy się rekurencyjnie na ośmiu podsześcianach. Ogólnie, im $\theta$ jest większa, to obliczenia są mniej dokładne, czyli więcej poddrzew traktujemy jako jeden węzeł \cite{Aarseth}.\\
+\bigskip
+Dodatkowo musimy rostrzygać czy nasz punkt i przetwarzany węzeł nie są tym samym węzłem, aby nie liczyć siły między nimi.\\~\\
+W poniższej iteracyjnej implementacji algorytmu obliczania siły korzystamy z dwóch tablic, które będzie nam symulować stos. Gdy przetwarzamy jeden wierzchołek i okazało się, że musimy w rekurencyjnej wersji wywoływalibyśmy się rekurencyjnie na mniejszym obszarze, tutaj wrzucimy na stos dwie pary. Pierwszą będzie \textbf{(idObecnegoWęzła, nrDziecka+1)}, czyli po przetworzeniu całego poddrzewa dziecka o  nrDziecka, przejdziemy do przetwarzania kolejnego dziecka. Druga para to \textbf{(idDziecka, 0)}, czyli wrzucamy na stos pierwszego dziecko obecnego węzła (to znaczy węzeł na którym będziemy wywoływać się rekurencyjnie).\\
+\bigskip
+Z kolei w celu przechowywania granic wyznaczających obszar, który ogranicza dany węzeł trzymamy jedynie tablice z minimalnymi i maksymalnymi punktami w każdym z wymiarów dla korzenia. Następnie, gdy jesteśmy na poziomie $i$, to dzielimy długość boku sześcianu korzenia przez $2^{i}$, co pozwala nam uzyskać bok węzła na poziomie $i$.
+
+\newpage
 \lstset{backgroundcolor=\color{white}, basicstyle=\footnotesize\fontfamily{fvm}\selectfont, numbers=left, numbersep=8pt, keywordstyle=\color{blue},commentstyle = \color{mygreen}} 
-\begin{lstlisting}[language=C++, frame=single, framerule=2pt, caption=Liczenie siły oddziałującej na ciało w układzie]
+\begin{lstlisting}[language=C++, frame=single, framerule=2pt, caption=Obliczanie siły oddziałującej na ciało w układzie]
 __global__
 void computeForces(OctreeNode* octree, double* velocities, double* weights, 
     double* pos, double* mins, double* maxs, int AllNodes, int N, double dt) 
@@ -713,12 +615,16 @@ void computeForces(OctreeNode* octree, double* velocities, double* weights,
         } 
         else {
        	    if(thid == octree[idx].position) continue;
-        	forces += computeForcesBetween(octree[idx].getPoint(), p);	
+       	    	for point in octree[idx].duplicates
+                    forces += computeForcesBetween(octree[idx].getPoint(point), p);	
         }
     }    
     UpdatePositionAndVelocity(forces, positions, velocities, weights, N, dt);
 }
 \end{lstlisting}
+
+\subsection{Złożoność algorytmu obliczania siły}
+Złożoność obliczeniowa algorytmu obliczania siły przy równomiernym rozkładzie punktów wynosi $\mathcal{O}(log_{N})$ i zostało to pokazane w pracy wprowadzającej algorytm Barnesa-Huta \cite{barnhut}.
 
 \section{\LARGE Wizualizacja}
 	
@@ -761,13 +667,13 @@ void Render()
 \bigskip
 
 Render polega głównie na wykorzystaniu macierzy Model-View-Projection (MVP) \cite{tutMat}. 
-W linii 19 wymnażamy wszystkie macierze ze sobą (odpowiedzialnego za każdy z kroków MVP), uzyskując wyrenderowaną pozycję naszych obiektów).\\
+W linii 19 wymnażamy wszystkie macierze ze sobą (pojedyncza macierz odpowiada za jeden krok MVP), uzyskując wyrenderowaną pozycję naszych obiektów).\\
 
 Bardziej szczegółowo, najpierw ustawiamy kamerę, do czego służy funkcja \textbf{lookAt} \cite{opengl}, która jako pierwszy argument przyjmuje współrzędne kamery, następnie punkt na który patrzymy, a w ostatnim parametrze ustawiamy, że patrzymy z góry do dołu.\\
 Z kolei funkcja \textbf{perspective} \cite{opengl} odpowiada za rzutowanie, a w argumentach przyjmuje:
 \begin{itemize}
 \item kąt z jakiego patrzymy na punkt podany w radianach
-\item \textbf{aspect rato}, czyli proporcje pomiędzy szerokością i wysokością obrazu
+\item \textbf{aspect ratio}, czyli proporcje pomiędzy szerokością i wysokością obrazu
 \item \textbf{far clipping plane} oraz \textbf{near clipping plane}, które wyznaczają płaszczyzny, które ograniczają obszar renderowania
 \end{itemize} 
 
@@ -779,14 +685,17 @@ W pracy zaimplementowałem cztery algorytmy:
 \begin{itemize}
 \item Jednowątkowy naiwny algorytm 
 \item Wielowątkowy naiwny algorytm 
-\item Jednowątkowy algorytm Barnes Hut
-\item Wielowątkowy algorytm Barnes Hut
+\item Jednowątkowy algorytm Barnesa-Huta
+\item Wielowątkowy algorytm Barnesa-Huta
 \end{itemize}
 
-Poniżej dokonam porównania algorytmów zaimplementowanych na CUDA z dwoma dalej opisanymi kryteriami. \\
-Symulacje, których wyniki zostały zebrane w poniższych wykresach były uruchamiane na karcie NVIDIA GeForce GTX 980.
-
-Poniżej widać wykres przedstawiający czas wykonywania się poszczególnych algorytmów przy jednakowych danych wejściowych oraz przez identyczną liczbę kroków. W testach algorytmy były odpalane przez $500$ kroków, a następnie całkowity czas działania algorytmu był dzielony przez liczbę kroków. Wykres przedstawia czasy działania trzech ostatnich programów z powyższej listy dla wybranych liczb obiektów z zakresu $\{0,100000\}$.
+Symulacje, których wyniki zostały zebrane w poniższych wykresach były uruchamiane na karcie NVIDIA GeForce GTX 980. Poniżej przedstawię wykresy przedstawiające wyniki moich implementacji algorytmów wielowątkowych z powyższej listy. Algorytmy 1 i 3 zostały wykorzystane jedynie do testowania poprawności symulacji. \\
+Dane testowe były losowe o równomiernym rozkładzie. Losowane były początkowe:
+\begin{itemize}
+\item pozycje ciał w przedziale $\{-1.0, 1.0\}$,
+\item prędkości ciał w przedziale $\{-0.01, 0.01\}$,
+\item masy ciał w przedziale $\{1000.0, 100000.0\}$.
+\end{itemize}
 
 \begin{figure}[h]
 \begin{tikzpicture}
@@ -823,14 +732,17 @@ Poniżej widać wykres przedstawiający czas wykonywania się poszczególnych al
 (75000,0.360973)(79000,0.391146)(81000,0.406964)(85000,0.439855)
 (89000,0.48233)(93000,0.511687)(99000,0.55421)
     };
-\legend{Wielowątkowy iteracyjny Barnes Hut, Wielowątkowy naiwny algorytm}
+\legend{Wielowątkowy iteracyjny Barnesa-Huta, Wielowątkowy naiwny algorytm}
 \end{axis}
 \end{tikzpicture}
 \caption{Porównanie czasu działania algorytmów}
 \end{figure}
 
-Z tego widzimy, że osiągnęliśmy zamierzony efekt, czyli dla coraz większej liczby ciał, równoległa implementacja algorytmu Barnes Hut jest o wiele szybsza niż wielowątkowy algorytm liczący dla każdego ciała siłę działającą na niego przez każde inne ciało. \\
-Zachodzi również zależność, że im więcej tur, tym algorytm Barnes Hut spisuje się lepiej, gdyż część obiektów oddala się względem innych obiektów i przez to często grupka obiektów jest traktowana jako jeden obiekt i nie musimy liczyć siły z każdym ciałem z osobna, a za to liczymy siłę tylko raz z środkiem masy tej grupki ciał.\\
+
+Powyżej widać wykres przedstawiający czas wykonywania się poszczególnych algorytmów przy jednakowych danych wejściowych oraz przez identyczną liczbę kroków. W testach algorytmy były uruchamiane przez $500$ kroków, a następnie całkowity czas działania algorytmu był dzielony przez liczbę kroków. Wykres przedstawia czasy działania obu algorytmów równoległych dla wybranych liczby obiektów z zakresu $\{0,100000\}$.
+
+Zauważmy że dla coraz większej liczby ciał, równoległa implementacja algorytmu Barnesa-Huta jest o wiele szybsza niż wielowątkowy algorytm liczący dla każdego ciała siłę działającą na niego przez każde inne ciało. \\
+Zachodzi również zależność, że im więcej tur, tym algorytm Barnesa-Huta spisuje się lepiej, gdyż część obiektów oddala się względem innych obiektów i przez to często grupka obiektów jest traktowana jako jeden obiekt i nie musimy liczyć siły z każdym ciałem z osobna, a za to liczymy siłę tylko raz z środkiem masy tej grupki ciał.\\
 Widzimy to na drugim wykresie, gdzie mamy ustalone, że ciał w symulacji jest $1000$, a zmienna jest liczba symulowanych kroków.
 \begin{figure}[h]
 \begin{tikzpicture}
@@ -860,13 +772,14 @@ Widzimy to na drugim wykresie, gdzie mamy ustalone, że ciał w symulacji jest $
 (6100,0.0127521)(6600,0.0122871)(7100,0.0117973)(7600,0.0113905)
 (8100,0.0114501)(8600,0.0115139)(9100,0.0113336)
     };
-\legend{Wielowątkowy Barnes Hut}
+\legend{Wielowątkowy Barnesa-Huta}
 \end{axis}
 \end{tikzpicture}
 \caption{Porównanie czasu działania algorytmów}
 \end{figure}
 
-
+Przeprowadzone eksperymenty dowodzą wysokiej przydatności architektury CUDA w implementacji algorytmu naiwnego oraz algorytmu Barnesa-Huta dla symulacji N ciał.
+\newpage
 \nocite{*}
 \printbibliography%[title=\foreignlanguage{polski}{Bibliografia}]
 

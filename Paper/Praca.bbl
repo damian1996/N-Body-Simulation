@@ -129,7 +129,7 @@
       \verb https://docs.nvidia.com/cuda/thrust/index.html
       \endverb
     \endentry
-    \entry{dirNBody}{misc}{}
+    \entry{dirNBody}{article}{}
       \name{author}{2}{}{%
         {{hash=d701820cd316f8391094da8e15df4005}{%
            family={D.\bibnamedelimi Richardson},
@@ -150,10 +150,14 @@
       \field{sortinithash}{78f7c4753a2004675f316a80bdb31742}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
+      \field{journaltitle}{Icarus}
       \field{title}{Direct Large-Scale N-Body Simulations of Planetesimal Dynamics}
-      \field{year}{1998}
+      \field{volume}{143}
+      \field{year}{2000}
+      \field{pages}{45\bibrangedash 59}
+      \range{pages}{15}
     \endentry
-    \entry{visGraph}{misc}{}
+    \entry{visGraph}{article}{}
       \name{author}{1}{}{%
         {{hash=bbc0090900fc4e36b3185b3ab7fe3f25}{%
            family={D.Egorov},
@@ -167,10 +171,14 @@
       \field{sortinithash}{78f7c4753a2004675f316a80bdb31742}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
+      \field{journaltitle}{Procedia Computer Science}
       \field{title}{Improved Force-Directed Method of Graph Layout Generation with Adaptive Step Length}
+      \field{volume}{66}
       \field{year}{2015}
+      \field{pages}{689\bibrangedash 696}
+      \range{pages}{8}
     \endentry
-    \entry{haloDensity}{misc}{}
+    \entry{haloDensity}{article}{}
       \name{author}{1}{}{%
         {{hash=f7a0c2d04eb6c2c11c8cae261bbf3c7c}{%
            family={E.D'Onghia},
@@ -186,8 +194,12 @@
       \field{sortinithash}{fefc5210ef4721525b2a478df41efcd4}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
+      \field{journaltitle}{Monthly Notices of the Royal Astronomical Society}
       \field{title}{The Halo Density Profiles with Non-Standard N-body Simulations}
-      \field{year}{2002}
+      \field{volume}{338}
+      \field{year}{2003}
+      \field{pages}{156\bibrangedash 164}
+      \range{pages}{9}
     \endentry
     \entry{threebody2}{article}{}
       \name{author}{1}{}{%
@@ -236,7 +248,7 @@
       \verb https://www.khronos.org/registry/OpenGL/index_gl.php
       \endverb
     \endentry
-    \entry{chaosMisc}{misc}{}
+    \entry{chaosMisc}{article}{}
       \name{author}{1}{}{%
         {{hash=72b90f0c3473f7bf08465574cbe2cedc}{%
            family={Heggie},
@@ -250,8 +262,11 @@
       \field{sortinithash}{82012198d5dfa657b8c4a168793268a6}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
+      \field{journaltitle}{Predictability, Stability, and Chaos in N-Body Dynamical Systems}
       \field{title}{CHAOS IN THE N-BODY PROBLEM OF STELLAR DYNAMICS}
       \field{year}{1991}
+      \field{pages}{47\bibrangedash 62}
+      \range{pages}{16}
     \endentry
     \entry{tutMat}{manual}{}
       \name{author}{1}{}{%
@@ -354,8 +369,9 @@
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{title}{N-Body Simulation of the Formation of the Earth-Moon System from a Single Giant Impact}
+      \field{year}{2013}
     \endentry
-    \entry{tero}{misc}{}
+    \entry{tero}{article}{}
       \name{author}{1}{}{%
         {{hash=9c6cb97b8c2c22b41d64c2c4f4520c11}{%
            family={Karras},
@@ -369,6 +385,7 @@
       \field{sortinithash}{a7d5b3aec5a0890aae7baf85a209abfc}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
+      \field{journaltitle}{High Performance Graphics}
       \field{title}{Maximizing Parallelism in the Construction of BVHs, Octrees, and k-d Trees}
       \field{year}{2012}
     \endentry
@@ -401,14 +418,17 @@
            given={Isaac},
            given_i={I\bibinitperiod}}}%
       }
+      \list{publisher}{1}{%
+        {Daniel Adee, New York}%
+      }
       \strng{namehash}{7a621e01239c1fe6557cf9c9d2f85bd3}
       \strng{fullhash}{7a621e01239c1fe6557cf9c9d2f85bd3}
       \field{sortinit}{N}
       \field{sortinithash}{925374ca63e7594de7fafdb83e64d41d}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{title}{Philosophiae Naturalis Principia Mathematica}
-      \field{year}{1687}
+      \field{title}{Philosophiae Naturalis Principia Mathematica, 1st American edition}
+      \field{year}{1846}
     \endentry
     \entry{fund}{inbook}{}
       \name{author}{1}{}{%

@@ -13,21 +13,20 @@
 \BOOKMARK [3][-]{subsubsection.3.2.3}{Implementacja wielowatkowa}{subsection.3.2}% 13
 \BOOKMARK [2][-]{subsection.3.3}{Softening}{section.3}% 14
 \BOOKMARK [2][-]{subsection.3.4}{Z\233ozonosc zr\363wnoleglonej naiwnej wersji algorytmu}{section.3}% 15
-\BOOKMARK [1][-]{section.4}{Symulacja N cia\233 algorytmem Barnes Hut}{}% 16
+\BOOKMARK [1][-]{section.4}{R\363wnoleg\233y algorytm Barnesa-Huta}{}% 16
 \BOOKMARK [2][-]{subsection.4.1}{Drzewa \323semkowe}{section.4}% 17
-\BOOKMARK [2][-]{subsection.4.2}{Algorytm Barnes Hut z pseudokodem}{section.4}% 18
-\BOOKMARK [2][-]{subsection.4.3}{Rekurencyjne tworzenie drzewa}{section.4}% 19
-\BOOKMARK [3][-]{subsubsection.4.3.1}{Funkcja CreateTree}{subsection.4.3}% 20
-\BOOKMARK [3][-]{subsubsection.4.3.2}{Funkcja InsertNode}{subsection.4.3}% 21
-\BOOKMARK [1][-]{section.5}{Zr\363wnoleglenie algorytmu Barnes Hut}{}% 22
-\BOOKMARK [2][-]{subsection.5.1}{Kody Mortona}{section.5}% 23
-\BOOKMARK [2][-]{subsection.5.2}{R\363wnoleg\233a implementacja drzew \363semkowych}{section.5}% 24
-\BOOKMARK [2][-]{subsection.5.3}{Pseudokody poszczeg\363lnych krok\363w}{section.5}% 25
-\BOOKMARK [3][-]{subsubsection.5.3.1}{Liczenie kod\363w Mortona}{subsection.5.3}% 26
-\BOOKMARK [3][-]{subsubsection.5.3.2}{Sortowanie oraz usuwanie duplikat\363w w kodach}{subsection.5.3}% 27
-\BOOKMARK [3][-]{subsubsection.5.3.3}{Zliczenie wez\233\363w wewnetrznych oraz \233aczenie wez\233\363w}{subsection.5.3}% 28
-\BOOKMARK [1][-]{section.6}{Liczenie si\233 oddzia\233ujacych na cia\233o}{}% 29
-\BOOKMARK [1][-]{section.7}{Wizualizacja}{}% 30
-\BOOKMARK [2][-]{subsection.7.1}{OpenGL}{section.7}% 31
-\BOOKMARK [2][-]{subsection.7.2}{Renderowanie symulacji}{section.7}% 32
-\BOOKMARK [1][-]{section.8}{Podsumowanie}{}% 33
+\BOOKMARK [2][-]{subsection.4.2}{Kody Mortona}{section.4}% 18
+\BOOKMARK [2][-]{subsection.4.3}{Struktura wez\233a w drzewie \363semkowym}{section.4}% 19
+\BOOKMARK [2][-]{subsection.4.4}{R\363wnoleg\233a implementacja drzew \363semkowych}{section.4}% 20
+\BOOKMARK [2][-]{subsection.4.5}{Pseudokody poszczeg\363lnych krok\363w}{section.4}% 21
+\BOOKMARK [3][-]{subsubsection.4.5.1}{Obliczanie kod\363w Mortona}{subsection.4.5}% 22
+\BOOKMARK [3][-]{subsubsection.4.5.2}{Sortowanie kod\363w}{subsection.4.5}% 23
+\BOOKMARK [3][-]{subsubsection.4.5.3}{Obs\233uga zduplikowanych kod\363w Mortona}{subsection.4.5}% 24
+\BOOKMARK [3][-]{subsubsection.4.5.4}{Zliczanie wez\233\363w wewnetrznych oraz \233aczenie wez\233\363w}{subsection.4.5}% 25
+\BOOKMARK [2][-]{subsection.4.6}{Z\233ozonosc budowania drzewa}{section.4}% 26
+\BOOKMARK [1][-]{section.5}{Obliczanie si\233 oddzia\233ujacych na cia\233o}{}% 27
+\BOOKMARK [2][-]{subsection.5.1}{Z\233ozonosc algorytmu obliczania si\233y}{section.5}% 28
+\BOOKMARK [1][-]{section.6}{Wizualizacja}{}% 29
+\BOOKMARK [2][-]{subsection.6.1}{OpenGL}{section.6}% 30
+\BOOKMARK [2][-]{subsection.6.2}{Renderowanie symulacji}{section.6}% 31
+\BOOKMARK [1][-]{section.7}{Podsumowanie}{}% 32

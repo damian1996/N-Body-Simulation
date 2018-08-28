@@ -2061,7 +2061,7 @@
     <bcf:citekey order="10">haloDensity</bcf:citekey>
     <bcf:citekey order="11">dirNBody</bcf:citekey>
     <bcf:citekey order="12">visGraph</bcf:citekey>
-    <bcf:citekey order="13">fund</bcf:citekey>
+    <bcf:citekey order="13">Principia</bcf:citekey>
     <bcf:citekey order="14">fund</bcf:citekey>
     <bcf:citekey order="15">Cuda</bcf:citekey>
     <bcf:citekey order="16">Cuda</bcf:citekey>
@@ -2075,10 +2075,11 @@
     <bcf:citekey order="24">octree</bcf:citekey>
     <bcf:citekey order="25">tero</bcf:citekey>
     <bcf:citekey order="26">Aarseth</bcf:citekey>
-    <bcf:citekey order="27">opengl</bcf:citekey>
-    <bcf:citekey order="28">tutMat</bcf:citekey>
-    <bcf:citekey order="29">opengl</bcf:citekey>
+    <bcf:citekey order="27">barnhut</bcf:citekey>
+    <bcf:citekey order="28">opengl</bcf:citekey>
+    <bcf:citekey order="29">tutMat</bcf:citekey>
     <bcf:citekey order="30">opengl</bcf:citekey>
+    <bcf:citekey order="31">opengl</bcf:citekey>
     <bcf:citekey order="0">*</bcf:citekey>
   </bcf:section>
   <bcf:sortlist section="0" name="nty/global" type="entry" sortscheme="nty" sortnamekeyscheme="global">
