@@ -98,13 +98,13 @@ citestyle=numeric,
 \section{\LARGE Przedstawienie problemu symulacji N ciał}
 \bigskip
 Symulacja N ciał jest zagadnieniem z mechaniki klasycznej, które polega na wyznaczeniu toru ruchów wszystkich ciał danego układu o danych masach, prędkościach i położeniach początkowych w oparciu o prawa ruchu i założenie, że ciała oddziałują ze sobą zgodnie z prawem grawitacji Newtona. \\ 
-Podstawowe zagadnienia do symulacji N ciał zostały przedstawione przez \textbf{Isaaca Newtona} w 1687 roku, który wprowadził prawa(później zostaną przedstawione dokładniej), które obowiązują przy próbach analitycznego rozwiązania problemu. \cite{Principia}. Początki symulacji można datować na rok 1941, kiedy to \textbf{Erik Holmberg}, prowadził eksperymenty z galaktykami, które modelował jako okręgi, w których punkty koncetrowały się wokół wspólnego środka. Co ciekawe, w swoich eksperymentach reprezentował punkty w galaktyce poprzez żarówki. \cite{holmberg} Z kolei pierwsze obliczenia dla symulacji N ciał na komputerze zostały wykonane przez \textbf{Sebastiana von Hoernera} w 1960 roku. \cite{vonHoerner}
+Podstawowe zagadnienia do symulacji N ciał zostały przedstawione przez \textbf{Isaaca Newtona} w 1687 roku, który wprowadził prawa(później zostaną przedstawione dokładniej), które obowiązują przy próbach analitycznego rozwiązania problemu \cite{Principia}. Początki symulacji można datować na rok 1941, kiedy to \textbf{Erik Holmberg}, prowadził eksperymenty z galaktykami, które modelował jako okręgi, w których punkty koncetrowały się wokół wspólnego środka. Co ciekawe, w swoich eksperymentach reprezentował punkty w galaktyce poprzez żarówki \cite{holmberg}. Z kolei pierwsze obliczenia dla symulacji N ciał na komputerze zostały wykonane przez \textbf{Sebastiana von Hoernera} w 1960 roku \cite{vonHoerner}.
 
 \subsection{\Large Szczególne przypadki}
 Problem analitycznego wyznaczenia dokładnego ruchu dowolnej liczby ciał jest trudny, więc można znaleźć wiele prac skupiająych się jedynie na ustalonej, małej liczbie ciał.
 
 \subsubsection{\large Problem dwóch ciał}
-Problem dla dwóch ciał podlegających prawom klasycznej dynamiki Newtona i przyciągających się zgodnie z newtonowskim prawem powszechnego ciążenia został analitycznie rozstrzygnięty przez J. Bernoulliego przy założeniu, że masa obiektu koncentruje się w jego środku. \cite[str.~1-49]{fund}
+Problem dla dwóch ciał podlegających prawom klasycznej dynamiki Newtona i przyciągających się zgodnie z newtonowskim prawem powszechnego ciążenia został analitycznie rozstrzygnięty przez J. Bernoulliego przy założeniu, że masa obiektu koncentruje się w jego środku  \cite[str.~1-49]{fund}.
 
 Obydwa ciała poruszają się po krzywych stożkowych, których rodzaj zależy od całkowitej energii układu. Przykładowo, gdy energia jest mała, to ciała nie mogą się od siebie uwolnić, więc krążą wokół siebie po elipsach.
 
@@ -119,7 +119,7 @@ Z kolei, bezpośrednie symulacje N ciał są wykorzystywane na przykład do stud
 \subsection{\Large Implementacja i wykorzystane technologie}
 W pierwszej części mojej pracy przedstawię równoległą implementację naiwnego algorytmu symulacji N ciał. W każdym kroku algorytm bezpośrednio wyznacza siły oddziałujące wzajemnie pomiędzy każdymi dwoma ciałami w systemie, przez co oblicza całkowitą siłę oddziałującą na każde ciało w jednym kroku symulacji. W drugiej części zaimplementuję wielowątkowo algorytm Barnesa-Huta, który korzysta z drzew ósemkowych.
 
-Repozytorium z całym kodem projektu jest dostępne pod tym \href{https://github.com/damian1996/N-Body-Simulation}{adresem}.
+Repozytorium z całym kodem projektu jest dostępne pod następującym adresem\\ \href{https://github.com/damian1996/N-Body-Simulation}{https://github.com/damian1996/N-Body-Simulation}.
 Całość została zaimplementowana w C++. Innymi technologiami wykorzystanymi w pracy są OpenGL, CUDA czy Thrust, których zastosowanie zostanie wspomniane później. \\
 Pełna instrukcja instalacji niezbędnego oprogramowania do uruchomienia symulacji jest zawarta w repozytorium (dla linuxa Ubuntu).
 
@@ -164,8 +164,8 @@ $$s = v_p\cdot t + \frac{a\cdot t^2}{2},$$ gdzie $s$ oznacza drogą przebytą w 
 
 Tak zdefiniowana symulacja N ciał spotyka się z następującymi problemami:
 \begin{itemize}
-\item Kiedy ciała są bardzo bliskie siebie, wtedy zadziała na nie ogromna siła, która w rzeczywistości będzie działała na ciało przez krótki czas. To znaczy krok symulacji może trwać znacznie dłużej niż czas, przez który obiekty będą blisko siebie. Przez to na ciało zadziała o wiele za duża siła niż powinna.
 \item Ciało w pojedynczym kroku symulacji porusza się ruchem jednostajnie przyśpieszonym prostoliniowym, więc ruch w całej symulacji jest jedynie aproksymacją poprzez sklejenie ruchu obiektu w tych odcinkach czasu.
+\item Kiedy ciała są bardzo bliskie siebie, wtedy zadziała na nie ogromna siła, która w rzeczywistości będzie działała na ciało przez krótki czas. Może zdarzyć się, że krok symulacji jest znacznie większy niz rzeczywisty czas, w którym obiekty są blisko siebie i obliczona przez symulację siła jest o wiele wieksza niż powinna.
 \end{itemize}
 
 \section{\LARGE Naiwny algorytm symulacji N ciał}
@@ -232,7 +232,7 @@ Warto, także wspomnieć o podziale pamięci w programach pisanych w tej archite
 \end{itemize}
 
 \subsubsection{\large Thrust}
-Thrust jest szablonową biblioteką dla CUDA bazująca na bibliotece STL z C++. Thrust umożliwia implementację aplikacji wielowątkowych za pośrednictwem interfejsu wysokiego poziomu, który jest w pełni zgodny z CUDA C. Korzystałem z wersji v9.2.148. \cite{thrust}
+Thrust jest szablonową biblioteką dla CUDA bazująca na bibliotece STL z C++. Thrust umożliwia implementację aplikacji wielowątkowych za pośrednictwem interfejsu wysokiego poziomu, który jest w pełni zgodny z CUDA C. Korzystałem z wersji v9.2.148 \cite{thrust}.
 
 
 \subsubsection{\large Implementacja wielowątkowa}
@@ -311,9 +311,9 @@ Algorytm jest oparty na drzewach, a dokładniej drzewach ósemkowych \cite{octre
 Drzewo ósemkowego przedstawiamy następująco(rys. Rysunek 1):
 \begin{itemize}
   \item cała przestrzeń trójwymiarowa jest przedstawiana przez sześcian, który jest reprezentowany przez korzeń drzewa
-  \item korzeń drzewa ma ośmioro następników, z których każdy reprezentuje jeden z ośmiu podsześcianów, na które dzielimy duży sześcian reprezentowany przez korzeń
   \item drzewo składa się z węzłów wewnętrznych oraz liści
-  \item jedynie liście drzewa zawierają punkty z symulacji
+  \item każdy węzeł wewnętrzny ma osiem następników, z których każdy reprezentuje jeden z ośmiu podsześcianów, na które dzielimy duży sześcian reprezentowany przez węzeł
+  \item jedynie liście drzewa zawierają punkty układu
   \item drzewo ma ustaloną głębkość K
 \end{itemize}
 \bigskip
@@ -363,7 +363,7 @@ Z wykorzystaniem powyżej zdefiniowanych kodów zaimplementujemy algorytm inspir
 
 Zmodyfikowany algorytm (skrótowo) składa się z pięciu kroków :
 \begin{itemize}
-\item Obliczenie kodów Mortona dla każdego węzła. Realizujemy to poprzez kernel, który na podstawie przedziałów, w których zawierają się punkty w całym układzie dla każdego z wymiarów (znajdujemy dolną i górną granicę w każdym z wymiarów), wyznacza przez K poziomów coraz to dokładniejsze położenie poprzez ustawianie kolejnych bitów w liczbie binarnej. 
+\item Obliczenie kodów Mortona dla każdego punktu układu. Realizujemy to poprzez kernel, który na podstawie przedziałów, w których zawierają się punkty w całym układzie dla każdego z wymiarów (znajdujemy dolną i górną granicę w każdym z wymiarów), wyznacza przez K poziomów coraz to dokładniejsze położenie poprzez ustawianie kolejnych bitów w liczbie binarnej. 
 \item Sortujemy kody Mortona. W tym celu wykorzystujemy bibliotekę Thrust, a dokładniej funkcję \textbf{sort\_by\_key}. 
 \item Kody liczymy do głębokości K, więc istnieje możliwość pojawienia się duplikatów, które musimy zachować. 
 \item Liczymy ile wierzchołków będzie miało nasze drzewo (znamy jedynie liczbę liści, potrzebujemy policzyć również liczbę węzłów wewnętrznych). Dodatkowo tworzymy wszystkie wierzchołki w drzewie.
@@ -570,8 +570,8 @@ for(int i = 0; i < K; ++i) {
 }
 \end{lstlisting}
 \subsection{\Large Złożoność budowania drzewa}
-Przyjrzyjmy się kolejnym operacjom w naszym algorytmie. Krok pierwszy wykonujemy w czasie stałym. Następnie sortowanie z biblioteki thrust, które wykonuje sie poprzez równoległy radixsort, czyli ma złożoność obliczeniową $\mathcal{O}(log_{N})$. Krok trzeci również wykonuje się logarytmicznie, a jego operacją dominującą jest thrust::inclusive\_scan. Ostatnia część jest bardziej wymagająca czasowo, gdyż ma złożoność obliczeniową $\mathcal{O}(K\cdot log_{N})$.
-Czyli widzimy, żę jest operacją dominującą całego algorymu. Z tego wynika, że złożoność algorytmu budowania drzewa, to $\mathcal{O}(K\cdot log_{N})$, gdzie w naszej symulacji $K=15$.
+Przyjrzyjmy się kolejnym operacjom w naszym algorytmie. Krok pierwszy wykonujemy w czasie stałym. Następnie sortowanie z biblioteki thrust, które wykonuje sie poprzez równoległy radixsort, czyli ma złożoność obliczeniową $\mathcal{O}(log N)$. Krok trzeci również wykonuje się logarytmicznie, a jego operacją dominującą jest thrust::inclusive\_scan. Ostatnia część jest bardziej wymagająca czasowo, gdyż ma złożoność obliczeniową $\mathcal{O}(K\cdot log N)$.
+Czyli widzimy, żę jest operacją dominującą całego algorymu. Z tego wynika, że złożoność algorytmu budowania drzewa, to $\mathcal{O}(K\cdot log N)$, gdzie w naszej symulacji $K=15$.
 \section{\LARGE Obliczanie sił oddziałujących na ciało}
 
 Drzewo zostało stworzone w celu szybszego obliczania siły jaka działa na ciało.\\
@@ -582,7 +582,7 @@ Algorytm polega na przejściu drzewa od korzenia i na sprawdzaniu czy węzeł je
 Niech s będzie szerokością obszaru obejmowanego przez sześcian oraz niech d będzie odległością między środkiem masy obszaru a punktem. Jeśli $s/d < \theta$, gdzie przyjęliśmy, że $\theta = 2.0$, to liczymy siłę między środkiem masy obszaru a punktem. W przeciwnym przypadku wywołujemy się rekurencyjnie na ośmiu podsześcianach. Ogólnie, im $\theta$ jest większa, to obliczenia są mniej dokładne, czyli więcej poddrzew traktujemy jako jeden węzeł \cite{Aarseth}.\\
 \bigskip
 Dodatkowo musimy rostrzygać czy nasz punkt i przetwarzany węzeł nie są tym samym węzłem, aby nie liczyć siły między nimi.\\~\\
-W poniższej iteracyjnej implementacji algorytmu obliczania siły korzystamy z dwóch tablic, które będzie nam symulować stos. Gdy przetwarzamy jeden wierzchołek i okazało się, że musimy w rekurencyjnej wersji wywoływalibyśmy się rekurencyjnie na mniejszym obszarze, tutaj wrzucimy na stos dwie pary. Pierwszą będzie \textbf{(idObecnegoWęzła, nrDziecka+1)}, czyli po przetworzeniu całego poddrzewa dziecka o  nrDziecka, przejdziemy do przetwarzania kolejnego dziecka. Druga para to \textbf{(idDziecka, 0)}, czyli wrzucamy na stos pierwszego dziecko obecnego węzła (to znaczy węzeł na którym będziemy wywoływać się rekurencyjnie).\\
+W poniższej iteracyjnej implementacji algorytmu obliczania siły korzystamy z dwóch tablic, które będą nam symulować stos. Podczas przetwarzania wierzchołka wrzucamy na stos dwie pary. Pierwszą będzie \textbf{(idObecnegoWęzła, nrDziecka+1)}, czyli po przetworzeniu całego poddrzewa dziecka o  nrDziecka, przejdziemy do przetwarzania kolejnego dziecka. Druga para to \textbf{(idDziecka, 0)}, czyli wrzucamy na stos pierwszego dziecko obecnego węzła (to znaczy węzeł na którym będziemy wywoływać się rekurencyjnie).\\
 \bigskip
 Z kolei w celu przechowywania granic wyznaczających obszar, który ogranicza dany węzeł trzymamy jedynie tablice z minimalnymi i maksymalnymi punktami w każdym z wymiarów dla korzenia. Następnie, gdy jesteśmy na poziomie $i$, to dzielimy długość boku sześcianu korzenia przez $2^{i}$, co pozwala nam uzyskać bok węzła na poziomie $i$.
 
@@ -628,7 +628,7 @@ void computeForces(OctreeNode* octree, double* velocities, double* weights,
 }
 \end{lstlisting}
 
-Złożoność obliczeniowa algorytmu obliczania siły przy równomiernym rozkładzie punktów wynosi $\mathcal{O}(log_{N})$ i zostało to pokazane w pracy wprowadzającej algorytm Barnesa-Huta \cite{barnhut}.
+Złożoność obliczeniowa algorytmu obliczania siły przy równomiernym rozkładzie punktów wynosi $\mathcal{O}(log N)$ i zostało to pokazane w pracy Barnesa-Hut'a \cite{barnhut}.
 
 \section{\LARGE Wizualizacja}
 	
@@ -751,7 +751,7 @@ Widzimy to na drugim wykresie, gdzie mamy ustalone, że ciał w symulacji jest $
 \begin{figure}[h]
 \begin{tikzpicture}
 \begin{axis}[
-    title={Porównanie czasu działania algorytmów},
+    title={Wyniki dla algorytmu Barnes-Huta przy zmiennej liczbie kroków},
     xlabel={Liczba kroków w symulacji},
     ylabel={Średni czas kroku(s)},
     xmin=0, xmax=9200,
@@ -779,7 +779,7 @@ Widzimy to na drugim wykresie, gdzie mamy ustalone, że ciał w symulacji jest $
 \legend{Wielowątkowy Barnesa-Huta}
 \end{axis}
 \end{tikzpicture}
-\caption{Porównanie czasu działania algorytmów}
+\caption{Wyniki dla algorytmu Barnes-Huta przy zmiennej liczbie kroków}
 \end{figure}
 
 Przeprowadzone eksperymenty dowodzą wysokiej przydatności architektury CUDA w implementacji algorytmu naiwnego oraz algorytmu Barnesa-Huta dla symulacji N ciał.

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.8.7)  29 AUG 2018 00:09
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.8.7)  29 AUG 2018 00:48
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -1922,11 +1922,6 @@ LaTeX Font Info:    Font shape `T1/fve/b/n' will be
 LaTeX Font Info:    Font shape `T1/fve/b/n' will be
 (Font)              scaled to size 10.79993pt on input line 103.
  [3]
-Overfull \hbox (3.6359pt too wide) in paragraph at lines 122--123
-\T1/fve/m/sc/10 im-ple-men-to-wana w C++. In-nymi tech-no-lo-giami wy-ko-rzy-st
-a-nymi w pracy s¡ OpenGL, CUDA 
- []
-
 LaTeX Font Info:    Font shape `T1/fve/m/it' in size <10> not available
 (Font)              Font shape `T1/fve/m/sl' tried instead on input line 130.
 LaTeX Font Info:    Font shape `T1/fve/m/sl' will be
@@ -2109,12 +2104,6 @@ Overfull \hbox (12.40176pt too wide) in paragraph at lines 580--580
 w-dza-niu czy w¦-zeª jest we-wn¦trzny 
  []
 
-
-Overfull \hbox (6.20976pt too wide) in paragraph at lines 585--585
-\T1/fve/m/sc/10 rze, tu-taj wrzu-cimy na stos dwie pary. Pierw-sz¡ b¦-dzie \T1/
-fve/b/n/10 (idO-bec-ne-go-W¦-zªa, nrDziecka+1)\T1/fve/m/sc/10 , 
- []
-
 [17]
 Overfull \hbox (6.0pt too wide) in paragraph at lines 591--591
 [][][][][][][]  
@@ -2178,7 +2167,7 @@ y10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb
 texlive/texmf-dist/fonts/type1/public/bera/fver8a.pfb></usr/share/texlive/texmf
 -dist/fonts/type1/public/bera/fver8a.pfb></usr/share/texlive/texmf-dist/fonts/t
 ype1/public/bera/fvmr8a.pfb>
-Output written on Praca.pdf (23 pages, 223989 bytes).
+Output written on Praca.pdf (23 pages, 223914 bytes).
 PDF statistics:
  759 PDF objects out of 1000 (max. 8388607)
  694 compressed objects within 7 object streams

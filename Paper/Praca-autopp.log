@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=latex 2018.8.7)  29 AUG 2018 00:09
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=latex 2018.8.7)  29 AUG 2018 00:48
 entering extended mode
  %&-line parsing enabled.
 **\let \APPmakepictures \empty \input  Praca.tex
@@ -1788,12 +1788,6 @@ LaTeX Warning: Citation 'dirNBody' on page 3 undefined on input line 117.
 LaTeX Warning: Citation 'visGraph' on page 3 undefined on input line 117.
 
 
-Overfull \hbox (3.6359pt too wide) in paragraph at lines 122--123
-\T1/fve/m/sc/10 im-ple-men-to-wana w C++. In-nymi tech-no-lo-giami wy-ko-rzy-st
-a-nymi w pracy s¡ OpenGL, CUDA 
- []
-
-
 LaTeX Warning: Citation 'Principia' on page 4 undefined on input line 128.
 
 LaTeX Font Info:    Font shape `T1/fve/m/it' in size <10> not available
@@ -1848,9 +1842,9 @@ LaTeX Warning: Citation 'Cuda' on page 7 undefined on input line 230.
 LaTeX Warning: Citation 'thrust' on page 7 undefined on input line 235.
 
 
-Overfull \hbox (3.56377pt too wide) in paragraph at lines 235--236
+Overfull \hbox (2.87978pt too wide) in paragraph at lines 235--236
 \T1/fve/m/sc/10 kiego po-ziomu, który jest w peªni zgodny z CUDA C. Ko-rzy-sta-
-ªem z wer-sji v9.2.148. [[]]  
+ªem z wer-sji v9.2.148 [[]].  
  []
 
 
@@ -2002,12 +1996,6 @@ w-dza-niu czy w¦-zeª jest we-wn¦trzny
 
 
 LaTeX Warning: Citation 'Aarseth' on page 17 undefined on input line 582.
-
-
-Overfull \hbox (6.20976pt too wide) in paragraph at lines 585--585
-\T1/fve/m/sc/10 rze, tu-taj wrzu-cimy na stos dwie pary. Pierw-sz¡ b¦-dzie \T1/
-fve/b/n/10 (idO-bec-ne-go-W¦-zªa, nrDziecka+1)\T1/fve/m/sc/10 , 
- []
 
 
 Overfull \hbox (6.0pt too wide) in paragraph at lines 591--591
